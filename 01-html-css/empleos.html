@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevJobs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+ <header>
+    <h1>
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+      DevJobs
+    </h1>
+
+    <nav>
+      <!-- <a href="">
+        Inicio
+      </a> -->
+      <a href="busquedas.html">Busquedas para empleos</a>
+    </nav>
+
+    <div>
+      <a href="">Publicar un empleo</a>
+      <!-- <a href="">Iniciar sesión</a> -->
+    </div>
+  </header>
+
+
+  <main>
+    <section class="hero">
+      <img src="./background.webp" width="200" />
+
+      <h1>Encuentra el trabajo de tus sueños</h1>
+
+      <p>Únete a la comunidad más grande de desarrolladores y encuentra tu próxima oportunidad.</p>
+
+      <form role="search">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+            <path d="M21 21l-6 -6" />
+          </svg>
+
+          <input required type="text" placeholder="Buscar empleos por título, habilidad o empresa">
+
+          <button disabled type="submit">Buscar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- La sección ahora solo se encarga del margen exterior y el borde -->
+    <section style="margin-top: 2rem; padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
+    
+        <!-- El FORM es el que necesita flex para separar sus hijos (los div) -->
+        <form style="display: flex; gap: 2rem; align-items: flex-end;">
+            
+            <div>
+            <label for="job-type" style="display: block;">Tipo de empleo</label>
+            <select id="job-type" name="job-type">
+                <option value="">Todos los tipos</option>
+                <option value="full-time">Tiempo completo</option>
+                <option value="part-time">Medio tiempo</option>
+                <option value="contract">Contrato</option>
+            </select>
+            </div>
+
+            <div>
+            <label for="location" style="display: block;">Ubicación</label>
+            <select id="location" name="location">
+                <option value="">Todas las ubicaciones</option>
+                <option value="remote">Remoto</option>
+                <option value="onsite">Presencial</option>
+            </select>
+            </div>
+
+        </form>
+    </section>
+
+
+    <nav style="margin-top: 2rem;" class="pagination">
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M15 6l-6 6l6 6" />
+        </svg>
+      </a>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 6l6 6l-6 6" />
+        </svg>
+      </a>
+    </nav>
+
+    </section>
+
+
+  </main>
+
+
+  <footer style="margin-top: 2rem; text-align: center; color: #777;">
+    <p>&copy; 2024 DevJobs. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

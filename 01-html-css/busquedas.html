@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevJobs</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+
+<body>
+ <header>
+    <h1>
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+      DevJobs
+    </h1>
+
+    <nav>
+      <!-- <a href="">
+        Inicio
+      </a> -->
+      <a href="empleos.html">Empleos</a>
+    </nav>
+
+    <div>
+      <a href="">Subir CV</a>
+    </div>
+
+    <div 
+        style="border-radius: 25px; width: 40px; height: 40px; background-color: #b44cce; display: flex; justify-content: center; align-items: center;">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+        </svg>
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <section class="hero">
+      <img src="./background.webp" width="200" />
+
+      <h1>Encuentra tú próximo trabajo</h1>
+
+      <p>Explora miles de oportunidades en el sector tecnológico.</p>
+
+      <form role="search">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+            <path d="M21 21l-6 -6" />
+          </svg>
+
+          <input required type="text" placeholder="Buscar trabajos, empresas o habilidades">
+
+          <button disabled type="submit">Buscar</button>
+        </div>
+      </form>
+    
+        <!-- El FORM de filtros -->
+        <form class="filtros-form" style="display: flex; gap: 1.5rem; align-items: flex-end; padding: 1rem; border: 1px solid #ccc; border-radius: 4px; margin-top: 2rem; flex-wrap: wrap; background-color: #f9f9f94f;">
+            
+            <div class="filter-group">
+                <span class="filter-label">Tecnología</span>
+                <svg class="filter-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                <select id="job-type" name="job-type">
+                    <option value="">Todas las tecnologías</option>
+                    <option value="frontend">Frontend</option>
+                    <option value="backend">Backend</option>
+                    <option value="devops">DevOps</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">Ubicación</span>
+                <svg class="filter-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                <select id="location" name="location">
+                    <option value="">Todas las ubicaciones</option>
+                    <option value="remote">Remoto</option>
+                    <option value="onsite">Presencial</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">Tipo de contrato</span>
+                <svg class="filter-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                <select id="contract-type" name="contract-type">
+                    <option value="">Todos los tipos</option>
+                    <option value="full-time">Tiempo completo</option>
+                    <option value="part-time">Medio tiempo</option>
+                    <option value="contract">Contrato</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">Nivel de experiencia</span>
+                <svg class="filter-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                <select id="experience" name="experience">
+                    <option value="">Todos los niveles</option>
+                    <option value="junior">Junior</option>
+                    <option value="mid">Mid</option>
+                    <option value="senior">Senior</option>
+                </select>
+            </div>
+
+        </form>
+
+
+    </section>
+
+    
+
+    <section 
+    style="
+        margin-top: 2rem; display: grid; gap: 1rem; 
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        ">
+
+        <div class="jobs-listing">
+            <h2 style="margin-bottom: 1rem;">Resultados de búsqueda</h2>
+
+            <article 
+            id = "empleo-1"
+            style="padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
+                <div>
+                    <h2>Desarrollador Frontend</h2>
+                    <p>Empresa XYZ - Remoto</p>
+                    <p>Publicado hace 2 días</p>
+                </div>
+
+                <button id="btn-apply-job-1" class="btn-apply-job" type="submit">Aplicar</button>
+            </article>
+
+            <article 
+            id = "empleo-2"
+            style="padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
+                <div>
+                    <h2>Desarrollador Backend</h2>
+                    <p>Empresa ABC - Presencial</p>
+                    <p>Publicado hace 5 días</p>
+                </div>
+
+                <button id="btn-apply-job-2" class="btn-apply-job" type="submit">Aplicar</button>
+            </article>
+
+            <article 
+            id = "empleo-3"
+            style="padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
+                <div>
+                    <h2>Ingeniero de DevOps</h2>
+                    <p>Empresa DEF - Remoto</p>
+                    <p>Publicado hace 1 semana</p>
+                </div>
+
+                <button id="btn-apply-job-3" class="btn-apply-job" type="submit">Aplicar</button>
+            </article>
+
+        </div>
+
+        <button 
+        id = "btn-colorear"
+        type="button">Colorear</button>
+
+        <nav style="margin-top: 2rem;" class="pagination">
+        <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M15 6l-6 6l6 6" />
+            </svg>
+        </a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M9 6l6 6l-6 6" />
+            </svg>
+        </a>
+        </nav>
+
+    </section>
+
+
+</main>
+
+
+  <footer style="margin-top: 2rem; text-align: center; color: #777;">
+    <p>&copy; 2024 DevJobs. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
