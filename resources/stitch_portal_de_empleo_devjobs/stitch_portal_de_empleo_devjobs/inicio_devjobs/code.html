@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DevJobs - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#11131b",
+                        "surface-container-high": "#282a32",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-container": "#2563eb",
+                        "tertiary-container": "#5e6e85",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#e9f0ff",
+                        "outline": "#8d90a0",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#e1e2ed",
+                        "inverse-surface": "#e1e2ed",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "outline-variant": "#434655",
+                        "surface-container-lowest": "#0c0e16",
+                        "on-primary-container": "#eeefff",
+                        "surface-container": "#1d1f27",
+                        "surface-dim": "#11131b",
+                        "inverse-primary": "#0053db",
+                        "tertiary-fixed": "#d3e4fe",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e1e2ed",
+                        "secondary-container": "#00a572",
+                        "on-secondary-container": "#00311f",
+                        "on-primary-fixed": "#00174b",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "on-primary": "#002a78",
+                        "on-tertiary": "#213145",
+                        "inverse-on-surface": "#2e3039",
+                        "surface-container-highest": "#32343d",
+                        "primary": "#b4c5ff",
+                        "tertiary": "#b7c8e1",
+                        "surface-container-low": "#191b23",
+                        "surface-bright": "#373942",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-error": "#690005",
+                        "on-secondary": "#003824",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-variant": "#32343d",
+                        "secondary": "#4edea3",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "surface-tint": "#b4c5ff",
+                        "secondary-fixed": "#6ffbbe",
+                        "background": "#11131b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "container-max": "1200px",
+                        "xl": "64px",
+                        "base": "8px",
+                        "lg": "40px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "code-snippet": ["JetBrains Mono"],
+                        "body-main": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h1": ["Inter"],
+                        "tech-tag": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "code-snippet": ["13px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-main": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h1": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "tech-tag": ["12px", {"lineHeight": "1", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(40, 51, 69, 0.75);
+        }
+        .input-glow:focus-within {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-main text-body-main antialiased min-h-screen flex flex-col pt-16">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16 max-w-container-max mx-auto bg-surface/70 backdrop-blur-md border-b border-white/10">
+<div class="flex items-center gap-lg">
+<a class="font-h1 text-h2 font-bold text-primary" href="#">DevJobs</a>
+<div class="hidden md:flex gap-md">
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Find Jobs</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Dashboard</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200">Sign In</button>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded font-medium hover:opacity-90 transition-opacity">Post Job</button>
+</div>
+</nav>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="px-gutter py-xl max-w-container-max mx-auto flex flex-col items-center text-center mt-lg relative">
+<div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-container/20 via-background to-background"></div>
+<h1 class="font-h1 text-[48px] md:text-[64px] font-bold tracking-tight mb-md leading-tight text-on-surface max-w-4xl">
+                Encuentra tu próximo <span class="text-primary">reto técnico</span>
+</h1>
+<p class="font-body-main text-lg text-on-surface-variant mb-xl max-w-2xl">
+                El IDE para tu búsqueda de empleo. Posiciones de alto impacto para ingenieros de software, sin ruido.
+            </p>
+<!-- Search Bar -->
+<div class="glass-panel w-full max-w-4xl p-2 rounded-lg flex flex-col md:flex-row gap-2">
+<div class="flex-1 flex items-center bg-surface-container-high rounded px-3 py-3 input-glow border border-outline-variant transition-all">
+<span class="material-symbols-outlined text-outline mr-2">search</span>
+<input class="w-full bg-transparent border-none outline-none text-on-surface placeholder:text-outline text-body-sm font-body-sm" placeholder="Job Title, Keywords (ej. React, Python)" type="text"/>
+</div>
+<div class="flex-1 flex items-center bg-surface-container-high rounded px-3 py-3 input-glow border border-outline-variant transition-all">
+<span class="material-symbols-outlined text-outline mr-2">location_on</span>
+<input class="w-full bg-transparent border-none outline-none text-on-surface placeholder:text-outline text-body-sm font-body-sm" placeholder="Location (ej. Madrid, Remote)" type="text"/>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded font-medium hover:opacity-90 transition-opacity whitespace-nowrap flex items-center justify-center gap-2">
+                    Buscar
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Trust Bar -->
+<section class="px-gutter py-lg border-y border-white/5 bg-surface-container-lowest/50">
+<div class="max-w-container-max mx-auto flex flex-col items-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 uppercase tracking-widest font-bold">Empresas que confían en nosotros</p>
+<div class="flex flex-wrap justify-center gap-xl opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
+<!-- Generic Logos as Text for simplicity in this pure HTML setup -->
+<span class="font-h2 text-h2 font-bold text-on-surface">TECHCORP</span>
+<span class="font-h2 text-h2 font-bold text-on-surface">INNOVA</span>
+<span class="font-h2 text-h2 font-bold text-on-surface">DATALABS</span>
+<span class="font-h2 text-h2 font-bold text-on-surface">CLOUDIFY</span>
+<span class="font-h2 text-h2 font-bold text-on-surface">DEVSTUDIO</span>
+</div>
+</div>
+</section>
+<!-- Categories -->
+<section class="px-gutter py-xl max-w-container-max mx-auto">
+<h2 class="font-h2 text-h2 mb-lg text-on-surface">Explorar por Especialidad</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+<a class="glass-panel p-md rounded-lg group cursor-pointer flex flex-col transition-all" href="#">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary text-2xl">web</span>
+</div>
+<h3 class="font-bold text-lg mb-1 text-on-surface group-hover:text-primary transition-colors">Frontend</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-auto">1,204 posiciones</p>
+</a>
+<a class="glass-panel p-md rounded-lg group cursor-pointer flex flex-col transition-all" href="#">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-secondary text-2xl">dns</span>
+</div>
+<h3 class="font-bold text-lg mb-1 text-on-surface group-hover:text-primary transition-colors">Backend</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-auto">982 posiciones</p>
+</a>
+<a class="glass-panel p-md rounded-lg group cursor-pointer flex flex-col transition-all" href="#">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary-fixed text-2xl">cloud</span>
+</div>
+<h3 class="font-bold text-lg mb-1 text-on-surface group-hover:text-primary transition-colors">DevOps</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-auto">431 posiciones</p>
+</a>
+<a class="glass-panel p-md rounded-lg group cursor-pointer flex flex-col transition-all" href="#">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center mb-4 border border-outline-variant group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-tertiary-fixed text-2xl">smart_toy</span>
+</div>
+<h3 class="font-bold text-lg mb-1 text-on-surface group-hover:text-primary transition-colors">AI / ML</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-auto">312 posiciones</p>
+</a>
+</div>
+</section>
+<!-- Featured Jobs -->
+<section class="px-gutter py-xl max-w-container-max mx-auto">
+<div class="flex justify-between items-end mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface">Roles Destacados</h2>
+<a class="text-primary hover:text-primary-fixed transition-colors font-medium text-sm flex items-center gap-1" href="#">
+                    Ver todos
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="flex flex-col gap-sm">
+<!-- Job Card 1 -->
+<div class="glass-panel rounded-lg p-md flex flex-col md:flex-row gap-md items-start md:items-center cursor-pointer relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-transparent group-hover:bg-primary transition-colors"></div>
+<div class="w-12 h-12 rounded bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="font-bold text-on-surface">T</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<h3 class="font-bold text-lg text-on-surface group-hover:text-primary transition-colors">Senior React Engineer</h3>
+<span class="inline-flex items-center gap-1 font-tech-tag text-[10px] uppercase tracking-wider text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Remote
+                            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">TechCorp Inc. • Madrid, Spain (o Remoto)</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container text-primary font-tech-tag text-tech-tag px-2 py-1 rounded border border-white/5">React</span>
+<span class="bg-surface-container text-primary font-tech-tag text-tech-tag px-2 py-1 rounded border border-white/5">TypeScript</span>
+<span class="bg-surface-container text-primary font-tech-tag text-tech-tag px-2 py-1 rounded border border-white/5">Next.js</span>
+</div>
+</div>
+<div class="text-left md:text-right shrink-0 mt-4 md:mt-0">
+<div class="font-code-snippet text-[15px] font-bold text-secondary mb-2">€60k - €85k</div>
+<p class="font-body-sm text-[12px] text-outline">Publicado hace 2h</p>
+</div>
+</div>
+<!-- Job Card 2 -->
+<div class="glass-panel rounded-lg p-md flex flex-col md:flex-row gap-md items-start md:items-center cursor-pointer relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-transparent group-hover:bg-primary transition-colors"></div>
+<div class="w-12 h-12 rounded bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="font-bold text-on-surface">I</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<h3 class="font-bold text-lg text-on-surface group-hover:text-primary transition-colors">Backend Developer (Node.js)</h3>
+<span class="inline-flex items-center gap-1 font-tech-tag text-[10px] uppercase tracking-wider text-[#fbbf24]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></span> Hybrid
+                            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">Innova Solutions • Barcelona, Spain</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container text-primary font-tech-tag text-tech-tag px-2 py-1 rounded border border-white/5">Node.js</span>
+<span class="bg-surface-container text-primary font-tech-tag text-tech-tag px-2 py-1 rounded border border-white/5">PostgreSQL</span>
+<span class="bg-surface-container text-primary font-tech-tag text-tech-tag px-2 py-1 rounded border border-white/5">AWS</span>
+</div>
+</div>
+<div class="text-left md:text-right shrink-0 mt-4 md:mt-0">
+<div class="font-code-snippet text-[15px] font-bold text-secondary mb-2">€50k - €70k</div>
+<p class="font-body-sm text-[12px] text-outline">Publicado hace 5h</p>
+</div>
+</div>
+<!-- Job Card 3 -->
+<div class="glass-panel rounded-lg p-md flex flex-col md:flex-row gap-md items-start md:items-center cursor-pointer relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-transparent group-hover:bg-primary transition-colors"></div>
+<div class="w-12 h-12 rounded bg-surface-container-highest flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="font-bold text-on-surface">C</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<h3 class="font-bold text-lg text-on-surface group-hover:text-primary transition-colors">Cloud Infrastructure Engineer</h3>
+<span class="inline-flex items-center gap-1 font-tech-tag text-[10px] uppercase tracking-wider text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Remote
+                            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">Cloudify Systems • EU Only</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container text-primary font-tech-tag text-tech-tag px-2 py-1 rounded border border-white/5">Kubernetes</span>
+<span class="bg-surface-container text-primary font-tech-tag text-tech-tag px-2 py-1 rounded border border-white/5">Terraform</span>
+<span class="bg-surface-container text-primary font-tech-tag text-tech-tag px-2 py-1 rounded border border-white/5">GCP</span>
+</div>
+</div>
+<div class="text-left md:text-right shrink-0 mt-4 md:mt-0">
+<div class="font-code-snippet text-[15px] font-bold text-secondary mb-2">€70k - €95k</div>
+<p class="font-body-sm text-[12px] text-outline">Publicado hace 1d</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-lg px-gutter flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto bg-surface-container-lowest border-t border-white/10 mt-xl">
+<div class="font-h2 text-h2 text-on-surface mb-4 md:mb-0">DevJobs</div>
+<div class="flex gap-md mb-4 md:mb-0">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Community</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Documentation</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">API</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy</a>
+</div>
+<div class="font-body-sm text-body-sm text-primary">
+            © 2024 DevJobs. Built for the developer ecosystem.
+        </div>
+</footer>
+</body></html>

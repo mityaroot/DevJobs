@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Explorador de Empleos - DevJobs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#11131b",
+                        "surface-container-high": "#282a32",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-container": "#2563eb",
+                        "tertiary-container": "#5e6e85",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#e9f0ff",
+                        "outline": "#8d90a0",
+                        "on-secondary-fixed": "#002113",
+                        "on-background": "#e1e2ed",
+                        "inverse-surface": "#e1e2ed",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "outline-variant": "#434655",
+                        "surface-container-lowest": "#0c0e16",
+                        "on-primary-container": "#eeefff",
+                        "surface-container": "#1d1f27",
+                        "surface-dim": "#11131b",
+                        "inverse-primary": "#0053db",
+                        "tertiary-fixed": "#d3e4fe",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e1e2ed",
+                        "secondary-container": "#00a572",
+                        "on-secondary-container": "#00311f",
+                        "on-primary-fixed": "#00174b",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "on-primary": "#002a78",
+                        "on-tertiary": "#213145",
+                        "inverse-on-surface": "#2e3039",
+                        "surface-container-highest": "#32343d",
+                        "primary": "#b4c5ff",
+                        "tertiary": "#b7c8e1",
+                        "surface-container-low": "#191b23",
+                        "surface-bright": "#373942",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-error": "#690005",
+                        "on-secondary": "#003824",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-variant": "#32343d",
+                        "secondary": "#4edea3",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "surface-tint": "#b4c5ff",
+                        "secondary-fixed": "#6ffbbe",
+                        "background": "#11131b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "container-max": "1200px",
+                        "xl": "64px",
+                        "base": "8px",
+                        "lg": "40px",
+                        "gutter": "24px",
+                        "md": "24px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "code-snippet": ["JetBrains Mono"],
+                        "body-main": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h1": ["Inter"],
+                        "tech-tag": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "code-snippet": ["13px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-main": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h1": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "tech-tag": ["12px", {"lineHeight": "1", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(17, 19, 27, 1); /* surface color */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(67, 70, 85, 1); /* outline-variant */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(141, 144, 160, 1); /* outline */
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-main min-h-screen flex flex-col pt-16">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16 mx-auto bg-surface/70 backdrop-blur-md border-b border-white/10">
+<div class="flex items-center gap-md max-w-container-max w-full mx-auto justify-between">
+<div class="flex items-center gap-lg">
+<a class="font-h1 text-h2 font-bold text-primary" href="#">DevJobs</a>
+<div class="hidden md:flex gap-md items-center">
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Encontrar Empleos</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Panel de Control</a>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<!-- Search bar on left as per JSON, but putting it in the right cluster for visual balance if needed, or keeping it separate. JSON says "search_bar": "on_left", let's put it next to nav links -->
+<div class="hidden lg:flex relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-body-sm">search</span>
+<input class="bg-surface-container-high border border-outline-variant rounded-DEFAULT py-1 pl-lg pr-sm text-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64" placeholder="Buscar..." type="text"/>
+</div>
+<button class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 px-sm py-1">Iniciar Sesión</button>
+<button class="bg-primary-container text-on-primary-container font-medium rounded-lg px-sm py-1 hover:opacity-80 transition-opacity">Publicar Empleo</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-gutter py-lg flex flex-col md:flex-row gap-xl">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-64 flex-shrink-0 space-y-lg">
+<!-- Tech Stack Filter -->
+<div class="bg-surface-container/40 backdrop-blur-md border border-white/10 rounded-lg p-sm">
+<h3 class="font-h2 text-h2 text-on-surface mb-sm">Stack Tecnológico</h3>
+<div class="space-y-base">
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">React</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input checked="" class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Python</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Node.js</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">TypeScript</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Go</span>
+</label>
+</div>
+</div>
+<!-- Job Type Filter -->
+<div class="bg-surface-container/40 backdrop-blur-md border border-white/10 rounded-lg p-sm">
+<h3 class="font-h2 text-h2 text-on-surface mb-sm">Tipo de Empleo</h3>
+<div class="space-y-base">
+<label class="flex items-center gap-sm cursor-pointer group">
+<input checked="" class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Remoto</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Híbrido</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Presencial</span>
+</label>
+</div>
+</div>
+<!-- Seniority Filter -->
+<div class="bg-surface-container/40 backdrop-blur-md border border-white/10 rounded-lg p-sm">
+<h3 class="font-h2 text-h2 text-on-surface mb-sm">Experiencia</h3>
+<div class="space-y-base">
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Junior</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Semi-Senior</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input checked="" class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Senior</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer group">
+<input class="form-checkbox rounded bg-surface border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Lead</span>
+</label>
+</div>
+</div>
+<!-- Salary Range Slider -->
+<div class="bg-surface-container/40 backdrop-blur-md border border-white/10 rounded-lg p-sm">
+<h3 class="font-h2 text-h2 text-on-surface mb-sm">Rango Salarial (USD)</h3>
+<div class="px-xs pt-base pb-sm">
+<input class="w-full h-1 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" max="200000" min="30000" type="range" value="90000"/>
+<div class="flex justify-between mt-sm">
+<span class="font-code-snippet text-code-snippet text-secondary">$30k</span>
+<span class="font-code-snippet text-code-snippet text-secondary">$200k+</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main List Area -->
+<section class="flex-grow w-full flex flex-col gap-lg">
+<!-- Local Search Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface">Explorar Oportunidades</h1>
+<p class="font-body-main text-body-main text-on-surface-variant mt-xs">Mostrando 1,245 empleos para desarrolladores.</p>
+</div>
+<div class="relative w-full md:w-auto">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-body-sm">search</span>
+<input class="bg-surface border border-outline-variant rounded-DEFAULT py-sm pl-lg pr-sm text-body-main text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-full md:w-72 shadow-none transition-all" placeholder="Filtrar resultados locales..." type="text"/>
+</div>
+</div>
+<!-- Job List -->
+<div class="flex flex-col gap-sm">
+<!-- Job Card 1 -->
+<article class="bg-surface-container-low/70 backdrop-blur-md border border-white/10 rounded-lg p-md hover:bg-surface-container/80 hover:border-white/20 transition-all cursor-pointer group">
+<div class="flex flex-col lg:flex-row justify-between items-start gap-md">
+<div class="flex-grow">
+<div class="flex items-center gap-sm mb-xs">
+<h2 class="font-h2 text-h2 text-on-surface group-hover:text-primary transition-colors">Ingeniero de Software Senior (Python)</h2>
+<span class="bg-surface-container-highest border border-white/5 rounded-DEFAULT px-sm py-xs font-body-sm text-body-sm text-secondary flex items-center gap-xs uppercase tracking-wider text-[10px] font-bold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Remoto
+                                </span>
+</div>
+<p class="font-body-main text-body-main text-on-surface-variant mb-md">TechNova Solutions · <span class="text-outline">Publicado hace 2 horas</span></p>
+<div class="flex flex-wrap gap-xs">
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">Python</span>
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">Django</span>
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">PostgreSQL</span>
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">AWS</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-sm w-full lg:w-auto">
+<span class="font-code-snippet text-code-snippet text-secondary font-bold text-lg">$120k - $150k USD</span>
+<button class="bg-transparent border border-primary text-primary hover:bg-primary/10 font-medium rounded-lg px-md py-sm transition-colors w-full lg:w-auto">Ver Detalles</button>
+</div>
+</div>
+</article>
+<!-- Job Card 2 -->
+<article class="bg-surface-container-low/70 backdrop-blur-md border border-white/10 rounded-lg p-md hover:bg-surface-container/80 hover:border-white/20 transition-all cursor-pointer group">
+<div class="flex flex-col lg:flex-row justify-between items-start gap-md">
+<div class="flex-grow">
+<div class="flex items-center gap-sm mb-xs">
+<h2 class="font-h2 text-h2 text-on-surface group-hover:text-primary transition-colors">Desarrollador Frontend React</h2>
+<span class="bg-surface-container-highest border border-white/5 rounded-DEFAULT px-sm py-xs font-body-sm text-body-sm text-outline flex items-center gap-xs uppercase tracking-wider text-[10px] font-bold">
+<span class="w-2 h-2 rounded-full bg-outline"></span> Presencial
+                                </span>
+</div>
+<p class="font-body-main text-body-main text-on-surface-variant mb-md">Creative UI Agency · Madrid, España · <span class="text-outline">Publicado hace 1 día</span></p>
+<div class="flex flex-wrap gap-xs">
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">React</span>
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">TypeScript</span>
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">Tailwind CSS</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-sm w-full lg:w-auto">
+<span class="font-code-snippet text-code-snippet text-secondary font-bold text-lg">€50k - €70k EUR</span>
+<button class="bg-transparent border border-primary text-primary hover:bg-primary/10 font-medium rounded-lg px-md py-sm transition-colors w-full lg:w-auto">Ver Detalles</button>
+</div>
+</div>
+</article>
+<!-- Job Card 3 -->
+<article class="bg-surface-container-low/70 backdrop-blur-md border border-white/10 rounded-lg p-md hover:bg-surface-container/80 hover:border-white/20 transition-all cursor-pointer group">
+<div class="flex flex-col lg:flex-row justify-between items-start gap-md">
+<div class="flex-grow">
+<div class="flex items-center gap-sm mb-xs">
+<h2 class="font-h2 text-h2 text-on-surface group-hover:text-primary transition-colors">Líder Técnico Full-Stack</h2>
+<span class="bg-surface-container-highest border border-white/5 rounded-DEFAULT px-sm py-xs font-body-sm text-body-sm text-[#f59e0b] flex items-center gap-xs uppercase tracking-wider text-[10px] font-bold">
+<span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span> Híbrido
+                                </span>
+</div>
+<p class="font-body-main text-body-main text-on-surface-variant mb-md">FinTech Global · Ciudad de México, MX · <span class="text-outline">Publicado hace 3 días</span></p>
+<div class="flex flex-wrap gap-xs">
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">Node.js</span>
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">React</span>
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">Docker</span>
+<span class="bg-surface-container-lowest font-tech-tag text-tech-tag text-primary px-sm py-xs rounded-DEFAULT border border-white/5">Kubernetes</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-sm w-full lg:w-auto">
+<span class="font-code-snippet text-code-snippet text-secondary font-bold text-lg">$90k - $130k USD</span>
+<button class="bg-transparent border border-primary text-primary hover:bg-primary/10 font-medium rounded-lg px-md py-sm transition-colors w-full lg:w-auto">Ver Detalles</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination Placeholder (Visual only) -->
+<div class="flex justify-center items-center gap-sm mt-md">
+<button class="w-10 h-10 flex items-center justify-center rounded-DEFAULT border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-DEFAULT bg-primary/20 border border-primary text-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-DEFAULT border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors font-medium">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-DEFAULT border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors font-medium">3</button>
+<span class="text-outline-variant">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-DEFAULT border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-lg px-gutter flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto bg-surface-container-lowest border-t border-white/10 mt-xl">
+<div class="flex items-center gap-md mb-md md:mb-0">
+<span class="font-h2 text-h2 text-on-surface">DevJobs</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant border-l border-outline-variant pl-md ml-xs">© 2024 DevJobs. Built for the developer ecosystem.</span>
+</div>
+<div class="flex flex-wrap gap-md justify-center">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Community</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Documentation</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">API</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy</a>
+</div>
+</footer>
+</body></html>
