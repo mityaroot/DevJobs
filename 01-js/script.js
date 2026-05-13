@@ -1,14 +1,18 @@
 
-// Selección de elementos del DOM
+// ######################################################################
+// Manejar clics en los botones de "Aplicar" dentro de la lista de empleos
+// Usamos delegación de eventos: escuchamos clics en el contenedor .jobs-listing
 const jobListings = document.querySelector('.jobs-listing');
 jobListings?.addEventListener('click', (event) => {
     const target = event.target;
 
     if (target.classList.contains('btn-apply-job')) {
+        // Alternar la clase 'is-applied' para cambiar el estilo visual
         target.classList.toggle('is-applied');
 
         console.log(`Botón ${target.id} clickeado. Clase 'is-applied' ahora: ${target.classList.contains('is-applied')}`);
         
+        // Cambiar el texto del botón según si está aplicado o no
         target.textContent = target.classList.contains('is-applied') ? '¡Aplicado!' : 'Aplicar';
         
         console.log('Estado actual de los botones:');
@@ -21,23 +25,25 @@ jobListings?.addEventListener('click', (event) => {
 
 
 // #####################################################################
-// Agregar funcionalidad al botón de colorear
+// Botón de colorear: aplica gradientes de colores a los artículos de empleos
 const btnColorear = document.getElementById('btn-colorear');
+// Array de pares de colores para crear gradientes (uno por cada artículo)
 const colores = [
-    ['#6366f1', '#a855f7'],
-    ['#14b8a6', '#06b6d4'],
-    ['#f59e0b', '#ef4444'],
-    ['#3b82f6', '#6366f1'],
-    ['#ec4899', '#a855f7'],
-    ['#10b981', '#14b8a6'],
-    ['#eab308', '#f59e0b'],
+    ['#6366f1', '#a855f7'],  // Índigo → Púrpura
+    ['#14b8a6', '#06b6d4'],  // Verde azulado → Cian
+    ['#f59e0b', '#ef4444'],  // Ámbar → Rojo
+    ['#3b82f6', '#6366f1'],  // Azul → Índigo
+    ['#ec4899', '#a855f7'],  // Rosa → Púrpura
+    ['#10b981', '#14b8a6'],  // Esmeralda → Verde azulado
+    ['#eab308', '#f59e0b'],  // Amarillo → Ámbar
 ];
 const articulos = document.querySelectorAll('.jobs-listing article');
-let coloreado = false;
+let coloreado = false; // Estado: true si los artículos están coloreados
 
 btnColorear.addEventListener('click', () => {
 
     if (!coloreado) {
+        // Aplicar gradientes a cada artículo
         articulos.forEach((art, i) => {
             const c = colores[i] || colores[0];
             art.style.background = `linear-gradient(135deg, ${c[0]}, ${c[1]})`;
@@ -47,6 +53,7 @@ btnColorear.addEventListener('click', () => {
             art.querySelectorAll('.btn-apply-job').forEach(b => b.style.color = '#fff');
         });
     } else {
+        // Restaurar estilos originales quitando los inline
         articulos.forEach(art => {
             art.style.background = '';
             art.style.color = '';
@@ -55,11 +62,12 @@ btnColorear.addEventListener('click', () => {
             art.querySelectorAll('.btn-apply-job').forEach(b => b.style.color = '');
         });
     }
-    coloreado = !coloreado;
+    coloreado = !coloreado; // Invertir el estado
 });
             
 // ####################################################################
-// Filtros combinados de búsqueda de empleos
+// Filtros combinados de búsqueda de empleos (selects + búsqueda por texto)
+// Mapeo de los elementos <select> del formulario de filtros
 const filters = {
     technology: document.getElementById('filter-job-type'),
     location: document.getElementById('filter-location'),
@@ -67,21 +75,42 @@ const filters = {
     experience: document.getElementById('filter-experience'),
 };
 
+// Input de búsqueda por texto libre
+const searchInput = document.getElementById('empleos-search-input');
+
+// Función que aplica todos los filtros activos de forma combinada (AND)
 function applyFilters() {
+    // 1. Obtener los valores seleccionados en cada <select>
     const values = {};
     for (const key in filters) {
         values[key] = filters[key].value.toLowerCase();
     }
 
+    // 2. Obtener el texto escrito en el buscador
+    const query = searchInput.value.toLowerCase();
+
+    // 3. Recorrer todos los artículos y decidir si mostrarlos u ocultarlos
     const articulos = document.querySelectorAll('.jobs-listing article');
     articulos.forEach(art => {
-        const show = Object.keys(values).every(key => {
+        // 3a. Verificar que el artículo cumpla TODOS los filtros activos
+        //     .every() retorna true solo si todas las condiciones se cumplen
+        const matchFilters = Object.keys(values).every(key => {
+            // Si el filtro está vacío (sin seleccionar) se considera cumplido
+            // Si tiene valor, se compara con el atributo data-* del artículo
             return !values[key] || art.dataset[key] === values[key];
         });
-        art.style.display = show ? '' : 'none';
+
+        // 3b. Verificar que el artículo coincida con el texto de búsqueda
+        const matchSearch = !query || art.textContent.toLowerCase().includes(query);
+
+        // 3c. Mostrar solo si cumple AMBAS condiciones (filtros Y búsqueda)
+        art.style.display = matchFilters && matchSearch ? '' : 'none';
     });
 }
 
+// Escuchar cambios en los selects de filtros
 for (const key in filters) {
     filters[key].addEventListener('change', applyFilters);
 }
+// Escuchar escritura en el buscador (filtrado en tiempo real)
+searchInput.addEventListener('input', applyFilters);
