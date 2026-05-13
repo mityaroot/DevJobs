@@ -58,35 +58,37 @@
   <main>
 
     <section class="hero">
-      <img src="./background.webp" width="200" />
+        <img src="../resources/background.webp" width="200" />
 
-      <h1>Encuentra tú próximo trabajo</h1>
+        <h1>Encuentra tú próximo trabajo</h1>
 
-      <p>Explora miles de oportunidades en el sector tecnológico.</p>
+        <p>Explora miles de oportunidades en el sector tecnológico.</p>
 
-      <form role="search">
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-search">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-            <path d="M21 21l-6 -6" />
-          </svg>
+        <form role="search">
+            <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                <path d="M21 21l-6 -6" />
+            </svg>
 
-          <input required type="text" placeholder="Buscar trabajos, empresas o habilidades">
+            <input required type="text" placeholder="Buscar trabajos, empresas o habilidades">
 
-          <button disabled type="submit">Buscar</button>
-        </div>
-      </form>
+            <button disabled type="submit">Buscar</button>
+            </div>
+        </form>
     
-        <!-- El FORM de filtros -->
+
+
+        <!-- El FORM de FILTROS DE BUSQUEDA DE EMPLEOS -->
         <form class="filtros-form" style="display: flex; gap: 1.5rem; align-items: flex-end; padding: 1rem; border: 1px solid #ccc; border-radius: 4px; margin-top: 2rem; flex-wrap: wrap; background-color: #f9f9f94f;">
             
             <div class="filter-group">
                 <span class="filter-label">Tecnología</span>
                 <svg class="filter-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-                <select id="job-type" name="job-type">
+                <select id="filter-job-type" name="job-type">
                     <option value="">Todas las tecnologías</option>
                     <option value="frontend">Frontend</option>
                     <option value="backend">Backend</option>
@@ -97,17 +99,17 @@
             <div class="filter-group">
                 <span class="filter-label">Ubicación</span>
                 <svg class="filter-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-                <select id="location" name="location">
+                <select id="filter-location" name="location">
                     <option value="">Todas las ubicaciones</option>
-                    <option value="remote">Remoto</option>
-                    <option value="onsite">Presencial</option>
+                    <option value="remoto">Remoto</option>
+                    <option value="presencial">Presencial</option>
                 </select>
             </div>
 
             <div class="filter-group">
                 <span class="filter-label">Tipo de contrato</span>
                 <svg class="filter-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-                <select id="contract-type" name="contract-type">
+                <select id="filter-contract-type" name="contract-type">
                     <option value="">Todos los tipos</option>
                     <option value="full-time">Tiempo completo</option>
                     <option value="part-time">Medio tiempo</option>
@@ -118,7 +120,7 @@
             <div class="filter-group">
                 <span class="filter-label">Nivel de experiencia</span>
                 <svg class="filter-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-                <select id="experience" name="experience">
+                <select id="filter-experience" name="experience">
                     <option value="">Todos los niveles</option>
                     <option value="junior">Junior</option>
                     <option value="mid">Mid</option>
@@ -145,15 +147,24 @@
 
         <div class="jobs-listing" style="width: 100%; 
             max-width: 600px; border: 4px solid #ffffff2d; 
-            border-radius: 4px;">
-            <h2 style="padding: 1rem 1rem 0 1rem; margin-bottom: 0;">Resultados de búsqueda</h2>
+            border-radius: 4px; padding-bottom: 2rem;
+            background-color: #f9f9f94f;
+            ">
+            <h2 style="padding: 1rem 1rem 0 1rem; margin-bottom: 2rem;">
+                Resultados de búsqueda
+            </h2>
 
             <article 
             id = "empleo-1"
-            style="padding: 1rem;">
+            style="padding: 1rem;"
+            data-technology="frontend"
+            data-location="remoto"
+            data-contract="full-time"
+            data-experience="mid">
                 <div>
                     <h2>Desarrollador Frontend</h2>
                     <p>Empresa XYZ - Remoto</p>
+                    <p>Tiempo completo · Mid</p>
                     <p>Publicado hace 2 días</p>
                 </div>
 
@@ -162,10 +173,15 @@
 
             <article 
             id = "empleo-2"
-            style="padding: 1rem;">
+            style="padding: 1rem;"
+            data-technology="backend"
+            data-location="presencial"
+            data-contract="full-time"
+            data-experience="senior">
                 <div>
                     <h2>Desarrollador Backend</h2>
                     <p>Empresa ABC - Presencial</p>
+                    <p>Tiempo completo · Senior</p>
                     <p>Publicado hace 5 días</p>
                 </div>
 
@@ -174,10 +190,15 @@
 
             <article 
             id = "empleo-3"
-            style="padding: 1rem; margin-bottom: 1rem;">
+            style="padding: 1rem;"
+            data-technology="devops"
+            data-location="remoto"
+            data-contract="contract"
+            data-experience="junior">
                 <div>
                     <h2>Ingeniero de DevOps</h2>
                     <p>Empresa DEF - Remoto</p>
+                    <p>Contrato · Junior</p>
                     <p>Publicado hace 1 semana</p>
                 </div>
 

@@ -76,17 +76,29 @@ btnColorear.addEventListener('click', () => {
 });
             
 // ####################################################################
-// Para los filtros, se podría implementar una función que oculte o muestre los artículos según el criterio seleccionado. Por ejemplo:
-const filtroSelect = document.getElementById('filtro');
+// Filtros combinados de búsqueda de empleos
+const filters = {
+    technology: document.getElementById('filter-job-type'),
+    location: document.getElementById('filter-location'),
+    contract: document.getElementById('filter-contract-type'),
+    experience: document.getElementById('filter-experience'),
+};
 
-filtroSelect.addEventListener('change', () => {
-    const valorFiltro = filtroSelect.value;
+function applyFilters() {
+    const values = {};
+    for (const key in filters) {
+        values[key] = filters[key].value.toLowerCase();
+    }
+
     const articulos = document.querySelectorAll('.jobs-listing article');
     articulos.forEach(art => {
-        const tipoTrabajo = art.querySelector('p:nth-child(2)').textContent.toLowerCase();  
-        if (valorFiltro === 'todos' || tipoTrabajo.includes(valorFiltro)) {
-            art.style.display = '';
-        } else {
-            art.style.display = 'none';
-        }   });
-});
+        const show = Object.keys(values).every(key => {
+            return !values[key] || art.dataset[key] === values[key];
+        });
+        art.style.display = show ? '' : 'none';
+    });
+}
+
+for (const key in filters) {
+    filters[key].addEventListener('change', applyFilters);
+}
