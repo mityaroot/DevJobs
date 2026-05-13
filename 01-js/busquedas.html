@@ -93,6 +93,10 @@
                     <option value="frontend">Frontend</option>
                     <option value="backend">Backend</option>
                     <option value="devops">DevOps</option>
+                    <option value="data">Data</option>
+                    <option value="ux-ui">UX/UI</option>
+                    <option value="mobile">Mobile</option>
+                    <option value="fullstack">Full Stack</option>
                 </select>
             </div>
 
@@ -150,9 +154,25 @@
             border-radius: 4px; padding-bottom: 2rem;
             background-color: #f9f9f94f;
             ">
-            <h2 style="padding: 1rem 1rem 0 1rem; margin-bottom: 2rem;">
+            <h2 style="padding: 1rem 1rem 0 1rem; margin-bottom: 1rem;">
                 Resultados de búsqueda
             </h2>
+
+            <button 
+                id = "btn-colorear"
+                type="button"
+                
+                style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; margin-bottom: 1rem;"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-palette">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+                        <path d="M7.5 10.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                        <path d="M11.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                        <path d="M15.5 10.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                    </svg>
+                    <span style="vertical-align: middle;">Colorear</span>
+            </button>
 
             <article 
             id = "empleo-1"
@@ -205,11 +225,75 @@
                 <button id="btn-apply-job-3" class="btn-apply-job" type="submit">Aplicar</button>
             </article>
 
-        </div>
+            <article 
+            id = "empleo-4"
+            style="padding: 1rem;"
+            data-technology="data"
+            data-location="remoto"
+            data-contract="full-time"
+            data-experience="senior">
+                <div>
+                    <h2>Data Scientist</h2>
+                    <p>Empresa GHI - Remoto</p>
+                    <p>Tiempo completo · Senior</p>
+                    <p>Publicado hace 3 días</p>
+                </div>
 
-        <button 
-        id = "btn-colorear"
-        type="button">Colorear</button>
+                <button id="btn-apply-job-4" class="btn-apply-job" type="submit">Aplicar</button>
+            </article>
+
+            <article 
+            id = "empleo-5"
+            style="padding: 1rem;"
+            data-technology="ux-ui"
+            data-location="presencial"
+            data-contract="part-time"
+            data-experience="mid">
+                <div>
+                    <h2>UX/UI Designer</h2>
+                    <p>Empresa JKL - Presencial</p>
+                    <p>Medio tiempo · Mid</p>
+                    <p>Publicado hace 6 días</p>
+                </div>
+
+                <button id="btn-apply-job-5" class="btn-apply-job" type="submit">Aplicar</button>
+            </article>
+
+            <article 
+            id = "empleo-6"
+            style="padding: 1rem;"
+            data-technology="mobile"
+            data-location="remoto"
+            data-contract="contract"
+            data-experience="junior">
+                <div>
+                    <h2>Mobile Developer</h2>
+                    <p>Empresa MNO - Remoto</p>
+                    <p>Contrato · Junior</p>
+                    <p>Publicado hoy</p>
+                </div>
+
+                <button id="btn-apply-job-6" class="btn-apply-job" type="submit">Aplicar</button>
+            </article>
+
+            <article 
+            id = "empleo-7"
+            style="padding: 1rem;"
+            data-technology="fullstack"
+            data-location="presencial"
+            data-contract="full-time"
+            data-experience="senior">
+                <div>
+                    <h2>Full Stack Developer</h2>
+                    <p>Empresa PQR - Presencial</p>
+                    <p>Tiempo completo · Senior</p>
+                    <p>Publicado hace 4 días</p>
+                </div>
+
+                <button id="btn-apply-job-7" class="btn-apply-job" type="submit">Aplicar</button>
+            </article>
+
+        </div>
 
         <nav style="margin-top: 2rem;" class="pagination">
         <a href="#">
