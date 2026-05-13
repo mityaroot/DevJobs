@@ -47,7 +47,7 @@ jobListings?.addEventListener('click', (event) => {
 // #####################################################################
 // Agregar funcionalidad al botón de colorear
 const btnColorear = document.getElementById('btn-colorear');
-const colores = ['rgba(255, 85, 227, 0.51)', 'rgba(0, 174, 255, 0.45)', 'rgba(0, 0, 255, 0.51)'];
+const colores = ['rgba(255, 36, 218, 0.29)', 'rgba(255, 0, 221, 0.45)', 'rgba(0, 102, 255, 0.25)'];
 const articulos = document.querySelectorAll('.jobs-listing article');
 let coloreado = false;
 
@@ -75,3 +75,18 @@ btnColorear.addEventListener('click', () => {
     coloreado = !coloreado;
 });
             
+// ####################################################################
+// Para los filtros, se podría implementar una función que oculte o muestre los artículos según el criterio seleccionado. Por ejemplo:
+const filtroSelect = document.getElementById('filtro');
+
+filtroSelect.addEventListener('change', () => {
+    const valorFiltro = filtroSelect.value;
+    const articulos = document.querySelectorAll('.jobs-listing article');
+    articulos.forEach(art => {
+        const tipoTrabajo = art.querySelector('p:nth-child(2)').textContent.toLowerCase();  
+        if (valorFiltro === 'todos' || tipoTrabajo.includes(valorFiltro)) {
+            art.style.display = '';
+        } else {
+            art.style.display = 'none';
+        }   });
+});

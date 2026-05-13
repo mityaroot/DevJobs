@@ -111,7 +111,7 @@ header div a {
 
 /* Hero */
 main > section.hero {
-  height: 300px;
+  min-height: 300px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -366,6 +366,12 @@ article {
   align-items: center;
   gap: 0.25rem;
   cursor: pointer;
+  padding: 1rem;
+  border-right: 1px solid #ccc;
+}
+
+.filter-group:last-child {
+  border-right: none;
 }
 
 .filter-label {
@@ -405,6 +411,13 @@ article {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+}
+
+.jobs-listing article:last-child {
+  border-bottom: none;
 }
 
 .jobs-listing article > div {
