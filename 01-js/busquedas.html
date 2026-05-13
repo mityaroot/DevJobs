@@ -104,13 +104,17 @@
                 <svg class="filter-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
                 <select id="filter-job-type" name="job-type">
                     <option value="">Todas las tecnologías</option>
-                    <option value="frontend">Frontend</option>
-                    <option value="backend">Backend</option>
+                    <br>
+                    <optgroup label="Desarrollo">
+                        <option value="frontend">Frontend</option>
+                        <option value="backend">Backend</option>
+                        <option value="fullstack">Full Stack</option>
+                    </optgroup>
+                    <br>
                     <option value="devops">DevOps</option>
                     <option value="data">Data</option>
                     <option value="ux-ui">UX/UI</option>
                     <option value="mobile">Mobile</option>
-                    <option value="fullstack">Full Stack</option>
                     <option value="qa">QA</option>
                     <option value="product">Producto</option>
                     <option value="cloud">Cloud</option>
@@ -151,6 +155,8 @@
 
         </form>
 
+    </section>
+
         <!-- Terminal de filtros activos -->
         <div id="filter-terminal" class="filter-terminal" style="display: none;">
             <div class="terminal-bar">
@@ -165,8 +171,6 @@
                 <div class="terminal-line terminal-cursor-line"><span class="terminal-prompt">$</span> <span class="terminal-blink">▌</span></div>
             </div>
         </div>
-
-    </section>
 
     
     

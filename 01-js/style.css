@@ -111,6 +111,7 @@ header div a {
 
 /* Hero */
 main > section.hero {
+  position: relative;
   min-height: 300px;
   text-align: center;
   display: flex;
@@ -396,8 +397,7 @@ article {
 }
 
 .filter-arrow {
-  color: var(--text-muted);
-  pointer-events: none;
+  display: none;
 }
 
 .filter-group select {
@@ -408,9 +408,147 @@ article {
   font-size: inherit;
 }
 
-.filter-group select option {
-  background: var(--card-bg);
-  color: var(--text-primary);
+/* Custom select macOS style */
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.custom-select-trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.custom-select-trigger.open {
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.custom-select-value {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.custom-select-value.placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.custom-select-arrow {
+  color: rgba(255, 255, 255, 0.4);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.custom-select-arrow.open {
+  transform: rotate(180deg);
+}
+
+.custom-select-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  min-width: 200px;
+  background: rgba(22, 27, 34, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0.35rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-4px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.custom-select-dropdown.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.custom-select-option {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.custom-select-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.custom-select-option.selected {
+  color: #fff;
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.custom-select-option.optgroup-label {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  padding: 0.6rem 0.75rem 0.3rem;
+  cursor: default;
+  pointer-events: none;
+}
+
+.custom-select-option.optgroup-label:hover {
+  background: transparent;
+}
+
+.custom-select-option.divider {
+  height: 1px;
+  padding: 0;
+  margin: 0.3rem 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 0;
+  cursor: default;
+  pointer-events: none;
+}
+
+.filter-group select {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  font-size: inherit;
+  pointer-events: none;
 }
 
 .jobs-listing {
