@@ -78,6 +78,39 @@ const filters = {
 // Input de búsqueda por texto libre
 const searchInput = document.getElementById('empleos-search-input');
 
+const filterLabels = {
+    technology: 'Tecnología',
+    location: 'Ubicación',
+    contract: 'Tipo de contrato',
+    experience: 'Nivel de experiencia',
+};
+
+const filterOptions = {
+    technology: { frontend: 'Frontend', backend: 'Backend', devops: 'DevOps', data: 'Data', 'ux-ui': 'UX/UI', mobile: 'Mobile', fullstack: 'Full Stack', qa: 'QA', product: 'Producto', cloud: 'Cloud' },
+    location: { remoto: 'Remoto', presencial: 'Presencial' },
+    contract: { 'full-time': 'Tiempo completo', 'part-time': 'Medio tiempo', contract: 'Contrato' },
+    experience: { junior: 'Junior', mid: 'Mid', senior: 'Senior' },
+};
+
+const terminal = document.getElementById('filter-terminal');
+const terminalOutput = document.getElementById('terminal-output');
+
+function updateTerminal(activeFilters, query, visibleCount, totalCount) {
+    const hasActiveFilters = activeFilters.length > 0 || query;
+
+    if (!hasActiveFilters) {
+        terminal.style.display = 'none';
+        return;
+    }
+
+    terminal.style.display = '';
+    terminalOutput.innerHTML = activeFilters.map(f =>
+        `<div class="terminal-filter-line">▸ <span class="filter-label-text">${f.label}:</span> <span class="filter-value-text">${f.value}</span></div>`
+    ).join('') +
+    (query ? `<div class="terminal-filter-line">▸ <span class="filter-label-text">Búsqueda:</span> <span class="filter-value-text">"${query}"</span></div>` : '') +
+    `<div class="terminal-result-line">└─ resultados: <span class="terminal-result-count">${visibleCount}/${totalCount}</span></div>`;
+}
+
 // Función que aplica todos los filtros activos de forma combinada (AND)
 function applyFilters() {
     // 1. Obtener los valores seleccionados en cada <select>
@@ -91,6 +124,7 @@ function applyFilters() {
 
     // 3. Recorrer todos los artículos y decidir si mostrarlos u ocultarlos
     const articulos = document.querySelectorAll('.jobs-listing article');
+    let visibleCount = 0;
     articulos.forEach(art => {
         // 3a. Verificar que el artículo cumpla TODOS los filtros activos
         //     .every() retorna true solo si todas las condiciones se cumplen
@@ -104,8 +138,23 @@ function applyFilters() {
         const matchSearch = !query || art.textContent.toLowerCase().includes(query);
 
         // 3c. Mostrar solo si cumple AMBAS condiciones (filtros Y búsqueda)
-        art.style.display = matchFilters && matchSearch ? '' : 'none';
+        const show = matchFilters && matchSearch;
+        art.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
     });
+
+    // 4. Actualizar terminal con filtros activos
+    const activeFilters = [];
+    for (const key in values) {
+        if (values[key]) {
+            const opts = filterOptions[key];
+            activeFilters.push({
+                label: filterLabels[key],
+                value: opts?.[values[key]] || values[key],
+            });
+        }
+    }
+    updateTerminal(activeFilters, searchInput.value, visibleCount, articulos.length);
 }
 
 // Escuchar cambios en los selects de filtros
@@ -114,3 +163,18 @@ for (const key in filters) {
 }
 // Escuchar escritura en el buscador (filtrado en tiempo real)
 searchInput.addEventListener('input', applyFilters);
+
+
+// ####################################################################
+// Botón de "Limpiar filtros": resetea selects, buscador y muestra todos los artículos
+const btnLimpiar = document.getElementById('btn-reset-filters');
+btnLimpiar.addEventListener('click', () => {
+    // 1. Resetear todos los selects a su valor por defecto (vacío) y el buscador
+    for (const key in filters) {
+        filters[key].value = '';
+    }
+    searchInput.value = '';
+
+    // 2. Aplicar filtros para refrescar la terminal
+    applyFilters();
+});

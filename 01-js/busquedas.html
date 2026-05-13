@@ -90,6 +90,15 @@
         <!-- El FORM de FILTROS DE BUSQUEDA DE EMPLEOS -->
         <form class="filtros-form" style="display: flex; gap: 1.5rem; align-items: flex-end; padding: 1rem; border: 1px solid #ccc; border-radius: 4px; margin-top: 2rem; flex-wrap: wrap; background-color: #f9f9f94f;">
             
+            <button type="button" id="btn-reset-filters" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; background-color: #e53e3e; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+                Limpiar filtros
+            </button>
+
             <div class="filter-group">
                 <span class="filter-label">Tecnología</span>
                 <svg class="filter-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
@@ -142,11 +151,25 @@
 
         </form>
 
+        <!-- Terminal de filtros activos -->
+        <div id="filter-terminal" class="filter-terminal" style="display: none;">
+            <div class="terminal-bar">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">filtros.sh</span>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line"><span class="terminal-prompt">$</span> ./aplicar-filtros.sh</div>
+                <div id="terminal-output"></div>
+                <div class="terminal-line terminal-cursor-line"><span class="terminal-prompt">$</span> <span class="terminal-blink">▌</span></div>
+            </div>
+        </div>
 
     </section>
 
     
-
+    
     <section 
     style="
         margin-top: 2rem; display: grid; gap: 1rem; 
