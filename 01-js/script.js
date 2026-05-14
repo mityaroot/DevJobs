@@ -93,9 +93,11 @@ btnLimpiar.addEventListener('click', () => {
 
 const jobsListingSection = document.querySelector('.jobs-listings')
 
+// Delegación de eventos: escuchamos clics en el contenedor de las ofertas de empleo
 jobsListingSection.addEventListener('click', function(event) {
   const element = event.target
 
+  // Si el elemento clickeado es un botón de aplicar a empleo, cambiamos su estado
   if (element.classList.contains('btn-apply-job')) {
     element.textContent = '¡Aplicado!'
     element.classList.add('is-applied')
@@ -103,8 +105,11 @@ jobsListingSection.addEventListener('click', function(event) {
   }
 })
 
+// Filtro de ubicación
 const filter = document.querySelector('#filter-location')
+// Elemento donde mostraremos el mensaje de la opción seleccionada
 const mesage = document.querySelector('#filter-selected-value')
+// Recuperamos todas las tarjetas de empleo para luego filtrarlas
 const jobs = document.querySelectorAll('.jobs-listings-card')
 
 filter.addEventListener('change', function() {
@@ -113,10 +118,17 @@ filter.addEventListener('change', function() {
     if (selectedValue) {
         mesage.textContent = `Has seleccionado: ${selectedValue}`
     } else {
-        mesage.textContent = 'No has seleccionado ninguna ubicación'
+        mesage.textContent = ''
     }
 
+    jobs.forEach(job => {
+        //const modalidad = job.dataset.modsalidad
+        const modalidad = job.getAttribute('data-modalidad')
+        const isShown = selectedValue === '' || selectedValue === modalidad
+        job.classList.toggle('is-hidden', !isShown === false)
 
+    })
+})
 
 // - Comentarios con otros eventos interesantes
 
