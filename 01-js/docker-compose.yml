@@ -1,0 +1,9 @@
+services:
+  web-server:
+    image: nginx:alpine
+    container_name: buscador-empleos
+    ports:
+      - "80:80"
+    volumes:
+      - .:/usr/share/nginx/html:ro
+    restart: "no"
