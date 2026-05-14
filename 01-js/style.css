@@ -325,6 +325,7 @@ footer {
   }
 }
 
+/*
 article {
   background-color: var(--card-bg);
   padding: 2rem;
@@ -349,6 +350,7 @@ article {
     font-weight: 500;
   }
 }
+*/
 
 /* Jobs Search */
 .jobs-search {
@@ -390,7 +392,7 @@ article {
   }
 }
 
-.jobs-listings {
+.job-listing {
   border: 1px solid rgba(255, 255, 255, .3);
   border-radius: 1rem;
 
@@ -500,4 +502,104 @@ article {
 /* Efecto al hacer clic */
 .nav-link:active {
     transform: translateY(0);
+}
+
+
+.job-card {
+    /* Fondo oscuro azulado, más suave que el negro puro */
+    background: #1e293b; 
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 400px;
+    margin-bottom: 1rem;
+    
+    
+    /* Sombra profunda para dar relieve */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #f1f5f9; /* Texto casi blanco */
+}
+
+/* Efecto hover: se ilumina ligeramente y sube */
+.job-card:hover {
+    transform: translateY(-5px);
+    border-color: #3b82f6; /* El borde brilla en azul */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.job-card h3 {
+    margin: 0 0 10px 0;
+    color: #ffffff;
+    font-size: 1.3rem;
+    letter-spacing: -0.025em;
+}
+
+.job-meta {
+    color: #94a3b8; /* Gris azulado claro para texto secundario */
+    display: block;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+}
+
+.job-meta span {
+    margin: 0 8px;
+    color: #475569;
+}
+
+.job-tech {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    margin-bottom: 14px;
+}
+
+/* El "badge" de tecnología en modo oscuro */
+.job-tech span {
+    background: #334155;
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: #60a5fa; /* Azul brillante para resaltar la tech */
+    font-weight: 500;
+}
+
+.job-description {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #334155;
+    margin: 20px 0;
+}
+
+.btn-apply-job {
+    width: 100%;
+    background-color: #3b82f6; 
+    color: #ffffff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-apply-job:hover {
+    background-color: #2563eb;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.btn-apply-job:active {
+    transform: scale(0.98); /* Efecto de pulsación */
+}
+
+.btn-apply-job.is-applied {
+    background-color: #4caf50; /* Verde para indicar que ya se aplicó */
+    cursor: default;
+    pointer-events: none;
 }

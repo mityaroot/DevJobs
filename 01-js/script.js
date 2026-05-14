@@ -21,7 +21,7 @@ function applyFilters() {
 
     const query = searchInput.value.toLowerCase();
 
-    const articulos = document.querySelectorAll('.jobs-listings article');
+    const articulos = document.querySelectorAll('.job-listing article');
     let visibleCount = 0;
     articulos.forEach(art => {
         const matchFilters = Object.keys(values).every(key => {
@@ -65,30 +65,31 @@ btnLimpiar.addEventListener('click', () => {
 //  Midudev
 // BOTON DE APLICAR A EMPLEO
 
-const jobsListingSection = document.querySelector('.jobs-listings')
+const jobsListingSection = document.querySelector('.job-listing')
 
 // Delegación de eventos: escuchamos clics en el contenedor de las ofertas de empleo
 jobsListingSection.addEventListener('click', function(event) {
-  const element = event.target
+    const element = event.target
 
-  // Si el elemento clickeado es un botón de aplicar a empleo, cambiamos su estado
-  if (element.classList.contains('btn-apply-job')) {
-    element.textContent = '¡Aplicado!'
-    element.classList.add('is-applied')
-    element.disabled = true
-  }
+    // Si el elemento clickeado es un botón de aplicar a empleo, cambiamos su estado
+    if (element.classList.contains('btn-apply-job')) {
+        element.textContent = '¡Aplicado!'
+        element.classList.add('is-applied')
+        element.disabled = true
+    }
 })
 
 // ####################################################################
-// Filtro de ubicación
-const filter = document.querySelector('#filter-location')
+
+const filter = document.querySelector('#filter-technology')
 // Elemento donde mostraremos el mensaje de la opción seleccionada
 const mesage = document.querySelector('#filter-selected-value')
-// Recuperamos todas las tarjetas de empleo para luego filtrarlas
-const jobs = document.querySelectorAll('.jobs-listings-card')
 
 filter.addEventListener('change', function() {
-  const selectedValue = filter.value
+    // Recuperamos todas las tarjetas de empleo para luego filtrarlas
+    const jobs = document.querySelectorAll('.job-listing-card')
+
+    const selectedValue = filter.value
 
     if (selectedValue) {
         mesage.textContent = `Has seleccionado: ${selectedValue}`
@@ -105,7 +106,8 @@ filter.addEventListener('change', function() {
     })
 })
 
-
+// ####################################################################
+// FETCH DE DATOS DESDE UN JSON LOCAL
 console.log('antes de fetch')
 fetch("./data.json") // el fetch es asíncrono, no bloquea el hilo principal, por eso el console.log de abajo se ejecuta antes de que el fetch termine
     .then((response) => {
@@ -114,13 +116,20 @@ fetch("./data.json") // el fetch es asíncrono, no bloquea el hilo principal, po
     .then((jobs) => {
         jobs.forEach(job => {
             const article = document.createElement('article')
-            article.classList.add('jobs-listings-card')
-            article.innerHTML = `
-                <h3>${job.titulo}</h3>
-                <p>${job.empresa}</p>
-                <p>${job.ubicacion}</p>
-                <p>${job.descripcion}</p>
-                <button class="btn-apply-job">Aplicar</button>
+            article.className = 'job-listing-card'
+            article.dataset.modalidad = job.data.modalidad
+            article.dataset.nivel = job.data.nivel
+            article.dataset.technology = job.data.technology
+
+            article.innerHTML = ` 
+                <div class="job-card">
+                    <h3>${job.titulo}</h3>
+                    <small class="job-meta">${job.empresa} <span>|</span> <strong>Modalidad:</strong> ${job.data.modalidad}</small>
+                    <p class="job-tech"><strong>Tecnología:</strong> <span>${job.data.technology}</span></p>
+                    <p class="job-description">${job.descripcion}</p>
+                    <hr>
+                    <button class="btn-apply-job">Aplicar ahora</button>
+                </div>
             `
             jobsListingSection.appendChild(article)
         })
