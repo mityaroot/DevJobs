@@ -1,6 +1,10 @@
 // FETCH DE DATOS DESDE UN JSON LOCAL
 const jobsListingSection = document.querySelector('.job-listing')
 
+const RESULTS_PER_PAGE = 3
+let currentPage = 1
+const job_article = 0;
+
 console.log('antes de fetch')
 
 fetch("./data.json") // el fetch es asíncrono, no bloquea el hilo principal, por eso el console.log de abajo se ejecuta antes de que el fetch termine
@@ -9,6 +13,7 @@ fetch("./data.json") // el fetch es asíncrono, no bloquea el hilo principal, po
     })
     .then((jobs) => {
         jobs.forEach(job => {
+            
             const article = document.createElement('article')
             article.className = 'job-listing-card'
             article.dataset.modalidad = job.data.modalidad
@@ -27,7 +32,16 @@ fetch("./data.json") // el fetch es asíncrono, no bloquea el hilo principal, po
                     <button class="btn-apply-job">Aplicar ahora</button>
                 </div>
             `
+            job_article++;
             jobsListingSection.appendChild(article)
+            
+            if (job_article < RESULTS_PER_PAGE) {
+                const paginationNumbers = document.getElementById('pagination-numbers');
+                const pageNumber = document.createElement('a');
+                pageNumber.href = '#' + job_article;
+                pageNumber.textContent = currentPage++;
+                paginationNumbers.appendChild(pageNumber);
+            }
         })
     })
     .catch(error => {
