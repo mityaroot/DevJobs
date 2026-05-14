@@ -78,6 +78,11 @@ function aplicarFiltros() {
         job.classList.toggle('is-hidden', !isShown);
         if (isShown) visibleCount++;
     });
+
+    // Actualizamos la paginación después de aplicar los filtros
+    if (typeof window.refreshPagination === 'function') {
+        window.refreshPagination()
+    }
 }
 
 // 3. Escuchamos el evento 'change' en cada uno
