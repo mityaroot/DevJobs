@@ -19,13 +19,24 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-        const titulo = <h1 style={{ color: "white", fontSize: "3rem" }}>
-        Hola, React </h1>;
+        function Saludo( {persona, color}) {
+            return <h2 style={{ fontSize: "1.5rem", color: color }}>Hola, {persona}!</h2>;
+        }
+
+        function App() {
+            return (
+                <div>
+                    <Saludo persona="Juan" color="yellow" />
+                    <Saludo persona="María" color="red" />
+                    <Saludo persona="Carlos" color="white" />
+                </div>
+            );
+        }
         
 
         const rootEl = document.querySelector("#root");
         const root = ReactDOM.createRoot(rootEl);
-        root.render(titulo);
+        root.render(App());
     </script>
 
 </head>
