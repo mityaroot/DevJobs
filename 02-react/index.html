@@ -19,16 +19,22 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-        function Saludo( {persona, color}) {
-            return <h2 style={{ fontSize: "1.5rem", color: color }}>Hola, {persona}!</h2>;
+        // Componente funcional que recibe props
+        function JobCard({ title, company }) {
+            return (
+                <div style={{ border: "1px solid #ccc", padding: "1rem", marginBottom: "1rem" }}>
+                    <h2>{title}</h2>
+                    <p>{company}</p>
+                </div>
+            );
         }
 
         function App() {
             return (
                 <div>
-                    <Saludo persona="Juan" color="yellow" />
-                    <Saludo persona="María" color="red" />
-                    <Saludo persona="Carlos" color="white" />
+                    <JobCard title="Desarrollador Frontend" company="Tech Corp" />
+                    <JobCard title="Diseñadora UX" company="Design Studio" />
+                    <JobCard title="Gerente de Proyecto" company="Project Management Inc" />
                 </div>
             );
         }
@@ -37,6 +43,7 @@
         const rootEl = document.querySelector("#root");
         const root = ReactDOM.createRoot(rootEl);
         root.render(App());
+
     </script>
 
 </head>
