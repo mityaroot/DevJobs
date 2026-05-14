@@ -603,3 +603,7 @@ hr {
     cursor: default;
     pointer-events: none;
 }
+
+.is-hidden {
+    display: none !important;
+}

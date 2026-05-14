@@ -80,7 +80,7 @@ jobsListingSection.addEventListener('click', function(event) {
 })
 
 // ####################################################################
-
+/*
 const filter = document.querySelector('#filter-technology')
 // Elemento donde mostraremos el mensaje de la opción seleccionada
 const mesage = document.querySelector('#filter-selected-value')
@@ -105,6 +105,46 @@ filter.addEventListener('change', function() {
 
     })
 })
+*/
+
+// ------------
+// 1. Seleccionamos todos los filtros
+const techFilter = document.querySelector('#filter-technology');
+const locationFilter = document.querySelector('#filter-location');
+const levelFilter = document.querySelector('#experience-level');
+
+// 2. Creamos una función que se ejecute cuando CUALQUIERA cambie
+function aplicarFiltros() {
+    const jobs = document.querySelectorAll('.job-listing-card');
+    
+    // Valores actuales de cada selector
+    const valTech = techFilter.value;
+    const valLoc = locationFilter.value;
+    const valLevel = levelFilter.value;
+
+    jobs.forEach(job => {
+        // Extraemos los datos de la tarjeta (article.dataset)
+        const techData = job.dataset.technology || "";
+        const locData = job.dataset.modalidad || ""; // En tu fetch pusiste .modalidad
+        const levelData = job.dataset.nivel || "";    // En tu fetch pusiste .nivel
+
+        // Lógica: La tarjeta se muestra si coincide con los 3 filtros a la vez
+        const matchesTech = valTech === '' || techData.includes(valTech);
+        const matchesLoc = valLoc === '' || locData === valLoc;
+        const matchesLevel = valLevel === '' || levelData === valLevel;
+
+        // Se muestra solo si cumple todas las condiciones
+        const isShown = matchesTech && matchesLoc && matchesLevel;
+
+        // Toggle de la clase 'is-hidden' según corresponda
+        job.classList.toggle('is-hidden', !isShown);
+    });
+}
+
+// 3. Escuchamos el evento 'change' en cada uno
+techFilter.addEventListener('change', aplicarFiltros);
+locationFilter.addEventListener('change', aplicarFiltros);
+levelFilter.addEventListener('change', aplicarFiltros);
 
 // ####################################################################
 // FETCH DE DATOS DESDE UN JSON LOCAL
@@ -124,7 +164,9 @@ fetch("./data.json") // el fetch es asíncrono, no bloquea el hilo principal, po
             article.innerHTML = ` 
                 <div class="job-card">
                     <h3>${job.titulo}</h3>
-                    <small class="job-meta">${job.empresa} <span>|</span> <strong>Modalidad:</strong> ${job.data.modalidad}</small>
+                    <small class="job-meta">${job.empresa} <span>|</span> <strong>Modalidad:</strong> ${job.data.modalidad}
+                        <span>|</span> <strong>Nivel:</strong> ${job.data.nivel}
+                        </small>
                     <p class="job-tech"><strong>Tecnología:</strong> <span>${job.data.technology}</span></p>
                     <p class="job-description">${job.descripcion}</p>
                     <hr>
