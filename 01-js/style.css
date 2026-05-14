@@ -465,3 +465,39 @@ article {
     pointer-events: none;
   }
 }
+
+/* ####################################################################### 
+  MIS ESTILOS */
+.nav-link {
+    /* Estructura y forma */
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px; /* Bordes redondeados modernos */
+    
+    /* Tipografía y Color */
+    text-decoration: none; /* Quitamos el subrayado feo */
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #3b82f6; /* Un azul vibrante moderno */
+    
+    /* Fondo y Borde */
+    background-color: #eff6ff; /* Un azul muy clarito de fondo */
+    border: 1px solid transparent;
+    
+    /* Animación */
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el ratón */
+.nav-link:hover {
+    background-color: #3b82f6;
+    color: white;
+    transform: translateY(-2px); /* Pequeño salto hacia arriba */
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25); /* Sombra suave */
+}
+
+/* Efecto al hacer clic */
+.nav-link:active {
+    transform: translateY(0);
+}

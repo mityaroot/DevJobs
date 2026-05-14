@@ -1,30 +1,3 @@
-
-// Manejar clics en los botones de "Aplicar" dentro de la lista de empleos
-// Usamos delegación de eventos: escuchamos clics en el contenedor .jobs-listings
-
-/*
-const jobListings = document.querySelector('.jobs-listings');
-jobListings?.addEventListener('click', (event) => {
-    const target = event.target;
-
-    if (target.classList.contains('btn-apply-job')) {
-        // Alternar la clase 'is-applied' para cambiar el estilo visual
-        target.classList.toggle('is-applied');
-
-        console.log(`Botón ${target.id} clickeado. Clase 'is-applied' ahora: ${target.classList.contains('is-applied')}`);
-        
-        // Cambiar el texto del botón según si está aplicado o no
-        target.textContent = target.classList.contains('is-applied') ? '¡Aplicado!' : 'Aplicar';
-        
-        console.log('Estado actual de los botones:');
-        
-        const botones = document.querySelectorAll('.btn-apply-job');
-        
-        botones.forEach(btn => console.log(btn.id, btn.classList.contains('is-applied')));
-    }
-});
-*/
-
 // ####################################################################
 // Filtros combinados de búsqueda de empleos (selects + búsqueda por texto)
 // Mapeo de los elementos <select> del formulario de filtros
@@ -90,6 +63,7 @@ btnLimpiar.addEventListener('click', () => {
 
 // ####################################################################
 //  Midudev
+// BOTON DE APLICAR A EMPLEO
 
 const jobsListingSection = document.querySelector('.jobs-listings')
 
@@ -105,6 +79,7 @@ jobsListingSection.addEventListener('click', function(event) {
   }
 })
 
+// ####################################################################
 // Filtro de ubicación
 const filter = document.querySelector('#filter-location')
 // Elemento donde mostraremos el mensaje de la opción seleccionada
@@ -130,55 +105,28 @@ filter.addEventListener('change', function() {
     })
 })
 
-// - Comentarios con otros eventos interesantes
 
-// otras formas de añadir eventos click a elementos
-// recupera solo el primer boton que encuentre
-// const boton = document.querySelector('.btn-apply-job')
-// console.log(boton) // null si no lo encuentra
+console.log('antes de fetch')
+fetch("./data.json") // el fetch es asíncrono, no bloquea el hilo principal, por eso el console.log de abajo se ejecuta antes de que el fetch termine
+    .then((response) => {
+        return response.json()
+    })
+    .then((jobs) => {
+        jobs.forEach(job => {
+            const article = document.createElement('article')
+            article.classList.add('jobs-listings-card')
+            article.innerHTML = `
+                <h3>${job.titulo}</h3>
+                <p>${job.empresa}</p>
+                <p>${job.ubicacion}</p>
+                <p>${job.descripcion}</p>
+                <button class="btn-apply-job">Aplicar</button>
+            `
+            jobsListingSection.appendChild(article)
+        })
+    })
+    .catch(error => {
+        console.error('Error al obtener los datos:', error)
+    })
 
-// if (boton !== null) {
-//   boton.addEventListener('click', function() {
-//     boton.textContent = '¡Aplicado!'
-//     boton.classList.add('is-applied')
-//     boton.disabled = true
-//   })
-// }
-
-// const botones = document.querySelectorAll('.btn-apply-job')
-// // devuelve un NodeList (array-like) con todos los botones que encuentre
-// // o una lista vacia [] si no encuentra ninguno
-
-// botones.forEach(boton => {
-//   boton.addEventListener('click', function() {
-//     boton.textContent = '¡Aplicado!'
-//     boton.classList.add('is-applied')
-//     boton.disabled = true
-//   })
-// })
-
-// ejemplos de eventos
-// const searchInput = document.querySelector('#empleos-search-input')
-
-// searchInput.addEventListener('input', function() {
-//   console.log(searchInput.value)
-// })
-
-// searchInput.addEventListener('blur', function() {
-//   console.log('Se dispara cuando el campo pierde el foco')
-// })
-
-// const searchForm = document.querySelector('#empleos-search-form')
-
-// searchForm.addEventListener('submit', function(event) {
-//   event.preventDefault()
-//   // ... todo lo que yo te diga aqui
-//   console.log('submit')
-// })
-
-// document.addEventListener('keydown', function(event) {
-//   console.log("Tecla presionada: ", event.key)
-//   console.log("¿Está pulsada la tecla shift?", event.shiftKey)
-//   console.log("¿Está pulsada la tecla ctrl?", event.ctrlKey)
-//   console.log("¿Está pulsada la tecla alt?", event.altKey)
-// })
+    console.log('después de fetch')
