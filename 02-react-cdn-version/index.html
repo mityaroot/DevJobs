@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevJobs</title>
+  
+    <link rel="stylesheet" href="style.css">
+
+    <script type="module">
+        import React from "https://esm.sh/react?dev";
+        import ReactDOM from "https://esm.sh/react-dom/client?dev";
+
+        window.React = React
+        window.ReactDOM = ReactDOM
+
+    </script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        // Componente funcional que recibe props
+        function JobCard({ data, titulo, empresa, ubicacion, descripcion, modalidad, nivel, technology }) {
+            
+            // Estado para controlar si el usuario ha aplicado o no
+            const [isApplied, setIsApplied] = React.useState(false);
+
+            // Log para verificar cuándo se renderiza el componente
+            console.log('----> render')
+
+            // Función para manejar el clic en el botón de aplicar
+            function handleClick() {
+                setIsApplied(!isApplied);
+            }
+
+            // Determinar el texto y la clase del botón según el estado de aplicación
+            const text = isApplied ? 'Aplicado' : 'Aplicar'
+            // const buttonClass = isApplied ? 'button-apply-button applied' : 'button-apply-button'
+            const buttonClass = isApplied ? 'is-applied' : ''
+            
+            // Renderizar el componente con la información del trabajo y el botón de aplicar
+            return (
+                <article
+                    className="job-listing-card"
+                >
+                    <div>
+                        <h3>{titulo}</h3>
+                        <small>{empresa} - {ubicacion}</small>
+                        <p>{descripcion}</p>
+                    </div>
+                    <button 
+                        style={{
+                            padding: "0.5rem 1rem",
+                            marginTop: "1rem",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "4px",
+                            cursor: "pointer",
+                            backgroundColor: isApplied ? "#777" : "#b44cce"
+                        }}
+                            disabled={isApplied}
+                            className={`button-apply-button ${isApplied ? 'applied' : ''}`}
+                            onClick={handleClick}
+                        >
+                            {text}
+                    </button>
+                </article>
+            )
+        }
+
+        function App() {
+            return (
+                <div className="job-listing">
+                    <JobCard    
+                     titulo="Desarrollador React"
+                     empresa="Tech Corp"
+                     ubicacion="Madrid, España"
+                     descripcion="Buscamos un desarrollador React con experiencia en componentes reutilizables y hooks."
+                     data={{
+                        modalidad: "remoto",
+                        nivel: "junior",
+                        technology: "react"
+                     }} 
+                    />
+                </div>
+            );
+        }
+        
+
+        const rootEl = document.querySelector("#root");
+        const root = ReactDOM.createRoot(rootEl);
+        root.render(App());
+
+    </script>
+
+</head>
+
+
+<body>
+    <header style="padding: 1rem 2rem; flex-wrap: wrap; gap: 0.75rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <h1 style="margin: 0; display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                DevJobs
+            </h1>
+
+            <nav>
+                <a href="index.html" class="nav-link">Empleos</a>
+            </nav>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-left: auto; flex-wrap: wrap;">
+            <div
+                style="border-radius: 25px; padding: 0.5rem 1rem; 
+                background-color: #b44cce; color: white; 
+                display: flex; justify-content: center; 
+                align-items: center;
+                
+            ">
+                <a href="">Subir CV</a>
+            </div>
+        </div>
+
+    </header>
+
+
+  <main>
+
+    <section class="hero">
+        <img src="../resources/background.webp" width="200" />
+
+        <h1 style="margin-bottom: 2rem;">React.js, primeros pasos</h1>
+
+        <div id="root"></div>
+
+
+</main>
+
+
+    <footer style="margin-top: 2rem; text-align: center; color: #777;">
+    
+        <hr style="margin: 2rem auto; width: 50%; border-color: #ccc;">
+        <p>&copy; 2024 DevJobs. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
