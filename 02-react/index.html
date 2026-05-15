@@ -20,21 +20,40 @@
 
     <script type="text/babel">
         // Componente funcional que recibe props
-        function JobCard({ title, company }) {
+        function JobCard({ data, titulo, modalidad, nivel, technology }) {
             return (
-                <div style={{ border: "1px solid #ccc", padding: "1rem", marginBottom: "1rem" }}>
-                    <h2>{title}</h2>
-                    <p>{company}</p>
-                </div>
-            );
+                <article
+                    className="job-listing-card"
+                    data-modalidad={data?.modalidad}
+                    data-nivel={data?.nivel}
+                    data-technology={data?.technology}
+                >
+                    <div>
+                        <h2>{titulo}</h2>
+                        <small>{empresa} - {ubicacion}</small>
+                        <p>{descripcion}</p>
+                    </div>
+                    <button className="apply-button-job">
+                        Aplicar
+                    </button>
+                </article>
+            )
         }
 
         function App() {
             return (
-                <div>
-                    <JobCard title="Desarrollador Frontend" company="Tech Corp" />
-                    <JobCard title="Diseñadora UX" company="Design Studio" />
-                    <JobCard title="Gerente de Proyecto" company="Project Management Inc" />
+                <div className="job-listing">
+                    <JobCard    
+                     titulo="Desarrollador React"
+                     empresa="Tech Corp"
+                     ubicacion="Madrid, España"
+                     descripcion="Buscamos un desarrollador React con experiencia en componentes reutilizables y hooks."
+                     data={{
+                        modalidad: "remoto",
+                        nivel: "junior",
+                        technology: "react"
+                     }} 
+                    />
                 </div>
             );
         }

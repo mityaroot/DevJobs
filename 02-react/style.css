@@ -6,6 +6,9 @@
 
 
 
+
+
+
 :root {
   --primary: #3b4550;
   --primary-dark: #0a3d66;
@@ -23,6 +26,14 @@
 }
 
 
+
+
+
+
+
+
+
+
 @font-face {
   font-family: 'Inter Variable';
   font-style: normal;
@@ -31,6 +42,13 @@
   src: url(https://cdn.jsdelivr.net/fontsource/fonts/inter:vf@latest/latin-wght-normal.woff2) format('woff2-variations');
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
+
+
+
+
+
+
+
 
 
 
@@ -71,6 +89,12 @@ select {
     outline-offset: 2px;
   }
 }
+
+
+
+
+
+
 
 
 
@@ -286,7 +310,31 @@ main > section:nth-child(2) footer {
   gap: 16px
 }
 
+/* Feature Cards */
+/* article {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  margin-bottom: 16px;
+  border-radius: 0.5rem;                   
+  box-shadow: 0px 1px 3px 0 var(--shadow); 
 
+  svg {
+    color: var(--primary-light);          
+    background: rgba(0, 153, 255, 0.3);  
+    border-radius: 9999px;               
+    width: 64px;                         
+    height: 64px;                        
+    padding: 16px;                       
+  }
+
+  h3 {
+    font-weight: 500;
+  }
+
+  p {
+    color: var(--text-muted);
+  }
+} */
 
 /* Footer */
 footer {
@@ -301,44 +349,143 @@ footer {
   }
 }
 
-/* ####################################################################### 
-  MIS ESTILOS */
-.nav-link {
-    /* Estructura y forma */
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 8px; /* Bordes redondeados modernos */
-    
-    /* Tipografía y Color */
-    text-decoration: none; /* Quitamos el subrayado feo */
-    font-family: 'Segoe UI', Roboto, sans-serif;
+article {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  margin-bottom: 16px;
+  border-radius: 0.5rem;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
+
+  svg {
+    color: var(--primary-light);
+    background: rgba(0, 153, 255, .3);
+    width: 64px;
+    height: 64px;
+    border-radius: 100%;
+    padding: 16px;
+  }
+
+  p {
+    color: var(--text-muted);
+  }
+
+  h3 {
     font-weight: 500;
-    font-size: 14px;
-    color: #3b82f6; /* Un azul vibrante moderno */
-    
-    /* Fondo y Borde */
-    background-color: #eff6ff; /* Un azul muy clarito de fondo */
-    border: 1px solid transparent;
-    
-    /* Animación */
-    transition: all 0.3s ease;
+  }
 }
 
-/* Efecto al pasar el ratón */
-.nav-link:hover {
-    background-color: #3b82f6;
-    color: white;
-    transform: translateY(-2px); /* Pequeño salto hacia arriba */
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25); /* Sombra suave */
+/* Jobs Search */
+.jobs-search {
+  margin: 0;
+  padding: 0;
+  height: auto !important;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: .25rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .search-bar {
+    background: var(--input-bg);
+    padding: .25rem .5rem;
+  }
+
+  .search-filters {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: .5rem;
+  }
+
+  form {
+    width: 100%;
+    max-width: 1280px;
+  }
+
+  form div {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
 }
 
-/* Efecto al hacer clic */
-.nav-link:active {
-    transform: translateY(0);
+.jobs-listings {
+  border: 1px solid rgba(255, 255, 255, .3);
+  border-radius: 1rem;
+
+  .job-listing-card {
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    margin: 0;
+
+    display: flex; /* valor original */
+    align-items: start;
+    gap: 1rem;
+
+    &.is-hidden {
+      display: none;
+    }
+
+    small {
+      font-size: .875rem;
+      opacity: .75;
+    }
+
+    p {
+      margin-top: 0.5rem
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }
 
-hr {
-    border: 0;
-    border-top: 1px solid #334155;
-    margin: 20px 0;
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-block: 2rem;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    text-decoration: none;
+    color: var(--text-muted);
+    border-radius: 0.375rem;
+    transition: all .3s;
+
+    &:hover, &:focus {
+      background-color: #fff;
+    }
+
+    &:active {
+      transform: scale(0.90);
+    }
+
+    &.is-active {
+      background-color: var(--primary-light);
+      color: white;
+      pointer-events: none;
+    }
+  }
+}
+
+.button-apply-job {
+  background: #09f;
+
+  &.is-applied {
+    background: #4caf50;
+    pointer-events: none;
+  }
 }
