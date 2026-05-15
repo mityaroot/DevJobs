@@ -20,7 +20,12 @@
 
     <script type="text/babel">
         // Componente funcional que recibe props
-        function JobCard({ data, titulo, modalidad, nivel, technology }) {
+        function JobCard({ data, titulo, empresa, ubicacion, descripcion, modalidad, nivel, technology }) {
+            
+            function handleClick() {
+                alert(`Aplicando a ${titulo}`);
+            }
+            
             return (
                 <article
                     className="job-listing-card"
@@ -33,7 +38,20 @@
                         <small>{empresa} - {ubicacion}</small>
                         <p>{descripcion}</p>
                     </div>
-                    <button className="apply-button-job">
+
+                    <button 
+                        style={{
+                            padding: "0.5rem 1rem",
+                            marginTop: "1rem",
+                            backgroundColor: "#b44cce",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "4px",
+                            cursor: "pointer"
+                        }}
+                        className="apply-button-job"
+                        onClick={handleClick}
+                        >
                         Aplicar
                     </button>
                 </article>
