@@ -22,6 +22,14 @@
         // Componente funcional que recibe props
         function JobCard({ data, titulo, empresa, ubicacion, descripcion, modalidad, nivel, technology }) {
             
+            const [
+                estaEncendido, 
+                actualizarEstaEncendido
+            ] = React.useState(false);
+
+            const numbers = [1, 2, 3, 4, 5]
+            const [firstNumber, , thirdNumber] = numbers
+
             function handleClick() {
                 alert(`Aplicando a ${titulo}`);
             }
@@ -123,7 +131,7 @@
     <section class="hero">
         <img src="../resources/background.webp" width="200" />
 
-        <h1>React.js, primeros pasos</h1>
+        <h1 style="margin-bottom: 2rem;">React.js, primeros pasos</h1>
 
         <div id="root"></div>
 
