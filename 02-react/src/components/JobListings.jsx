@@ -2,7 +2,7 @@ import { JobCard } from './JobCard.jsx'
 
 export function JobListings ({ jobs }) {
   return (
-    <>
+    <> // Fragment para envolver el contenido sin agregar un elemento extra al DOM
       <div className="jobs-listings">
         {
           jobs.length === 0 && (
