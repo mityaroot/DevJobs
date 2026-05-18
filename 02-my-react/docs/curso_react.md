@@ -1,50 +1,62 @@
+# Índice del curso React
 
-Puntos del curso:     ¿Qué es React?
-    Primeros pasos en React
-    JSX: La sintaxis de React
-    Componentes en React
-    Componentes vs Funciones normales
-    Creando JobCard: Nuestro primer componente real
-    Eventos en React
-    Estado con useState
-    Renderizado y Virtual DOM
-    Vite: Empaquetador moderno
-    Instalación de Vite
-    Fast Refresh y Actualizaciones de Estado
-    Migrando el Proyecto DevJobs a React
-    Ejercicios de práctica
-    Props - Comunicación entre Componentes
-    Módulos JavaScript - Import y Export
-    Paginación - Props y Comunicación Padre-Hijo
-    Callbacks - Pasar Funciones como Props
-    Estado por Props - Lifting State Up
-    Keys y Renderizado de Listas
-    Terminando la paginación
-    CSS Modules
-    Hook useId()
-    Gestión de Formularios y Filtros
-    Ejercicios: Formularios y Eventos
-(he llegado hasta aquí)    Filtros automáticos y Routing básico 
-    Hook useEffect: Efectos secundarios en React
-    Cuándo usar useEffect
-    Creando una Single Page Application (SPA) desde cero con React
-    Custom Hooks: Reutilizar lógica en React
-    Integrando navegación con formulario de búsqueda
-    Creando un componente <Route> declarativo
-    Creando custom hook para formulario
-    9 Ejercicios prácticos: Router y Formularios
-    Llamada a la API: Consumiendo datos reales con fetch
-    Integrando filtros en la petición HTTP
-    Arreglando paginación con limit y offset
-    Ejercicios: Mejoras en la aplicación
-    Problemas con la etiqueta title
-    Técnica de debounce en el buscador
-    Hook useRef: referencias y valores que persisten entre renders
-    Arreglando la paginación
-    Sincronización de la URL con el buscador
+## Completado
+
+1. [¿Qué es React?](#que-es-react)
+2. [Primeros pasos en React](#primeros-pasos-en-react)
+3. [JSX: La sintaxis de React](#jsx-la-sintaxis-de-react)
+4. [Componentes en React](#componentes-en-react)
+5. [Componentes vs Funciones normales](#componentes-vs-funciones-normales)
+6. [Creando JobCard: Nuestro primer componente real](#creando-jobcard-componente-real)
+7. [Eventos en React](#eventos-en-react)
+8. [Estado con useState](#estado-con-usestate)
+9. [Renderizado y Virtual DOM](#renderizado-y-virtual-dom)
+10. [Vite: Empaquetador moderno](#vite-empaquetador-moderno)
+11. [Instalación de Vite](#instalacion-de-vite)
+12. [Fast Refresh y Actualizaciones de Estado](#fast-refresh)
+13. [Migrando el Proyecto DevJobs a React](#migrando-devjobs)
+14. [Creando el Componente JobCard](#creando-componente-jobcard)
+15. [Props - Comunicación entre Componentes](#props-comunicacion)
+16. [Módulos JavaScript - Import y Export](#modulos-javascript)
+17. [Paginación - Props y Comunicación Padre-Hijo](#paginacion-props)
+18. [Callbacks - Pasar Funciones como Props](#callbacks)
+19. [Estado por Props - Lifting State Up](#lifting-state-up)
+20. [Keys y Renderizado de Listas](#keys-listas)
+21. [Terminando la paginación](#terminando-paginacion)
+22. [CSS Modules](#css-modules)
+23. [Hook useId()](#hook-useid)
+24. [Gestión de Formularios y Filtros](#formularios-filtros)
+25. [Ejercicios: Formularios y Eventos](#ejercicios-formularios)
+
+---
+
+## Próximamente
+*(temas planificados, contenido aún no escrito)*
+
+26. Filtros automáticos y Routing básico
+27. Hook useEffect: Efectos secundarios en React
+28. Cuándo usar useEffect
+29. Creando una Single Page Application (SPA) desde cero con React
+30. Custom Hooks: Reutilizar lógica en React
+31. Integrando navegación con formulario de búsqueda
+32. Creando un componente <Route> declarativo
+33. Creando custom hook para formulario
+34. 9 Ejercicios prácticos: Router y Formularios
+35. Llamada a la API: Consumiendo datos reales con fetch
+36. Integrando filtros en la petición HTTP
+37. Arreglando paginación con limit y offset
+38. Ejercicios: Mejoras en la aplicación
+39. Problemas con la etiqueta title
+40. Técnica de debounce en el buscador
+41. Hook useRef: referencias y valores que persisten entre renders
+42. Arreglando la paginación
+43. Sincronización de la URL con el buscador
+
+---
 
 
 ---
+<a id="que-es-react"></a>
 ¿Qué es React?
 
 Hasta ahora hemos trabajado con HTML, CSS y JavaScript puro (también conocido como “Vanilla JavaScript”) para construir nuestra aplicación DevJobs. Esto está genial para proyectos pequeños, pero cuando las aplicaciones crecen, manipular el DOM manualmente se vuelve complejo y difícil de mantener.
@@ -236,6 +248,7 @@ En esta clase vamos a migrar DevJobs paso a paso de JavaScript vanilla a React. 
 
 ¡Prepárate para ver el poder de React en acción!
 ---
+<a id="primeros-pasos-en-react"></a>
 Primeros pasos en React
 
 En esta clase vamos a crear nuestra primera aplicación React desde cero. Por defecto, React recomienda instalar un framework para crear proyectos, pero nosotros vamos a hacerlo desde cero, paso a paso y de forma incremental.
@@ -524,6 +537,7 @@ En la siguiente clase veremos JSX, que hace todo esto mucho más simple y legibl
     💡 Recuerda: JSX es solo azúcar sintáctica. Al final, todo se convierte en React.createElement.
 
 ---
+<a id="jsx-la-sintaxis-de-react"></a>
 JSX: La sintaxis de React
 
 En la clase anterior aprendimos a usar React.createElement para crear elementos. Funcionaba, pero el código era verboso y difícil de leer. Ahora vamos a conocer JSX, que hace que React sea mucho más fácil de escribir y entender.
@@ -1041,6 +1055,7 @@ En la siguiente clase aprenderemos sobre componentes, que es donde JSX realmente
     💡 Recuerda: JSX es opcional, pero el 99.9% de proyectos React lo usan porque hace el código mucho más legible y mantenible.
 
 ---
+<a id="componentes-en-react"></a>
 Componentes en React
 
 Hasta ahora hemos usado JSX para crear elementos, pero la verdadera potencia de React está en los componentes. Un componente es una función de JavaScript que retorna JSX. Es como crear tus propias etiquetas HTML personalizadas y reutilizables.
@@ -1316,6 +1331,7 @@ En la próxima clase aprenderemos sobre el estado (useState), que nos permitirá
 
     💡 Recuerda: Los componentes son funciones que retornan JSX. Las props son los datos que reciben. JSX es JavaScript, por eso los estilos son objetos.
 ----
+<a id="componentes-vs-funciones-normales"></a>
 Componentes vs Funciones normales
 
 Los componentes de React son funciones de JavaScript, pero no todas las funciones de JavaScript son componentes de React. En esta clase vamos a entender cuál es la diferencia y por qué es importante.
@@ -1724,6 +1740,7 @@ En la próxima clase aprenderemos sobre el estado con useState, que nos permitir
 
     💡 Recuerda: Los componentes son funciones especiales que retornan JSX y usan PascalCase. Las funciones normales ayudan con la lógica pero no se renderizan directamente.
 ---
+<a id="creando-jobcard-componente-real"></a>
 Creando JobCard: Nuestro primer componente real
 
 Hasta ahora hemos aprendido qué es JSX, qué son los componentes y cómo se diferencian de las funciones normales. Ahora es el momento de aplicar todo ese conocimiento creando un componente real para nuestra aplicación DevJobs.
@@ -2262,6 +2279,7 @@ En la próxima clase aprenderemos sobre el estado con useState, que nos permitir
     💡 Recuerda: Los componentes son bloques de construcción reutilizables. Divide tu UI en componentes pequeños y composables para crear aplicaciones más mantenibles.
 
 ----
+<a id="eventos-en-react"></a>
 Eventos en React
 
 Hasta ahora nuestros componentes son estáticos: muestran información pero no responden a las acciones del usuario. En esta clase vamos a aprender a manejar eventos como clicks, cambios en inputs, envío de formularios, etc.
@@ -2771,6 +2789,7 @@ En la próxima clase aprenderemos sobre el estado con useState, que nos permitir
 
     💡 Recuerda: Los eventos en React usan camelCase (onClick) y reciben referencias a funciones, no llamadas (onClick={handleClick}, no onClick={handleClick()}).
 ---
+<a id="estado-con-usestate"></a>
 Estado con useState
 
 En la clase anterior aprendimos a manejar eventos, pero los componentes no recordaban nada. Cuando hacías clic en “Aplicar”, se ejecutaba la función pero el botón no cambiaba visualmente. Ahora vamos a solucionar eso con el estado.
@@ -3316,6 +3335,7 @@ En la próxima clase aprenderemos a renderizar listas de elementos dinámicament
     💡 Recuerda: El estado es la memoria del componente. Cuando el estado cambia, React re-renderiza automáticamente. Nunca modifiques el estado directamente, siempre usa la función set.
 
 ---
+<a id="renderizado-y-virtual-dom"></a>
 Renderizado y Virtual DOM
 
 Ya sabemos que cuando cambiamos el estado con useState, la interfaz se actualiza automáticamente. Pero ¿qué está pasando por debajo? ¿Cómo sabe React qué actualizar? En esta clase vamos a entenderlo.
@@ -3836,6 +3856,7 @@ En la próxima clase aprenderemos a renderizar listas de elementos dinámicament
     💡 Recuerda: Cuando el estado cambia, React re-ejecuta el componente, compara el Virtual DOM antiguo con el nuevo, y actualiza solo lo que cambió en el DOM real. ¡Por eso React es tan rápido!
 
 ----
+<a id="vite-empaquetador-moderno"></a>
 Vite: Empaquetador moderno
 
 Hasta ahora hemos usado React directamente en el navegador con un simple archivo HTML. Esto está bien para aprender, pero en proyectos reales necesitamos herramientas más potentes. Aquí es donde entra Vite.
@@ -4153,6 +4174,7 @@ En la próxima clase vamos a crear nuestro primer proyecto React con Vite y ver�
     💡 Recuerda: Vite es la herramienta moderna recomendada para proyectos React. Es extremadamente rápido porque usa ES Modules nativos en desarrollo y solo procesa lo que realmente necesitas. ¡Prepárate para una experiencia de desarrollo increíblemente rápida!
 
 ----
+<a id="instalacion-de-vite"></a>
 Instalación de Vite
 
 Hasta ahora hemos estado trabajando con React directamente en un archivo HTML, cargando React desde un CDN y usando Babel en el navegador. Esto está bien para aprender, pero no es lo que se hace en proyectos reales.
@@ -4762,6 +4784,7 @@ En la próxima clase empezaremos a migrar nuestra aplicación DevJobs a este nue
 
     💡 Recuerda: Vite + SWC es la combinación moderna para desarrollo React. Es rápido, simple y es lo que usan las empresas actualmente.
 ----
+<a id="fast-refresh"></a>
 Fast Refresh y Actualizaciones de Estado
 
 En esta clase vamos a entender dos conceptos importantes: Fast Refresh (una característica que hace que tu desarrollo sea más rápido) y la forma correcta de actualizar el estado cuando depende de su valor anterior.
@@ -5011,6 +5034,7 @@ Repaso final de la clase
 
     💡 Recuerda: Usa setState((prev) => ...) cuando el nuevo valor depende del anterior. Fast Refresh hace que tu experiencia de desarrollo sea más fluida al mantener el estado mientras editas código.
 ----
+<a id="migrando-devjobs"></a>
 Migrando el Proyecto DevJobs a React
 
 Ya tenemos nuestro proyecto React con Vite configurado. Ahora vamos a migrar nuestro proyecto DevJobs que teníamos en HTML puro a React.
@@ -5513,6 +5537,7 @@ En la próxima clase continuaremos separando más componentes y aprenderemos a p
 
     💡 Recuerda: No intentes separar todo en componentes desde el principio. Empieza con todo funcionando en un solo componente y ve separando progresivamente. Es más fácil y menos propenso a errores.
 ---
+<a id="creando-componente-jobcard"></a>
 Creando el Componente JobCard
 
 En esta clase vamos a continuar componetizando nuestra aplicación DevJobs. Ya tenemos separados el Header y el Footer. Ahora es el turno de la parte más importante: los JobCard (tarjetas de trabajo).
@@ -5822,6 +5847,7 @@ En esta clase has aprendido:
 
     💡 Recuerda: Las props fluyen de padre a hijo. Usa props para hacer componentes reutilizables que puedan mostrar diferentes datos cada vez.
 ---
+<a id="props-comunicacion"></a>
 Props - Comunicación entre Componentes
 
 En la clase anterior creamos el componente JobCard y lo usamos manualmente tres veces. Ahora vamos a profundizar en props, el mecanismo fundamental de React para pasar datos entre componentes.
@@ -6595,6 +6621,7 @@ En la próxima clase aprenderemos a renderizar listas con .map() y a importar da
 
     💡 Recuerda: Las props son el mecanismo fundamental de React para crear componentes reutilizables y componibles. Dominar las props es esencial para ser efectivo con React.
 ---
+<a id="modulos-javascript"></a>
 Módulos JavaScript - Import y Export
 
 Hasta ahora hemos tenido todo nuestro código en un solo archivo App.jsx. En aplicaciones reales, separamos el código en múltiples archivos usando el sistema de módulos de JavaScript. En esta clase aprenderemos a exportar e importar componentes.
@@ -7158,6 +7185,7 @@ En la próxima clase aprenderemos sobre CSS Modules, una forma de escribir CSS c
     💡 Recuerda: Usa named exports (export function ComponentName) en lugar de default exports para mantener consistencia y aprovechar mejor el autocomplete. Organiza tu código en archivos pequeños y enfocados en una sola responsabilidad.
 
 ---
+<a id="paginacion-props"></a>
 Paginación - Props y Comunicación Padre-Hijo
 
 En esta clase vamos a crear un componente Pagination que nos permitirá navegar entre diferentes páginas de contenido. Aprenderemos a pasar datos mediante props, definir valores por defecto, y lo más importante: cómo un componente hijo puede comunicarse con su padre usando funciones.
@@ -7504,6 +7532,7 @@ En la próxima clase aprenderemos sobre callbacks y cómo pasar funciones como p
     💡 Recuerda: Las props fluyen de padre a hijo. Los estilos inline se pasan como objetos JavaScript con propiedades en camelCase. Usa preventDefault() para evitar comportamientos por defecto del navegador.
 
 ----
+<a id="callbacks"></a>
 Callbacks - Pasar Funciones como Props
 
 En la clase anterior creamos el componente Pagination que recibe props con datos. Ahora vamos a aprender a pasar funciones como props para que el componente hijo pueda comunicarse con el padre y notificarle cuando algo cambia.
@@ -7969,6 +7998,7 @@ En la próxima clase completaremos el ciclo aprendiendo sobre estado en el compo
     💡 Recuerda: Las funciones como props (callbacks) permiten que los componentes hijos notifiquen a sus padres sobre eventos. El hijo no modifica datos directamente, solo informa al padre que algo ocurrió llamando a la función callback.
 
 ---
+<a id="lifting-state-up"></a>
 Estado por Props - Lifting State Up
 
 En la clase anterior aprendimos a pasar funciones como props para que el hijo notifique al padre. Ahora vamos a completar el ciclo: crear estado en el padre y pasarlo como props al hijo, haciendo que todo funcione de forma reactiva.
@@ -8664,6 +8694,7 @@ En la próxima clase profundizaremos en renderizado de listas con .map(), aprend
 
     💡 Recuerda: El estado vive en el padre, se pasa a los hijos como props, y los hijos lo actualizan llamando a callbacks. Este es el flujo de datos unidireccional de React. Los renderizados dobles en desarrollo son normales por StrictMode y te ayudan a escribir mejor código.
 ---
+<a id="keys-listas"></a>
 Keys y Renderizado de Listas
 
 Hasta ahora hemos trabajado con componentes individuales. En esta clase aprenderemos a renderizar listas de datos dinámicamente usando .map(), y entenderemos por qué React necesita que cada elemento tenga una key única.
@@ -9140,6 +9171,7 @@ En la próxima clase vamos a terminar de hacer funcionar nuestra paginación.
     💡 Recuerda: Siempre usa keys únicas y estables al renderizar listas. Prefiere IDs del objeto sobre índices del array. La key ayuda a React a optimizar los renderizados identificando qué elementos cambiaron.
 
 ---
+<a id="terminando-paginacion"></a>
 Terminando la paginación
 
 En las clases anteriores creamos el componente Pagination y aprendimos a pasar funciones como props y manejar el estado en el componente padre. Ahora vamos a conectar todo para que la paginación funcione completamente: calcularemos el número total de páginas y mostraremos solo los trabajos de la página actual.
@@ -10040,6 +10072,7 @@ En la próxima clase veremos más conceptos avanzados de React que te ayudarán 
     💡 Recuerda: Para paginación siempre usa Math.ceil() para el total de páginas y slice() para cortar los datos. La fórmula clave es: inicio = (página - 1) * tamaño, fin = página * tamaño.
 
 ----
+<a id="css-modules"></a>
 CSS Modules
 
 Hasta ahora hemos usado CSS global, donde todas las clases están disponibles en toda la aplicación. En esta clase aprenderemos a usar CSS Modules, una técnica que nos permite escribir CSS con ámbito local para cada componente, evitando conflictos de nombres.
@@ -10678,6 +10711,7 @@ En la próxima clase seguiremos explorando más conceptos de React que te ayudar
     💡 Recuerda: Usa CSS Modules para estilos de componentes específicos y CSS global para estilos base y utilidades. Los CSS Modules te dan encapsulación y evitan colisiones de nombres automáticamente.
 
 ----
+<a id="hook-useid"></a>
 Hook useId()
 
 En esta clase vamos a mejorar nuestro componente de formulario de búsqueda. Aprenderemos a manejar el evento submit y a usar el hook useId() para generar identificadores únicos que eviten colisiones en nuestros elementos HTML.
@@ -11433,6 +11467,7 @@ En la próxima clase aprenderemos a gestionar los datos del formulario y cómo c
     💡 Recuerda: Siempre usa useId() para generar IDs en tus componentes React. Evita IDs hardcodeados para prevenir colisiones cuando el componente se usa múltiples veces. Los IDs son para accesibilidad y asociación de elementos, mientras que name es para enviar datos del formulario.
 
 ---
+<a id="formularios-filtros"></a>
 Gestión de Formularios y Filtros
 
 En la clase anterior añadimos el handleSubmit y usamos useId() para generar identificadores únicos. Ahora vamos a implementar la lógica completa del formulario: capturar los valores, filtrar los trabajos y añadir búsqueda en tiempo real.
@@ -12158,6 +12193,7 @@ En la próxima clase exploraremos más conceptos avanzados de React como custom 
     💡 Recuerda: El orden importa: primero filtras los datos, luego calculas las páginas totales, y finalmente aplicas la paginación. El estado debe estar en el componente padre que necesita manipular los datos, no en los componentes hijos que solo los muestran.
 
 ---
+<a id="ejercicios-formularios"></a>
 Ejercicios: Formularios y Eventos
 
 En esta clase vamos a practicar todo lo que hemos aprendido sobre gestión de formularios, filtros y eventos en React. Estos ejercicios te ayudarán a consolidar los conceptos de la clase anterior y a mejorar tu aplicación DevJobs.
