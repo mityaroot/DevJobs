@@ -4,11 +4,21 @@ const useSearchForm = ({ idTechnology, idLocation, idExperienceLevel, idText, on
   const timeoutId = useRef(null)
   const [searchText, setSearchText] = useState("")
 
+  // Este handleSubmit se ejecutará cada vez que cambie cualquier input del formulario, 
+  // pero solo llamará a onSearch si el cambio no es del input de texto (que se maneja 
+  // en handleTextChange)
+
+  // ¿qué es el event? Es un objeto que representa el evento que ocurrió, en este caso el cambio en el formulario.
+  // event.preventDefault() se llama para evitar que el formulario se envíe de forma tradicional, lo cual recargaría la página.
+  // Luego, se crea un objeto FormData a partir del formulario actual (event.currentTarget), lo que permite acceder a los valores de los inputs.
+  // Si el cambio ocurrió en el input de texto (identificado por idText), simplemente se retorna sin hacer nada, ya que ese cambio se maneja en handleTextChange.
+  // Si el cambio ocurrió en alguno de los select (tecnología, ubicación o nivel de experiencia), se construye un objeto filters con los valores seleccionados y se llama a onSearch con esos filtros.
   const handleSubmit = (event) => {
     event.preventDefault()
     
     const formData = new FormData(event.currentTarget)
     
+    // Si el cambio ocurrió en el input de texto, no hacemos nada aquí porque ya lo manejamos en handleTextChange
     if (event.target.name === idText) {
       return // ya lo manejamos en onChange
     }
