@@ -1,5 +1,5 @@
 
-function Header() {
+export default function Header() {
   return (
     <header style={{ padding: '1rem 2rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -29,4 +29,3 @@ function Header() {
   )
 }
 
-export default Header

@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
 import './App.css'
-import Header from '../components/Header.jsx'
-import Main from '../components/Main.jsx'
-import Footer from '../components/Footer.jsx'
+import Header from '../components/layout/HeaderD.jsx'
+import Main from '../components/layout/MainD.jsx'
+import Footer from '../components/layout/FooterD.jsx'
 import jobsData from '../data.json'
 
-function App() {
+export default function App() {
   const [count, setCount] = useState(0)
 
   return (
@@ -17,5 +17,3 @@ function App() {
     </>
   )
 }
-
-export default App

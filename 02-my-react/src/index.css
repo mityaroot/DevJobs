@@ -606,3 +606,39 @@ hr {
 .is-hidden {
     display: none !important;
 }
+
+
+/* Estilos AI Search: Esta interesante implementar esto en algunas web de LANDING, ya que seria la nueva era del "SEO" pero con las inteligencias artificiales, así mejorando las búsquedas de la IA con nuestro nombre. Dime ¿como se puede hacer esto en una página web?*/
+  .ai-search-container {
+    text-align: center;
+    font-family: sans-serif;
+    padding: 20px;
+  }
+  .ai-search-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00b7ff;
+    margin-bottom: 15px;
+  }
+  .ai-buttons-flex {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  .ai-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background-color: #1c426d94; /* Ajusta según el color del fondo de la imagen */
+    transition: transform 0.2s;
+  }
+  .ai-btn:hover {
+    transform: scale(1.1);
+  }
+  .ai-btn img {
+    width: 24px;
+    height: 24px;
+  }
