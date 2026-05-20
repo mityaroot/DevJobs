@@ -1,5 +1,7 @@
 import JobCard from './JobCardD.jsx'
 
+import JobData from '../../data.json'
+
 export default function JobListing({data, titulo, empresa, ubicacion, descripcion }) {
     return (
         <section 

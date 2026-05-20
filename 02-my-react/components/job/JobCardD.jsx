@@ -40,7 +40,8 @@ export default function JobCard({data, titulo, empresa, ubicacion, descripcion }
 
     /*className = "job-card"*/
     return (
-        <article style={estilos} className = "job-card"
+        <article style={estilos} 
+        className = "job-card"
         data-modalidad={data?.modalidad}
         data-nivel={data?.nivel}
         data-technology={data?.technology}
