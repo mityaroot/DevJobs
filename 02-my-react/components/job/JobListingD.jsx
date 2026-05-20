@@ -1,8 +1,6 @@
 import JobCard from './JobCardD.jsx'
 
-import JobData from '../../data.json'
-
-export default function JobListing({data, titulo, empresa, ubicacion, descripcion }) {
+export default function JobListing({ jobs = [] }) {
     return (
         <section 
         style={{ marginTop: '2rem', display: 'grid', gap: '1rem', textAlign: 'center' }}>
@@ -15,37 +13,23 @@ export default function JobListing({data, titulo, empresa, ubicacion, descripcio
                 backgroundColor: '#f9f9f94f',
 
                 display: 'flex', justifyContent: 'center', 
-                alignItems: 'center', flexDirection: 'column' }}>
+                alignItems: 'center', flexDirection: 'column' 
+                }}>
 
                 <h2 style={{ padding: '1rem 1rem 0 1rem', marginBottom: '1rem' }}>
                     Resultados de búsqueda
                 </h2>
 
-                <JobCard
-                    titulo="Desarrollo 0"
-                    empresa="Tech Solution" 
-                    ubicacion="Remoto"
-                    descripcion="Buscamos un desarrollador para varias cosas chulas dentro de la empresa."
-                    data={{modalidad: "remoto", nivel: "junior", technology: "react"}}
-                />
-                <JobCard
-                    titulo="Desarrollo 1"
-                    empresa="Tech Solution" 
-                    ubicacion="Remoto"
-                    descripcion="Buscamos un desarrollador para varias cosas chulas dentro de la empresa."
-                />
-                <JobCard
-                    titulo="Desarrollo 2"
-                    empresa="Tech Solution" 
-                    ubicacion="Remoto"
-                    descripcion="Buscamos un desarrollador para varias cosas chulas dentro de la empresa."
-                />
-                <JobCard
-                    titulo="Desarrollo 3"
-                    empresa="Tech Solution" 
-                    ubicacion="Remoto"
-                    descripcion="Buscamos un desarrollador para varias cosas chulas dentro de la empresa."
-                />
+                {jobs.map((job) => (
+                    <JobCard
+                        key={job.id}
+                        titulo={job.titulo}
+                        empresa={job.empresa}
+                        ubicacion={job.ubicacion}
+                        descripcion={job.descripcion}
+                        data={job.data}
+                    />
+                ))}
 
             </div>
         </section>
