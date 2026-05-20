@@ -1,6 +1,7 @@
 
 // valores por defecto 1 y 10
 export default function Pagination({currentPage = 1, totalPages = 10, onPageChange}) {
+
     console.log('🟢 Pagination renderizado', { currentPage })
     
     // Generar array de páginas a mostrar
@@ -39,9 +40,10 @@ export default function Pagination({currentPage = 1, totalPages = 10, onPageChan
             }
             
 
-            {pages.map((page) => (
+            {pages.map(page => (
                 <a 
                 key={page}
+                data-page={page}
                 className={currentPage === page ? 'is-active' : ''} 
                 href="#"
                 onClick={(e) => {

@@ -18,7 +18,10 @@ export default function Main() {
         setCurrentPage(page)
     }
 
+    // Calcular los trabajos para la página actual
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+
+    // Obtener los trabajos para la página actual
     const currentJobs = JobData.slice(startIndex, startIndex + ITEMS_PER_PAGE)
 
     // Manejar el cambio de página

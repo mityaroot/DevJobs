@@ -20,7 +20,7 @@ export default function JobListing({ jobs = [] }) {
                     Resultados de búsqueda
                 </h2>
 
-                {jobs.map((job) => (
+                {jobs.map(job => (
                     <JobCard
                         key={job.id}
                         titulo={job.titulo}
