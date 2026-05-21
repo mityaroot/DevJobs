@@ -1,8 +1,16 @@
+import {useId} from 'react'
 
+export default function Search({handleTextChange}) {
+    const searchInput = useId()
 
-function Search() {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const value = e.target[0].value
+        handleTextChange(value)
+    }
+
     return (
-        <form role="search">
+        <form role="search" onSubmit={handleSubmit}>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"
@@ -12,16 +20,27 @@ function Search() {
                     <path d="M21 21l-6 -6" />
                 </svg>
 
-                <input 
-                id="empleos-search-input"
-                required type="text" 
+                <input
+                name="search"
+                id={searchInput}
+                className="empleos-search-input"
+                required type="text"
                 placeholder="Buscar trabajos, empresas o habilidades"
-                
-                style={{ padding: '0.5rem 1rem', border: 'none', borderRadius: '4px', width: '300px', maxWidth: '100%' }}
+
+                style={{ padding: '0.5rem 1rem', border: 'none',
+                borderRadius: '4px', width: '300px', maxWidth: '100%'
+                }}
+
+                onChange={(e) => handleTextChange(e.target.value)}
                 />
+
+                <button type="submit"
+                style={{ padding: '0.5rem 1rem', border: 'none',
+                    borderRadius: '4px', backgroundColor: '#334155',
+                    color: 'white', cursor: 'pointer' }}>
+                    Buscar
+                </button>
             </div>
         </form>
     )
 }
-
-export default Search

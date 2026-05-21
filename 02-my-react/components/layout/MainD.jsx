@@ -1,51 +1,67 @@
 
-import React from "react"
+import React, { useState } from "react"
 import JobData from "../../data.json"
 
 import Hero from "../hero/HeroD"
 import JobListing from "../job/JobListingD"
 import Pagination from "../job/PaginationD"
 
-const ITEMS_PER_PAGE = 4
+const RESULTS_PER_PAGE = 4
 
 export default function Main() {
     console.log('🔵 App.MainD renderizado')
 
     const [currentPage, setCurrentPage] = React.useState(1)
-    const totalPages = Math.ceil(JobData.length / ITEMS_PER_PAGE)
+    const [filters, setFilters] = useState({
+        technology: '',
+        location: '',
+        experienceLevel: ''
+    })
+    const [textToFilter, setTextToFilter] = useState('')
 
-    const handlePageChange = (page) => {
-        setCurrentPage(page)
+    const filteredJobs = JobData.filter((job) => {
+        return (
+            (filters.technology === '' || job.data.technology.includes(filters.technology)) &&
+            (filters.location === '' || job.data.modalidad.includes(filters.location)) &&
+            (filters.experienceLevel === '' || job.data.nivel.includes(filters.experienceLevel))
+        )
+    })
+
+    const searchedJobs = textToFilter === ''
+        ? filteredJobs
+        : filteredJobs.filter(job =>
+            job.titulo.toLowerCase().includes(textToFilter.toLowerCase())
+        )
+
+    const totalPages = Math.ceil(searchedJobs.length / RESULTS_PER_PAGE)
+    const startIndex = (currentPage - 1) * RESULTS_PER_PAGE
+    const currentJobs = searchedJobs.slice(startIndex, startIndex + RESULTS_PER_PAGE)
+
+    const handleSearch = (filters) => {
+        setFilters(filters)
+        setCurrentPage(1)
     }
 
-    // Calcular los trabajos para la página actual
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+    const handleTextChange = (text) => {
+        setTextToFilter(text)
+        setCurrentPage(1)
+    }
 
-    // Obtener los trabajos para la página actual
-    const currentJobs = JobData.slice(startIndex, startIndex + ITEMS_PER_PAGE)
-
-    // Manejar el cambio de página
     React.useEffect(() => {
-        // Si la página actual supera el total de páginas, se vuelve a la primera
         if (currentPage > totalPages) {
             setCurrentPage(1)
         }
-    }, [totalPages, currentPage]) // Dependencias: totalPages y currentPage para detectar cambios
+    }, [totalPages, currentPage])
 
     return (
     <main>
-
-        <Hero />
-        
+        <Hero onSearch={handleSearch} onTextChange={handleTextChange} />
         <JobListing jobs={currentJobs} />
-
-        <Pagination 
-            currentPage={currentPage} 
-            totalPages={totalPages} 
-            onPageChange={handlePageChange}
+        <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
         />
-
     </main>
     )
 }
-

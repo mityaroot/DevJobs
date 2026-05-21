@@ -1,4 +1,4 @@
-
+import styles from './css/Pagination.module.css'
 // valores por defecto 1 y 10
 export default function Pagination({currentPage = 1, totalPages = 10, onPageChange}) {
 
@@ -28,7 +28,7 @@ export default function Pagination({currentPage = 1, totalPages = 10, onPageChan
 
     return(
         <section>
-            <nav style={{ marginTop: '2rem' }} className="pagination">
+            <nav style={{ marginTop: '2rem' }} className={styles.pagination}>
 
             {
                 <a href="#" style={currentPage === 1 ? { pointerEvents: 'none', opacity: 0.5 } : {}} onClick={handlePrevClick}>

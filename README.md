@@ -1,4 +1,4 @@
-Hola, mi apodo de usuario es Zintinux, me gusta aprender y por eso ahora estoy investigando desarollo web; venía una FP que se centro sobre todo en el desarrollo para Android. Pero ahora estoy aprendiendo desarrollar para web solo, ya que es un entorno bastante rico en herramientas y posibilidades, y fascinante para los que quieran aprender.
+Hola, mi apodo de usuario es mityaroot, me gusta aprender y por eso ahora estoy investigando desarollo web; venía una FP que se centro sobre todo en el desarrollo para Android. Pero ahora estoy aprendiendo desarrollar para web solo, ya que es un entorno bastante rico en herramientas y posibilidades, y fascinante para los que quieran aprender.
 ---
 
 Este proyecto sigue el curso de Midu:

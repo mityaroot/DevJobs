@@ -1,36 +1,5 @@
 import { useState } from "react"
 
-function ApplyButton() {
-    // Declarar estado
-    const [
-        isApplied, 
-        setIsApplied
-    ] = useState(false) // si no se hubiera importado arriba sería React.useState(false)
-
-    function handleApply() {
-        setIsApplied(!isApplied)
-    }
-
-    const textButton = isApplied ? '¡Aplicado!' : 'Aplicar'
-    const buttonClass = isApplied ? 'is-applied' : ''
-
-    /** Si el usuario ha aplicado, se muestra el texto que aparece a modo de constante.
-     * {isApplied ? '¡Aplicado!' : 'Aplicar'}
-     * 
-    */
-    return (
-        <button
-            className={`button-apply-job ${buttonClass}`}
-            onClick={() => handleApply()}
-            disabled={isApplied}
-            style={{ height: '40px' }}
-        >
-            {textButton}
-        </button>
-    )
-
-}
-
 export default function JobCard({data, titulo, empresa, ubicacion, descripcion }) {
     const estilos = { marginTop: '1rem', border: '2px solid rgba(0, 51, 102, 0.6)', 
         padding: '20px', display: 'flex', justifyContent: 'space-between'}
@@ -65,4 +34,36 @@ export default function JobCard({data, titulo, empresa, ubicacion, descripcion }
         </article>
         
     )
+}
+
+
+function ApplyButton() {
+    // Declarar estado
+    const [
+        isApplied, 
+        setIsApplied
+    ] = useState(false) // si no se hubiera importado arriba sería React.useState(false)
+
+    function handleApply() {
+        setIsApplied(!isApplied)
+    }
+
+    const textButton = isApplied ? '¡Aplicado!' : 'Aplicar'
+    const buttonClass = isApplied ? 'button-apply-job is-applied' : 'button-apply-job'
+
+    /** Si el usuario ha aplicado, se muestra el texto que aparece a modo de constante.
+     * {isApplied ? '¡Aplicado!' : 'Aplicar'}
+     * 
+    */
+    return (
+        <button
+            className={`button-apply-job ${buttonClass}`}
+            onClick={() => handleApply()}
+            disabled={isApplied}
+            style={{ height: '40px' }}
+        >
+            {textButton}
+        </button>
+    )
+
 }
