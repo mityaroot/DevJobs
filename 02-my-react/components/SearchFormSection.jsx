@@ -1,35 +1,49 @@
 import {useId} from 'react'
 
+import jobsData from '../data.json'
+
 export default function Search({onTextFilter, onSearch}) {
+    // IDs que se usaran en el formulario
     const isSearchInputText = useId()
     const idTechnology = useId()
     const idLocation = useId()
     const idExperience = useId()
 
-    // Manejador de submit, lleva a cabo la busqueda con los filtros en tiempo real
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        
-        const formData = new FormData(event.target)
+    // Manejador de envio del formulario
+    const handleSearchSubmit = (e) => {
+        e.preventDefault()
+        onTextFilter(new FormData(e.target).get('search') || '')
+    }
 
-        const filters = {
-            technology: formData.get(idTechnology),
-            location: formData.get(idLocation),
-            experienceLevel: formData.get(idExperienceLevel)
-        }
+    // Manejador de cambio en los select
+    const handleSelectFilterSubmit = (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        onSearch({
+            technology: formData.get(idTechnology) || '',
+            location: formData.get(idLocation) || '',
+            experience: formData.get(idExperience) || ''
+        })
 
-        onSearch(filters)
+        console.log('>>> Filtros: ', {
+            technology: formData.get(idTechnology) || '',
+            location: formData.get(idLocation) || '',
+            experience: formData.get(idExperience) || ''
+        })
     }
 
     // Manejador de cambio en el input de texto
-    const handleTextChange = (e) => {
+    const handleInputTextChange = (e) => {
         const text = e.target.value
         onTextFilter(text)
+        console.log('>>> Texto del filtro: ', { text })
     }
+
+    // onFocus y onBlur
 
     return (
         <>
-        <form role="search" onSubmit={handleSubmit}>
+        <form role="search" onSubmit={handleSearchSubmit}>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"
@@ -40,31 +54,33 @@ export default function Search({onTextFilter, onSearch}) {
                 </svg>
 
                 <input
-                name="search"
-                id={isSearchInputText}
-                className="empleos-search-input"
-                    required type="text"
-                    placeholder="Buscar trabajos, empresas o habilidades"
+                    name="search"
+                    id={isSearchInputText}
+                    className="empleos-search-input"
+                        required type="text"
+                        placeholder="Buscar trabajos, empresas o habilidades"
 
-                    style={{ padding: '0.5rem 1rem', border: 'none',
-                        borderRadius: '4px', width: '300px', maxWidth: '100%'
-                    }}
+                        style={{ padding: '0.5rem 1rem', border: 'none',
+                            borderRadius: '4px', width: '300px', maxWidth: '100%'
+                        }}
 
-                onChange={handleTextChange}
+                    onChange={handleInputTextChange}
+                    // onFocus={} // Se ejecuta cuando el usuario hace clic en el input
+                    // onBlur={} // Se ejecuta cuando el usuario hace clic fuera del input
                 />
 
                 <button type="submit"
-                style={{ padding: '0.5rem 1rem', border: 'none',
-                    borderRadius: '4px', backgroundColor: '#334155',
-                    color: 'white', cursor: 'pointer' 
-                }}>
+                    style={{ padding: '0.5rem 1rem', border: 'none',
+                        borderRadius: '4px', backgroundColor: '#334155',
+                        color: 'white', cursor: 'pointer' 
+                    }}>
                 Buscar
                 </button>
             </div>
         </form>
 
         <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSelectFilterSubmit}
         className="search-filters"
         style={{ display: 'flex', gap: '1.5rem', alignItems: 'center',
         flexWrap: 'wrap', marginTop: '1rem', marginLeft: '3rem', marginRight: '1rem'
