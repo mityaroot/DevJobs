@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function JobCard({data, titulo, empresa, ubicacion, descripcion }) {
+export default function JobCard({job}) {
     const estilos = { marginTop: '1rem', border: '2px solid rgba(0, 51, 102, 0.6)', 
         padding: '20px', display: 'flex', justifyContent: 'space-between'}
 
@@ -11,21 +11,21 @@ export default function JobCard({data, titulo, empresa, ubicacion, descripcion }
     return (
         <article style={estilos} 
         className = "job-card"
-        data-modalidad={data?.modalidad}
-        data-nivel={data?.nivel}
-        data-technology={data?.technology}
+        data-modalidad={job.data?.modalidad}
+        data-nivel={job.data?.nivel}
+        data-technology={job.data?.technology}
         >
             <div>
-                <h2>{titulo}</h2>
-                <small>{empresa} - {ubicacion}</small>
-                 <p>{descripcion}</p>
+                <h2>{job.titulo}</h2>
+                <small>{job.empresa} - {job.ubicacion}</small>
+                 <p>{job.descripcion}</p>
                 
             </div>
 
             <div style = {{display: 'flex', flexDirection: 'column', gap: '0.5rem', marginLeft: 'auto' }}>
-                <span>{data?.modalidad}</span>
-                <span>{data?.nivel}</span>
-                <span>{data?.technology}</span>
+                <span>{job.data?.modalidad}</span>
+                <span>{job.data?.nivel}</span>
+                <span>{job.data?.technology}</span>
 
                 <ApplyButton />
             </div>

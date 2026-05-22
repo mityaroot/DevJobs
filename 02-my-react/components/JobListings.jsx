@@ -1,6 +1,6 @@
-import JobCard from './JobCardD.jsx'
+import JobCard from './JobCard'
 
-export default function JobListing({ jobs = [] }) {
+export default function JobListing({ jobs }) {
     return (
         <section 
         style={{ marginTop: '2rem', display: 'grid', gap: '1rem', textAlign: 'center' }}>
@@ -23,11 +23,7 @@ export default function JobListing({ jobs = [] }) {
                 {jobs.map(job => (
                     <JobCard
                         key={job.id}
-                        titulo={job.titulo}
-                        empresa={job.empresa}
-                        ubicacion={job.ubicacion}
-                        descripcion={job.descripcion}
-                        data={job.data}
+                        job={job}
                     />
                 ))}
 

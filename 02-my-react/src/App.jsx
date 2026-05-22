@@ -1,18 +1,80 @@
 import { useState } from 'react'
 
 import './App.css'
-import Header from '../components/layout/HeaderD.jsx'
-import Main from '../components/layout/MainD.jsx'
-import Footer from '../components/layout/FooterD.jsx'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import JobListing from '../components/JobListings'
+import Pagination from '../components/Pagination'
+import Search from '../components/SearchFormSection'
+import heroImg from '@assets/hero.png'
 import jobsData from '../data.json'
 
-export default function App() {
-  const [count, setCount] = useState(0)
+const RESULTS_PER_PAGE = 4
 
-  return (
+export default function App() {
+    const [filters, setFilters] = useState({
+      technology: '',
+      location: '',
+      experienceLevel: ''
+    })
+    const [textToFilter, setTextToFilter] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const jobsFilteredByFilters = jobsData.filter(job => {
+        return (
+            (filters.technology === '' || job.data.technology.includes(filters.technology))
+        )
+    })
+
+    const jobsWithTextFilter = textToFilter === ''
+        ? jobsFilteredByFilters
+        : jobsFilteredByFilters.filter(job => {
+            return job.titulo.toLowerCase().includes(textToFilter.toLowerCase())
+        })
+        
+    const totalPages = Math.ceil(jobsFilteredByFilters.length / RESULTS_PER_PAGE)
+
+    const pagedResults = jobsWithTextFilter.slice(
+        (currentPage - 1) * RESULTS_PER_PAGE, //Pagina 1 empieza en 0, pagina 2 empieza en 5, pagina 3 empieza en 10
+        currentPage * RESULTS_PER_PAGE // pagina 1 empieza en 5, pagina 2 empieza en 10, pagina 3 empieza en 15
+    )
+
+    // el hadlePageChange se pasa a la paginación
+    //
+
+    const handleSearch = (filters) => {
+        setFilters(filters)
+        setCurrentPage(1)
+    }
+
+    const handleTextFilter = (newTextToFilter) => {
+        setTextToFilter(newTextToFilter)
+        setCurrentPage(1)
+    }
+
+    return (
     <> 
       <Header />
-      <Main />
+        <main>
+            <section className="hero">
+                <img src={heroImg} width="200" />
+
+                <h1>Encuentra tú próximo trabajo</h1>
+
+                <p>Explora miles de oportunidades en el sector tecnológico.</p>
+
+                <Search onSearch={handleSearch} onTextFilter={handleTextFilter} />
+
+            </section>
+
+            <JobListing jobs={pagedResults} />
+            
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+            />
+        </main>
       <Footer />
     </>
   )

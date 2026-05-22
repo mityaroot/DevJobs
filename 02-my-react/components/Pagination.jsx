@@ -1,4 +1,4 @@
-import styles from './css/Pagination.module.css'
+import styles from './Pagination.module.css'
 // valores por defecto 1 y 10
 export default function Pagination({currentPage = 1, totalPages = 10, onPageChange}) {
 

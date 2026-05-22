@@ -1,29 +1,68 @@
 import {useId} from 'react'
 
-export default function JobFilter({onSearch}) {
+export default function Search({onTextFilter, onSearch}) {
+    const isSearchInputText = useId()
     const idTechnology = useId()
     const idLocation = useId()
     const idExperience = useId()
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        const formData = new FormData(e.target)
+    // Manejador de submit, lleva a cabo la busqueda con los filtros en tiempo real
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        
+        const formData = new FormData(event.target)
 
         const filters = {
-            technology: formData.get(idTechnology) || '',
-            location: formData.get(idLocation) || '',
-            experienceLevel: formData.get(idExperience) || '',
+            technology: formData.get(idTechnology),
+            location: formData.get(idLocation),
+            experienceLevel: formData.get(idExperienceLevel)
         }
 
         onSearch(filters)
     }
 
-    const handleReset = () => {
-        onSearch({ technology: '', location: '', experienceLevel: '' })
+    // Manejador de cambio en el input de texto
+    const handleTextChange = (e) => {
+        const text = e.target.value
+        onTextFilter(text)
     }
 
-    return(
+    return (
+        <>
+        <form role="search" onSubmit={handleSubmit}>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"
+                    className="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                    <path d="M21 21l-6 -6" />
+                </svg>
+
+                <input
+                name="search"
+                id={isSearchInputText}
+                className="empleos-search-input"
+                    required type="text"
+                    placeholder="Buscar trabajos, empresas o habilidades"
+
+                    style={{ padding: '0.5rem 1rem', border: 'none',
+                        borderRadius: '4px', width: '300px', maxWidth: '100%'
+                    }}
+
+                onChange={handleTextChange}
+                />
+
+                <button type="submit"
+                style={{ padding: '0.5rem 1rem', border: 'none',
+                    borderRadius: '4px', backgroundColor: '#334155',
+                    color: 'white', cursor: 'pointer' 
+                }}>
+                Buscar
+                </button>
+            </div>
+        </form>
+
         <form
         onSubmit={handleSubmit}
         className="search-filters"
@@ -31,9 +70,10 @@ export default function JobFilter({onSearch}) {
         flexWrap: 'wrap', marginTop: '1rem', marginLeft: '3rem', marginRight: '1rem'
         }}>
 
-            <button type="button"
-                id="btn-reset-filters"
-                onClick={handleReset}
+            
+            <button // Boton para limpiar los filtros
+                id="btn-reset-filters" type="button"
+                // onClick={handleReset}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                 padding: '0.5rem 1rem', backgroundColor: '#e53e3e', color: 'white',
                 border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '0.85rem'
@@ -86,5 +126,7 @@ export default function JobFilter({onSearch}) {
                 Filtrar
             </button>
         </form>
+
+        </>
     )
 }
