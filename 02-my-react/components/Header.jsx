@@ -1,8 +1,9 @@
+import {Link} from './Link.jsx';
 
 export default function Header() {
   return (
     <header style={{ padding: '1rem 2rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+        <Link style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
             <a href="/" style={{ textDecoration: 'none', background: 'transparent' }}>
                 <h1 style={{ color: 'white', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
                     <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
@@ -14,16 +15,17 @@ export default function Header() {
                 </h1>
             </a>
 
+        </Link>
+
             <nav>
-                <a href="/search" className="nav-link">Empleos</a>
+                <Link href="/search" className="nav-link">Empleos</Link>
             </nav>
-        </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginLeft: 'auto', flexWrap: 'wrap' }}>
             <div
                 style={{ borderRadius: '25px', padding: '0.5rem 1rem', backgroundColor: '#b44cce', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             >
-                <a href="">Subir CV</a>
+                <Link href="">Subir CV</Link>
             </div>
         </div>
 

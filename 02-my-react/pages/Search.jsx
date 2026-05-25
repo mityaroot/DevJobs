@@ -72,19 +72,6 @@ export function SearchPage() {
     }, [filters, currentPage, textToFilter]) // Si cambian los filtros, se actualiza la URL
 
     useEffect(() => {
-
-        const handleResize = () => {
-            console.log('>>> Ventana redimensionada')
-            console.log(window.innerWidth, window.innerHeight)
-        }
-
-        // Escuchar el evento, nos suscribimos
-        window.addEventListener('resize', handleResize)
-
-        // Limpieza si se ejecuta antes de desmontar o antes de re-ejecutar, nos desuscribimos
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
         
     }, [])
 
