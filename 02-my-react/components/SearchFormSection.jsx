@@ -15,13 +15,14 @@ export default function Search({onTextFilter, onSearch, filteredJobs}) {
     // Manejador de envio del formulario
     const handleSearchSubmit = (e) => {
         e.preventDefault()
-        onTextFilter(new FormData(e.target).get('search') || '')
+        // target !== currentTarget: https://www.w3schools.com/jsref/met_event_target.asp
+        onTextFilter(new FormData(e.currentTarget).get('search') || '')
     }
 
     // Manejador de cambio en los select
     const handleSelectFilterSubmit = (e) => {
         e.preventDefault()
-        const formData = new FormData(e.target)
+        const formData = new FormData(e.currentTarget)
         onSearch({
             technology: formData.get(idTechnology) || '',
             location: formData.get(idLocation) || '',
@@ -47,7 +48,7 @@ export default function Search({onTextFilter, onSearch, filteredJobs}) {
 
     // Manejador de cambio en el input de texto
     const handleInputTextChange = (e) => {
-        const text = e.target.value
+        const text = e.currentTarget.value
         onTextFilter(text)
         console.log('>>> Texto del filtro: ', { text })
     }
@@ -65,7 +66,7 @@ export default function Search({onTextFilter, onSearch, filteredJobs}) {
 
     return (
         <>
-        <form role="search" onSubmit={handleSearchSubmit} ref={searchFormRef}>
+        <form role="search" onChange={handleSearchSubmit} ref={searchFormRef}>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"
@@ -93,25 +94,18 @@ export default function Search({onTextFilter, onSearch, filteredJobs}) {
                     // onBlur={} // Se ejecuta cuando el usuario hace clic fuera del input
                 />
 
-                <button type="submit"
-                    style={{ padding: '0.5rem 1rem', border: 'none',
-                        borderRadius: '4px', backgroundColor: '#334155',
-                        color: 'white', cursor: 'pointer' 
-                    }}>
-                Buscar
-                </button>
             </div>
         </form>
 
         <form
-        onSubmit={handleSelectFilterSubmit}
+        onChange={handleSelectFilterSubmit}
         className="search-filters"
         ref={filterFormRef}
         style={{ display: 'flex', gap: '1.5rem', alignItems: 'center',
         flexWrap: 'wrap', marginTop: '1rem', marginLeft: '3rem', marginRight: '1rem'
         }}>
 
-            <div style={{ }}>
+            <div>
                 <div
                     style={{ borderRadius: '25px', padding: '0.5rem 1rem', backgroundColor: '#b44cce', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                 > 
@@ -120,11 +114,11 @@ export default function Search({onTextFilter, onSearch, filteredJobs}) {
                 </div>
             </div>
 
-            <div style={{ }}>
+            <div>
                 <div
                     style={{ borderRadius: '25px', padding: '0.5rem 1rem', backgroundColor: '#b44cce', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                 > 
-                    <p style={{ fontSize: '0.85rem' }}>{filteredJobs.length}</p>
+                    <p style={{ fontSize: '0.85rem' }}>{filteredJobs}</p>
                     <p style={{ margin: 0, fontSize: '1.1rem' , paddingLeft: '0.5rem'}}>Filtrados</p>
                 </div>
             </div>
@@ -177,12 +171,6 @@ export default function Search({onTextFilter, onSearch, filteredJobs}) {
                 <option value="freelance">Freelance</option>
             </select>
 
-            <button type="submit"
-                style={{ padding: '0.5rem 1rem', border: 'none',
-                borderRadius: '4px', backgroundColor: '#334155',
-                color: 'white', cursor: 'pointer' }}>
-                Filtrar
-            </button>
         </form>
 
         </>
