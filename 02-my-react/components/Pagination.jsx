@@ -43,13 +43,13 @@ export default function Pagination({currentPage = 1, totalPages = 10, onPageChan
             {pages.map(page => (
                 <a 
                 key={page}
-                data-page={page}
-                className={currentPage === page ? 'is-active' : ''} 
-                href="#"
-                onClick={(e) => {
-                    e.preventDefault()
-                    onPageChange(page)
-                }}
+                    data-page={page}
+                    className={currentPage === page ? 'is-active' : ''} 
+                    href="#"
+                    onClick={(e) => {
+                        e.preventDefault()
+                        onPageChange(page)
+                    }}
                 >
                     {page}
                 </a>

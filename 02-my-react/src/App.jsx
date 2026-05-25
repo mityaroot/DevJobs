@@ -12,14 +12,17 @@ import jobsData from '../data.json'
 const RESULTS_PER_PAGE = 4
 
 export default function App() {
+
+    // Estados
     const [filters, setFilters] = useState({
       technology: '',
       location: '',
       experience: ''
     })
-    const [textToFilter, setTextToFilter] = useState('')
-    const [currentPage, setCurrentPage] = useState(1)
+    const [textToFilter, setTextToFilter] = useState('') // Filtro en tiempo real, por defecto ''
+    const [currentPage, setCurrentPage] = useState(1) // Pagina actual, por defecto 1
 
+    // Filtrar por los selects
     const jobsFilteredByFilters = jobsData.filter(job => {
         return (
             (filters.technology === '' || job.data.technology.includes(filters.technology)) &&
@@ -28,6 +31,7 @@ export default function App() {
         )
     })
 
+    // Filtrar por texto (le aplicamos a los demas filtros el filtro por texto en tiempo real) 
     const jobsWithTextFilter = textToFilter === ''
         ? jobsFilteredByFilters
         : jobsFilteredByFilters.filter(job => { 
@@ -47,13 +51,14 @@ export default function App() {
     // el hadlePageChange se pasa a la paginación
     //
 
-    // el handleSearch se pasa a la barra de busqueda
+    // el handleSearch se pasa a la barra de busqueda, para el filtro
     const handleSearch = (filters) => {
         setFilters(filters)
         setCurrentPage(1)
         console.log('>>> Filtro aplicado: ', { filters })
     }
 
+    // el handleTextFilter se pasa a la barra de busqueda, para el filtro en tiempo real
     const handleTextFilter = (newTextToFilter) => {
         setTextToFilter(newTextToFilter)
         setCurrentPage(1)
@@ -71,7 +76,7 @@ export default function App() {
 
                 <p>Explora miles de oportunidades en el sector tecnológico.</p>
 
-                <Search onSearch={handleSearch} onTextFilter={handleTextFilter} />
+                <Search onSearch={handleSearch} onTextFilter={handleTextFilter} filteredJobs={jobsWithTextFilter}/>
 
             </section>
 

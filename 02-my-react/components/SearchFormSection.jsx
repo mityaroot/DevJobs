@@ -1,13 +1,16 @@
-import {useId} from 'react'
+import {useId, useRef} from 'react'
 
 import jobsData from '../data.json'
 
-export default function Search({onTextFilter, onSearch}) {
+export default function Search({onTextFilter, onSearch, filteredJobs}) {
     // IDs que se usaran en el formulario
     const isSearchInputText = useId()
     const idTechnology = useId()
     const idLocation = useId()
     const idExperience = useId()
+
+    const searchFormRef = useRef(null) // Referencia al formulario, para limpiar los filtros de busqueda en tiempo real
+    const filterFormRef = useRef(null) // Referencia al formulario, para limpiar los filtros los select en tiempo real
 
     // Manejador de envio del formulario
     const handleSearchSubmit = (e) => {
@@ -25,11 +28,21 @@ export default function Search({onTextFilter, onSearch}) {
             experience: formData.get(idExperience) || ''
         })
 
+        // Imprimir los filtros
         console.log('>>> Filtros: ', {
             technology: formData.get(idTechnology) || '',
             location: formData.get(idLocation) || '',
             experience: formData.get(idExperience) || ''
         })
+
+        // Imprimir los trabajos filtrados
+        console.log('>>> Trabajos filtrados: ', jobsData.filter(job => {
+            return (
+                (formData.get(idTechnology) === '' || job.data.technology.includes(formData.get(idTechnology))) &&
+                (formData.get(idLocation) === '' || job.data.modalidad.includes(formData.get(idLocation))) &&
+                (formData.get(idExperience) === '' || job.data.nivel.includes(formData.get(idExperience)))
+            )
+        }))
     }
 
     // Manejador de cambio en el input de texto
@@ -39,11 +52,20 @@ export default function Search({onTextFilter, onSearch}) {
         console.log('>>> Texto del filtro: ', { text })
     }
 
-    // onFocus y onBlur
+    const handleClearFilters = () => {
+        onSearch({
+            technology: '',
+            location: '',
+            experience: ''
+        })
+        onTextFilter('')
+        searchFormRef.current?.reset()
+        filterFormRef.current?.reset()
+    }
 
     return (
         <>
-        <form role="search" onSubmit={handleSearchSubmit}>
+        <form role="search" onSubmit={handleSearchSubmit} ref={searchFormRef}>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"
@@ -64,7 +86,9 @@ export default function Search({onTextFilter, onSearch}) {
                             borderRadius: '4px', width: '300px', maxWidth: '100%'
                         }}
 
-                    onChange={handleInputTextChange}
+                    // onChange={handleInputTextChange} // original con Midu
+                    // probamos lo que nos dijo Midu de onFocus y onBlur.
+                    onBlur={handleInputTextChange}
                     // onFocus={} // Se ejecuta cuando el usuario hace clic en el input
                     // onBlur={} // Se ejecuta cuando el usuario hace clic fuera del input
                 />
@@ -82,14 +106,32 @@ export default function Search({onTextFilter, onSearch}) {
         <form
         onSubmit={handleSelectFilterSubmit}
         className="search-filters"
+        ref={filterFormRef}
         style={{ display: 'flex', gap: '1.5rem', alignItems: 'center',
         flexWrap: 'wrap', marginTop: '1rem', marginLeft: '3rem', marginRight: '1rem'
         }}>
 
+            <div style={{ }}>
+                <div
+                    style={{ borderRadius: '25px', padding: '0.5rem 1rem', backgroundColor: '#b44cce', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                > 
+                    <p style={{ fontSize: '0.85rem' }}>{jobsData.length}</p>
+                    <p style={{ margin: 0, fontSize: '1.1rem' , paddingLeft: '0.5rem'}}>Total de trabajos</p>
+                </div>
+            </div>
+
+            <div style={{ }}>
+                <div
+                    style={{ borderRadius: '25px', padding: '0.5rem 1rem', backgroundColor: '#b44cce', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                > 
+                    <p style={{ fontSize: '0.85rem' }}>{filteredJobs.length}</p>
+                    <p style={{ margin: 0, fontSize: '1.1rem' , paddingLeft: '0.5rem'}}>Filtrados</p>
+                </div>
+            </div>
             
             <button // Boton para limpiar los filtros
                 id="btn-reset-filters" type="button"
-                // onClick={handleReset}
+            onClick={handleClearFilters}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
                 padding: '0.5rem 1rem', backgroundColor: '#e53e3e', color: 'white',
                 border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '0.85rem'
