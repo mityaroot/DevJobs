@@ -27,7 +27,11 @@
 23. [Hook useId()](#hook-useid)
 24. [Gestión de Formularios y Filtros](#formularios-filtros)
 25. [Ejercicios: Formularios y Eventos](#ejercicios-formularios)
-
+26. [Filtros automáticos y Routing básico](#filtros-automaticos-y-routing-basico)
+27. [Hook useEffect: Efectos secundarios en React](#hook-useeffect-efectos-secundarios-en-react)
+28. [Cuándo usar useEffect](#cuando-usar-useeffect)
+29. [Creando una Single Page Application (SPA) desde cero con React](#creando-un-single-page-spa)
+30. 
 ---
 
 ## Próximamente
@@ -57,7 +61,7 @@
 
 ---
 <a id="que-es-react"></a>
-¿Qué es React?
+# ¿Qué es React?
 
 Hasta ahora hemos trabajado con HTML, CSS y JavaScript puro (también conocido como “Vanilla JavaScript”) para construir nuestra aplicación DevJobs. Esto está genial para proyectos pequeños, pero cuando las aplicaciones crecen, manipular el DOM manualmente se vuelve complejo y difícil de mantener.
 
@@ -249,7 +253,7 @@ En esta clase vamos a migrar DevJobs paso a paso de JavaScript vanilla a React. 
 ¡Prepárate para ver el poder de React en acción!
 ---
 <a id="primeros-pasos-en-react"></a>
-Primeros pasos en React
+# Primeros pasos en React
 
 En esta clase vamos a crear nuestra primera aplicación React desde cero. Por defecto, React recomienda instalar un framework para crear proyectos, pero nosotros vamos a hacerlo desde cero, paso a paso y de forma incremental.
 Creando nuestro primer archivo React
@@ -538,7 +542,7 @@ En la siguiente clase veremos JSX, que hace todo esto mucho más simple y legibl
 
 ---
 <a id="jsx-la-sintaxis-de-react"></a>
-JSX: La sintaxis de React
+# JSX: La sintaxis de React
 
 En la clase anterior aprendimos a usar React.createElement para crear elementos. Funcionaba, pero el código era verboso y difícil de leer. Ahora vamos a conocer JSX, que hace que React sea mucho más fácil de escribir y entender.
 ¿Qué es JSX?
@@ -1056,7 +1060,7 @@ En la siguiente clase aprenderemos sobre componentes, que es donde JSX realmente
 
 ---
 <a id="componentes-en-react"></a>
-Componentes en React
+# Componentes en React
 
 Hasta ahora hemos usado JSX para crear elementos, pero la verdadera potencia de React está en los componentes. Un componente es una función de JavaScript que retorna JSX. Es como crear tus propias etiquetas HTML personalizadas y reutilizables.
 ¿Qué es un componente?
@@ -1332,7 +1336,7 @@ En la próxima clase aprenderemos sobre el estado (useState), que nos permitirá
     💡 Recuerda: Los componentes son funciones que retornan JSX. Las props son los datos que reciben. JSX es JavaScript, por eso los estilos son objetos.
 ----
 <a id="componentes-vs-funciones-normales"></a>
-Componentes vs Funciones normales
+# Componentes vs Funciones normales
 
 Los componentes de React son funciones de JavaScript, pero no todas las funciones de JavaScript son componentes de React. En esta clase vamos a entender cuál es la diferencia y por qué es importante.
 ¿Qué es un componente de React?
@@ -1741,7 +1745,7 @@ En la próxima clase aprenderemos sobre el estado con useState, que nos permitir
     💡 Recuerda: Los componentes son funciones especiales que retornan JSX y usan PascalCase. Las funciones normales ayudan con la lógica pero no se renderizan directamente.
 ---
 <a id="creando-jobcard-componente-real"></a>
-Creando JobCard: Nuestro primer componente real
+# Creando JobCard: Nuestro primer componente real
 
 Hasta ahora hemos aprendido qué es JSX, qué son los componentes y cómo se diferencian de las funciones normales. Ahora es el momento de aplicar todo ese conocimiento creando un componente real para nuestra aplicación DevJobs.
 Componente JobCard: Caso real
@@ -2280,7 +2284,7 @@ En la próxima clase aprenderemos sobre el estado con useState, que nos permitir
 
 ----
 <a id="eventos-en-react"></a>
-Eventos en React
+# Eventos en React
 
 Hasta ahora nuestros componentes son estáticos: muestran información pero no responden a las acciones del usuario. En esta clase vamos a aprender a manejar eventos como clicks, cambios en inputs, envío de formularios, etc.
 ¿Qué son los eventos?
@@ -2790,7 +2794,7 @@ En la próxima clase aprenderemos sobre el estado con useState, que nos permitir
     💡 Recuerda: Los eventos en React usan camelCase (onClick) y reciben referencias a funciones, no llamadas (onClick={handleClick}, no onClick={handleClick()}).
 ---
 <a id="estado-con-usestate"></a>
-Estado con useState
+# Estado con useState
 
 En la clase anterior aprendimos a manejar eventos, pero los componentes no recordaban nada. Cuando hacías clic en “Aplicar”, se ejecutaba la función pero el botón no cambiaba visualmente. Ahora vamos a solucionar eso con el estado.
 ¿Qué es el estado?
@@ -3336,7 +3340,7 @@ En la próxima clase aprenderemos a renderizar listas de elementos dinámicament
 
 ---
 <a id="renderizado-y-virtual-dom"></a>
-Renderizado y Virtual DOM
+# Renderizado y Virtual DOM
 
 Ya sabemos que cuando cambiamos el estado con useState, la interfaz se actualiza automáticamente. Pero ¿qué está pasando por debajo? ¿Cómo sabe React qué actualizar? En esta clase vamos a entenderlo.
 ¿Qué significa “renderizar”?
@@ -3857,7 +3861,7 @@ En la próxima clase aprenderemos a renderizar listas de elementos dinámicament
 
 ----
 <a id="vite-empaquetador-moderno"></a>
-Vite: Empaquetador moderno
+# Vite: Empaquetador moderno
 
 Hasta ahora hemos usado React directamente en el navegador con un simple archivo HTML. Esto está bien para aprender, pero en proyectos reales necesitamos herramientas más potentes. Aquí es donde entra Vite.
 ¿Qué es un empaquetador?
@@ -4785,7 +4789,7 @@ En la próxima clase empezaremos a migrar nuestra aplicación DevJobs a este nue
     💡 Recuerda: Vite + SWC es la combinación moderna para desarrollo React. Es rápido, simple y es lo que usan las empresas actualmente.
 ----
 <a id="fast-refresh"></a>
-Fast Refresh y Actualizaciones de Estado
+# Fast Refresh y Actualizaciones de Estado
 
 En esta clase vamos a entender dos conceptos importantes: Fast Refresh (una característica que hace que tu desarrollo sea más rápido) y la forma correcta de actualizar el estado cuando depende de su valor anterior.
 ¿Qué es Fast Refresh?
@@ -5035,7 +5039,7 @@ Repaso final de la clase
     💡 Recuerda: Usa setState((prev) => ...) cuando el nuevo valor depende del anterior. Fast Refresh hace que tu experiencia de desarrollo sea más fluida al mantener el estado mientras editas código.
 ----
 <a id="migrando-devjobs"></a>
-Migrando el Proyecto DevJobs a React
+# Migrando el Proyecto DevJobs a React
 
 Ya tenemos nuestro proyecto React con Vite configurado. Ahora vamos a migrar nuestro proyecto DevJobs que teníamos en HTML puro a React.
 
@@ -5538,7 +5542,7 @@ En la próxima clase continuaremos separando más componentes y aprenderemos a p
     💡 Recuerda: No intentes separar todo en componentes desde el principio. Empieza con todo funcionando en un solo componente y ve separando progresivamente. Es más fácil y menos propenso a errores.
 ---
 <a id="creando-componente-jobcard"></a>
-Creando el Componente JobCard
+# Creando el Componente JobCard
 
 En esta clase vamos a continuar componetizando nuestra aplicación DevJobs. Ya tenemos separados el Header y el Footer. Ahora es el turno de la parte más importante: los JobCard (tarjetas de trabajo).
 Creando la estructura de datos
@@ -5848,7 +5852,7 @@ En esta clase has aprendido:
     💡 Recuerda: Las props fluyen de padre a hijo. Usa props para hacer componentes reutilizables que puedan mostrar diferentes datos cada vez.
 ---
 <a id="props-comunicacion"></a>
-Props - Comunicación entre Componentes
+# Props - Comunicación entre Componentes
 
 En la clase anterior creamos el componente JobCard y lo usamos manualmente tres veces. Ahora vamos a profundizar en props, el mecanismo fundamental de React para pasar datos entre componentes.
 ¿Qué son las Props?
@@ -6622,7 +6626,7 @@ En la próxima clase aprenderemos a renderizar listas con .map() y a importar da
     💡 Recuerda: Las props son el mecanismo fundamental de React para crear componentes reutilizables y componibles. Dominar las props es esencial para ser efectivo con React.
 ---
 <a id="modulos-javascript"></a>
-Módulos JavaScript - Import y Export
+# Módulos JavaScript - Import y Export
 
 Hasta ahora hemos tenido todo nuestro código en un solo archivo App.jsx. En aplicaciones reales, separamos el código en múltiples archivos usando el sistema de módulos de JavaScript. En esta clase aprenderemos a exportar e importar componentes.
 El problema: Todo en un archivo
@@ -7186,7 +7190,7 @@ En la próxima clase aprenderemos sobre CSS Modules, una forma de escribir CSS c
 
 ---
 <a id="paginacion-props"></a>
-Paginación - Props y Comunicación Padre-Hijo
+# Paginación - Props y Comunicación Padre-Hijo
 
 En esta clase vamos a crear un componente Pagination que nos permitirá navegar entre diferentes páginas de contenido. Aprenderemos a pasar datos mediante props, definir valores por defecto, y lo más importante: cómo un componente hijo puede comunicarse con su padre usando funciones.
 Creando el componente Pagination
@@ -7533,7 +7537,7 @@ En la próxima clase aprenderemos sobre callbacks y cómo pasar funciones como p
 
 ----
 <a id="callbacks"></a>
-Callbacks - Pasar Funciones como Props
+# Callbacks - Pasar Funciones como Props
 
 En la clase anterior creamos el componente Pagination que recibe props con datos. Ahora vamos a aprender a pasar funciones como props para que el componente hijo pueda comunicarse con el padre y notificarle cuando algo cambia.
 El problema: Componente sin interacción
@@ -7999,7 +8003,7 @@ En la próxima clase completaremos el ciclo aprendiendo sobre estado en el compo
 
 ---
 <a id="lifting-state-up"></a>
-Estado por Props - Lifting State Up
+# Estado por Props - Lifting State Up
 
 En la clase anterior aprendimos a pasar funciones como props para que el hijo notifique al padre. Ahora vamos a completar el ciclo: crear estado en el padre y pasarlo como props al hijo, haciendo que todo funcione de forma reactiva.
 El problema: Estado fijo
@@ -8695,7 +8699,7 @@ En la próxima clase profundizaremos en renderizado de listas con .map(), aprend
     💡 Recuerda: El estado vive en el padre, se pasa a los hijos como props, y los hijos lo actualizan llamando a callbacks. Este es el flujo de datos unidireccional de React. Los renderizados dobles en desarrollo son normales por StrictMode y te ayudan a escribir mejor código.
 ---
 <a id="keys-listas"></a>
-Keys y Renderizado de Listas
+# Keys y Renderizado de Listas
 
 Hasta ahora hemos trabajado con componentes individuales. En esta clase aprenderemos a renderizar listas de datos dinámicamente usando .map(), y entenderemos por qué React necesita que cada elemento tenga una key única.
 El problema: Componentes repetidos manualmente
@@ -9172,7 +9176,7 @@ En la próxima clase vamos a terminar de hacer funcionar nuestra paginación.
 
 ---
 <a id="terminando-paginacion"></a>
-Terminando la paginación
+# Terminando la paginación
 
 En las clases anteriores creamos el componente Pagination y aprendimos a pasar funciones como props y manejar el estado en el componente padre. Ahora vamos a conectar todo para que la paginación funcione completamente: calcularemos el número total de páginas y mostraremos solo los trabajos de la página actual.
 Moviendo la importación de datos a App.jsx
@@ -10073,7 +10077,7 @@ En la próxima clase veremos más conceptos avanzados de React que te ayudarán 
 
 ----
 <a id="css-modules"></a>
-CSS Modules
+# CSS Modules
 
 Hasta ahora hemos usado CSS global, donde todas las clases están disponibles en toda la aplicación. En esta clase aprenderemos a usar CSS Modules, una técnica que nos permite escribir CSS con ámbito local para cada componente, evitando conflictos de nombres.
 El problema con CSS global
@@ -10712,7 +10716,7 @@ En la próxima clase seguiremos explorando más conceptos de React que te ayudar
 
 ----
 <a id="hook-useid"></a>
-Hook useId()
+# Hook useId()
 
 En esta clase vamos a mejorar nuestro componente de formulario de búsqueda. Aprenderemos a manejar el evento submit y a usar el hook useId() para generar identificadores únicos que eviten colisiones en nuestros elementos HTML.
 El formulario de búsqueda actual
@@ -11468,7 +11472,7 @@ En la próxima clase aprenderemos a gestionar los datos del formulario y cómo c
 
 ---
 <a id="formularios-filtros"></a>
-Gestión de Formularios y Filtros
+# Gestión de Formularios y Filtros
 
 En la clase anterior añadimos el handleSubmit y usamos useId() para generar identificadores únicos. Ahora vamos a implementar la lógica completa del formulario: capturar los valores, filtrar los trabajos y añadir búsqueda en tiempo real.
 Capturando los datos del formulario con FormData
@@ -12194,7 +12198,7 @@ En la próxima clase exploraremos más conceptos avanzados de React como custom 
 
 ---
 <a id="ejercicios-formularios"></a>
-Ejercicios: Formularios y Eventos
+# Ejercicios: Formularios y Eventos
 
 En esta clase vamos a practicar todo lo que hemos aprendido sobre gestión de formularios, filtros y eventos en React. Estos ejercicios te ayudarán a consolidar los conceptos de la clase anterior y a mejorar tu aplicación DevJobs.
 Objetivo de los ejercicios
@@ -13026,3 +13030,2116 @@ Ahora que dominas la gestión de formularios en React, en las próximas clases a
 ---
 
 Lo de arriba es hasta "Ejercicios: Formularios y Eventos".
+
+---
+
+<a id="filtros-automaticos-y-routing-basico"></a>
+# 26. Filtros automáticos y Routing básico
+
+En esta clase vamos a mejorar significativamente la experiencia de usuario de nuestra aplicación eliminando el botón de búsqueda para que los filtros funcionen automáticamente. Además, aprenderemos a crear un sistema básico de páginas sin usar React Router.
+Ajustes iniciales del formulario
+
+Antes de empezar con los cambios, vamos a revisar algunos problemas visuales y funcionales de nuestra aplicación.
+Revisión del flujo de filtros existente
+
+En este momento, nuestros filtros solo funcionan al hacer clic en el botón “Buscar”. Esto significa que:
+
+    El usuario cambia un select
+    No pasa nada
+    El usuario cambia otro select
+    No pasa nada
+    El usuario hace clic en “Buscar”
+    Recién ahí se aplican todos los filtros
+
+Este flujo no es óptimo para la experiencia de usuario. Vamos a mejorarlo.
+Eliminación del botón “Buscar” y envío automático
+
+La solución es simple: eliminar el botón de buscar y hacer que el formulario se envíe automáticamente cada vez que cambia un campo.
+Transformación: eliminando el botón de submit
+
+// src/components/SearchForm.jsx
+export function SearchForm({ onSearch, onChangeText }) {
+  const idText = useId()
+  const idLocation = useId()
+
+  // Ahora manejamos el cambio de cualquier campo
+  const handleChange = (event) => {
+    // IMPORTANTE: usar currentTarget, NO target
+    const formData = new FormData(event.currentTarget)
+
+    const filters = {
+      search: formData.get(idText),
+      location: formData.get(idLocation),
+    }
+
+    onSearch(filters)
+  }
+
+  const handleChangeText = (event) => {
+    onChangeText(event.target.value)
+    // También actualizamos los filtros cuando cambia el texto
+    handleChange(event)
+  }
+
+  return (
+    <form className="search-form" onChange={handleChange}>
+      <input
+        type="text"
+        name={idText}
+        id={idText}
+        placeholder="Buscar..."
+        onChange={handleChangeText}
+      />
+
+      <select name={idLocation} id={idLocation}>
+        <option value="">Todas las ubicaciones</option>
+        <option value="remoto">Remoto</option>
+        <option value="presencial">Presencial</option>
+      </select>
+    </form>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+event.target vs event.currentTarget
+
+Este es uno de los errores más comunes al trabajar con formularios en React. Es crucial entender la diferencia:
+event.target
+
+event.target es el elemento que lanzó el evento. En nuestro caso:
+
+    Si haces clic en el input → event.target es el <input>
+    Si cambias el select → event.target es el <select>
+
+const handleChange = (event) => {
+  console.log(event.target) // <input> o <select>, dependiendo de cuál cambió
+}
+        
+          
+        
+        
+        
+      
+
+event.currentTarget
+
+event.currentTarget es el elemento que tiene el listener del evento. En nuestro caso, siempre es el <form>:
+
+const handleChange = (event) => {
+  console.log(event.currentTarget) // Siempre <form>
+}
+        
+          
+        
+        
+        
+      
+
+¿Por qué necesitamos currentTarget?
+
+Cuando creamos un FormData, necesitamos pasarle el formulario completo, no solo el campo que cambió:
+
+// ❌ INCORRECTO - Solo obtenemos los datos del input/select que cambió
+const formData = new FormData(event.target)
+
+// ✅ CORRECTO - Obtenemos todos los datos del formulario
+const formData = new FormData(event.currentTarget)
+        
+          
+        
+        
+        
+      
+
+Ejemplo visual del problema
+
+<form onChange={handleChange}>
+  <input name="search" />
+  <select name="location">
+    <option value="remoto">Remoto</option>
+  </select>
+</form>
+        
+          
+        
+        
+        
+      
+
+Si cambias el select:
+
+// Con event.target (INCORRECTO)
+const formData = new FormData(event.target) // FormData del <select>
+console.log(formData.get('search')) // null ❌
+console.log(formData.get('location')) // null ❌ (los selects no funcionan así)
+
+// Con event.currentTarget (CORRECTO)
+const formData = new FormData(event.currentTarget) // FormData del <form>
+console.log(formData.get('search')) // "..." ✅
+console.log(formData.get('location')) // "remoto" ✅
+        
+          
+        
+        
+        
+      
+
+Filtros funcionando en tiempo real
+
+Después de corregir el currentTarget, el formulario filtra automáticamente cada vez que:
+
+    El usuario escribe en el input de búsqueda
+    El usuario cambia cualquier select
+    El usuario interactúa con cualquier campo del formulario
+
+Ventajas de este enfoque
+
+✅ Resultados instantáneos - El usuario ve los cambios inmediatamente ✅ Menos clics - No necesita hacer clic en “Buscar” ✅ Más intuitivo - El comportamiento es más natural ✅ Unifica la experiencia - Texto y filtros funcionan de la misma manera
+Necesidad de tener varias páginas
+
+Hasta ahora, nuestra aplicación solo tiene una página. Pero una aplicación real necesita múltiples páginas:
+
+    Home (/) - Página principal con información del proyecto
+    Search (/search) - Página de búsqueda de trabajos
+    404 - Página de error para rutas no encontradas
+
+Problema identificado
+
+Actualmente, todo el contenido está en App.jsx:
+
+// src/App.jsx (ANTES)
+function App() {
+  // Todo el código de búsqueda y filtros
+  return (
+    <>
+      <Header />
+      <main>
+        <SearchForm onSearch={handleSearch} onChangeText={handleChangeText} />
+        <JobListings jobs={pagedResults} />
+        <Pagination />
+      </main>
+      <Footer />
+    </>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Esto no escala bien cuando queremos agregar más páginas.
+Reorganización del App y separación de layout
+
+Vamos a reorganizar la estructura de la aplicación para que sea más modular:
+Estructura de carpetas
+
+src/
+├── components/
+│   ├── Header.jsx
+│   ├── Footer.jsx
+│   ├── SearchForm.jsx
+│   ├── JobListings.jsx
+│   └── Pagination.jsx
+└── pages/
+    ├── Home.jsx
+    ├── Search.jsx
+    └── NotFound.jsx
+        
+          
+        
+        
+        
+      
+
+Crear la carpeta de páginas
+
+mkdir src/pages
+        
+          
+        
+        
+        
+      
+
+Mover la lógica de búsqueda a Search.jsx
+
+// src/pages/Search.jsx
+import { useState } from 'react'
+import { SearchForm } from '../components/SearchForm'
+import { JobListings } from '../components/JobListings'
+import { Pagination } from '../components/Pagination'
+import jobsData from '../data/jobs.json'
+
+export function Search() {
+  const [filters, setFilters] = useState({
+    technology: '',
+    location: '',
+    experienceLevel: '',
+  })
+
+  // ... resto del código
+}
+        
+          
+        
+        
+        
+      
+
+Nuevo App.jsx simplificado
+
+Ahora App.jsx solo contiene el layout (Header y Footer) y decide qué página mostrar:
+
+// src/App.jsx
+import { Header } from './components/Header'
+import { Footer } from './components/Footer'
+import { Home } from './pages/Home'
+import { Search } from './pages/Search'
+import { NotFound } from './pages/NotFound'
+
+function App() {
+  // Por ahora, mostramos siempre Search
+  // En la próxima sección implementaremos el routing
+  return (
+    <>
+      <Header />
+      <Search />
+      <Footer />
+    </>
+  )
+}
+
+export default App
+        
+          
+        
+        
+        
+      
+
+Routing manual usando window.location.pathname
+
+Ahora vamos a implementar un sistema básico de routing sin usar React Router. Usaremos window.location.pathname para detectar en qué ruta estamos.
+¿Qué es window.location.pathname?
+
+Es una propiedad del navegador que contiene la ruta actual:
+
+// Si estás en: http://localhost:5173/
+console.log(window.location.pathname) // "/"
+
+// Si estás en: http://localhost:5173/search
+console.log(window.location.pathname) // "/search"
+
+// Si estás en: http://localhost:5173/about
+console.log(window.location.pathname) // "/about"
+        
+          
+        
+        
+        
+      
+
+Implementación del router manual
+
+// src/App.jsx
+import { Header } from './components/Header'
+import { Footer } from './components/Footer'
+import { Home } from './pages/Home'
+import { Search } from './pages/Search'
+import { NotFound } from './pages/NotFound'
+
+function App() {
+  // Obtenemos la ruta actual
+  const { pathname } = window.location
+
+  // Decidimos qué página mostrar según la ruta
+  let Page
+
+  if (pathname === '/') {
+    Page = Home
+  } else if (pathname === '/search') {
+    Page = Search
+  } else {
+    Page = NotFound
+  }
+
+  return (
+    <>
+      <Header />
+      <Page />
+      <Footer />
+    </>
+  )
+}
+
+export default App
+        
+          
+        
+        
+        
+      
+
+Versión alternativa más limpia
+
+// src/App.jsx
+import { Header } from './components/Header'
+import { Footer } from './components/Footer'
+import { Home } from './pages/Home'
+import { Search } from './pages/Search'
+import { NotFound } from './pages/NotFound'
+
+function App() {
+  const { pathname } = window.location
+
+  return (
+    <>
+      <Header />
+      {pathname === '/' && <Home />}
+      {pathname === '/search' && <Search />}
+      {pathname !== '/' && pathname !== '/search' && <NotFound />}
+      <Footer />
+    </>
+  )
+}
+
+export default App
+        
+          
+        
+        
+        
+      
+
+Creando la página 404
+
+Cuando el usuario intenta acceder a una ruta que no existe, mostramos una página de error:
+
+// src/pages/NotFound.jsx
+export function NotFound() {
+  return (
+    <main className="not-found">
+      <h1>404</h1>
+      <h2>Página no encontrada</h2>
+      <p>La página que buscas no existe.</p>
+      <a href="/">Volver al inicio</a>
+    </main>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+    ¡Aquí tienes un ejercicio! Tienes que estilar la página 404 para que tenga el mismo estilo que el resto de la aplicación.
+
+Importando la Home original
+
+Ahora vamos a recuperar el contenido original de la página Home que teníamos en la primera clase del curso.
+Creando Home.jsx
+
+// src/pages/Home.jsx
+export function Home() {
+  return (
+    <main>
+      <section className="hero">
+        <h1>DevJobs</h1>
+        <p>Encuentra el trabajo de tus sueños en desarrollo</p>
+        <a href="/search" className="cta-button">
+          Buscar trabajos
+        </a>
+      </section>
+
+      <section className="features">
+        <div className="feature">
+          <h3>🚀 Oportunidades</h3>
+          <p>Cientos de ofertas actualizadas diariamente</p>
+        </div>
+        <div className="feature">
+          <h3>💼 Empresas top</h3>
+          <p>Trabaja con las mejores empresas tecnológicas</p>
+        </div>
+        <div className="feature">
+          <h3>🌍 Remoto</h3>
+          <p>Encuentra trabajos remotos desde cualquier lugar</p>
+        </div>
+      </section>
+
+      <section className="stats">
+        <div className="stat">
+          <h2>1,500+</h2>
+          <p>Ofertas de trabajo</p>
+        </div>
+        <div className="stat">
+          <h2>300+</h2>
+          <p>Empresas</p>
+        </div>
+        <div className="stat">
+          <h2>50+</h2>
+          <p>Tecnologías</p>
+        </div>
+      </section>
+    </main>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Errores típicos al pasar HTML a JSX
+
+Cuando migras HTML plano a JSX, ten cuidado con estos errores comunes:
+1. Inputs sin cerrar
+
+// ❌ HTML (no funciona en JSX)
+<input type="text" name="search">
+
+// ✅ JSX (self-closing)
+<input type="text" name="search" />
+        
+          
+        
+        
+        
+      
+
+2. Atributos con nombres diferentes
+
+// ❌ HTML
+<label for="search">Búsqueda</label>
+<div class="container">
+
+// ✅ JSX
+<label htmlFor="search">Búsqueda</label>
+<div className="container">
+        
+          
+        
+        
+        
+      
+
+3. Atributos en camelCase
+
+// ❌ HTML
+<button onclick="handleClick()">
+
+// ✅ JSX
+<button onClick={handleClick}>
+        
+          
+        
+        
+        
+      
+
+4. Comentarios diferentes
+
+// ❌ HTML
+<!-- Este es un comentario -->
+
+// ✅ JSX
+{/* Este es un comentario */}
+        
+          
+        
+        
+        
+      
+
+5. Valores booleanos
+
+// ❌ HTML
+<input disabled>
+
+// ✅ JSX
+<input disabled={true} />
+// o simplemente
+<input disabled />
+        
+          
+        
+        
+        
+      
+
+Mejorando navegación dentro del Header
+
+Ahora que tenemos múltiples páginas, necesitamos que el Header permita navegar entre ellas.
+Header con navegación
+
+// src/components/Header.jsx
+export function Header() {
+  return (
+    <header className="header">
+      <div className="header-container">
+        {/* Logo clicable que lleva a Home */}
+        <a href="/" className="logo-link">
+          <img src="/logo.png" alt="DevJobs" className="logo" />
+          <h1>DevJobs</h1>
+        </a>
+
+        {/* Navegación */}
+        <nav className="nav">
+          <a href="/" className="nav-link">
+            Inicio
+          </a>
+          <a href="/search" className="nav-link">
+            Buscar trabajos
+          </a>
+        </nav>
+      </div>
+    </header>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Problema con el routing manual
+
+Nuestro router funciona, pero tiene un problema importante: cuando haces clic en los enlaces, la página se recarga completamente.
+¿Por qué se recarga?
+
+<a href="/search">Buscar trabajos</a>
+        
+          
+        
+        
+        
+      
+
+Los enlaces HTML normales (<a href="...">) hacen que el navegador recargue la página completa. Esto:
+
+    ❌ Es lento
+    ❌ Pierde el estado de React
+    ❌ No se siente como una SPA (Single Page Application)
+
+Solución temporal
+
+Por ahora, nuestro router manual funciona así. En futuras clases aprenderemos a:
+
+    Usar React Router - La solución profesional para routing en React
+    Prevenir recargas - Mantener el estado sin recargar la página
+    Sincronizar con la URL - Compartir URLs con filtros aplicados
+
+Preparando la base para sincronizar filtros con la URL
+
+Una característica avanzada que implementaremos más adelante es sincronizar los filtros con la URL:
+
+http://localhost:5173/search?technology=react&location=remoto
+        
+          
+        
+        
+        
+      
+
+Esto permite:
+
+✅ Compartir búsquedas - Envía un enlace con filtros aplicados
+
+✅ Marcar como favorito - Guarda búsquedas frecuentes
+
+✅ Historial del navegador - Vuelve a búsquedas anteriores con el botón “Atrás”
+
+✅ SEO friendly - Los motores de búsqueda pueden indexar las búsquedas
+Próximos pasos
+
+En las siguientes clases aprenderemos:
+
+    🎯 React Router - Sistema profesional de routing
+    🔗 URL Search Params - Sincronizar filtros con la URL
+    ⚡ Navegación sin recarga - SPA real con Link y navigate
+    📱 Rutas dinámicas - Páginas de detalle /jobs/:id
+
+    💡 Recuerda: Nuestro router manual es educativo, pero en producción siempre debes usar React Router o una librería similar.
+
+Comparación: Router manual vs React Router
+Característica	Router manual	React Router
+Recarga la página	❌ Sí	✅ No
+Mantiene el estado	❌ No	✅ Sí
+Parámetros de URL	❌ Manual	✅ Automático
+Rutas dinámicas	❌ Difícil	✅ Fácil
+Navegación programática	❌ Limitada	✅ Completa
+Historial del navegador	⚠️ Básico	✅ Completo
+Producción	❌ No recomendado	✅ Recomendado
+
+Conclusión: El router manual nos ayuda a entender cómo funciona el routing, pero React Router es la solución profesional.
+
+---
+<a id="hook-useeffect-efectos-secundarios-en-react"></a>
+# Hook useEffect: Efectos secundarios en React
+
+
+El hook useEffect es uno de los hooks más importantes de React. Te permite ejecutar efectos secundarios en tus componentes, es decir, operaciones que afectan algo fuera del componente como llamadas a APIs, manipulación del DOM, suscripciones a eventos, etc.
+
+En esta clase aprenderás cómo funciona useEffect, cuándo se ejecuta, cómo controlar su ejecución con dependencias y cómo evitar errores comunes como los bucles infinitos.
+¿Qué son los efectos secundarios?
+
+Un efecto secundario es cualquier operación que afecta algo fuera del scope del componente:
+
+    🌐 Llamadas a APIs externas
+    📝 Modificar el DOM directamente (document.title, localStorage, etc.)
+    🔔 Suscribirse a eventos del navegador
+    ⏱️ Configurar timers o intervals
+    📡 Conectarse a WebSockets
+
+En React, los componentes deben ser funciones puras en su render, pero necesitamos una forma de ejecutar estas operaciones. Para eso existe useEffect.
+Sintaxis básica de useEffect
+
+import { useEffect } from 'react'
+
+function MyComponent() {
+  useEffect(() => {
+    // Código del efecto
+    console.log('El efecto se ejecutó')
+  })
+
+  return <div>Mi componente</div>
+}
+        
+          
+        
+        
+        
+      
+
+¿Cuándo se ejecuta useEffect?
+Sin segundo parámetro: En cada render
+
+Si no pasas un segundo parámetro, el efecto se ejecuta en cada render del componente:
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    console.log('El componente se renderizó')
+  })
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Incrementar</button>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Cada vez que haces clic en el botón:
+
+1. El estado count cambia
+2. El componente se re-renderiza
+3. useEffect se ejecuta
+4. Se imprime "El componente se renderizó"
+        
+          
+        
+        
+        
+      
+
+⚠️ Cuidado: Esto puede causar problemas de rendimiento si el efecto es costoso.
+El array de dependencias
+
+El segundo parámetro de useEffect es un array de dependencias que controla cuándo se ejecuta el efecto:
+
+useEffect(() => {
+  // Código del efecto
+}, [dependencia1, dependencia2])
+        
+          
+        
+        
+        
+      
+
+Array vacío: Solo en el primer render
+
+Si pasas un array vacío [], el efecto se ejecuta solo una vez cuando el componente se monta:
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    console.log('Solo se ejecuta al montar el componente')
+  }, [])
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Incrementar</button>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Ahora, aunque hagas clic 100 veces en el botón, el efecto solo se ejecuta una vez al inicio.
+Con dependencias: Solo cuando cambian
+
+Si pasas dependencias específicas, el efecto se ejecuta:
+
+    En el primer render
+    Cada vez que alguna dependencia cambia
+
+function App() {
+  const [count, setCount] = useState(0)
+  const [name, setName] = useState('Miguel')
+
+  useEffect(() => {
+    console.log('El contador cambió:', count)
+  }, [count])
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Incrementar</button>
+
+      <input value={name} onChange={(e) => setName(e.target.value)} />
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+En este ejemplo:
+
+    ✅ El efecto se ejecuta cuando count cambia
+    ❌ El efecto NO se ejecuta cuando name cambia
+    ✅ El efecto se ejecuta en el primer render
+
+Múltiples dependencias
+
+Puedes tener múltiples dependencias. El efecto se ejecutará si cualquiera de ellas cambia:
+
+function JobListings() {
+  const [currentPage, setCurrentPage] = useState(1)
+  const [textToFilter, setTextToFilter] = useState('')
+
+  useEffect(() => {
+    console.log('Página o filtro cambiaron')
+    console.log('Página:', currentPage)
+    console.log('Filtro:', textToFilter)
+  }, [currentPage, textToFilter])
+
+  return (
+    <div>
+      <input
+        value={textToFilter}
+        onChange={(e) => setTextToFilter(e.target.value)}
+        placeholder="Filtrar trabajos..."
+      />
+
+      <button onClick={() => setCurrentPage(currentPage + 1)}>Siguiente página</button>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+El efecto se ejecuta cuando:
+
+    ✅ Cambias el texto del filtro
+    ✅ Cambias de página
+    ✅ El componente se monta por primera vez
+
+Evitar bucles infinitos ⚠️
+
+Uno de los errores más comunes con useEffect es crear bucles infinitos. Esto ocurre cuando el efecto modifica una de sus propias dependencias:
+❌ Mal: Bucle infinito
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    // 🚨 ¡BUCLE INFINITO!
+    setCount(count + 1)
+  }, [count])
+
+  return <div>Contador: {count}</div>
+}
+        
+          
+        
+        
+        
+      
+
+¿Qué pasa?
+
+1. El componente se monta → useEffect se ejecuta
+2. setCount(count + 1) → count cambia
+3. count cambió y es una dependencia → useEffect se ejecuta
+4. setCount(count + 1) → count cambia
+5. count cambió y es una dependencia → useEffect se ejecuta
+6. ... infinito
+        
+          
+        
+        
+        
+      
+
+✅ Solución 1: Eliminar la dependencia
+
+Si no necesitas que el efecto se ejecute cuando cambia count, elimínalo de las dependencias:
+
+useEffect(() => {
+  // Solo se ejecuta una vez
+  setCount(1)
+}, [])
+        
+          
+        
+        
+        
+      
+
+✅ Solución 2: Usar la función callback de setState
+
+Si necesitas el valor anterior, usa la forma funcional de setState:
+
+useEffect(() => {
+  // Correcto: no depende de count
+  setCount((prevCount) => prevCount + 1)
+}, [])
+        
+          
+        
+        
+        
+      
+
+✅ Solución 3: No modifiques las dependencias
+
+Si count es una dependencia, no lo modifiques dentro del efecto:
+
+useEffect(() => {
+  // Solo leer count, no modificarlo
+  console.log('El contador es:', count)
+  document.title = `Contador: ${count}`
+}, [count])
+        
+          
+        
+        
+        
+      
+
+Ejemplo práctico: Actualizar el título del documento
+
+Vamos a crear un efecto que cambia el título de la pestaña del navegador según los filtros y la página actual:
+
+function App() {
+  const [currentPage, setCurrentPage] = useState(1)
+  const [textToFilter, setTextToFilter] = useState('')
+  const [jobsData, setJobsData] = useState([])
+
+  // Filtrar trabajos
+  const jobsFiltered =
+    textToFilter === ''
+      ? jobsData
+      : jobsData.filter((job) => job.title.toLowerCase().includes(textToFilter.toLowerCase()))
+
+  // Efecto para actualizar el título
+  useEffect(() => {
+    const jobCount = jobsFiltered.length
+
+    if (textToFilter === '') {
+      document.title = `DevJobs - Página ${currentPage}`
+    } else {
+      document.title = `${jobCount} trabajos de "${textToFilter}" - Página ${currentPage}`
+    }
+  }, [jobsFiltered.length, currentPage, textToFilter])
+
+  return (
+    <div>
+      <input
+        value={textToFilter}
+        onChange={(e) => setTextToFilter(e.target.value)}
+        placeholder="Filtrar trabajos..."
+      />
+
+      <div>
+        {jobsFiltered.map((job) => (
+          <div key={job.id}>{job.title}</div>
+        ))}
+      </div>
+
+      <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+        Anterior
+      </button>
+
+      <span>Página {currentPage}</span>
+
+      <button onClick={() => setCurrentPage(currentPage + 1)}>Siguiente</button>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Ahora, cuando:
+
+    🔍 Escribes en el filtro → el título se actualiza con el número de resultados
+    📄 Cambias de página → el título muestra la página actual
+    🧹 Borras el filtro → el título vuelve a mostrar solo la página
+
+Reglas importantes de useEffect
+1. Siempre se ejecuta al menos una vez
+
+El efecto siempre se ejecuta en el primer render, sin importar las dependencias:
+
+useEffect(() => {
+  console.log('Se ejecuta en el primer render')
+}, [count])
+        
+          
+        
+        
+        
+      
+
+Aunque count no haya cambiado, el efecto se ejecuta al montar el componente.
+2. Las dependencias deben incluir todo lo que uses
+
+Si usas variables, props o estado dentro del efecto, debes incluirlos en las dependencias:
+
+// ❌ Mal: falta textToFilter en las dependencias
+useEffect(() => {
+  console.log('Filtro:', textToFilter)
+}, [])
+
+// ✅ Bien: incluimos todas las variables que usamos
+useEffect(() => {
+  console.log('Filtro:', textToFilter)
+}, [textToFilter])
+        
+          
+        
+        
+        
+      
+
+3. No uses objetos o arrays como dependencias directamente
+
+Los objetos y arrays se crean de nuevo en cada render, lo que puede causar que el efecto se ejecute más de lo esperado:
+
+const filters = { technology: 'react', location: 'remote' }
+
+// ❌ Mal: filters es un objeto nuevo en cada render
+useEffect(() => {
+  console.log('Filtros:', filters)
+}, [filters])
+        
+          
+        
+        
+        
+      
+
+Solución: Usa las propiedades individuales como dependencias:
+
+// ✅ Bien: usamos las propiedades
+useEffect(() => {
+  console.log('Filtros:', filters.technology, filters.location)
+}, [filters.technology, filters.location])
+        
+          
+        
+        
+        
+      
+
+4. Evita modificar las dependencias dentro del efecto
+
+Como vimos antes, esto puede causar bucles infinitos:
+
+// ❌ Mal: modifica su propia dependencia
+useEffect(() => {
+  setCount(count + 1)
+}, [count])
+
+// ✅ Bien: no modifica sus dependencias
+useEffect(() => {
+  console.log('Count:', count)
+}, [count])
+        
+          
+        
+        
+        
+      
+
+Resumen de la matriz de dependencias
+Dependencias	¿Cuándo se ejecuta el efecto?
+Sin segundo parámetro	En cada render
+[] (array vacío)	Solo una vez (al montar)
+[dep1]	Al montar + cada vez que dep1 cambie
+[dep1, dep2]	Al montar + cada vez que dep1 o dep2 cambien
+Conclusión
+
+El hook useEffect es esencial para ejecutar efectos secundarios en React:
+
+    🎯 Controla cuándo se ejecuta con el array de dependencias
+    🔄 Evita bucles infinitos no modificando las dependencias dentro del efecto
+    🧹 Haz cleanup cuando sea necesario
+    📦 Domina la matriz de dependencias para evitar bugs
+
+En las próximas clases veremos hooks más avanzados y aprenderemos a crear nuestros propios custom hooks para reutilizar lógica de efectos.
+
+    💡 Recuerda: El efecto siempre se ejecuta al menos una vez (en el primer render), y después solo según las dependencias que le indiques.
+
+
+
+---
+<a id="cuando-usar-useeffect"></a>
+
+# 28. Cuándo usar useEffect
+
+Ya conoces cómo funciona useEffect y su array de dependencias. Pero ahora viene la pregunta más importante: ¿cuándo deberías usarlo realmente?
+
+En esta clase aprenderás los casos de uso prácticos de useEffect, cuándo es necesario y cuándo no, cómo gestionar suscripciones a eventos y por qué la función de limpieza es esencial para evitar memory leaks.
+¿Cuándo NO necesitas useEffect?
+
+Antes de aprender cuándo usar useEffect, es importante entender cuándo NO lo necesitas.
+❌ No lo uses para transformar datos
+
+Si solo necesitas transformar datos basados en props o estado, no necesitas useEffect. Hazlo directamente en el cuerpo del componente:
+
+// ❌ MAL: Usar useEffect para transformar datos
+function ProductList({ products }) {
+  const [expensiveProducts, setExpensiveProducts] = useState([])
+
+  useEffect(() => {
+    const filtered = products.filter((product) => product.price > 100)
+    setExpensiveProducts(filtered)
+  }, [products])
+
+  return <div>{expensiveProducts.map((product) => /* ... */)}</div>
+}
+
+// ✅ BIEN: Transformar datos directamente
+function ProductList({ products }) {
+  const expensiveProducts = products.filter((product) => product.price > 100)
+
+  return <div>{expensiveProducts.map((product) => /* ... */)}</div>
+}
+        
+          
+        
+        
+        
+      
+
+¿Por qué? Porque no estás haciendo nada fuera del componente. Solo estás transformando datos que ya tienes.
+❌ No lo uses para calcular valores derivados
+
+Si un valor se puede calcular a partir del estado o props, calcúlalo directamente:
+
+// ❌ MAL: useEffect innecesario
+function ShoppingCart({ items }) {
+  const [total, setTotal] = useState(0)
+
+  useEffect(() => {
+    const newTotal = items.reduce((sum, item) => sum + item.price, 0)
+    setTotal(newTotal)
+  }, [items])
+
+  return <div>Total: ${total}</div>
+}
+
+// ✅ BIEN: Cálculo directo
+function ShoppingCart({ items }) {
+  const total = items.reduce((sum, item) => sum + item.price, 0)
+
+  return <div>Total: ${total}</div>
+}
+        
+          
+        
+        
+        
+      
+
+❌ No lo uses para inicializar estado
+
+Si solo necesitas inicializar un estado una vez, usa el valor inicial de useState:
+
+// ❌ MAL: useEffect para inicializar
+function TodoList() {
+  const [todos, setTodos] = useState([])
+
+  useEffect(() => {
+    setTodos(['Aprender React', 'Construir proyecto'])
+  }, [])
+
+  return <ul>{todos.map((todo) => /* ... */)}</ul>
+}
+
+// ✅ BIEN: Valor inicial en useState
+function TodoList() {
+  const [todos, setTodos] = useState(['Aprender React', 'Construir proyecto'])
+
+  return <ul>{todos.map((todo) => /* ... */)}</ul>
+}
+        
+          
+        
+        
+        
+      
+
+✅ Cuándo SÍ debes usar useEffect
+
+Usa useEffect cuando necesites hacer algo que no puede ejecutarse durante el render porque afecta algo externo al componente.
+1. Fetching de datos
+
+Uno de los casos más comunes es hacer peticiones a APIs:
+
+import { useState, useEffect } from 'react'
+
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    setLoading(true)
+    setError(null)
+
+    fetch(`https://api.example.com/users/${userId}`)
+      .then((response) => {
+        if (!response.ok) throw new Error('Error al cargar usuario')
+        return response.json()
+      })
+      .then((data) => {
+        setUser(data)
+        setLoading(false)
+      })
+      .catch((error) => {
+        setError(error.message)
+        setLoading(false)
+      })
+  }, [userId])
+
+  if (loading) return <div>Cargando...</div>
+  if (error) return <div>Error: {error}</div>
+  if (!user) return <div>Usuario no encontrado</div>
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+¿Por qué necesitamos useEffect aquí?
+
+    No podemos hacer fetch durante el render porque es asíncrono
+    El fetch afecta algo externo (la red)
+    Queremos ejecutarlo cuando cambia userId
+
+    Igualmente, existen bibliotecas que simplifican mucho este proceso, como TanStack Query, y no necesitarás usar entonces useEffect.
+
+2. Modificar el DOM directamente
+
+Cuando necesitas interactuar con APIs del navegador como document:
+
+function DocumentTitle({ title }) {
+  useEffect(() => {
+    // Cambiar el título de la pestaña
+    document.title = title
+  }, [title])
+
+  return <div>La página ahora se llama: {title}</div>
+}
+        
+          
+        
+        
+        
+      
+
+Otros ejemplos de modificación del DOM:
+
+function AutoFocusInput() {
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    // Hacer focus en el input cuando se monta el componente
+    inputRef.current.focus()
+  }, [])
+
+  return <input ref={inputRef} />
+}
+        
+          
+        
+        
+        
+      
+
+3. Suscripciones a eventos
+
+Este es uno de los casos más importantes y donde necesitarás la función de limpieza.
+Ejemplo: Detectar el tamaño de la ventana
+
+Vamos a crear un componente que muestra el ancho de la ventana en tiempo real:
+
+import { useState, useEffect } from 'react'
+
+function WindowSize() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    // Handler que se ejecuta cuando la ventana cambia de tamaño
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    // Suscribirse al evento resize
+    window.addEventListener('resize', handleResize)
+
+    // Función de limpieza: desuscribirse cuando el componente se desmonte
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  return (
+    <div>
+      <h2>Ancho de la ventana: {windowWidth}px</h2>
+      <p>Intenta redimensionar la ventana y verás el valor actualizarse</p>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+¿Qué está pasando aquí?
+
+    Cuando el componente se monta, useEffect se ejecuta
+    Añadimos un listener al evento resize de la ventana
+    Cada vez que redimensionas la ventana, se ejecuta handleResize
+    handleResize actualiza el estado con el nuevo ancho
+    Cuando el componente se desmonta, la función de limpieza elimina el listener
+
+La función de limpieza (cleanup function)
+
+La función de limpieza es el return dentro de useEffect. Es esencial para evitar memory leaks y bugs.
+¿Por qué necesitamos limpiar?
+
+Imagina que tienes este componente:
+
+function LiveCounter() {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prev) => prev + 1)
+    }, 1000)
+
+    // ❌ SIN LIMPIEZA: El interval seguirá ejecutándose aunque el componente se desmonte
+  }, [])
+
+  return <div>Contador: {count}</div>
+}
+        
+          
+        
+        
+        
+      
+
+Problema: Si el componente se desmonta, el interval seguirá ejecutándose en segundo plano, intentando actualizar un componente que ya no existe. Esto es un memory leak.
+✅ Solución: Limpiar el interval
+
+function LiveCounter() {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prev) => prev + 1)
+    }, 1000)
+
+    // ✅ CON LIMPIEZA: Detener el interval cuando el componente se desmonte
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
+  return <div>Contador: {count}</div>
+}
+        
+          
+        
+        
+        
+      
+
+Cuándo se ejecuta la función de limpieza
+
+La función de limpieza se ejecuta en dos momentos:
+
+    Cuando el componente se desmonta (desaparece de la pantalla)
+    Antes de ejecutar el efecto nuevamente (cuando cambian las dependencias)
+
+function Timer({ delay }) {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    console.log(`Configurando timer con delay: ${delay}ms`)
+
+    const interval = setInterval(() => {
+      setCount((prev) => prev + 1)
+    }, delay)
+
+    return () => {
+      console.log(`Limpiando timer con delay: ${delay}ms`)
+      clearInterval(interval)
+    }
+  }, [delay])
+
+  return <div>Contador: {count}</div>
+}
+        
+          
+        
+        
+        
+      
+
+Si cambias el delay de 1000ms a 500ms:
+
+1. Se ejecuta la función de limpieza (clearInterval del anterior)
+2. Se ejecuta el nuevo efecto (nuevo setInterval con 500ms)
+        
+          
+        
+        
+        
+      
+
+Múltiples efectos en un componente
+
+Un componente puede (y debería) tener múltiples efectos si hacen cosas diferentes. No intentes meter todo en un solo useEffect.
+
+function UserDashboard({ userId }) {
+  const [user, setUser] = useState(null)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+  // Efecto 1: Cargar datos del usuario
+  useEffect(() => {
+    fetch(`/api/users/${userId}`)
+      .then((res) => res.json())
+      .then(setUser)
+  }, [userId])
+
+  // Efecto 2: Suscribirse al resize de la ventana
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Efecto 3: Actualizar el título del documento
+  useEffect(() => {
+    if (user) {
+      document.title = `Dashboard de ${user.name}`
+    }
+  }, [user])
+
+  return (
+    <div>
+      <h1>{user?.name}</h1>
+      <p>Ancho: {windowWidth}px</p>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+¿Por qué separarlos?
+
+    ✅ Cada efecto tiene sus propias dependencias
+    ✅ Es más fácil de leer y mantener
+    ✅ Las limpiezas no se mezclan
+    ✅ Puedes desactivar/modificar efectos independientemente
+
+Ejemplo práctico completo: Buscador con resize
+
+Vamos a crear un ejemplo que combina varios conceptos:
+
+import { useState, useEffect } from 'react'
+
+function SearchWithResize() {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState([])
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Efecto 1: Buscar cuando cambia el query
+  useEffect(() => {
+    if (query === '') {
+      setResults([])
+      return
+    }
+
+    const timeoutId = setTimeout(() => {
+      fetch(`/api/search?q=${query}`)
+        .then((res) => res.json())
+        .then(setResults)
+    }, 300) // Debounce de 300ms
+
+    // Limpiar el timeout si el usuario sigue escribiendo
+    return () => clearTimeout(timeoutId)
+  }, [query])
+
+  // Efecto 2: Detectar el tamaño de la ventana
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Efecto 3: Calcular si es móvil basado en el ancho
+  useEffect(() => {
+    setIsMobile(windowWidth < 768)
+  }, [windowWidth])
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Buscar..."
+      />
+
+      <p>
+        Ancho: {windowWidth}px - {isMobile ? 'Móvil' : 'Escritorio'}
+      </p>
+
+      <ul>
+        {results.map((result) => (
+          <li key={result.id}>{result.title}</li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Casos de uso comunes de limpieza
+1. Event listeners
+
+useEffect(() => {
+  const handleClick = () => console.log('Click!')
+  document.addEventListener('click', handleClick)
+
+  return () => document.removeEventListener('click', handleClick)
+}, [])
+        
+          
+        
+        
+        
+      
+
+2. Intervals y Timeouts
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    console.log('Tick')
+  }, 1000)
+
+  return () => clearInterval(interval)
+}, [])
+        
+          
+        
+        
+        
+      
+
+3. Suscripciones a WebSockets
+
+useEffect(() => {
+  const ws = new WebSocket('ws://example.com')
+
+  ws.onmessage = (event) => {
+    console.log('Mensaje:', event.data)
+  }
+
+  return () => ws.close()
+}, [])
+        
+          
+        
+        
+        
+      
+
+4. Librerías externas
+
+useEffect(() => {
+  const chart = initializeChart('#chart')
+
+  return () => chart.destroy()
+}, [])
+        
+          
+        
+        
+        
+      
+
+Nuevas alternativas a useEffect para fetching
+
+En el video mencioné que existen nuevas formas de hacer fetching sin useEffect. Estas son algunas:
+1. React Server Components
+
+En frameworks modernos como Next.js 13+, puedes hacer fetching directamente en el componente:
+
+// Componente de servidor (Next.js)
+async function UserProfile({ userId }) {
+  const user = await fetch(`/api/users/${userId}`).then((res) => res.json())
+
+  return <div>{user.name}</div>
+}
+        
+          
+        
+        
+        
+      
+
+2. use Hook (React 19)
+
+React 19 introduce el hook use para leer promesas:
+
+import { use } from 'react'
+
+function UserProfile({ userPromise }) {
+  const user = use(userPromise)
+
+  return <div>{user.name}</div>
+}
+        
+          
+        
+        
+        
+      
+
+3. Librerías especializadas
+
+    React Query / TanStack Query: Gestión avanzada de estado asíncrono
+    SWR: Librería de fetching de Vercel
+    RTK Query: Solución de Redux Toolkit
+
+Estas librerías manejan automáticamente:
+
+    Caché
+    Revalidación
+    Loading states
+    Error handling
+    Refetching
+
+Resumen de cuándo usar useEffect
+Caso de uso	¿Usar useEffect?	¿Por qué?
+Transformar datos	❌ No	Hazlo directamente en el cuerpo del componente
+Calcular valores derivados	❌ No	No es un efecto secundario
+Inicializar estado	❌ No	Usa el valor inicial de useState
+Fetching de datos	✅ Sí	Es una operación asíncrona externa
+Modificar el DOM (document.title)	✅ Sí	Afecta algo externo al componente
+Suscribirse a eventos	✅ Sí	Necesitas limpiar la suscripción
+Timers (setInterval, setTimeout)	✅ Sí	Necesitas limpiar el timer
+WebSockets o conexiones persistentes	✅ Sí	Necesitas cerrar la conexión al desmontar
+Reglas importantes
+
+    Un efecto, una responsabilidad: Si un efecto hace múltiples cosas sin relación, divídelo
+    Siempre limpia lo que creas: Event listeners, intervals, suscripciones
+    Piensa si realmente necesitas un efecto: Muchas veces puedes evitarlo
+    Las dependencias deben estar completas: Incluye todo lo que uses dentro del efecto
+    La limpieza debe deshacer lo que hizo el efecto: Desuscribirse, cancelar, cerrar
+
+Conclusión
+
+useEffect es una herramienta poderosa, pero no debes usarla para todo. Úsala cuando realmente necesites:
+
+    🌐 Comunicarte con sistemas externos (APIs, navegador)
+    🔔 Suscribirte a eventos que necesitan limpieza
+    ⏱️ Crear timers o conexiones persistentes
+
+Recuerda: si puedes hacerlo sin useEffect, no uses useEffect.
+
+---
+<a id="creando-un-single-page-spa"></a>
+# 29. Creando una Single Page Application (SPA) desde cero con React
+
+Una Single Page Application (SPA) es una aplicación web que no recarga la página al navegar entre diferentes rutas. En lugar de solicitar nuevas páginas al servidor, la SPA carga todo el código necesario al inicio y luego renderiza contenido dinámicamente según la URL.
+
+En esta clase aprenderás a crear tu propia SPA sin usar React Router ni otras librerías, implementando todo el sistema de navegación desde cero. Esto te ayudará a entender cómo funcionan las SPAs por dentro antes de usar herramientas más avanzadas.
+¿Por qué crear una SPA?
+Navegación tradicional (Multi-Page Application)
+
+En una web tradicional, cada vez que haces clic en un enlace:
+
+1. Se hace una petición al servidor
+2. El servidor devuelve un HTML completo
+3. El navegador descarga de nuevo CSS, JavaScript, imágenes, fuentes...
+4. Se pierde el estado de la aplicación
+5. Hay un "parpadeo" mientras carga la nueva página
+        
+          
+        
+        
+        
+      
+
+Navegación SPA
+
+En una SPA, cuando haces clic:
+
+1. Se previene la recarga de la página
+2. Se cambia la URL del navegador
+3. React re-renderiza el contenido correspondiente
+4. NO se vuelven a descargar recursos
+5. Navegación instantánea y fluida
+        
+          
+        
+        
+        
+      
+
+Ventajas:
+
+    ⚡ Navegación instantánea: no se recargan recursos
+    💾 Mantiene el estado: las variables y datos persisten
+    🎨 Mejor UX: transiciones suaves, sin parpadeos
+    📦 Menos datos: solo se descarga contenido nuevo
+
+El problema: Los enlaces recargan la página
+
+Por defecto, cuando haces clic en un <a>:
+
+function Header() {
+  return (
+    <header>
+      <a href="/">Inicio</a>
+      <a href="/about">Acerca de</a>
+      <a href="/contact">Contacto</a>
+    </header>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Cada clic recarga toda la página → descarga de nuevo HTML, CSS, JS, imágenes…
+Solución: Crear un componente Link personalizado
+
+Vamos a crear nuestro propio componente <Link> que intercepta los clics y evita la recarga:
+
+function Link({ href, children, ...props }) {
+  const handleClick = (event) => {
+    // 1. Prevenir el comportamiento por defecto (no recargar)
+    event.preventDefault()
+
+    // 2. Cambiar la URL sin recargar la página
+    window.history.pushState({}, '', href)
+
+    // 3. Emitir un evento para notificar el cambio
+    const navigationEvent = new PopStateEvent('popstate')
+    window.dispatchEvent(navigationEvent)
+  }
+
+  return (
+    <a href={href} onClick={handleClick} {...props}>
+      {children}
+    </a>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+¿Qué hace cada parte?
+1. preventDefault()
+
+Evita que el navegador haga el comportamiento por defecto, que es navegar al enlace.
+
+event.preventDefault()
+        
+          
+        
+        
+        
+      
+
+Sin esto, el navegador seguiría el enlace de forma tradicional.
+2. pushState()
+
+Cambia la URL del navegador sin recargar la página:
+
+window.history.pushState({}, '', href)
+        
+          
+        
+        
+        
+      
+
+    Primer parámetro: objeto de estado (lo dejamos vacío)
+    Segundo parámetro: título (obsoleto, lo dejamos vacío)
+    Tercer parámetro: la nueva URL
+
+Después de esto, la barra de direcciones muestra la nueva URL, pero la página no se recarga.
+3. Emitir evento popstate
+
+Para que React se entere del cambio de URL, emitimos manualmente un evento popstate:
+
+const navigationEvent = new PopStateEvent('popstate')
+window.dispatchEvent(navigationEvent)
+        
+          
+        
+        
+        
+      
+
+Este evento se dispara automáticamente cuando el usuario usa los botones de atrás/adelante del navegador, pero como nosotros estamos cambiando la URL manualmente con pushState, debemos emitirlo nosotros.
+Reemplazar los enlaces tradicionales
+
+Ahora sustituimos todos los <a> por nuestro componente <Link>:
+
+function Header() {
+  return (
+    <header>
+      <Link href="/">Inicio</Link>
+      <Link href="/about">Acerca de</Link>
+      <Link href="/contact">Contacto</Link>
+    </header>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+¡Genial! Ahora al hacer clic:
+
+    ✅ La URL cambia
+    ✅ No se recarga la página
+    ❌ Pero… el contenido no cambia
+
+El problema: React no reacciona al cambio de URL
+
+Aunque la URL cambia, ningún componente se está re-renderizando porque React no sabe que la URL ha cambiado.
+
+Necesitamos:
+
+    Escuchar cambios en la URL
+    Actualizar un estado de React con la nueva ruta
+    Renderizar el contenido correspondiente según esa ruta
+
+Solución: Mantener la ruta en el estado
+
+Vamos a crear un estado que contenga la ruta actual:
+
+import { useState, useEffect } from 'react'
+
+function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  return (
+    <div>
+      <Header />
+      <main>
+        <h1>Ruta actual: {currentPath}</h1>
+      </main>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Ahora tenemos la ruta en el estado, pero todavía no se actualiza cuando navegamos.
+Escuchar cambios de URL con useEffect
+
+Necesitamos escuchar el evento popstate para detectar cuando la URL cambia:
+
+import { useState, useEffect } from 'react'
+
+function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  useEffect(() => {
+    // Función que actualiza el estado con la nueva ruta
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname)
+    }
+
+    // Escuchar el evento popstate
+    window.addEventListener('popstate', handleLocationChange)
+
+    // Limpiar el event listener al desmontar
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange)
+    }
+  }, [])
+
+  return (
+    <div>
+      <Header />
+      <main>
+        <h1>Ruta actual: {currentPath}</h1>
+      </main>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Importante: Usamos la misma referencia de función (handleLocationChange) para añadir y eliminar el listener. Si usáramos funciones anónimas diferentes, no se limpiaría correctamente.
+¿Por qué el array vacío []?
+
+useEffect(() => {
+  // ...
+}, [])
+        
+          
+        
+        
+        
+      
+
+Queremos que el listener se añada solo una vez cuando el componente se monta, no en cada render. Por eso usamos un array vacío como dependencia.
+Renderizar contenido según la ruta
+
+Ahora que tenemos currentPath actualizado, podemos renderizar contenido diferente según la ruta:
+
+function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname)
+    }
+
+    window.addEventListener('popstate', handleLocationChange)
+
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange)
+    }
+  }, [])
+
+  return (
+    <div>
+      <Header />
+      <main>
+        {currentPath === '/' && <HomePage />}
+        {currentPath === '/search' && <SearchPage />}
+      </main>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+¡Ya tenemos una SPA funcional!
+El flujo completo
+
+Cuando el usuario hace clic en un <Link>:
+
+1. Link captura el clic → event.preventDefault()
+2. Cambia la URL → window.history.pushState({}, '', href)
+3. Emite el evento → window.dispatchEvent(new PopStateEvent('popstate'))
+4. useEffect detecta el evento → handleLocationChange()
+5. Actualiza el estado → setCurrentPath(window.location.pathname)
+6. React re-renderiza → muestra el componente correspondiente
+        
+          
+        
+        
+        
+      
+
+¡Ya es una SPA! Comprobación con DevTools
+
+Abre las DevTools del navegador → pestaña Network (Red):
+Navegación tradicional (sin SPA)
+
+Al hacer clic en un enlace <a> normal:
+
+✅ index.html        200 OK  1.2 KB
+✅ styles.css        200 OK  450 B
+✅ bundle.js         200 OK  234 KB
+✅ logo.png          200 OK  45 KB
+✅ font.woff2        200 OK  78 KB
+---------------------------------
+    Total: 357 KB descargados
+        
+          
+        
+        
+        
+      
+
+Navegación SPA (con nuestro Link)
+
+Al hacer clic en nuestro <Link>:
+
+(vacío, no se descarga nada)
+        
+          
+        
+        
+        
+      
+
+¡Navegación instantánea! No se recargan recursos porque la página nunca se recarga.
+Comparación con red lenta
+
+Para ver la diferencia más claramente, simula una conexión lenta:
+
+    Abre DevTools → Network
+    Cambia “No throttling” a “Slow 3G”
+    Haz clic en un enlace tradicional → tarda varios segundos
+    Haz clic en un <Link> de tu SPA → instantáneo
+
+Esta es la gran ventaja de las SPAs: experiencia de usuario mucho más rápida y fluida.
+Soportar botones Atrás/Adelante del navegador
+
+Nuestra SPA ya soporta los botones de navegación del navegador sin código adicional porque:
+
+    Cuando el usuario hace clic en “Atrás” o “Adelante”
+    El navegador emite automáticamente el evento popstate
+    Nuestro useEffect lo detecta y actualiza el estado
+    React re-renderiza el contenido correspondiente
+
+¡Todo funciona! 🎉
+¿Y React Router?
+
+Ahora que entiendes cómo funciona una SPA por dentro, en las próximas clases usaremos React Router, que es una librería profesional que:
+
+    ✅ Maneja rutas dinámicas (/user/:id)
+    ✅ Permite rutas anidadas
+    ✅ Facilita la navegación programática
+    ✅ Soporta lazy loading de componentes
+    ✅ Incluye hooks como useNavigate, useParams, etc.
+
+Pero es importante entender qué hace React Router por dentro antes de usarlo. ¡Ahora ya lo sabes!
+Resumen
+
+En esta clase aprendiste a crear una SPA desde cero:
+
+    🔗 Crear un componente Link que intercepta clics
+    🚫 Usar preventDefault() para evitar recargas
+    🌐 Cambiar la URL con window.history.pushState
+    📢 Emitir eventos popstate para notificar cambios
+    👂 Escuchar cambios con useEffect y event listeners
+    🔄 Mantener la ruta en estado para re-renderizar componentes
+    ⚡ Navegación instantánea sin descargar recursos de nuevo
+
+Ventajas de las SPAs
+
+    ⚡ Rendimiento: navegación instantánea
+    💾 Estado persistente: no se pierde información al navegar
+    🎨 Mejores transiciones: animaciones fluidas entre páginas
+    📦 Menos datos: solo se descarga contenido nuevo
+    🚀 Experiencia de usuario: se siente como una app nativa
+
+Recuerda: React Router hace todo esto (y más) por ti, pero ahora entiendes cómo funciona por dentro. ¡En la próxima clase veremos React Router!
+
+    💡 Tip: Abre las DevTools → Network y compara la navegación tradicional vs SPA. Verás que con SPA no se descarga nada al navegar.
+
+---
+
+# 
