@@ -5,6 +5,8 @@ export function Link ({ href, children, ...restOfProps }) {
     
         window.history.pushState({}, '', href)
         window.dispatchEvent(new PopStateEvent('popstate'))
+
+        // ver Navigation API, lo tienen que añadir proxomamente como una manera nueva de navegar más eficiente.
     }    
 
     return (

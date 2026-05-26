@@ -71,19 +71,7 @@ export function SearchPage() {
         console.log('>>> Actualizando la URL')
     }, [filters, currentPage, textToFilter]) // Si cambian los filtros, se actualiza la URL
 
-    useEffect(() => {
 
-        const handleResize = () => {
-            console.log('>>> Ventana redimensionada')
-            console.log(window.innerWidth, window.innerHeight)
-        }
-
-        window.addEventListener('resize', handleResize)
-
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, [])
 
     return (
     <> 
