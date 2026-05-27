@@ -44,7 +44,7 @@ export default function Pagination({currentPage = 1, totalPages = 10, onPageChan
                 <a 
                 key={page}
                     data-page={page}
-                    className={currentPage === page ? 'is-active' : ''} 
+                    className={currentPage === page ? styles['is-active'] : ''} 
                     href="#"
                     onClick={(e) => {
                         e.preventDefault()

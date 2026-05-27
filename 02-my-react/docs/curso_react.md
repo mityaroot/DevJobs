@@ -32,6 +32,11 @@
 28. [Cuándo usar useEffect](#cuando-usar-useeffect)
 29. [Creando una Single Page Application (SPA) desde cero con React](#creando-un-single-page-spa)
 30. [Custom Hooks: Reutilizar lógica en React](#custom-hooks-reutilizar-logica)
+31. [Integrando navegación con formulario de búsqueda](#31)
+32. [Creando un componente <Route> declarativo](#32)
+33. [Creando custom hook para formulario](#33)
+34. [9 Ejercicios prácticos: Router y Formularios](#34)
+
 ---
 
 ## Próximamente
@@ -15169,10 +15174,6 @@ function useWindowWidth() {
   return width
 }
         
-          
-        
-        
-        
       
 
 ¿Por qué crear custom hooks?
@@ -15913,3 +15914,1580 @@ Los custom hooks son una herramienta fundamental en React moderno:
     🧪 Permiten testing de forma aislada
 
 Empieza identificando patrones repetidos en tu código y extráelos a custom hooks. Con el tiempo, construirás una librería de hooks reutilizables que acelerarán tu desarrollo.
+
+---
+<a id="31"></a>
+# Integrando navegación con formulario de búsqueda
+
+En esta clase aprenderás a conectar un formulario de búsqueda con el router de tu aplicación SPA. Verás cómo manejar el evento de submit, extraer valores con FormData, construir URLs dinámicas con query params y reutilizar tu función de navegación personalizada.
+El problema inicial
+
+Actualmente en la Home tenemos un formulario con un input y un botón de búsqueda, pero no hace nada. El objetivo es hacerlo funcionar para que al enviar el formulario navegue a la página de búsqueda con el texto introducido como parámetro.
+
+// Estado actual del formulario (no funcional)
+function Home() {
+  return (
+    <form>
+      <input type="text" placeholder="Buscar..." />
+      <button disabled>
+        <svg>...</svg>
+      </button>
+    </form>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Limpiando el SVG del botón
+
+Antes de empezar con la funcionalidad, es importante corregir los atributos del SVG para que sean compatibles con JSX.
+Problema con los atributos SVG
+
+En HTML los atributos usan kebab-case, pero en JSX debemos usar camelCase:
+
+// ❌ Incorrecto (HTML)
+<svg>
+  <path stroke-width="2" line-cap="round" />
+</svg>
+
+// ✅ Correcto (JSX)
+<svg>
+  <path strokeWidth="2" lineCap="round" />
+</svg>
+        
+          
+        
+        
+        
+      
+
+Habilitando el botón de búsqueda
+
+Para poder probar el formulario, necesitamos habilitar el botón eliminando el atributo disabled:
+
+// ❌ Antes
+<button disabled type="submit">
+  <svg>...</svg>
+</button>
+
+// ✅ Después
+<button type="submit">
+  <svg>...</svg>
+</button>
+        
+          
+        
+        
+        
+      
+
+Cambios realizados:
+
+    ❌ stroke-width → ✅ strokeWidth
+    ❌ stroke-linecap → ✅ strokeLinecap
+    ❌ stroke-linejoin → ✅ strokeLinejoin
+    Eliminamos el atributo disabled del botón
+
+Manejando el submit del formulario
+
+Ahora vamos a implementar la lógica para capturar el evento de envío del formulario.
+Crear el manejador de eventos
+
+function Home() {
+  const handleSearch = (event) => {
+    // Prevenir el comportamiento por defecto (reload de página)
+    event.preventDefault()
+
+    // Aquí implementaremos la lógica
+  }
+
+  return (
+    <form onSubmit={handleSearch}>
+      <input type="text" placeholder="Buscar cursos..." />
+      <button type="submit">
+        <svg>...</svg>
+      </button>
+    </form>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+¿Por qué event.preventDefault()?
+
+En una aplicación web tradicional, cuando envías un formulario, el navegador:
+
+    Recarga la página completa
+    Pierde todo el estado de JavaScript
+    Hace una petición al servidor
+
+En una SPA (Single Page Application) queremos:
+
+    ✅ Mantener la página sin recargar
+    ✅ Conservar el estado
+    ✅ Manejar la navegación con JavaScript
+
+const handleSearch = (event) => {
+  event.preventDefault() // ← Evita el reload
+  // Ahora podemos controlar la navegación nosotros
+}
+        
+          
+        
+        
+        
+      
+
+Extrayendo el valor del input con FormData
+
+Para obtener el texto que el usuario escribió en el input, usaremos la API de FormData.
+Añadir el atributo name al input
+
+Primero, el input necesita un atributo name para poder identificarlo:
+
+<input
+  type="text"
+  name="search" // ← Importante
+  placeholder="Buscar cursos..."
+/>
+        
+          
+        
+        
+        
+      
+
+Usar FormData para extraer el valor
+
+const handleSearch = (event) => {
+  event.preventDefault()
+
+  // Crear un objeto FormData desde el formulario
+  const formData = new FormData(event.target)
+
+  // Extraer el valor del input por su name
+  const searchTerm = formData.get('search')
+
+  console.log('Buscando:', searchTerm)
+}
+        
+          
+        
+        
+        
+      
+
+¿Por qué FormData en lugar de useState?
+
+Podrías pensar: “¿Por qué no usar un estado controlado con useState?”
+
+Opción 1: Estado controlado (más código)
+
+function Home() {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const handleSearch = (event) => {
+    event.preventDefault()
+    console.log(searchTerm) // Usar el estado
+  }
+
+  return (
+    <form onSubmit={handleSearch}>
+      <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} name="search" />
+      <button type="submit">Buscar</button>
+    </form>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Opción 2: FormData (menos código)
+
+function Home() {
+  const handleSearch = (event) => {
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    const searchTerm = formData.get('search')
+    console.log(searchTerm) // Obtener directamente
+  }
+
+  return (
+    <form onSubmit={handleSearch}>
+      <input name="search" />
+      <button type="submit">Buscar</button>
+    </form>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+✅ FormData es más simple cuando:
+
+    Solo necesitas el valor al enviar el formulario
+    No necesitas validación en tiempo real
+    Tienes múltiples campos
+
+✅ useState es mejor cuando:
+
+    Necesitas validación mientras el usuario escribe
+    Quieres mostrar el valor en otros componentes
+    Necesitas deshabilitar el botón si el campo está vacío
+
+Construyendo la URL de destino
+
+Ahora necesitamos construir la URL a la que queremos navegar según si el usuario escribió algo o no.
+Lógica de la URL
+
+const handleSearch = (event) => {
+  event.preventDefault()
+
+  const formData = new FormData(event.target)
+  const searchTerm = formData.get('search')
+
+  // Construir la URL según si hay texto o no
+  let targetUrl = '/search'
+
+  if (searchTerm) {
+    targetUrl += `?text=${searchTerm}`
+  }
+
+  console.log('Navegar a:', targetUrl)
+}
+        
+          
+        
+        
+        
+      
+
+Ejemplos de URLs generadas:
+
+    Usuario escribe “programador” → /search?text=programador
+    Usuario escribe “React de Dev” → /search?text=React de Dev
+    Usuario deja vacío → /search
+
+Problema con espacios y caracteres especiales
+
+Si el usuario escribe “React de Dev”, la URL quedaría:
+
+/search?text=React de Dev  ← ¡URL inválida!
+        
+          
+        
+        
+        
+      
+
+Necesitamos codificar la URL:
+
+const handleSearch = (event) => {
+  event.preventDefault()
+
+  const formData = new FormData(event.target)
+  const searchTerm = formData.get('search')
+
+  let targetUrl = '/search'
+
+  if (searchTerm) {
+    // Codificar el texto para que sea seguro en la URL
+    const encodedTerm = encodeURIComponent(searchTerm)
+    targetUrl += `?text=${encodedTerm}`
+  }
+
+  console.log('Navegar a:', targetUrl)
+}
+        
+          
+        
+        
+        
+      
+
+Ahora sí funciona correctamente:
+
+    “React de Dev” → /search?text=React%20de%20Dev ✅
+    “C++” → /search?text=C%2B%2B ✅
+    “¿Qué es React?” → /search?text=%C2%BFQu%C3%A9%20es%20React%3F ✅
+
+¿Qué hace encodeURIComponent?
+
+Convierte caracteres especiales a su representación segura para URLs:
+Carácter	Codificado	Razón
+espacio	%20	Los espacios no son válidos en URL
++	%2B	Tiene significado especial
+?	%3F	Delimita query params
+&	%26	Separa query params
+=	%3D	Asigna valores en query params
+#	%23	Indica fragmento de URL
+Reutilizando navigateTo del custom hook useRouter
+
+En lugar de usar directamente window.history.pushState, vamos a reutilizar el custom hook useRouter que creamos en la clase anterior.
+¿Por qué no usar window.history.pushState directamente?
+
+Si hiciéramos esto:
+
+const handleSearch = (event) => {
+  event.preventDefault()
+  // ...construcción de URL...
+
+  // ❌ Problema: Solo actualiza la URL, no renderiza la vista
+  window.history.pushState({}, '', targetUrl)
+}
+        
+          
+        
+        
+        
+      
+
+Problemas:
+
+    ❌ La URL cambia, pero la vista no se actualiza
+    ❌ Los listeners del router no se disparan
+    ❌ El estado del componente no cambia
+    ❌ Código duplicado de la lógica del router
+
+Solución: Usar el hook useRouter
+
+En la clase anterior creamos el custom hook useRouter que encapsula toda la lógica del router:
+
+// hooks/useRouter.js
+import { useState, useEffect } from 'react'
+
+export function useRouter() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname)
+    }
+
+    window.addEventListener('popstate', handleLocationChange)
+    return () => window.removeEventListener('popstate', handleLocationChange)
+  }, [])
+
+  const navigateTo = (path) => {
+    window.history.pushState({}, '', path)
+    setCurrentPath(path)
+  }
+
+  return {
+    currentPath,
+    navigateTo,
+  }
+}
+        
+          
+        
+        
+        
+      
+
+Este hook nos proporciona la función navigateTo que:
+
+    ✅ Actualiza la URL en el navegador
+    ✅ Actualiza el estado del componente
+    ✅ Dispara el re-render necesario
+    ✅ Mantiene la lógica del router en un solo lugar
+
+Implementación completa con useRouter
+
+Ahora usamos el hook en nuestro componente Home:
+
+import { useRouter } from './hooks/useRouter'
+
+function Home() {
+  // Obtenemos navigateTo del custom hook
+  const { navigateTo } = useRouter()
+
+  const handleSearch = (event) => {
+    event.preventDefault()
+
+    const formData = new FormData(event.target)
+    const searchTerm = formData.get('search')
+
+    let targetUrl = '/search'
+
+    if (searchTerm) {
+      const encodedTerm = encodeURIComponent(searchTerm)
+      targetUrl += `?text=${encodedTerm}`
+    }
+
+    // ✅ Usar navigateTo del hook
+    navigateTo(targetUrl)
+  }
+
+  return (
+    <form onSubmit={handleSearch}>
+      <input type="text" name="search" placeholder="Buscar cursos..." />
+      <button type="submit">
+        <svg ... />
+      </button>
+    </form>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Ventajas de usar el hook:
+
+    ✅ Reutilización: Cualquier componente puede usar useRouter
+    ✅ Separación de responsabilidades: La lógica del router está encapsulada
+    ✅ Consistencia: Todos los componentes navegan de la misma manera
+    ✅ Mantenibilidad: Cambios en el router solo en un lugar
+
+Probando la funcionalidad
+
+Vamos a probar diferentes escenarios:
+Caso 1: Búsqueda con texto
+
+    Usuario escribe “programador” en el input
+    Usuario presiona “Buscar” o Enter
+    La página navega a /search?text=programador
+    El router renderiza la vista de búsqueda
+    La URL en el navegador se actualiza correctamente
+
+Caso 2: Búsqueda vacía
+
+    Usuario deja el input vacío
+    Usuario presiona “Buscar”
+    La página navega a /search (sin query params)
+    El router renderiza la vista de búsqueda
+    Mostraría todos los cursos disponibles
+
+Caso 3: Búsqueda con espacios
+
+    Usuario escribe “React de Dev”
+    Usuario presiona “Buscar”
+    La página navega a /search?text=React%20de%20Dev
+    El router renderiza la vista de búsqueda
+    La URL está correctamente codificada
+
+Caso 4: Navegación con botón “Atrás”
+
+    Usuario hace una búsqueda
+    Usuario presiona el botón “Atrás” del navegador
+    El router detecta el cambio (evento popstate)
+    La vista vuelve a la Home
+    Todo funciona correctamente ✅
+
+Código completo del componente Home
+
+import { useRouter } from './hooks/useRouter'
+
+function Home() {
+  // Usar el custom hook para obtener la función de navegación
+  const { navigateTo } = useRouter()
+
+  const handleSearch = (event) => {
+    event.preventDefault()
+
+    // Extraer el valor del input usando FormData
+    const formData = new FormData(event.target)
+    const searchTerm = formData.get('search')
+
+    // Construir la URL de destino
+    let targetUrl = '/search'
+
+    if (searchTerm) {
+      const encodedTerm = encodeURIComponent(searchTerm)
+      targetUrl += `?text=${encodedTerm}`
+    }
+
+    // Navegar usando navigateTo del hook
+    navigateTo(targetUrl)
+  }
+
+  return (
+    <div className="home">
+      <h1>Encuentra el mejor curso para ti</h1>
+
+      <form onSubmit={handleSearch}>
+        <input type="text" name="search" placeholder="Buscar cursos..." className="search-input" />
+
+        <button type="submit" className="search-button">
+          <svg ... />
+        </button>
+      </form>
+    </div>
+  )
+}
+
+export default Home
+        
+          
+        
+        
+        
+      
+
+Próximos pasos
+
+En las siguientes clases veremos:
+
+    Sincronizar filtros con la URL: Los filtros de la página de búsqueda también actualizarán los query params
+    Leer query params: Extraer ?text=programador de la URL para mostrar los resultados
+    Filtrado dinámico: Aplicar los filtros de búsqueda a los cursos
+    Mantener estado en la URL: Para que los usuarios puedan compartir búsquedas específicas
+
+Conceptos clave aprendidos
+Concepto	Descripción
+event.preventDefault()	Evita el comportamiento por defecto del formulario
+FormData	API para extraer valores de formularios fácilmente
+encodeURIComponent	Codifica texto para que sea seguro en URLs
+Query params	Parámetros en la URL: ?text=valor&filtro=otro
+navigateTo	Reutilizar lógica del router en lugar de duplicar
+Atributo name	Identifica inputs para poder extraer sus valores
+JSX attributes	Usar camelCase en lugar de kebab-case para SVG/HTML
+Conclusión
+
+En esta clase has aprendido a:
+
+    ✅ Corregir atributos SVG para que funcionen con JSX
+    ✅ Manejar el evento submit de formularios
+    ✅ Usar event.preventDefault() para controlar el comportamiento
+    ✅ Extraer valores de formularios con FormData
+    ✅ Construir URLs dinámicas con query params
+    ✅ Codificar texto para URLs con encodeURIComponent
+    ✅ Reutilizar la función navigateTo del router
+    ✅ Integrar formularios con navegación SPA
+
+Ahora tu formulario de búsqueda está completamente funcional y se integra correctamente con el sistema de routing de tu aplicación. En las próximas clases implementaremos la lógica para leer estos parámetros y mostrar los resultados filtrados.
+
+
+---
+<a id="32"></a>
+
+# Creando un componente <Route> declarativo
+
+En esta clase aprenderás a transformar un router con lógica imperativa (basado en if y switch) en un sistema declarativo usando un componente <Route>. Este cambio mejorará drásticamente la legibilidad, escalabilidad y mantenibilidad de tu aplicación.
+El problema: Lógica imperativa en el componente principal
+
+Actualmente, nuestro router funciona con condicionales en el componente principal:
+
+// App.jsx - Versión con if
+import { useRouter } from './hooks/useRouter'
+import { Home } from './pages/Home'
+import { Search } from './pages/Search'
+import { About } from './pages/About'
+
+function App() {
+  const { currentPath } = useRouter()
+
+  // ❌ Problema: Lógica imperativa con if
+  if (currentPath === '/') {
+    return <Home />
+  }
+
+  if (currentPath === '/search') {
+    return <Search />
+  }
+
+  if (currentPath === '/about') {
+    return <About />
+  }
+
+  return <NotFound />
+}
+
+export default App
+        
+          
+        
+        
+        
+      
+
+Alternativa con switch (tampoco es ideal)
+
+Alguien podría sugerir usar switch para mejorar el código:
+
+// App.jsx - Versión con switch
+function App() {
+  const { currentPath } = useRouter()
+
+  // ❌ Sigue siendo imperativo
+  switch (currentPath) {
+    case '/':
+      return <Home />
+    case '/search':
+      return <Search />
+    case '/about':
+      return <About />
+    default:
+      return <NotFound />
+  }
+}
+        
+          
+        
+        
+        
+      
+
+¿Por qué no es ideal?
+
+Aunque switch está mejor que múltiples if, ambos enfoques tienen problemas:
+
+❌ Lógica imperativa: Describes cómo funciona el routing, no qué debe hacer ❌ No escala bien: Añadir rutas significa modificar la lógica del componente ❌ Difícil de leer: No es evidente qué rutas existen de un vistazo ❌ No es declarativo: No expresa la intención claramente ❌ Lógica acoplada: El componente principal conoce los detalles del routing
+La solución: Componente <Route> declarativo
+
+En lugar de condicionales, vamos a crear un componente <Route> que encapsule la lógica de matching.
+Ventajas del enfoque declarativo
+
+✅ Expresa intención: Cada ruta es clara y autoexplicativa ✅ Fácil de leer: Ves todas las rutas de un vistazo ✅ Escalable: Añadir rutas es solo añadir más <Route> ✅ Separación de responsabilidades: Cada <Route> gestiona su propia lógica ✅ Sin condicionales: El componente principal queda limpio
+Creando el componente <Route>
+Paso 1: Crear el archivo del componente
+
+Vamos a crear un nuevo archivo para nuestro componente:
+
+// components/Route.jsx
+import { useRouter } from '../hooks/useRouter'
+
+export function Route({ path, component: Component }) {
+  // Obtener la ruta actual del router
+  const { currentPath } = useRouter()
+
+  // Si la ruta no coincide, no renderizar nada
+  if (currentPath !== path) {
+    return null
+  }
+
+  // Si coincide, renderizar el componente
+  return <Component />
+}
+        
+          
+        
+        
+        
+      
+
+Desglosando el código
+
+1. Reutilizamos el custom hook useRouter()
+
+const { currentPath } = useRouter()
+        
+          
+        
+        
+        
+      
+
+Aquí es donde se ve claramente el poder del custom hook que creamos en la clase anterior:
+
+    ✅ Centraliza la lógica del router
+    ✅ Se puede reutilizar en diferentes componentes
+    ✅ Mantiene el código limpio y organizado
+
+2. Decisión de renderizado
+
+if (currentPath !== path) {
+  return null
+}
+        
+          
+        
+        
+        
+      
+
+Este es el patrón de renderizado condicional en React:
+
+    Si la ruta actual NO coincide con la ruta del componente → no renderiza nada (null)
+    Si coinciden → renderiza el componente
+
+3. Prop component con destructuring
+
+export function Route({ path, component: Component }) {
+  return <Component />
+}
+        
+          
+        
+        
+        
+      
+
+Usamos destructuring con renaming:
+
+    component: Component → Recibimos component pero lo renombramos a Component (con mayúscula)
+    ¿Por qué? En JSX, los componentes deben empezar con mayúscula
+    Esto nos permite hacer <Component /> en lugar de <component />
+
+Usando el componente <Route> en App
+Antes (imperativo)
+
+// App.jsx - ANTES
+import { useRouter } from './hooks/useRouter'
+import { Home } from './pages/Home'
+import { Search } from './pages/Search'
+import { About } from './pages/About'
+
+function App() {
+  const { currentPath } = useRouter()
+
+  if (currentPath === '/') return <Home />
+  if (currentPath === '/search') return <Search />
+  if (currentPath === '/about') return <About />
+
+  return <NotFound />
+}
+        
+          
+        
+        
+        
+      
+
+Después (declarativo)
+
+// App.jsx - DESPUÉS
+import { Route } from './components/Route'
+import { Home } from './pages/Home'
+import { Search } from './pages/Search'
+import { About } from './pages/About'
+import { NotFound } from './pages/NotFound'
+
+function App() {
+  return (
+    <>
+      <Route path="/" component={Home} />
+      <Route path="/search" component={Search} />
+      <Route path="/about" component={About} />
+      <Route path="/404" component={NotFound} />
+    </>
+  )
+}
+
+export default App
+        
+          
+        
+        
+        
+      
+
+¿Qué cambió?
+
+✅ Sin condicionales: Nada de if, switch o ternarios ✅ Declarativo: Cada línea declara una ruta claramente ✅ Auto-gestionado: Cada <Route> decide si debe renderizarse ✅ Escalable: Añadir rutas es solo añadir más <Route> ✅ Legible: Ves todas las rutas de un vistazo
+Cómo funciona internamente
+
+Vamos a entender qué pasa cuando renderizamos estas rutas:
+
+<>
+  <Route path="/" component={Home} />
+  <Route path="/search" component={Search} />
+  <Route path="/about" component={About} />
+</>
+        
+          
+        
+        
+        
+      
+
+Si estamos en /
+
+    Primera ruta (path="/")
+        currentPath === "/" → ✅ Coincide
+        Renderiza <Home />
+
+    Segunda ruta (path="/search")
+        currentPath !== "/search" → ❌ No coincide
+        Retorna null (no renderiza nada)
+
+    Tercera ruta (path="/about")
+        currentPath !== "/about" → ❌ No coincide
+        Retorna null (no renderiza nada)
+
+Resultado final: Solo se renderiza <Home />
+Si estamos en /search
+
+    Primera ruta (path="/")
+        currentPath !== "/" → ❌ No coincide
+        Retorna null
+
+    Segunda ruta (path="/search")
+        currentPath === "/search" → ✅ Coincide
+        Renderiza <Search />
+
+    Tercera ruta (path="/about")
+        currentPath !== "/about" → ❌ No coincide
+        Retorna null
+
+Resultado final: Solo se renderiza <Search />
+Patrón de renderizado con null
+
+Renderizar null es un patrón muy común en React:
+
+function ConditionalComponent({ shouldShow, children }) {
+  // Si no debe mostrarse, renderiza null
+  if (!shouldShow) {
+    return null
+  }
+
+  // Si debe mostrarse, renderiza el contenido
+  return <div>{children}</div>
+}
+        
+          
+        
+        
+        
+      
+
+Ventajas:
+
+✅ Limpio: No ensucia el DOM con elementos vacíos
+
+✅ Performante: React optimiza el renderizado de null
+
+✅ Idiomático: Es el estándar en React para “no renderizar nada”
+Comparación: Imperativo vs Declarativo
+Imperativo (con if)
+
+function App() {
+  const { currentPath } = useRouter()
+
+  // Describes CÓMO decidir qué renderizar
+  if (currentPath === '/') {
+    return <Home />
+  } else if (currentPath === '/search') {
+    return <Search />
+  } else if (currentPath === '/about') {
+    return <About />
+  } else {
+    return <NotFound />
+  }
+}
+        
+          
+        
+        
+        
+      
+
+❌ Desventajas:
+
+    Lógica imperativa (“si esto, entonces aquello”)
+    El componente principal conoce todos los detalles
+    No es fácilmente extensible
+    Difícil de testear cada ruta independientemente
+
+Declarativo (con <Route>)
+
+function App() {
+  // Declaras QUÉ debe pasar en cada ruta
+  return (
+    <>
+      <Route path="/" component={Home} />
+      <Route path="/search" component={Search} />
+      <Route path="/about" component={About} />
+      <Route path="/404" component={NotFound} />
+    </>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+✅ Ventajas:
+
+    Declarativo (“en esta ruta, este componente”)
+    Cada ruta es autónoma
+    Fácil añadir/quitar rutas
+    Fácil de testear cada <Route> independientemente
+
+Añadiendo un layout compartido
+
+Ahora que tenemos un sistema declarativo, es muy fácil añadir elementos compartidos:
+
+function App() {
+  return (
+    <>
+      <Header />
+
+      <main>
+        <Route path="/" component={Home} />
+        <Route path="/search" component={Search} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+      </main>
+
+      <Footer />
+    </>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+Lo que pasa:
+
+    El <Header /> siempre se renderiza
+    Solo una de las rutas se renderiza (la que coincide)
+    El <Footer /> siempre se renderiza
+
+Próximos pasos
+
+Con este patrón declarativo, hemos sentado las bases para un router profesional. En las próximas clases aprenderemos:
+
+    Rutas dinámicas: /users/:id
+    Rutas anidadas: Rutas dentro de rutas
+    Protección de rutas: Rutas privadas que requieren autenticación
+    Navegación programática: Navegar desde eventos
+    React Router: Migrar a la librería oficial
+
+Conceptos clave aprendidos
+Concepto	Descripción
+Programación declarativa	Expresar qué queremos, no cómo lograrlo
+Programación imperativa	Describir paso a paso cómo hacer algo
+Renderizado condicional	Componentes que deciden si renderizar o no
+Retornar null	Patrón para indicar “no renderizar nada”
+Composición de componentes	Crear componentes que usan otros componentes
+Props con renaming	component: Component para usar mayúsculas
+Reutilización de hooks	useRouter() usado en múltiples lugares
+Ventajas del patrón <Route>
+Ventaja	Descripción
+🎯 Declarativo	Expresa claramente la intención
+📖 Legible	Fácil de entender de un vistazo
+🔧 Mantenible	Cambios localizados en cada ruta
+📈 Escalable	Añadir rutas no complica el código
+🧩 Modular	Cada ruta es independiente
+✅ Testeable	Fácil testear cada ruta por separado
+🔄 Reutilizable	El componente <Route> es reusable
+Conclusión
+
+En esta clase has aprendido a:
+
+    ✅ Identificar problemas de código imperativo con if y switch
+    ✅ Crear un componente <Route> declarativo y reutilizable
+    ✅ Reutilizar el custom hook useRouter() en diferentes componentes
+    ✅ Usar el patrón de renderizado condicional con null
+    ✅ Aplicar programación declarativa en React
+    ✅ Entender cómo funciona internamente el routing declarativo
+    ✅ Crear una base sólida para un sistema de routing escalable
+
+Este patrón declarativo es la base de cómo funcionan los routers profesionales como React Router. Has construido una versión simplificada pero completamente funcional que te ayudará a entender los conceptos fundamentales del routing en aplicaciones web modernas.
+
+    💡 Recuerda: En producción siempre debes usar React Router o una librería similar, pero entender cómo funciona internamente te hace un mejor desarrollador.
+
+
+---
+<a id="33"></a>
+# Creando custom hook para formulario
+
+Introducción del problema
+
+Ahora mismo tenemos un componente principal que gestiona toda la lógica de búsqueda, y eso lo hace demasiado complejo. El componente tiene mezclado:
+
+    handleSubmit
+    handleTextChange
+    La lógica de búsqueda (search)
+    IDs como tecnología, localización, experiencia, etc.
+
+Todo esto junto hace que el componente sea difícil de leer y mantener. Vamos a separar responsabilidades usando un custom hook.
+Identificando la complejidad
+
+Cuando un componente tiene demasiadas responsabilidades, es señal de que necesitamos refactorizar. En nuestro caso, la lógica del formulario de búsqueda debería vivir en su propio hook personalizado.
+Creando useSearchForm
+
+Vamos a crear un custom hook llamado useSearchForm que encapsule toda la lógica del formulario.
+
+Los custom hooks, a diferencia de hooks como el router que vimos en el vídeo anterior, pueden recibir parámetros igual que funciones normales.
+Parámetros del hook
+
+Nuestro hook necesita recibir:
+
+    onSearch: función que se ejecuta al buscar
+    onTextFilter: función para filtrar por texto
+    IDs necesarias para los filtros:
+        IDTechnology
+        IDLocation
+        IDExperienceLevel
+        Cualquier otra ID que use el componente
+
+function useSearchForm({ onSearch, onTextFilter, IDTechnology, IDLocation, IDExperienceLevel }) {
+  // Lógica del hook aquí
+}
+        
+          
+        
+        
+        
+      
+
+Añadiendo estado interno
+
+El texto de búsqueda necesita estar en un estado. Lo añadimos dentro del custom hook:
+
+function useSearchForm({ onSearch, onTextFilter, IDTechnology, IDLocation, IDExperienceLevel }) {
+  const [searchText, setSearchText] = useState('')
+
+  // Este estado:
+  // - guarda el texto introducido por el usuario
+  // - se actualiza en handleChange
+  // - será devuelto al componente para mostrarlo en el input
+}
+        
+          
+        
+        
+        
+      
+
+Implementando los handlers
+
+Ahora movemos la lógica de los handlers al hook:
+
+function useSearchForm({ onSearch, onTextFilter, IDTechnology, IDLocation, IDExperienceLevel }) {
+  const [searchText, setSearchText] = useState('')
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    const formData = new FormData(event.target)
+
+    const filters = {
+      text: formData.get('search'),
+      technology: formData.get('technology'),
+      location: formData.get('location'),
+      experience: formData.get('experience'),
+    }
+
+    onSearch(filters)
+  }
+
+  const handleChange = (event) => {
+    const text = event.target.value
+    setSearchText(text)
+    onTextFilter(text)
+  }
+
+  // Devolvemos lo que el componente necesita
+  return {
+    searchText,
+    handleSubmit,
+    handleChange,
+  }
+}
+        
+          
+        
+        
+        
+      
+
+Usando el hook en el componente
+
+Ahora nuestro componente se simplifica enormemente:
+
+function SearchComponent() {
+  const { searchText, handleSubmit, handleChange } = useSearchForm({
+    onSearch: performSearch,
+    onTextFilter: filterByText,
+    IDTechnology: 'tech',
+    IDLocation: 'loc',
+    IDExperienceLevel: 'exp',
+  })
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input value={searchText} onChange={handleChange} name="search" />
+      {/* Resto del formulario */}
+    </form>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+El componente ya no implementa la lógica, solo consume las funciones y valores del hook.
+Ventajas de esta refactorización
+
+✅ Código más limpio: el componente se enfoca en renderizar
+
+✅ Lógica reutilizable: el hook puede usarse en otros componentes
+
+✅ Más fácil de testear: podemos probar el hook independientemente
+
+✅ Mejor organización: separación clara de responsabilidades
+Reglas importantes sobre custom hooks
+1. Llamar solo en el nivel superior
+
+Los custom hooks deben llamarse solo en el nivel superior del componente o de otro custom hook.
+
+❌ NO dentro de:
+
+    Callbacks (handleClick, handleSubmit, etc.)
+    Condicionales (if)
+    Loops (for, while)
+    useEffect ni otros hooks
+
+// ❌ MAL - dentro de un callback
+function Component() {
+  const handleClick = () => {
+    const { data } = useSearchForm() // ERROR
+  }
+}
+
+// ❌ MAL - dentro de un condicional
+function Component() {
+  if (condition) {
+    const { data } = useSearchForm() // ERROR
+  }
+}
+
+// ✅ BIEN - nivel superior
+function Component() {
+  const { searchText, handleSubmit } = useSearchForm()
+
+  const handleClick = () => {
+    // Usar los valores del hook aquí está bien
+    console.log(searchText)
+  }
+}
+        
+          
+        
+        
+        
+      
+
+2. Deben empezar con el prefijo “use”
+
+Como useState, useEffect, etc.
+
+Esto no es solo una convención: React confía en ese nombre para validar reglas internas.
+
+// ✅ BIEN
+function useSearchForm() {}
+function useUserData() {}
+function useAuthentication() {}
+
+// ❌ MAL
+function searchFormHook() {} // No empieza con "use"
+function getSearchForm() {} // No es un hook
+        
+          
+        
+        
+        
+      
+
+3. Solo se pueden usar en componentes o custom hooks
+
+Los custom hooks solo se pueden usar en:
+
+    Componentes de React
+    Otros custom hooks
+
+❌ NO en funciones normales fuera del ecosistema de React:
+
+// ❌ MAL - función normal
+function calculateTotal() {
+  const { data } = useData() // ERROR
+  return data.total
+}
+
+// ✅ BIEN - componente
+function Component() {
+  const { data } = useData()
+  return <div>{data.total}</div>
+}
+
+// ✅ BIEN - otro custom hook
+function useCalculateTotal() {
+  const { data } = useData()
+  return data.total
+}
+        
+          
+        
+        
+        
+      
+
+Verificando que todo funciona
+
+Después de la refactorización, todo debe seguir funcionando exactamente igual que antes. La diferencia está en la organización del código, no en el comportamiento.
+Conclusión
+
+Extraer la lógica a custom hooks es una práctica esencial en React moderno:
+
+    El componente se enfoca en renderizar
+    La lógica vive en un sitio reutilizable
+    El desarrollo se vuelve más escalable
+
+Esta técnica mantiene tu código:
+
+    ✅ Limpio
+    ✅ Modular
+    ✅ Fácil de testear
+    ✅ Mantenible a largo plazo
+
+Usar custom hooks correctamente es señal de código React profesional y bien arquitecturado.
+
+
+---
+<a id="34"></a>
+
+# 9 Ejercicios prácticos: Router y Formularios
+
+Antes de continuar con temas más avanzados como la sincronización de filtros con la URL y el fetch de datos desde la API, es momento de practicar todo lo que has aprendido hasta ahora sobre React Router y formularios.
+
+En esta clase te propongo tres ejercicios prácticos que te ayudarán a consolidar conceptos fundamentales de React:
+
+    🛣️ Crear nuevas rutas y páginas
+    📝 Manejo de formularios con estado y validaciones
+    🎯 Mejoras en componentes del router
+
+¿Por qué practicar ahora?
+
+Antes de avanzar con conceptos más complejos, es importante que domines:
+
+    Creación y manejo de rutas
+    Estado con useState
+    Efectos con useEffect
+    Custom hooks
+    Validaciones de formularios
+    Mejora de componentes reutilizables
+
+Estos ejercicios te preparan para trabajar con filtros sincronizados con la URL y llamadas a APIs.
+📋 Ejercicio 1: Crear una nueva ruta
+Objetivo
+
+Practicar cómo añadir rutas adicionales a tu aplicación y crear nuevas páginas dentro del sistema de routing.
+¿Qué debes hacer?
+
+    Crear una nueva ruta en tu aplicación
+    Crear un nuevo componente que se renderice en esa ruta
+    Añadir un enlace en la navegación para acceder a ella
+
+Ejemplo sugerido: Página de Contacto
+
+Puedes crear una página de Contacto, o cualquier otra que se te ocurra:
+
+    /contact → Página de contacto
+    /services → Página de servicios
+    /portfolio → Página de portafolio
+    /team → Página del equipo
+
+Paso a paso
+1. Crear el componente de la página
+
+// pages/Contact.jsx
+export function Contact() {
+  return (
+    <div>
+      <h1>📧 Contacto</h1>
+      <p>¿Tienes alguna pregunta? Contáctanos.</p>
+    </div>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+2. Añadir la ruta en App
+
+// App.jsx
+import { Route } from './components/Route'
+import { Home } from './pages/Home'
+import { Search } from './pages/Search'
+import { About } from './pages/About'
+import { Contact } from './pages/Contact' // 👈 Importar
+
+function App() {
+  return (
+    <>
+      <Header />
+
+      <main>
+        <Route path="/" component={Home} />
+        <Route path="/search" component={Search} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} /> {/* 👈 Nueva ruta */}
+      </main>
+
+      <Footer />
+    </>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+3. Añadir enlace en la navegación
+
+// components/Header.jsx
+import { Link } from './Link'
+
+export function Header() {
+  return (
+    <header>
+      <nav>
+        <Link href="/">Inicio</Link>
+        <Link href="/search">Búsqueda</Link>
+        <Link href="/about">Acerca de</Link>
+        <Link href="/contact">Contacto</Link> {/* 👈 Nuevo enlace */}
+      </nav>
+    </header>
+  )
+}
+        
+          
+        
+        
+        
+      
+
+✅ Verificación
+
+Comprueba que:
+
+    ✅ La ruta /contact funciona correctamente
+    ✅ El enlace en la navegación lleva a la página correcta
+    ✅ No se recarga la página al navegar
+    ✅ Los botones atrás/adelante del navegador funcionan
+
+📝 Ejercicio 2: Página de Contacto con formulario
+Objetivo
+
+Practicar el manejo de formularios en React utilizando estado, validaciones, efectos y custom hooks.
+¿Qué debes hacer?
+
+Dentro de la página de Contacto que creaste en el ejercicio anterior, implementa un formulario completo con:
+
+    Manejo del estado con useState
+    Un custom hook para encapsular la lógica
+    Validaciones básicas de los campos
+    Mensaje de confirmación tras el envío
+
+Conceptos a practicar
+
+    📦 Estado: Guardar valores del formulario
+    🎣 Custom hooks: Extraer lógica reutilizable
+    ✅ Validación: Comprobar campos requeridos
+    🎯 Efectos: Mostrar mensajes o limpiar formulario
+    📤 Submit: Manejar el envío del formulario
+    🪝 Custom hooks: Extraer lógica reutilizable
+
+✅ Verificación
+
+Comprueba que tu formulario:
+
+    ✅ Valida los campos antes de enviar
+    ✅ Muestra errores específicos para cada campo
+    ✅ Limpia los errores cuando el usuario escribe
+    ✅ Muestra un mensaje de confirmación tras el envío
+    ✅ Limpia el formulario después de enviar
+    ✅ (Opcional) Deshabilita el botón mientras se envía
+
+💡 Mejoras opcionales
+
+Si quieres ir más allá, puedes añadir:
+
+    🎨 Estilos mejorados: CSS para que el formulario se vea mejor
+    ⏱️ Validación en tiempo real: Validar mientras el usuario escribe
+    📧 Integración con API: Enviar datos a un backend real
+    🔄 Loading state: Mostrar spinner mientras se envía
+    📱 Responsive design: Que funcione bien en móviles
+
+🎯 Ejercicio 3: Mejorar el componente Link
+Objetivo
+
+Aprovechar la información de la ruta actual para mejorar la experiencia de usuario, añadiendo automáticamente una clase CSS al enlace activo.
+¿Qué debes hacer?
+
+Modificar el componente Link para que:
+
+    Detecte si su href coincide con la ruta actual
+    Añada automáticamente una clase active cuando esté activo
+    Funcione sin que el desarrollador tenga que hacer nada especial
+
+Por qué es útil
+
+En muchas aplicaciones, el enlace de la página actual se resalta visualmente:
+
+Inicio  |  Búsqueda  |  Acerca de  |  Contacto
+                         ^^^^^^^
+                       (estilo activo)
+        
+          
+        
+        
+        
+      
+
+Esto ayuda al usuario a saber en qué página está.
+✅ Verificación
+
+Comprueba que:
+
+    ✅ El enlace de la página actual tiene la clase active
+    ✅ Los demás enlaces no tienen la clase active
+    ✅ Al navegar, el enlace activo cambia automáticamente
+    ✅ Puedes añadir otras clases CSS sin problemas
+    ✅ Los estilos se aplican correctamente
+
+💡 Mejoras opcionales
+
+Si quieres ir más allá:
+
+    🎨 Animaciones: Transiciones suaves al cambiar de enlace activo
+    🔍 Matching parcial: Activar si la URL contiene el href (útil para rutas anidadas)
+    📱 Estilos responsivos: Diferentes estilos en móvil vs desktop
+    ♿ Accesibilidad: Añadir aria-current="page" al enlace activo
+
+Ejemplo de matching parcial (avanzado)
+
+export function Link({
+  href,
+  children,
+  target,
+  className = '',
+  activeClassName = 'active',
+  exact = true, // 👈 Nueva prop
+  ...props
+}) {
+  const { currentPath } = useRouter()
+
+  // ... código del handleClick ...
+
+  // Determinar si está activo
+  const isActive = exact
+    ? currentPath === href // Matching exacto
+    : currentPath.startsWith(href) // Matching parcial
+
+  // ... resto del código ...
+}
+        
+          
+        
+        
+        
+      
+
+Uso:
+
+{
+  /* Solo activo en /search exactamente */
+}
+;<Link href="/search" exact>
+  Búsqueda
+</Link>
+
+{
+  /* Activo en /search, /search/results, /search/filters, etc. */
+}
+;<Link href="/search" exact={false}>
+  Búsqueda
+</Link>
+        
+          
+        
+        
+        
+      
+
+🎓 Conceptos practicados
+
+Al completar estos ejercicios habrás practicado:
+Concepto	Dónde lo usaste
+Routing	Crear y configurar nuevas rutas
+Componentes	Crear páginas y componentes reutilizables
+Estado con useState	Manejar datos del formulario y errores
+Custom hooks	Extraer lógica del formulario
+Validaciones	Validar campos del formulario
+Efectos con useEffect	(Opcional) Limpiar mensajes después de un tiempo
+Manejo de eventos	Capturar submit, change, etc.
+Renderizado condicional	Mostrar/ocultar mensajes y errores
+Props	Pasar datos entre componentes
+Composición	Combinar componentes para crear UI
+Reutilización de hooks	Usar useRouter() en múltiples lugares
+Accesibilidad	Atributos aria-current, labels, etc.
+🚀 Próximos pasos
+
+Una vez completes estos ejercicios, estarás preparado para:
+
+    Sincronizar filtros con la URL: Los filtros se reflejarán en la barra de direcciones
+    Fetch de datos desde una API: Obtener información de un servidor
+    Rutas dinámicas: Rutas con parámetros como /users/:id
+    Rutas protegidas: Rutas que requieren autenticación
+    React Router: Migrar a la librería oficial
+
+📝 Resumen
+
+En esta clase te propuse tres ejercicios prácticos:
+Ejercicio 1: Crear nueva ruta
+
+    ✅ Añadir ruta en App
+    ✅ Crear componente de página
+    ✅ Añadir enlace en navegación
+
+Ejercicio 2: Formulario con validación
+
+    ✅ Manejar estado del formulario
+    ✅ Crear custom hook para la lógica
+    ✅ Validar campos requeridos
+    ✅ Mostrar mensajes de error
+    ✅ Mensaje de confirmación tras envío
+
+Ejercicio 3: Mejorar Link
+
+    ✅ Detectar ruta actual
+    ✅ Añadir clase active automáticamente
+    ✅ Soportar clases personalizadas
+    ✅ (Opcional) Matching parcial
+
+💪 Desafío extra
+
+Si terminaste todos los ejercicios y quieres más práctica:
+
+    Página 404 personalizada: Crea una página bonita para rutas no encontradas
+    Breadcrumbs: Muestra el camino de navegación actual
+    Formulario multi-paso: Divide el formulario en varios pasos
+    Tema claro/oscuro: Añade un botón para cambiar el tema
+    Animaciones de transición: Anima el cambio entre páginas
+
+    💡 Recuerda: La práctica es fundamental para dominar React. Estos ejercicios te preparan para trabajar en aplicaciones reales. ¡Tómate tu tiempo y experimenta!
+
+¡Mucho ánimo con los ejercicios! 🎉

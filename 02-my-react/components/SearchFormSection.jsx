@@ -1,18 +1,16 @@
-import {useId, useRef} from 'react'
+import {useState, useId, useRef} from 'react'
 
 import jobsData from '../data.json'
 
-export default function Search({onTextFilter, onSearch, filteredJobs}) {
-    // IDs que se usaran en el formulario
-    const isSearchInputText = useId()
-    const idTechnology = useId()
-    const idLocation = useId()
-    const idExperience = useId()
+
+const useSearchForm = ({idTechnology, idLocation, idExperience, onTextFilter, onSearch}) => {
+
+    const [searchText, setSearchText] = useState('')
 
     const searchFormRef = useRef(null) // Referencia al formulario, para limpiar los filtros de busqueda en tiempo real
     const filterFormRef = useRef(null) // Referencia al formulario, para limpiar los filtros los select en tiempo real
 
-    // Manejador de envio del formulario
+        // Manejador de envio del formulario
     const handleSearchSubmit = (e) => {
         e.preventDefault()
         // target !== currentTarget: https://www.w3schools.com/jsref/met_event_target.asp
@@ -49,6 +47,7 @@ export default function Search({onTextFilter, onSearch, filteredJobs}) {
     // Manejador de cambio en el input de texto
     const handleInputTextChange = (e) => {
         const text = e.currentTarget.value
+        setSearchText(text)
         onTextFilter(text)
         console.log('>>> Texto del filtro: ', { text })
     }
@@ -63,6 +62,34 @@ export default function Search({onTextFilter, onSearch, filteredJobs}) {
         searchFormRef.current?.reset()
         filterFormRef.current?.reset()
     }
+
+    return {
+        searchText,
+        searchFormRef,
+        filterFormRef,
+        handleSearchSubmit,
+        handleSelectFilterSubmit,
+        handleInputTextChange,
+        handleClearFilters
+    }
+}
+
+
+export default function Search({onTextFilter, onSearch, filteredJobs}) {
+    // IDs que se usaran en el formulario
+    const isSearchInputText = useId()
+    const idTechnology = useId()
+    const idLocation = useId()
+    const idExperience = useId()
+
+    const {searchText, 
+        searchFormRef, 
+        filterFormRef, 
+        handleSearchSubmit, 
+        handleSelectFilterSubmit, 
+        handleInputTextChange, 
+        handleClearFilters
+    } = useSearchForm({idTechnology, idLocation, idExperience, onTextFilter, onSearch})
 
     return (
         <>
