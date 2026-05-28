@@ -1,5 +1,6 @@
 
 import './404.css'
+import {Link} from '../components/Link.jsx'
 
 export function NotFoundPage() {
     return (
@@ -24,10 +25,10 @@ export function NotFoundPage() {
               <div className="screen_out">
                 <div className="screen_out1">
                   <div className="screen">
-                    <span className="notfound_text"> NOT FOUND</span>
+                    <span className="notfound_text"> NO ENCONTRADO</span>
                   </div>
                   <div className="screenM">
-                    <span className="notfound_text"> NOT FOUND</span>
+                    <span className="notfound_text"> NO ENCONTRADO</span>
                   </div>
                 </div>
               </div>
@@ -62,6 +63,9 @@ export function NotFoundPage() {
           <div className="text_4042">0</div>
           <div className="text_4043">4</div>
         </div>
+        <Link href="/" className="back-home" 
+          >Volver al inicio
+        </Link>
     </div>
 
   )

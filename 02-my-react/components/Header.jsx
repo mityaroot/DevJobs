@@ -18,6 +18,14 @@ export default function Header() {
                 <Link href="/search" className="nav-link">Empleos</Link>
             </nav>
 
+            <nav>
+                <Link href="/contact" className="nav-link">Contacto</Link>
+            </nav>
+
+            <nav>
+                <Link href="/404" className="nav-link">404</Link>
+            </nav>
+
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginLeft: 'auto', flexWrap: 'wrap' }}>
             <div
                 style={{ borderRadius: '25px', padding: '0.5rem 1rem', backgroundColor: '#b44cce', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}

@@ -40,6 +40,7 @@
 ---
 
 ## Próximamente
+
 *(temas planificados, contenido aún no escrito)*
 
 26. Filtros automáticos y Routing básico
@@ -63,9 +64,10 @@
 
 ---
 
-
 ---
+
 <a id="que-es-react"></a>
+
 # ¿Qué es React?
 
 Hasta ahora hemos trabajado con HTML, CSS y JavaScript puro (también conocido como “Vanilla JavaScript”) para construir nuestra aplicación DevJobs. Esto está genial para proyectos pequeños, pero cuando las aplicaciones crecen, manipular el DOM manualmente se vuelve complejo y difícil de mantener.
@@ -89,6 +91,7 @@ Miremos nuestro código actual de DevJobs. Tenemos:
     ✅ Renderizado dinámico con fetch
 
 Pero conforme crece, nos encontraremos con problemas:
+
 1. Código repetitivo y difícil de mantener
 
 // fetch-data.js - Creamos elementos manualmente
@@ -103,12 +106,6 @@ jobs.forEach((job) => {
     <button class="button-apply-job">Aplicar</button>`
   container.appendChild(article)
 })
-        
-          
-        
-        
-        
-      
 
 Cada vez que queremos mostrar un empleo, tenemos que crear manualmente el elemento, asignar clases, construir el HTML y añadirlo al DOM. Si queremos cambiar algo, tenemos que buscarlo en todo el código.
 2. Gestión manual del estado
@@ -117,12 +114,6 @@ Cada vez que queremos mostrar un empleo, tenemos que crear manualmente el elemen
 element.textContent = '¡Aplicado!'
 element.classList.add('is-applied')
 element.disabled = true
-        
-          
-        
-        
-        
-      
 
 Tenemos que buscar el elemento en el DOM, cambiar su texto, añadir clases y modificar propiedades. Si el estado cambia en varios lugares, se vuelve un caos mantener todo sincronizado.
 3. Sincronización compleja
@@ -133,12 +124,6 @@ jobs.forEach((job) => {
   const isShown = selectedValue === '' || selectedValue === modalidad
   job.classList.toggle('is-hidden', isShown === false)
 })
-        
-          
-        
-        
-        
-      
 
 Cuando filtramos, tenemos que iterar sobre todos los elementos del DOM, leer atributos y actualizar clases. Es propenso a errores y lento.
 Con React, todo esto se simplifica
@@ -163,12 +148,6 @@ button.addEventListener('click', () => {
   button.classList.add('is-applied')
   button.disabled = true
 })
-        
-          
-        
-        
-        
-      
 
 React:
 
@@ -186,12 +165,6 @@ function ApplyButton() {
     </button>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Ves la diferencia?
 
@@ -257,7 +230,9 @@ En esta clase vamos a migrar DevJobs paso a paso de JavaScript vanilla a React. 
 
 ¡Prepárate para ver el poder de React en acción!
 ---
+
 <a id="primeros-pasos-en-react"></a>
+
 # Primeros pasos en React
 
 En esta clase vamos a crear nuestra primera aplicación React desde cero. Por defecto, React recomienda instalar un framework para crear proyectos, pero nosotros vamos a hacerlo desde cero, paso a paso y de forma incremental.
@@ -266,6 +241,7 @@ Creando nuestro primer archivo React
 Crea un nuevo archivo react.html en la carpeta de nuestro proyecto:
 
 <!DOCTYPE html>
+
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -274,7 +250,7 @@ Crea un nuevo archivo react.html en la carpeta de nuestro proyecto:
     <link rel="stylesheet" href="./styles.css" />
   </head>
 
-  <body>
+<body>
     <!-- Aquí React renderizará nuestra aplicación -->
     <div id="root"></div>
 
@@ -282,49 +258,39 @@ Crea un nuevo archivo react.html en la carpeta de nuestro proyecto:
     <script type="module">
       import React from 'https://esm.sh/react?dev'
       import ReactDOM from 'https://esm.sh/react-dom/client?dev'
-
+    
       // Crear un elemento h1 con React.createElement
       const titulo = React.createElement(
         'h1', // Tipo de elemento
         { style: { color: '#09f' } }, // Props (atributos)
         '¡Hola React!' // Contenido (children)
       )
-
+    
       // Renderizar en el DOM
       const rootEl = document.querySelector('#root')
       const root = ReactDOMClient.createRoot(rootEl)
       root.render(titulo)
     </script>
-  </body>
+
+</body>
 </html>
-        
-          
-        
-        
-        
-      
 
 Abre este archivo en tu navegador y verás un título azul que dice “¡Hola React!”.
 ¿Qué está pasando aquí?
 
 Vamos a desglosar cada parte del código:
+
 1. Importamos React desde un CDN
 
 import React from 'https://esm.sh/react?dev'
 import ReactDOM from 'https://esm.sh/react-dom/client?dev'
-        
-          
-        
-        
-        
-      
 
     Cargamos React y ReactDOM desde el CDN esm.sh
     react es la biblioteca principal con la lógica de componentes
     react-dom/client es el encargado de renderizar React en el navegador
     No necesitamos instalar nada, todo funciona directamente en el navegador
     El ?dev al final activa el modo desarrollo para mejores mensajes de error
-
+    
     💡 Nota: Esto es solo para aprender. En proyectos reales usaremos herramientas como Vite o Next.js que gestionan esto automáticamente.
 
 2. Creamos un elemento con React.createElement
@@ -334,12 +300,6 @@ const titulo = React.createElement(
   { style: { color: '#09f' } }, // ¿Qué propiedades? (className, style, etc.)
   '¡Hola React!' // ¿Qué contenido?
 )
-        
-          
-        
-        
-        
-      
 
 Esta función tiene tres parámetros:
 
@@ -350,24 +310,12 @@ Esta función tiene tres parámetros:
 Ejemplo equivalente en HTML puro:
 
 <h1 style="color: #09f">¡Hola React!</h1>
-        
-          
-        
-        
-        
-      
 
 3. Lo renderizamos en el DOM
 
 const rootEl = document.querySelector('#root')
 const root = ReactDOMClient.createRoot(rootEl)
 root.render(titulo)
-        
-          
-        
-        
-        
-      
 
     Seleccionamos el elemento con id="root" donde queremos renderizar
     Creamos un root de React con createRoot()
@@ -397,12 +345,6 @@ const tarjetaEmpleo = React.createElement(
 
 // Renderizar la tarjeta
 root.render(tarjetaEmpleo)
-        
-          
-        
-        
-        
-      
 
 Estructura de elementos anidados
 
@@ -415,12 +357,6 @@ React.createElement(
   React.createElement('p', null, 'Párrafo'),
   React.createElement('button', null, 'Botón')
 )
-        
-          
-        
-        
-        
-      
 
 Equivalente en HTML:
 
@@ -429,12 +365,6 @@ Equivalente en HTML:
   <p>Párrafo</p>
   <button>Botón</button>
 </div>
-        
-          
-        
-        
-        
-      
 
 Como ves, con React.createElement el código se vuelve muy verboso y difícil de leer. Por eso existe JSX, que lo veremos próximamente.
 Props: null vs objeto vacío
@@ -448,12 +378,6 @@ En el segundo parámetro de createElement puedes pasar:
 React.createElement('h1', null, 'Sin props')
 React.createElement('h1', {}, 'Sin props también')
 React.createElement('h1', { className: 'title' }, 'Con props')
-        
-          
-        
-        
-        
-      
 
 Propiedades comunes en React
 
@@ -461,36 +385,18 @@ Algunas props importantes que usarás:
 className (no class)
 
 React.createElement('div', { className: 'container' }, 'Contenido')
-        
-          
-        
-        
-        
-      
 
     ⚠️ Usamos className en lugar de class porque class es una palabra reservada en JavaScript.
 
 style
 
 React.createElement('h1', { style: { color: 'red', fontSize: '24px' } }, 'Título rojo')
-        
-          
-        
-        
-        
-      
 
     💡 Los estilos se pasan como un objeto JavaScript. Las propiedades CSS en kebab-case (font-size) se convierten a camelCase (fontSize).
 
 onClick y eventos
 
 React.createElement('button', { onClick: () => alert('¡Clic!') }, 'Haz clic')
-        
-          
-        
-        
-        
-      
 
     📝 Los eventos en React usan camelCase: onClick, onChange, onSubmit, etc.
 
@@ -506,23 +412,11 @@ const titulo = document.createElement('h1')
 titulo.textContent = '¡Hola!'
 titulo.style.color = 'blue'
 document.body.appendChild(titulo)
-        
-          
-        
-        
-        
-      
 
 React con createElement:
 
 const titulo = React.createElement('h1', { style: { color: 'blue' } }, '¡Hola!')
 root.render(titulo)
-        
-          
-        
-        
-        
-      
 
 Ventajas de React:
 
@@ -546,7 +440,9 @@ En la siguiente clase veremos JSX, que hace todo esto mucho más simple y legibl
     💡 Recuerda: JSX es solo azúcar sintáctica. Al final, todo se convierte en React.createElement.
 
 ---
+
 <a id="jsx-la-sintaxis-de-react"></a>
+
 # JSX: La sintaxis de React
 
 En la clase anterior aprendimos a usar React.createElement para crear elementos. Funcionaba, pero el código era verboso y difícil de leer. Ahora vamos a conocer JSX, que hace que React sea mucho más fácil de escribir y entender.
@@ -559,12 +455,6 @@ const titulo = <h1>¡Hola React!</h1>
 
 // Sin JSX - JavaScript puro
 const titulo = React.createElement('h1', null, '¡Hola React!')
-        
-          
-        
-        
-        
-      
 
 ¿Por qué JSX?
 
@@ -572,7 +462,7 @@ const titulo = React.createElement('h1', null, '¡Hola React!')
     ✅ Menos código - Escribes menos para lograr lo mismo
     ✅ Menos errores - Es más fácil ver la estructura
     ✅ Más intuitivo - Se siente natural
-
+    
     💡 Importante: JSX NO es HTML. Es JavaScript que se parece a HTML. Al final se transforma en React.createElement.
 
 Creando nuestro primer archivo con JSX
@@ -580,6 +470,7 @@ Creando nuestro primer archivo con JSX
 Vamos a actualizar nuestro archivo react.html para usar JSX:
 
 <!DOCTYPE html>
+
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -588,7 +479,7 @@ Vamos a actualizar nuestro archivo react.html para usar JSX:
     <link rel="stylesheet" href="./styles.css" />
   </head>
 
-  <body>
+<body>
     <!-- Aquí React renderizará nuestra aplicación -->
     <div id="root"></div>
 
@@ -599,15 +490,15 @@ Vamos a actualizar nuestro archivo react.html para usar JSX:
       window.React = React
       window.ReactDOMClient = ReactDOM
     </script>
-
+    
     <!-- 2. ¡NOVEDAD! Cargar Babel para transformar JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
+    
     <!-- 3. Nuestro código React CON JSX -->
     <script type="text/babel">
       // Ahora podemos escribir JSX directamente
       const titulo = <h1 style={{ color: '#09f' }}>¡Hola React con JSX!</h1>
-
+    
       // Renderizar
       window.onload = () => {
         const rootEl = document.querySelector('#root')
@@ -615,27 +506,17 @@ Vamos a actualizar nuestro archivo react.html para usar JSX:
         root.render(titulo)
       }
     </script>
-  </body>
+
+</body>
 </html>
-        
-          
-        
-        
-        
-      
 
 ¿Qué cambió?
 
 Analicemos los cambios importantes:
+
 1. Añadimos Babel
 
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-        
-          
-        
-        
-        
-      
 
 ¿Qué es Babel?
 
@@ -650,24 +531,18 @@ Analicemos los cambios importantes:
 
 // Babel lo transforma a esto (JavaScript)
 React.createElement('h1', null, 'Hola')
-        
-          
-        
-        
-        
-      
 
     ⚠️ Nota: Usar Babel en el navegador es solo para aprender. En proyectos reales, la transformación se hace al compilar, no en tiempo de ejecución.
 
 2. Cambiamos el tipo de script
 
 <script type="text/babel">
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
     En lugar de type="module", usamos type="text/babel"
     Esto le indica a Babel que debe procesar este código
@@ -678,22 +553,22 @@ React.createElement('h1', null, 'Hola')
 3. Escribimos JSX
 
 const titulo = <h1 style={{ color: '#09f' }}>¡Hola React con JSX!</h1>
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 ¡Mira qué diferencia! En lugar de:
 
 const titulo = React.createElement('h1', { style: { color: '#09f' } }, '¡Hola React con JSX!')
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 Ahora escribimos algo que parece HTML. Mucho más limpio y fácil de leer.
 Sintaxis de JSX
@@ -702,12 +577,12 @@ Las llaves dobles en style
 ¿Notaste las dobles llaves en style={{ color: '#09f' }}?
 
 <h1 style={{ color: '#09f' }}>Título</h1>
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 ¿Por qué dos pares de llaves?
 
@@ -719,23 +594,23 @@ Las llaves dobles en style
 
 // Segundo par de llaves: objeto con estilos
 <h1 style={{ color: '#09f', fontSize: '24px' }}>
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 Es lo mismo que:
 
 const estilos = { color: '#09f', fontSize: '24px' }
 <h1 style={estilos}>Título</h1>
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 Insertando JavaScript en JSX
 
@@ -745,12 +620,12 @@ const nombre = 'Miguel'
 const elemento = <h1>Hola, {nombre}</h1>
 
 // Se renderiza: "Hola, Miguel"
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 Puedes insertar cualquier expresión válida de JavaScript:
 
@@ -765,12 +640,12 @@ Puedes insertar cualquier expresión válida de JavaScript:
 
 <button>Hay {empleos.length} empleos</button>
 // Usa métodos de arrays
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
     ⚠️ Importante: Solo puedes usar expresiones (cosas que devuelven un valor), no sentencias (if, for, while, etc.).
 
@@ -783,12 +658,12 @@ En JSX usamos className en lugar de class:
 
 // ❌ Incorrecto (aunque funciona, no es recomendado)
 <div class="container">Contenido</div>
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 ¿Por qué className?
 
@@ -798,12 +673,12 @@ Estilos inline en JSX
 Los estilos se escriben como objetos JavaScript:
 
 <h1 style={{ color: 'red', fontSize: '24px', marginTop: '10px' }}>Título con estilos</h1>
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 Diferencias con HTML:
 
@@ -816,12 +691,12 @@ Diferencias con HTML:
 
 // ✅ JSX
 <h1 style={{ color: 'red', fontSize: '24px' }}>Título</h1>
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 Comparación: Sin JSX vs Con JSX
 
@@ -840,12 +715,12 @@ const tarjeta = React.createElement(
   ),
   React.createElement('button', { className: 'button-apply-job' }, 'Aplicar')
 )
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 Con JSX (limpio y legible)
 
@@ -859,12 +734,12 @@ const tarjeta = (
     <button className="button-apply-job">Aplicar</button>
   </article>
 )
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 ¡La diferencia es enorme! 🎉
 JSX con datos dinámicos
@@ -890,12 +765,12 @@ const tarjeta = (
     <button className="button-apply-job">Aplicar</button>
   </article>
 )
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 Múltiples elementos en JSX
 
@@ -916,12 +791,12 @@ const app = (
   <p>Esta es mi app React</p>
   <button>Empezar</button>
 )
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
     🔧 Más adelante aprenderemos sobre React Fragment (<>...</>) que permite agrupar elementos sin crear un div extra en el DOM.
 
@@ -937,12 +812,12 @@ Reglas importantes de JSX
 <img src="logo.png">
 <input type="text">
 <br>
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 2. Un solo elemento raíz
 
@@ -959,12 +834,12 @@ const app = (
   <h1>Título</h1>
   <p>Párrafo</p>
 )
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 3. Usa paréntesis para JSX multi-línea
 
@@ -981,12 +856,12 @@ const elemento = (
     <h1>Título</h1>
   </div>
 )
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 4. JSX es una expresión
 
@@ -1002,12 +877,12 @@ root.render(<h1>Hola</h1>)
 function Header() {
   return <h1>Hola</h1>
 }
-        
-          
-        
-        
-        
-      
+
+
+
+
+
+
 
 Ejercicio práctico
 
@@ -1041,12 +916,6 @@ Actualiza tu archivo react.html y prueba este código:
     root.render(app)
   }
 </script>
-        
-          
-        
-        
-        
-      
 
 Lo que hemos aprendido
 
@@ -1064,7 +933,9 @@ En la siguiente clase aprenderemos sobre componentes, que es donde JSX realmente
     💡 Recuerda: JSX es opcional, pero el 99.9% de proyectos React lo usan porque hace el código mucho más legible y mantenible.
 
 ---
+
 <a id="componentes-en-react"></a>
+
 # Componentes en React
 
 Hasta ahora hemos usado JSX para crear elementos, pero la verdadera potencia de React está en los componentes. Un componente es una función de JavaScript que retorna JSX. Es como crear tus propias etiquetas HTML personalizadas y reutilizables.
@@ -1075,22 +946,10 @@ Un componente es simplemente una función de JavaScript que devuelve JSX:
 function Saludo() {
   return <h1>¡Hola desde un componente!</h1>
 }
-        
-          
-        
-        
-        
-      
 
 Y puedes usarlo como si fuera una etiqueta HTML:
 
 <Saludo />
-        
-          
-        
-        
-        
-      
 
 ¿Por qué componentes?
 
@@ -1104,32 +963,14 @@ Elemento vs Componente en React
 En React, los elementos son los bloques básicos de la interfaz de usuario. Son lo que se renderizan en el DOM y son representados por etiquetas HTML.
 
 <h1>Hola</h1>
-        
-          
-        
-        
-        
-      
 
 Los componentes son funciones que retornan elementos.
 
 function Saludar() {
   return <h1>Hola</h1>
 }
-        
-          
-        
-        
-        
-      
 
 <Saludar />
-        
-          
-        
-        
-        
-      
 
 Esa es la diferencia fundamental entre elementos y componentes.
 Tu primer componente: Saludar
@@ -1137,6 +978,7 @@ Tu primer componente: Saludar
 Vamos a crear un componente simple para entender los conceptos básicos. Actualiza tu archivo react.html:
 
 <!DOCTYPE html>
+
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -1145,7 +987,7 @@ Vamos a crear un componente simple para entender los conceptos básicos. Actuali
     <link rel="stylesheet" href="./styles.css" />
   </head>
 
-  <body>
+<body>
     <div id="root"></div>
 
     <script type="module">
@@ -1154,15 +996,15 @@ Vamos a crear un componente simple para entender los conceptos básicos. Actuali
       window.React = React
       window.ReactDOMClient = ReactDOM
     </script>
-
+    
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
+    
     <script type="text/babel">
       // Nuestro primer componente
       function Saludar() {
         return <h1>¡Hola desde un componente!</h1>
       }
-
+    
       // Renderizar el componente
       window.onload = () => {
         const rootEl = document.querySelector('#root')
@@ -1170,14 +1012,9 @@ Vamos a crear un componente simple para entender los conceptos básicos. Actuali
         root.render(<Saludar />)
       }
     </script>
-  </body>
+
+</body>
 </html>
-        
-          
-        
-        
-        
-      
 
 Props: Pasando datos a componentes
 
@@ -1189,12 +1026,6 @@ function Saludar(props) {
 
 // Usar el componente
 // <Saludar nombre="Miguel" />
-        
-          
-        
-        
-        
-      
 
 Destructuring de props
 
@@ -1205,12 +1036,6 @@ function Saludar({ nombre }) {
 }
 
 // uso: <Saludar nombre="Miguel" />
-        
-          
-        
-        
-        
-      
 
 Esto es más limpio que escribir props.nombre cada vez.
 Múltiples props
@@ -1229,12 +1054,6 @@ function Saludar({ nombre, edad, ciudad }) {
 }
 
 // uso: <Saludar nombre="Miguel" edad={25} ciudad="Madrid" />
-        
-          
-        
-        
-        
-      
 
     💡 Nota: Los valores que no son strings se pasan entre llaves: edad={25} en lugar de edad="25".
 
@@ -1255,12 +1074,6 @@ function Saludar({ nombre, color }) {
 
 <Saludar nombre="Miguel" color="#09f" />
 <Saludar nombre="Ana" color="#f90" />
-        
-          
-        
-        
-        
-      
 
 ¿Por qué estilos como objeto?
 
@@ -1274,22 +1087,12 @@ JSX es JavaScript, no HTML. Por eso:
 Comparación:
 
 <!-- HTML normal -->
+
 <h1 style="color: red; font-size: 32px">Hola</h1>
-        
-          
-        
-        
-        
-      
 
 // JSX (JavaScript)
+
 <h1 style={{ color: 'red', fontSize: '32px' }}>Hola</h1>
-        
-          
-        
-        
-        
-      
 
 Estilos inline con props
 
@@ -1305,24 +1108,12 @@ function Saludar({ nombre, color }) {
 
 <Saludar nombre="Miguel" color="blue" />
 <Saludar nombre="Ana" color="green" />
-        
-          
-        
-        
-        
-      
 
 O incluso más corto con la notación de propiedad abreviada:
 
 function Saludar({ nombre, color }) {
   return <h1 style={{ color, fontSize: '32px' }}>¡Hola, {nombre}!</h1>
 }
-        
-          
-        
-        
-        
-      
 
     Cuando la propiedad del objeto tiene el mismo nombre que la variable (color: color), puedes escribir solo color.
 
@@ -1339,8 +1130,11 @@ function Saludar({ nombre, color }) {
 En la próxima clase aprenderemos sobre el estado (useState), que nos permitirá crear componentes interactivos que reaccionan a eventos del usuario.
 
     💡 Recuerda: Los componentes son funciones que retornan JSX. Las props son los datos que reciben. JSX es JavaScript, por eso los estilos son objetos.
+
 ----
+
 <a id="componentes-vs-funciones-normales"></a>
+
 # Componentes vs Funciones normales
 
 Los componentes de React son funciones de JavaScript, pero no todas las funciones de JavaScript son componentes de React. En esta clase vamos a entender cuál es la diferencia y por qué es importante.
@@ -1359,12 +1153,6 @@ function Saludo() {
 
 // Se usa así:
 // <Saludo />
-        
-          
-        
-        
-        
-      
 
 ¿Qué es una función normal?
 
@@ -1377,14 +1165,9 @@ function calcularTotal(precio, iva) {
 
 // Se llama como función
 const total = calcularTotal(100, 0.21)
-        
-          
-        
-        
-        
-      
 
 Diferencias clave
+
 1. Cómo se invocan
 
 Componentes: Se usan como etiquetas JSX
@@ -1395,12 +1178,6 @@ function Boton() {
 
 // Se invoca así:
 // <Boton />
-        
-          
-        
-        
-        
-      
 
 Funciones normales: Se llaman con paréntesis
 
@@ -1410,12 +1187,6 @@ function saludar(nombre) {
 
 // Se invoca así:
 saludar('Miguel')
-        
-          
-        
-        
-        
-      
 
 2. Lo que retornan
 
@@ -1424,12 +1195,6 @@ Componentes: Retornan elementos que React puede renderizar
 function Titulo() {
   return <h1>Mi título</h1> // Retorna JSX
 }
-        
-          
-        
-        
-        
-      
 
 Funciones normales: Retornan cualquier tipo de dato JavaScript
 
@@ -1440,12 +1205,6 @@ function sumar(a, b) {
 function obtenerUsuario() {
   return { nombre: 'Miguel', edad: 25 } // Retorna un objeto
 }
-        
-          
-        
-        
-        
-      
 
 3. Convención de nombres
 
@@ -1454,24 +1213,12 @@ Componentes: PascalCase (primera letra mayúscula)
 function MiComponente() {
   return <div>Hola</div>
 }
-        
-          
-        
-        
-        
-      
 
 Funciones normales: camelCase (primera letra minúscula)
 
 function calcularPrecio() {
   return 100
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué puede renderizar React?
 
@@ -1481,12 +1228,6 @@ React puede renderizar varios tipos de valores:
 function App() {
   return <h1>Hola mundo</h1>
 }
-        
-          
-        
-        
-        
-      
 
 ✅ Strings (texto)
 
@@ -1495,14 +1236,9 @@ function Saludo() {
 }
 
 // También puedes renderizar strings directamente
+
 <div>{'Texto entre llaves'}</div>
 <div>Texto directo</div>
-        
-          
-        
-        
-        
-      
 
 ✅ Números
 
@@ -1511,14 +1247,9 @@ function Contador() {
 }
 
 // También en JSX:
+
 <div>{100}</div>
 <div>{2 + 2}</div>
-        
-          
-        
-        
-        
-      
 
 ✅ null o undefined
 
@@ -1530,12 +1261,6 @@ function Invisible() {
 
 // Uso:
 ;<Invisible /> // No renderiza nada
-        
-          
-        
-        
-        
-      
 
 PascalCase: ¿Por qué es importante?
 
@@ -1552,12 +1277,6 @@ React necesita distinguir entre:
 
 // React ve minúscula = elemento HTML
 <miboton /> // Renderiza un elemento HTML normal
-        
-          
-        
-        
-        
-      
 
 Ejemplo práctico
 
@@ -1576,12 +1295,6 @@ function miComponente() {
 
 // uso: <miComponente />
 // React lo trata como una etiqueta HTML normal
-        
-          
-        
-        
-        
-      
 
 Si usas minúscula, React pensará que es una etiqueta HTML desconocida y no funcionará correctamente.
 Reglas de nomenclatura
@@ -1597,12 +1310,6 @@ function boton() {} // Minúscula
 function miBoton() {} // camelCase
 function BOTON() {} // MAYÚSCULAS (técnicamente funciona, pero no es convención)
 function boton_primario() {} // snake_case
-        
-          
-        
-        
-        
-      
 
 Mezclando componentes y funciones
 
@@ -1627,12 +1334,6 @@ function Producto({ nombre, precio }) {
 
 // Uso del componente
 // <Producto nombre="Laptop" precio={999} />
-        
-          
-        
-        
-        
-      
 
 Cuándo usar cada uno
 Usa componentes cuando:
@@ -1649,12 +1350,6 @@ function Tarjeta({ titulo, descripcion }) {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Usa funciones normales cuando:
 
@@ -1669,12 +1364,6 @@ function validarEmail(email) {
 function obtenerFechaActual() {
   return new Date().toLocaleDateString()
 }
-        
-          
-        
-        
-        
-      
 
 Errores comunes
 ❌ Error 1: Llamar un componente como función
@@ -1688,12 +1377,6 @@ const resultado = Saludo() // No hagas esto
 
 // ✅ Bien
 <Saludo /> // Usa como etiqueta
-        
-          
-        
-        
-        
-      
 
 ❌ Error 2: Usar minúscula para componentes
 
@@ -1706,12 +1389,6 @@ function saludo() {
 function Saludo() {
   return <h1>Hola</h1>
 }
-        
-          
-        
-        
-        
-      
 
 ❌ Error 3: Intentar renderizar objetos
 
@@ -1729,12 +1406,6 @@ function Usuario() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 El último repaso:
 
@@ -1748,8 +1419,11 @@ El último repaso:
 En la próxima clase aprenderemos sobre el estado con useState, que nos permitirá crear componentes interactivos que reaccionan a las acciones del usuario.
 
     💡 Recuerda: Los componentes son funciones especiales que retornan JSX y usan PascalCase. Las funciones normales ayudan con la lógica pero no se renderizan directamente.
+
 ---
+
 <a id="creando-jobcard-componente-real"></a>
+
 # Creando JobCard: Nuestro primer componente real
 
 Hasta ahora hemos aprendido qué es JSX, qué son los componentes y cómo se diferencian de las funciones normales. Ahora es el momento de aplicar todo ese conocimiento creando un componente real para nuestra aplicación DevJobs.
@@ -1760,6 +1434,7 @@ Vamos a crear un componente que muestre una tarjeta de empleo. Este componente s
 Actualiza tu archivo react.html con este código completo:
 
 <!DOCTYPE html>
+
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -1768,7 +1443,7 @@ Actualiza tu archivo react.html con este código completo:
     <link rel="stylesheet" href="./styles.css" />
   </head>
 
-  <body>
+<body>
     <div id="root"></div>
 
     <script type="module">
@@ -1777,9 +1452,9 @@ Actualiza tu archivo react.html con este código completo:
       window.React = React
       window.ReactDOMClient = ReactDOM
     </script>
-
+    
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
+    
     <script type="text/babel">
       // Componente JobCard con múltiples props
       function JobCard({ titulo, empresa, ubicacion, descripcion }) {
@@ -1796,7 +1471,7 @@ Actualiza tu archivo react.html con este código completo:
           </article>
         )
       }
-
+    
       // Componente App
       function App() {
         return (
@@ -1819,7 +1494,7 @@ Actualiza tu archivo react.html con este código completo:
           </section>
         )
       }
-
+    
       // Renderizar
       window.onload = () => {
         const rootEl = document.querySelector('#root')
@@ -1827,18 +1502,14 @@ Actualiza tu archivo react.html con este código completo:
         root.render(<App />)
       }
     </script>
-  </body>
+
+</body>
 </html>
-        
-          
-        
-        
-        
-      
 
 ¿Qué está pasando aquí?
 
 Vamos a analizar cada parte del código en detalle.
+
 1. Componente con múltiples props
 
 function JobCard({ titulo, empresa, ubicacion, descripcion }) {
@@ -1853,12 +1524,6 @@ function JobCard({ titulo, empresa, ubicacion, descripcion }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Este componente:
 
@@ -1890,12 +1555,6 @@ function JobCard({ titulo, empresa }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 2. Componente App que compone otros componentes
 
@@ -1920,12 +1579,6 @@ function App() {
     </section>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Aquí vemos la composición de componentes:
 
@@ -1943,12 +1596,6 @@ Ventajas de la composición:
 3. Renderizamos el componente principal
 
 root.render(<App />)
-        
-          
-        
-        
-        
-      
 
 Solo renderizamos App, y React automáticamente renderiza todos los componentes hijos. No necesitamos renderizar cada JobCard individualmente.
 Comparación con JavaScript vanilla
@@ -1969,12 +1616,6 @@ jobs.forEach((job) => {
     <button class="button-apply-job">Aplicar</button>`
   container.appendChild(article)
 })
-        
-          
-        
-        
-        
-      
 
 Problemas con este enfoque:
 
@@ -2010,12 +1651,6 @@ function JobCard({ titulo, empresa, ubicacion, descripcion }) {
   descripcion={job.descripcion}
 />
 */
-        
-          
-        
-        
-        
-      
 
 Ventajas de React:
 
@@ -2070,12 +1705,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Principio de responsabilidad única:
 
@@ -2149,12 +1778,6 @@ function App() {
     </section>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ahora estamos usando datos reales en lugar de strings hardcodeados. En la próxima clase veremos cómo hacer esto de forma más elegante con .map().
 Ejercicio práctico
@@ -2192,14 +1815,9 @@ function JobCard({ titulo, empresa, ubicacion, descripcion, salario, modalidad, 
   nivel="Senior"
 />
 */
-        
-          
-        
-        
-        
-      
 
 Buenas prácticas con componentes
+
 1. Un componente, una responsabilidad
 
 Cada componente debe hacer una sola cosa y hacerla bien:
@@ -2221,12 +1839,6 @@ function JobCompany({ empresa, ubicacion }) {
 function EverythingComponent({ titulo, empresa, ubicacion, descripcion, usuario, configuracion }) {
   // Demasiadas responsabilidades
 }
-        
-          
-        
-        
-        
-      
 
 2. Nombres descriptivos
 
@@ -2241,12 +1853,6 @@ function NavigationMenu() {}
 function Item() {} // Demasiado genérico
 function Thing() {} // No descriptivo
 function Comp1() {} // Nada claro
-        
-          
-        
-        
-        
-      
 
 3. Props claras y descriptivas
 
@@ -2267,12 +1873,6 @@ function Button({ t, oc, d }) {
     </button>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Lo que hemos aprendido
 
@@ -2288,7 +1888,9 @@ En la próxima clase aprenderemos sobre el estado con useState, que nos permitir
     💡 Recuerda: Los componentes son bloques de construcción reutilizables. Divide tu UI en componentes pequeños y composables para crear aplicaciones más mantenibles.
 
 ----
+
 <a id="eventos-en-react"></a>
+
 # Eventos en React
 
 Hasta ahora nuestros componentes son estáticos: muestran información pero no responden a las acciones del usuario. En esta clase vamos a aprender a manejar eventos como clicks, cambios en inputs, envío de formularios, etc.
@@ -2332,16 +1934,11 @@ function JobCard({ titulo, empresa, ubicacion, descripcion }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué cambió?
 
 Analicemos las novedades paso a paso.
+
 1. Función manejadora de eventos
 
 function JobCard({ titulo, empresa, ubicacion, descripcion }) {
@@ -2361,12 +1958,6 @@ function JobCard({ titulo, empresa, ubicacion, descripcion }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Puntos clave:
 
@@ -2377,12 +1968,6 @@ Puntos clave:
 2. Sintaxis de eventos en React
 
 <button onClick={handleAplicar}>Aplicar</button>
-        
-          
-        
-        
-        
-      
 
 Importante:
 
@@ -2398,12 +1983,6 @@ Importante:
 
 // ✅ Alternativa con función inline
 <button onClick={() => alert('Click!')}>Aplicar</button>
-        
-          
-        
-        
-        
-      
 
 Pruébalo
 
@@ -2428,12 +2007,6 @@ const handleChange = () => {
 const handleAplicar = () => {
   /* ... */
 }
-        
-          
-        
-        
-        
-      
 
 Esto hace el código más legible: cuando ves handleAlgo, sabes que es un manejador de eventos.
 Comparación con JavaScript vanilla
@@ -2453,12 +2026,6 @@ jobsListingSection.addEventListener('click', function (event) {
     element.disabled = true
   }
 })
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -2474,12 +2041,6 @@ const handleAplicar = () => {
 }
 
 ;<button onClick={handleAplicar}>Aplicar</button>
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -2497,12 +2058,6 @@ A veces es útil definir la función directamente en el onClick:
 function JobCard({ titulo, empresa }) {
   return <button onClick={() => alert(`Aplicando a ${titulo}`)}>Aplicar</button>
 }
-        
-          
-        
-        
-        
-      
 
 ¿Cuándo usar cada enfoque?
 Función separada (recomendado)
@@ -2515,12 +2070,6 @@ function JobCard({ titulo }) {
 
   return <button onClick={handleClick}>Aplicar</button>
 }
-        
-          
-        
-        
-        
-      
 
 ✅ Mejor cuando:
 
@@ -2531,12 +2080,6 @@ function JobCard({ titulo }) {
 Función inline
 
 <button onClick={() => alert('Click!')}>Aplicar</button>
-        
-          
-        
-        
-        
-      
 
 ✅ Mejor cuando:
 
@@ -2556,6 +2099,7 @@ function JobCard({ titulo, empresa, ubicacion, descripcion }) {
     console.log('Descripción:', descripcion)
 
     alert(`Has aplicado a ${titulo} en ${empresa}`)
+
   }
 
   return (
@@ -2565,12 +2109,6 @@ function JobCard({ titulo, empresa, ubicacion, descripcion }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Esto es posible gracias a los closures de JavaScript: la función handleAplicar “recuerda” las variables del ámbito donde fue creada.
 Tipos de eventos comunes
@@ -2579,22 +2117,10 @@ React soporta todos los eventos del navegador. Los más comunes:
 onClick - Click del ratón
 
 <button onClick={() => console.log('Click!')}>Haz click</button>
-        
-          
-        
-        
-        
-      
 
 onChange - Cambio en un input
 
 <input onChange={(e) => console.log('Valor:', e.target.value)} />
-        
-          
-        
-        
-        
-      
 
 onSubmit - Envío de formulario
 
@@ -2606,34 +2132,16 @@ onSubmit - Envío de formulario
 >
   <button type="submit">Enviar</button>
 </form>
-        
-          
-        
-        
-        
-      
 
 onMouseEnter / onMouseLeave - Hover
 
 <div onMouseEnter={() => console.log('Entrando')} onMouseLeave={() => console.log('Saliendo')}>
   Pasa el ratón
 </div>
-        
-          
-        
-        
-        
-      
 
 onKeyDown / onKeyUp - Teclas
 
 <input onKeyDown={(e) => console.log('Tecla:', e.key)} />
-        
-          
-        
-        
-        
-      
 
 El objeto evento (event)
 
@@ -2648,12 +2156,6 @@ function JobCard({ titulo }) {
 
   return <button onClick={handleAplicar}>Aplicar</button>
 }
-        
-          
-        
-        
-        
-      
 
 Propiedades útiles del evento
 
@@ -2664,12 +2166,6 @@ const handleClick = (event) => {
   event.currentTarget // Elemento al que está adjunto el evento
   event.type // Tipo de evento ('click', 'change', etc.)
 }
-        
-          
-        
-        
-        
-      
 
 Ejemplo práctico con preventDefault
 
@@ -2686,12 +2182,6 @@ function Formulario() {
     </form>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Pasando argumentos a los manejadores
 
@@ -2705,12 +2195,6 @@ function JobCard({ titulo, id }) {
 
   return <button onClick={() => handleAplicar(id)}>Aplicar</button>
 }
-        
-          
-        
-        
-        
-      
 
 Opción 2: Con el evento
 
@@ -2722,12 +2206,6 @@ function JobCard({ titulo, id }) {
 
   return <button onClick={(e) => handleAplicar(e, id)}>Aplicar</button>
 }
-        
-          
-        
-        
-        
-      
 
 Múltiples eventos en un componente
 
@@ -2755,12 +2233,6 @@ function JobCard({ titulo, empresa }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Limitaciones actuales
 
@@ -2797,8 +2269,11 @@ Lo que hemos aprendido de los eventos de React
 En la próxima clase aprenderemos sobre el estado con useState, que nos permitirá crear componentes que cambian en respuesta a eventos.
 
     💡 Recuerda: Los eventos en React usan camelCase (onClick) y reciben referencias a funciones, no llamadas (onClick={handleClick}, no onClick={handleClick()}).
+
 ---
+
 <a id="estado-con-usestate"></a>
+
 # Estado con useState
 
 En la clase anterior aprendimos a manejar eventos, pero los componentes no recordaban nada. Cuando hacías clic en “Aplicar”, se ejecutaba la función pero el botón no cambiaba visualmente. Ahora vamos a solucionar eso con el estado.
@@ -2826,12 +2301,6 @@ Hasta ahora, nuestros componentes son estáticos:
 function Boton() {
   return <button>Haz clic</button>
 }
-        
-          
-        
-        
-        
-      
 
 Este botón siempre dice “Haz clic”. No puede recordar si ya hiciste clic.
 
@@ -2842,12 +2311,6 @@ function Boton() {
 
   return <button onClick={() => setClicks(clicks + 1)}>Clicks: {clicks}</button>
 }
-        
-          
-        
-        
-        
-      
 
 Ahora el botón recuerda cuántas veces has hecho clic.
 Gestionando estado con useState
@@ -2883,12 +2346,6 @@ function JobCard({ titulo, empresa, ubicacion, descripcion }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué cambió?
 
@@ -2919,22 +2376,10 @@ function JobCard({ titulo, empresa, ubicacion, descripcion }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Desglose de useState
 
 const [aplicado, setAplicado] = React.useState(false)
-        
-          
-        
-        
-        
-      
 
 ¿Qué significa esto?
 
@@ -2951,12 +2396,6 @@ const setAplicado = resultado[1] // La función
 
 // Destructuring hace esto más simple:
 const [aplicado, setAplicado] = React.useState(false)
-        
-          
-        
-        
-        
-      
 
 Cómo funciona el flujo
 
@@ -2974,22 +2413,18 @@ Usando el estado en el JSX
 <button
   className={aplicado ? 'button-apply-job is-applied' : 'button-apply-job'}
   disabled={aplicado}
->
+
+> 
+
   {aplicado ? '¡Aplicado!' : 'Aplicar'}
 </button>
-        
-          
-        
-        
-        
-      
 
 Tres cosas cambian según el estado:
 
     className - Si aplicado es true, añade la clase is-applied
     disabled - Deshabilita el botón cuando aplicado es true
     Texto - Cambia de “Aplicar” a “¡Aplicado!”
-
+    
     Nota sobre accesibilidad: Cuando cambias el estado de un botón dinámicamente (como cambiar el texto de “Aplicar” a “¡Aplicado!”), React actualiza el DOM y los lectores de pantalla generalmente detectan estos cambios automáticamente. El atributo disabled también se anuncia correctamente. Si necesitas anunciar cambios más complejos o importantes, considera usar aria-live regions o aria-label para proporcionar contexto adicional sobre el cambio de estado.
 
 Operador ternario
@@ -2997,22 +2432,10 @@ Operador ternario
 {
   aplicado ? '¡Aplicado!' : 'Aplicar'
 }
-        
-          
-        
-        
-        
-      
 
 Esto es un operador ternario:
 
 condición ? siVerdadero : siFalso
-        
-          
-        
-        
-        
-      
 
 Es como un if/else en una línea:
 
@@ -3025,12 +2448,6 @@ if (aplicado) {
 
 // Con operador ternario (funciona en JSX)
 aplicado ? '¡Aplicado!' : 'Aplicar'
-        
-          
-        
-        
-        
-      
 
 Comparación completa: Antes vs Ahora
 
@@ -3052,12 +2469,6 @@ jobsListingSection.addEventListener('click', function (event) {
     element.disabled = true
   }
 })
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -3078,12 +2489,6 @@ function JobCard({ titulo, empresa, ubicacion, descripcion }) {
     </button>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -3099,12 +2504,6 @@ Mira esto: tenemos dos tarjetas de empleo:
 
 <JobCard titulo="Frontend Developer" />
 <JobCard titulo="Backend Developer" />
-        
-          
-        
-        
-        
-      
 
 Cada una tiene su propio estado independiente:
 
@@ -3116,6 +2515,7 @@ Cada una tiene su propio estado independiente:
 
 Porque cada vez que usas <JobCard />, React crea una instancia nueva con su propio estado.
 Reglas de useState
+
 1. Solo en el nivel superior
 
 // ✅ Correcto: en el nivel superior del componente
@@ -3139,12 +2539,6 @@ function JobCard() {
   }
   return <button>Aplicar</button>
 }
-        
-          
-        
-        
-        
-      
 
 2. Solo en componentes de React
 
@@ -3157,12 +2551,6 @@ function MiComponente() {
 function miFuncion() {
   const [estado, setEstado] = React.useState(0) // Error!
 }
-        
-          
-        
-        
-        
-      
 
 3. Nunca modificar el estado directamente
 
@@ -3173,12 +2561,6 @@ aplicado = true // No funciona y es un error
 
 // ✅ Correcto: usar la función set
 setAplicado(true)
-        
-          
-        
-        
-        
-      
 
 Tipos de valores en useState
 
@@ -3187,56 +2569,26 @@ Booleanos
 
 const [activo, setActivo] = React.useState(false)
 const [visible, setVisible] = React.useState(true)
-        
-          
-        
-        
-        
-      
 
 Números
 
 const [contador, setContador] = React.useState(0)
 const [edad, setEdad] = React.useState(25)
-        
-          
-        
-        
-        
-      
 
 Strings
 
 const [nombre, setNombre] = React.useState('')
 const [mensaje, setMensaje] = React.useState('Hola')
-        
-          
-        
-        
-        
-      
 
 Arrays
 
 const [empleos, setEmpleos] = React.useState([])
 const [numeros, setNumeros] = React.useState([1, 2, 3])
-        
-          
-        
-        
-        
-      
 
 Objetos
 
 const [usuario, setUsuario] = React.useState({ nombre: 'Miguel', edad: 25 })
 const [config, setConfig] = React.useState({ tema: 'oscuro', idioma: 'es' })
-        
-          
-        
-        
-        
-      
 
 Ejemplo práctico: Contador
 
@@ -3254,12 +2606,6 @@ function Contador() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué pasa aquí?
 
@@ -3289,12 +2635,6 @@ function JobCard({ titulo, empresa }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Cada estado es independiente y se puede actualizar por separado.
 Actualizando estado basado en el valor anterior
@@ -3316,12 +2656,6 @@ function Contador() {
 
   return <button onClick={incrementar}>Incrementar</button>
 }
-        
-          
-        
-        
-        
-      
 
 ¿Cuándo usar la función?
 
@@ -3344,7 +2678,9 @@ En la próxima clase aprenderemos a renderizar listas de elementos dinámicament
     💡 Recuerda: El estado es la memoria del componente. Cuando el estado cambia, React re-renderiza automáticamente. Nunca modifiques el estado directamente, siempre usa la función set.
 
 ---
+
 <a id="renderizado-y-virtual-dom"></a>
+
 # Renderizado y Virtual DOM
 
 Ya sabemos que cuando cambiamos el estado con useState, la interfaz se actualiza automáticamente. Pero ¿qué está pasando por debajo? ¿Cómo sabe React qué actualizar? En esta clase vamos a entenderlo.
@@ -3360,12 +2696,6 @@ function Saludo() {
 // 1. Ejecuta la función Saludo()
 // 2. Obtiene el JSX: <h1>Hola</h1>
 // 3. Lo convierte en elementos del DOM
-        
-          
-        
-        
-        
-      
 
 Re-renderizado: Cuando cambia el estado
 
@@ -3407,12 +2737,6 @@ function JobCard({ titulo, empresa, ubicacion, descripcion }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Prueba esto
 
@@ -3428,24 +2752,12 @@ Verás algo así:
 📊 Estado actual de aplicado: false
 🔄 JobCard se está renderizando. Título: Ingeniero de Software Senior
 📊 Estado actual de aplicado: false
-        
-          
-        
-        
-        
-      
 
 Y cuando haces click en el primer botón:
 
 👆 Click en aplicar
 🔄 JobCard se está renderizando. Título: Desarrollador Frontend
 📊 Estado actual de aplicado: true
-        
-          
-        
-        
-        
-      
 
 ¿Qué está pasando?
 
@@ -3453,11 +2765,11 @@ Y cuando haces click en el primer botón:
         React ejecuta cada componente JobCard
         aplicado empieza en false
         Se muestra “Aplicar”
-
+    
     Usuario hace click:
         Se ejecuta handleAplicar
         Llama a setAplicado(true)
-
+    
     React detecta el cambio de estado:
         Vuelve a ejecutar la función JobCard
         Esta vez aplicado es true
@@ -3490,12 +2802,6 @@ El ciclo de vida del renderizado
 │     • React compara con el anterior     │
 │     • Actualiza solo lo que cambió      │
 └─────────────────────────────────────────┘
-        
-          
-        
-        
-        
-      
 
 ¿Por qué no se pierde el estado?
 
@@ -3508,12 +2814,6 @@ function JobCard() {
   // ↑ Esto NO crea un nuevo estado cada vez
   // React lo mantiene guardado y te lo devuelve
 }
-        
-          
-        
-        
-        
-      
 
 Cómo funciona:
 
@@ -3528,12 +2828,6 @@ React mantiene internamente:
   posición: 0,
   estado: true  ← Este valor se mantiene entre renders
 }
-        
-          
-        
-        
-        
-      
 
 Virtual DOM: La magia de React
 
@@ -3544,12 +2838,6 @@ Si actualizáramos el DOM manualmente cada vez:
 
 // Esto es ineficiente
 element.innerHTML = '<button>¡Aplicado!</button>' // Recrea todo el elemento
-        
-          
-        
-        
-        
-      
 
 Recrear elementos del DOM es lento y puede causar:
 
@@ -3602,12 +2890,6 @@ React usa un Virtual DOM (DOM Virtual):
 │     • element.disabled = true                │
 │     • element.classList.add('is-applied')    │
 └──────────────────────────────────────────────┘
-        
-          
-        
-        
-        
-      
 
 Ejemplo visual
 
@@ -3624,12 +2906,6 @@ function JobCard({ titulo }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Cuando haces click:
 
@@ -3646,30 +2922,20 @@ Virtual DOM antes:          Virtual DOM después:
 
 React actualiza solo:
 → button.textContent = '¡Aplicado!'
-        
-          
-        
-        
-        
-      
 
 No toca el <h3> ni el <p> porque no cambiaron. ¡Súper eficiente!
 Ventajas del Virtual DOM
+
 1. Rendimiento optimizado
 
 // Si tienes 100 empleos y cambias uno:
+
 <div>
   <JobCard /> ← No se actualiza
   <JobCard /> ← No se actualiza
   <JobCard /> ← SOLO ESTE se actualiza
   <JobCard /> ← No se actualiza ...97 más
 </div>
-        
-          
-        
-        
-        
-      
 
 React solo actualiza el componente que cambió, no los otros 99.
 2. Batch Updates (Agrupación de actualizaciones)
@@ -3687,12 +2953,6 @@ function JobCard() {
     // y hace UN SOLO re-render, no dos
   }
 }
-        
-          
-        
-        
-        
-      
 
 3. Previene actualizaciones innecesarias
 
@@ -3702,12 +2962,6 @@ const [count, setCount] = React.useState(0)
 
 setCount(0) // Ya es 0
 // React detecta que no cambió y NO re-renderiza
-        
-          
-        
-        
-        
-      
 
 Comparación: Vanilla JS vs React
 Vanilla JS
@@ -3718,12 +2972,6 @@ button.classList.add('is-applied')
 button.disabled = true
 
 // Si te olvidas de algo, hay inconsistencias
-        
-          
-        
-        
-        
-      
 
 React con Virtual DOM
 
@@ -3735,12 +2983,6 @@ setAplicado(true)
 // 2. Generar nuevo Virtual DOM
 // 3. Comparar con el anterior
 // 4. Actualizar solo lo necesario
-        
-          
-        
-        
-        
-      
 
 Cuando NO se re-renderiza
 
@@ -3755,12 +2997,6 @@ function JobCard() {
   const [aplicado, setAplicado] = React.useState(false)
   setAplicado(true) // Esto SÍ actualiza la UI
 }
-        
-          
-        
-        
-        
-      
 
 Variables normales se resetean en cada render:
 
@@ -3773,12 +3009,6 @@ function JobCard() {
     console.log(contador) // ...pero se pierde en el próximo render
   }
 }
-        
-          
-        
-        
-        
-      
 
 Re-renderizado por props
 
@@ -3799,12 +3029,6 @@ function App() {
 // 1. App se re-renderiza
 // 2. JobCard recibe nueva prop
 // 3. JobCard también se re-renderiza
-        
-          
-        
-        
-        
-      
 
 Visualizando los re-renders
 
@@ -3826,23 +3050,11 @@ function Counter({ count }) {
   console.log('🔵 Counter se renderiza con count:', count)
   return <p>Count: {count}</p>
 }
-        
-          
-        
-        
-        
-      
 
 Al hacer click verás:
 
 🟢 App se renderiza
 🔵 Counter se renderiza con count: 1
-        
-          
-        
-        
-        
-      
 
 Ambos se re-renderizan porque:
 
@@ -3865,7 +3077,9 @@ En la próxima clase aprenderemos a renderizar listas de elementos dinámicament
     💡 Recuerda: Cuando el estado cambia, React re-ejecuta el componente, compara el Virtual DOM antiguo con el nuevo, y actualiza solo lo que cambió en el DOM real. ¡Por eso React es tan rápido!
 
 ----
+
 <a id="vite-empaquetador-moderno"></a>
+
 # Vite: Empaquetador moderno
 
 Hasta ahora hemos usado React directamente en el navegador con un simple archivo HTML. Esto está bien para aprender, pero en proyectos reales necesitamos herramientas más potentes. Aquí es donde entra Vite.
@@ -3892,12 +3106,6 @@ proyecto/
 │   │   └── variables.css
 │   └── App.jsx
 └── index.html
-        
-          
-        
-        
-        
-      
 
 Problemas sin un empaquetador:
 
@@ -3912,12 +3120,6 @@ Solución con un empaquetador:
 
 Tus archivos → Empaquetador → Archivos optimizados para producción
   (100+ archivos)                      (1-3 archivos)
-        
-          
-        
-        
-        
-      
 
 El empaquetador:
 
@@ -3979,12 +3181,6 @@ Desventajas:
 ❌ Menos maduro
 ❌ Menos plugins
 ❌ No tan optimizado para producción
-        
-          
-        
-        
-        
-      
 
 Nota: Vite, a día de hoy (octubre 2025), usa esbuild internamente para el desarrollo.
 Turbopack
@@ -3998,14 +3194,9 @@ Ventajas:
 Desventajas:
 ❌ Aún en beta (no estable)
 ❌ Solo funciona con Next.js por ahora
-        
-          
-        
-        
-        
-      
 
 ¿Por qué Vite es ideal para React?
+
 1. Configuración instantánea
 
 Un proyecto React con Vite se crea y está listo para trabajar en segundos. No necesitas configurar nada.
@@ -4024,12 +3215,6 @@ function App() {
 }
 
 // Y se actualiza INSTANTÁNEAMENTE sin perder el estado
-        
-          
-        
-        
-        
-      
 
 Si tienes un formulario con datos, no se pierden al hacer cambios en el código.
 3. Importaciones naturales
@@ -4047,12 +3232,6 @@ import logo from './assets/logo.png'
 
 // JSON
 import data from './data.json'
-        
-          
-        
-        
-        
-      
 
 4. Build optimizado
 
@@ -4080,12 +3259,6 @@ Vite transforma App.jsx on-demand
 Navegador pide componentes importados
        ↓
 Vite transforma solo lo necesario
-        
-          
-        
-        
-        
-      
 
 Ventaja: Solo procesa lo que realmente se usa. Arranque instantáneo.
 En producción
@@ -4101,12 +3274,6 @@ dist/
 ├── assets/
 │   ├── index-a1b2c3d4.js  (minificado)
 │   └── index-e5f6g7h8.css (minificado)
-        
-          
-        
-        
-        
-      
 
 Ventaja: Todo optimizado al máximo para rendimiento.
 ES Modules: La tecnología detrás de Vite
@@ -4114,16 +3281,11 @@ ES Modules: La tecnología detrás de Vite
 Vite aprovecha los ES Modules nativos del navegador:
 
 <!-- Los navegadores modernos entienden esto: -->
+
 <script type="module">
   import { useState } from 'react'
   import App from './App.jsx'
 </script>
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -4153,12 +3315,6 @@ export default defineConfig({
     // Puedes añadir más plugins aquí
   ],
 })
-        
-          
-        
-        
-        
-      
 
 Plugins populares:
 
@@ -4183,6 +3339,7 @@ En la próxima clase vamos a crear nuestro primer proyecto React con Vite y ver�
     💡 Recuerda: Vite es la herramienta moderna recomendada para proyectos React. Es extremadamente rápido porque usa ES Modules nativos en desarrollo y solo procesa lo que realmente necesitas. ¡Prepárate para una experiencia de desarrollo increíblemente rápida!
 
 ----
+
 <a id="instalacion-de-vite"></a>
 Instalación de Vite
 
@@ -4197,13 +3354,8 @@ Node.js
 Node.js es un entorno de ejecución de JavaScript que te permite ejecutar JavaScript fuera del navegador, directamente en tu computadora.
 
 # Puedes ejecutar JavaScript en la terminal
+
 node script.js
-        
-          
-        
-        
-        
-      
 
 ¿Por qué lo necesitamos?
 
@@ -4232,16 +3384,12 @@ Si no tienes Node.js instalado:
     Verifica la instalación:
 
 node --version
+
 # Debería mostrar algo como: v22.x.x
 
 npm --version
+
 # Debería mostrar algo como: 11.x.x
-        
-          
-        
-        
-        
-      
 
 Creando un proyecto con Vite
 
@@ -4251,12 +3399,6 @@ Paso 1: Crear el proyecto
 Abre tu terminal y ejecuta:
 
 npm create vite@latest
-        
-          
-        
-        
-        
-      
 
 Este comando:
 
@@ -4271,12 +3413,6 @@ Te preguntará:
 1. Project name:
 
 ? Project name: › devjobs-react
-        
-          
-        
-        
-        
-      
 
 Escribe el nombre de tu proyecto. Por ejemplo: devjobs-react
 
@@ -4292,12 +3428,6 @@ Escribe el nombre de tu proyecto. Por ejemplo: devjobs-react
   Solid
   Qwik
   Others
-        
-          
-        
-        
-        
-      
 
 Usa las flechas para seleccionar React y presiona Enter.
 
@@ -4308,12 +3438,6 @@ Usa las flechas para seleccionar React y presiona Enter.
 ❯ TypeScript + SWC
   JavaScript
   JavaScript + SWC
-        
-          
-        
-        
-        
-      
 
 Selecciona JavaScript + SWC y presiona Enter.
 ¿Por qué SWC?
@@ -4330,12 +3454,6 @@ SWC vs Babel:
 
 Babel:        ████████████████ (100s)
 SWC:          █ (5s)
-        
-          
-        
-        
-        
-      
 
 ¿Por qué lo usamos?
 
@@ -4348,22 +3466,10 @@ Paso 3: Instalar dependencias
 Una vez creado el proyecto, entra a la carpeta:
 
 cd devjobs-react
-        
-          
-        
-        
-        
-      
 
 E instala las dependencias:
 
 npm install
-        
-          
-        
-        
-        
-      
 
 Esto instala:
 
@@ -4378,12 +3484,6 @@ npm lee el archivo package.json que Vite creó, descarga todas las librerías li
 Paso 4: Iniciar el servidor de desarrollo
 
 npm run dev
-        
-          
-        
-        
-        
-      
 
 Verás algo como:
 
@@ -4392,12 +3492,6 @@ Verás algo como:
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
-        
-          
-        
-        
-        
-      
 
 Abre tu navegador en http://localhost:5173/ y verás tu aplicación React funcionando.
 Estructura del proyecto
@@ -4420,19 +3514,15 @@ devjobs-react/
 ├── package.json        # Configuración del proyecto y dependencias
 ├── package-lock.json   # Versiones exactas de dependencias
 └── vite.config.js      # Configuración de Vite
-        
-          
-        
-        
-        
-      
 
 Archivos importantes
 
 Veamos los archivos más importantes y qué hace cada uno.
+
 1. index.html - El HTML principal
 
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -4445,12 +3535,6 @@ Veamos los archivos más importantes y qué hace cada uno.
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace?
 
@@ -4461,16 +3545,12 @@ Veamos los archivos más importantes y qué hace cada uno.
 Diferencias con lo que hacíamos antes:
 
 <!-- Antes: cargábamos React desde CDN -->
+
 <script src="https://esm.sh/react"></script>
 
 <!-- Ahora: Vite lo gestiona por nosotros -->
+
 <script type="module" src="/src/main.jsx"></script>
-        
-          
-        
-        
-        
-      
 
 2. main.jsx - Punto de entrada de React
 
@@ -4484,12 +3564,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 )
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace?
 
@@ -4504,19 +3578,13 @@ React.StrictMode:
 <React.StrictMode>
   <App />
 </React.StrictMode>
-        
-          
-        
-        
-        
-      
 
 Es un componente especial que:
 
     Detecta problemas potenciales en tu código
     Solo funciona en desarrollo (no afecta producción)
     Hace que los componentes se rendericen dos veces para encontrar bugs
-
+    
     💡 Nota sobre los archivos .jsx: Los archivos con extensión .jsx le indican a Vite que contienen código JSX que necesita ser compilado. Vite detecta automáticamente estos archivos y los transforma usando SWC.
 
 3. App.jsx - Componente principal
@@ -4536,12 +3604,6 @@ function App() {
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace?
 
@@ -4557,12 +3619,6 @@ const [count, setCount] = React.useState(0)
 // Ahora (con módulos)
 import { useState } from 'react'
 const [count, setCount] = useState(0)
-        
-          
-        
-        
-        
-      
 
 4. package.json - Configuración del proyecto
 
@@ -4585,12 +3641,6 @@ const [count, setCount] = useState(0)
     "vite": "^7.0.0"
   }
 }
-        
-          
-        
-        
-        
-      
 
 Secciones importantes:
 
@@ -4598,11 +3648,11 @@ Secciones importantes:
         npm run dev - Inicia el servidor de desarrollo
         npm run build - Crea la versión de producción
         npm run preview - Vista previa de la build de producción
-
+    
     dependencies - Librerías que tu app necesita:
         react - La biblioteca de React
         react-dom - Para renderizar en el navegador
-
+    
     devDependencies - Herramientas de desarrollo:
         vite - El build tool
         @vitejs/plugin-react-swc - Plugin para usar SWC con React
@@ -4615,12 +3665,6 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
 })
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace?
 
@@ -4631,12 +3675,6 @@ Comandos útiles
 Desarrollo
 
 npm run dev
-        
-          
-        
-        
-        
-      
 
 Inicia el servidor de desarrollo en http://localhost:5173/
 
@@ -4649,12 +3687,6 @@ Características:
 Build para producción
 
 npm run build
-        
-          
-        
-        
-        
-      
 
 Crea una versión optimizada en la carpeta dist/:
 
@@ -4666,29 +3698,19 @@ Crea una versión optimizada en la carpeta dist/:
 Vista previa de producción
 
 npm run preview
-        
-          
-        
-        
-        
-      
 
 Sirve la build de producción localmente para probarla antes de desplegar.
 Diferencias clave con el HTML directo
 Antes (HTML + CDN)
 
 <script src="https://esm.sh/react"></script>
+
 <script src="https://unpkg.com/@babel/standalone"></script>
+
 <script type="text/babel">
   const [count, setCount] = React.useState(0)
   // Todo en un solo archivo
 </script>
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -4706,12 +3728,6 @@ function App() {
   const [count, setCount] = useState(0)
   // ...
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -4731,12 +3747,6 @@ Los archivos con extensión .jsx indican que contienen código JSX que necesita 
 function App() {
   return <h1>Hola</h1> // ← Esto es JSX
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué es importante?
 
@@ -4749,12 +3759,6 @@ function App() {
 
 App.js   ← JavaScript puro (sin JSX)
 App.jsx  ← JavaScript con JSX
-        
-          
-        
-        
-        
-      
 
 ¿Puedes usar .js con JSX?
 
@@ -4771,12 +3775,6 @@ export default function App() {
 export default function App() {
   return <h1>Hola</h1>
 }
-        
-          
-        
-        
-        
-      
 
 Resumen de la clase
 
@@ -4792,8 +3790,11 @@ Resumen de la clase
 En la próxima clase empezaremos a migrar nuestra aplicación DevJobs a este nuevo proyecto de Vite, creando componentes organizados en archivos separados.
 
     💡 Recuerda: Vite + SWC es la combinación moderna para desarrollo React. Es rápido, simple y es lo que usan las empresas actualmente.
+
 ----
+
 <a id="fast-refresh"></a>
+
 # Fast Refresh y Actualizaciones de Estado
 
 En esta clase vamos a entender dos conceptos importantes: Fast Refresh (una característica que hace que tu desarrollo sea más rápido) y la forma correcta de actualizar el estado cuando depende de su valor anterior.
@@ -4814,12 +3815,6 @@ function Contador() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Sin Fast Refresh:
 
@@ -4851,12 +3846,6 @@ Hot Module Replacement (HMR)
 
 HMR: "Cambió el archivo CSS → Actualizo solo el CSS"
 HMR: "Cambió el archivo JS → Actualizo ese módulo"
-        
-          
-        
-        
-        
-      
 
 Fast Refresh
 
@@ -4867,23 +3856,11 @@ Fast Refresh
     ✨ Construido sobre HMR (lo usa por debajo)
 
 Fast Refresh: "Cambió el componente → Actualizo Y mantengo el estado"
-        
-          
-        
-        
-        
-      
 
 En resumen
 
 HMR = Reemplaza código sin recargar la página
 Fast Refresh = HMR + Preservar estado de React
-        
-          
-        
-        
-        
-      
 
 Fast Refresh usa HMR como base, pero añade inteligencia específica de React para mantener el estado.
 Actualizando estado: Callback vs Valor directo
@@ -4909,12 +3886,6 @@ function Contador() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿El resultado? ❌ Solo suma 1, no 3
 ¿Por qué pasa esto?
@@ -4931,12 +3902,6 @@ const incrementarTresVeces = () => {
   // React aplica las actualizaciones después
   // Como todas dicen "poner en 1", el resultado es 1
 }
-        
-          
-        
-        
-        
-      
 
 Es como si dijeras tres veces: “pon el contador en 1”, en lugar de “suma 1 al contador”.
 La solución: Usar un callback
@@ -4959,23 +3924,11 @@ function Contador() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ahora sí funciona correctamente: ✅ Suma 3
 ¿Cómo funciona el callback?
 
 setCount((prevCount) => prevCount + 1)
-        
-          
-        
-        
-        
-      
 
 Le dices a React: “Dame el valor más reciente y yo te devuelvo el nuevo valor”
 
@@ -4991,12 +3944,6 @@ const incrementarTresVeces = () => {
 
   // Resultado final: 3 ✅
 }
-        
-          
-        
-        
-        
-      
 
 React procesa las actualizaciones en orden, usando siempre el valor más reciente.
 ¿Cuándo usar cada forma?
@@ -5006,12 +3953,6 @@ Valor directo (forma simple)
 setNombre('Miguel')
 setMostrar(true)
 setColor('#ff0000')
-        
-          
-        
-        
-        
-      
 
 Usa esta forma cuando el nuevo valor es independiente del valor actual.
 Callback (forma con función)
@@ -5020,12 +3961,6 @@ Callback (forma con función)
 setCount((prev) => prev + 1)
 setItems((prevItems) => [...prevItems, nuevoItem])
 setVisible((prev) => !prev)
-        
-          
-        
-        
-        
-      
 
 Usa esta forma cuando:
 
@@ -5040,10 +3975,13 @@ Repaso final de la clase
     📝 Callback en setState - Usar función cuando el nuevo valor depende del anterior
     ⚡ Múltiples actualizaciones - El callback garantiza que uses el valor más reciente
     🎯 Cuándo usar cada forma - Valor directo para independientes, callback para dependientes
-
+    
     💡 Recuerda: Usa setState((prev) => ...) cuando el nuevo valor depende del anterior. Fast Refresh hace que tu experiencia de desarrollo sea más fluida al mantener el estado mientras editas código.
+
 ----
+
 <a id="migrando-devjobs"></a>
+
 # Migrando el Proyecto DevJobs a React
 
 Ya tenemos nuestro proyecto React con Vite configurado. Ahora vamos a migrar nuestro proyecto DevJobs que teníamos en HTML puro a React.
@@ -5074,21 +4012,16 @@ function App() {
       <main>
         <section>...</section>
       </main>
-
+    
       <footer>
         <p>...</p>
       </footer>
     </div>
+
   )
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 Este es un buen primer paso. Tener todo en un componente nos permite:
 
@@ -5104,13 +4037,8 @@ Comentarios en HTML vs JSX
 En HTML normal escribíamos:
 
 <!-- Este es un comentario en HTML -->
+
 <div>Contenido</div>
-        
-          
-        
-        
-        
-      
 
 Pero en JSX, esto da error:
 
@@ -5123,30 +4051,19 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué fallan los comentarios HTML?
 
 Recuerda que JSX no es HTML, es JavaScript que se transforma a llamadas de React:
 
 // Esto:
+
 <div><!-- comentario --><h1>Hola</h1></div>
 
 // Se intenta transformar a:
 React.createElement('div', null, '<!-- comentario -->', React.createElement('h1', null, 'Hola'))
 
 // ❌ Pero '<!-- comentario -->' no es válido en JavaScript
-        
-          
-        
-        
-        
-      
 
 La solución: Comentarios en JSX
 
@@ -5165,26 +4082,15 @@ function App() {
       */}
       <p>Contenido</p>
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Sintaxis:
 
 {
   /* Tu comentario aquí */
 }
-        
-          
-        
-        
-        
-      
 
     Empieza con {/*
     Termina con */}
@@ -5195,7 +4101,9 @@ Reemplazando comentarios
 Cuando migres tu HTML, busca todos los comentarios y reemplázalos:
 
 // ❌ Antes (HTML)
+
 <!-- Header principal -->
+
 <header>
   <!-- Navegación -->
   <nav>...</nav>
@@ -5203,16 +4111,11 @@ Cuando migres tu HTML, busca todos los comentarios y reemplázalos:
 
 // ✅ Después (JSX)
 {/* Header principal */}
+
 <header>
   {/* Navegación */}
   <nav>...</nav>
 </header>
-        
-          
-        
-        
-        
-      
 
     💡 Tip: Puedes buscar en tu editor <!-- para encontrar todos los comentarios HTML y reemplazarlos por comentarios JSX.
 
@@ -5253,16 +4156,11 @@ function Header() {
         </ul>
       </nav>
     </header>
+
   )
 }
 
 export default Header
-        
-          
-        
-        
-        
-      
 
 Pasos que seguimos:
 
@@ -5288,16 +4186,11 @@ function Footer() {
         </div>
       </div>
     </footer>
+
   )
 }
 
 export default Footer
-        
-          
-        
-        
-        
-      
 
 Usando los componentes en App
 
@@ -5318,19 +4211,14 @@ function App() {
           {/* ... */}
         </section>
       </main>
-
+    
       <Footer />
     </div>
+
   )
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 ¿Qué ganamos?
 
@@ -5349,14 +4237,9 @@ src/
 │   └── Footer.jsx    # ← Nuevo
 ├── App.jsx           # ← Modificado (usa Header y Footer)
 └── main.jsx
-        
-          
-        
-        
-        
-      
 
 Ventajas de separar en componentes
+
 1. Código más organizado
 
 // ❌ Todo en un archivo - Difícil de leer
@@ -5374,12 +4257,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 2. Más fácil de mantener
 
@@ -5387,12 +4264,6 @@ Si necesitas cambiar el footer, solo editas Footer.jsx:
 
 // Antes: buscar el footer entre 500 líneas
 // Ahora: abrir Footer.jsx directamente
-        
-          
-        
-        
-        
-      
 
 3. Reutilizable
 
@@ -5406,12 +4277,6 @@ Puedes usar el mismo Header en múltiples páginas:
 
 // pages/About.jsx
 <Header />
-        
-          
-        
-        
-        
-      
 
 4. Testeable
 
@@ -5422,12 +4287,6 @@ test('Header muestra el logo correctamente', () => {
   render(<Header />)
   // ...
 })
-        
-          
-        
-        
-        
-      
 
 Próximos pasos
 
@@ -5456,28 +4315,19 @@ Este patrón que hemos seguido es muy común al migrar proyectos:
 
 5. Repetir con piezas más complejas
    └── JobList, JobCard, etc.
-        
-          
-        
-        
-        
-      
 
 Este enfoque progresivo es mejor que intentar separar todo de una vez.
 Errores comunes al migrar
+
 1. Olvidar cambiar class por className
 
 // ❌ HTML
+
 <div class="header">
 
 // ✅ JSX
+
 <div className="header">
-        
-          
-        
-        
-        
-      
 
 2. No cerrar etiquetas self-closing
 
@@ -5488,12 +4338,6 @@ Errores comunes al migrar
 // ✅ JSX (obligatorio cerrar)
 <img src="logo.png" />
 <input type="text" />
-        
-          
-        
-        
-        
-      
 
 3. Olvidar el export
 
@@ -5506,12 +4350,6 @@ function Header() {
 export function Header() {
   return <header>...</header>
 }
-        
-          
-        
-        
-        
-      
 
 4. No importar el componente
 
@@ -5526,12 +4364,6 @@ import Header from './components/Header'
 function App() {
   return <Header />
 }
-        
-          
-        
-        
-        
-      
 
 ¡Resumiendo que es gerundio!
 
@@ -5545,8 +4377,11 @@ function App() {
 En la próxima clase continuaremos separando más componentes y aprenderemos a pasar datos entre componentes usando props.
 
     💡 Recuerda: No intentes separar todo en componentes desde el principio. Empieza con todo funcionando en un solo componente y ve separando progresivamente. Es más fácil y menos propenso a errores.
+
 ---
+
 <a id="creando-componente-jobcard"></a>
+
 # Creando el Componente JobCard
 
 En esta clase vamos a continuar componetizando nuestra aplicación DevJobs. Ya tenemos separados el Header y el Footer. Ahora es el turno de la parte más importante: los JobCard (tarjetas de trabajo).
@@ -5595,17 +4430,12 @@ function App() {
           {/* Aquí renderizaremos los JobCard */}
         </section>
       </main>
-
+    
       <Footer />
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Creando el componente JobCard
 
@@ -5626,22 +4456,17 @@ function JobCard({ job }) {
         <p className="job-salary">💰 {job.salary}</p>
         <p className="job-description">{job.description}</p>
       </div>
-
+    
       <footer className="job-card-footer">
         <span className="job-tags">{job.tags.join(', ')}</span>
         <button className="btn-apply">Aplicar</button>
       </footer>
     </article>
+
   )
 }
 
 export default JobCard
-        
-          
-        
-        
-        
-      
 
 Simplificando el componente con la desestructuración
 
@@ -5667,24 +4492,13 @@ function JobCard({ job }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace este componente?
+
 1. Recibe props
 
 function JobCard({ job }) {
   // Este componente recibe un objeto 'job' como prop
-        
-          
-        
-        
-        
-      
 
 Desestructuración de props: En lugar de escribir props.job.title, desestructuramos y usamos directamente job.title.
 
@@ -5697,12 +4511,6 @@ function JobCard(props) {
 function JobCard({ job }) {
   return <h3>{job.title}</h3>
 }
-        
-          
-        
-        
-        
-      
 
 Ahora desestructuramos el objeto job en el componente JobCard.
 
@@ -5710,23 +4518,11 @@ function JobCard({ job }) {
   const { title } = job
   return <h3 className="job-title">{title}</h3>
 }
-        
-          
-        
-        
-        
-      
 
 2. Renderiza la información del trabajo
 
 <h3 className="job-title">{title}</h3>
 <p className="job-company">{company}</p>
-        
-          
-        
-        
-        
-      
 
 Usamos expresiones de JavaScript {title} para mostrar datos dinámicos.
 Usando el componente en App
@@ -5745,7 +4541,7 @@ function App() {
       <main>
         <section className="jobs-container">
           <h2>Trabajos Disponibles (3)</h2>
-
+    
           <div className="jobs-grid">
             <JobCard
               job={{
@@ -5783,19 +4579,14 @@ function App() {
           </div>
         </section>
       </main>
-
+    
       <Footer />
     </div>
+
   )
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 ¿Qué pasa aquí?
 
@@ -5803,7 +4594,7 @@ export default App
     Creamos tres instancias del componente manualmente con sus respectivos datos
     Pasamos la prop job con todos los datos de cada trabajo
     Cada JobCard renderiza la información de su trabajo correspondiente
-
+    
     💡 Por ahora repetimos el componente manualmente. Más adelante en esta clase veremos cómo usar .map() para automatizar esto y no tener que repetir el código tantas veces.
 
 Componentización progresiva
@@ -5815,12 +4606,6 @@ function App() {
   // 500 líneas de HTML
   return <div>...todo el HTML...</div>
 }
-        
-          
-        
-        
-        
-      
 
 Paso 2: Header y Footer
 
@@ -5833,12 +4618,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Paso 3: Crea un componente JobList
 
@@ -5853,10 +4632,13 @@ En esta clase has aprendido:
     📋 JobList - Componente que renderiza la lista de trabajos
     🎯 Componentización - Separar en componentes más pequeños
     💡 Desestructuración de props - { job } en lugar de props.job
-
+    
     💡 Recuerda: Las props fluyen de padre a hijo. Usa props para hacer componentes reutilizables que puedan mostrar diferentes datos cada vez.
+
 ---
+
 <a id="props-comunicacion"></a>
+
 # Props - Comunicación entre Componentes
 
 En la clase anterior creamos el componente JobCard y lo usamos manualmente tres veces. Ahora vamos a profundizar en props, el mecanismo fundamental de React para pasar datos entre componentes.
@@ -5875,12 +4657,6 @@ function Saludo({ nombre }) {
   return <h1>Hola {nombre}</h1>
 }
 ;<Saludo nombre="Miguel" /> // <h1>Hola Miguel</h1>
-        
-          
-        
-        
-        
-      
 
 Características de las props:
 
@@ -5912,12 +4688,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 El flujo es unidireccional:
 
@@ -5930,12 +4700,6 @@ App (padre)
 JobCard (hijo)
   │
   └─ usa: {title} y {company} para renderizar
-        
-          
-        
-        
-        
-      
 
 Tipos de Valores en Props
 
@@ -5943,22 +4707,10 @@ Puedes pasar diferentes tipos de datos como props:
 Strings (texto)
 
 <JobCard title="Frontend Developer" location="Madrid" />
-        
-          
-        
-        
-        
-      
 
 Numbers (números)
 
 <JobCard salary={45000} experience={3} />
-        
-          
-        
-        
-        
-      
 
     ⚠️ Nota: Los números se pasan entre llaves {}, no entre comillas.
 
@@ -5970,22 +4722,10 @@ Booleans (booleanos)
   /* Shorthand para true */
 }
 ;<JobCard isRemote isFeatured />
-        
-          
-        
-        
-        
-      
 
 Arrays (listas)
 
 <JobCard tags={['React', 'TypeScript', 'CSS']} />
-        
-          
-        
-        
-        
-      
 
 Objects (objetos)
 
@@ -5996,22 +4736,10 @@ Objects (objetos)
     salary: 45000,
   }}
 />
-        
-          
-        
-        
-        
-      
 
 Functions (funciones)
 
 <JobCard onApply={() => console.log('Aplicando...')} />
-        
-          
-        
-        
-        
-      
 
 Desestructuración de Props
 
@@ -6027,12 +4755,6 @@ function JobCard(props) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Problema: Escribir props. todo el tiempo es repetitivo.
 Con desestructuración (recomendado)
@@ -6046,12 +4768,6 @@ function JobCard({ title, company, location }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -6086,12 +4802,6 @@ function JobCard({ job: { title, company, location } }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Recomendación: La opción 1 es más legible.
 Props por Defecto
@@ -6115,12 +4825,6 @@ function JobCard({ title, company, location = 'Remoto' }) {
 // Si pasas location, usa ese valor
 <JobCard title="Frontend Dev" company="TechCorp" location="Madrid" />
 // Renderiza: <p>Madrid</p>
-        
-          
-        
-        
-        
-      
 
 Props Condicionales
 
@@ -6135,26 +4839,15 @@ function JobCard({ title, company, isRemote, isFeatured }) {
       {isRemote && <span className="badge">🏠 Remoto</span>}
       {isFeatured && <span className="badge">⭐ Destacado</span>}
     </article>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace &&?
 
 {
   condición && <Elemento />
 }
-        
-          
-        
-        
-        
-      
 
     Si condición es true, renderiza <Elemento />
     Si condición es false, no renderiza nada
@@ -6170,12 +4863,6 @@ Ejemplos:
 {
   isRemote && <span>Remoto</span>
 } // Depende de isRemote
-        
-          
-        
-        
-        
-      
 
 Mejor usar las ternarias
 
@@ -6184,24 +4871,12 @@ Muchas veces es mejor usar las ternarias para renderizar condicionalmente:
 {
   isRemote ? <span>Remoto</span> : null
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué? Porque cuando estamos comparando booleanos no hay ningún problema, pero a veces podemos usar valores que no sean booleanos, como strings, números, etc. pero que sean falsy, y se renderizarán en la aplicación.
 
 {
   results.length && <span>Remoto</span>
 }
-        
-          
-        
-        
-        
-      
 
 Esto mostraría el número 0 en la pantalla, que es un error muy común en aplicaciones de React.
 Ejercicio Práctico: Mejorar JobCard
@@ -6223,28 +4898,23 @@ function JobCard({ job, isRemote, isFeatured, isNew }) {
           {isRemote && <span className="badge remote">🏠 Remoto</span>}
         </div>
       </header>
-
+    
       <div className="job-card-body">
         <p className="job-location">📍 {location}</p>
         <p className="job-salary">💰 {salary}</p>
         <p className="job-description">{description}</p>
       </div>
-
+    
       <footer className="job-card-footer">
         <span className="job-tags">{tags.join(', ')}</span>
         <button className="btn-apply">Aplicar</button>
       </footer>
     </article>
+
   )
 }
 
 export default JobCard
-        
-          
-        
-        
-        
-      
 
 Y úsalo así en App.jsx:
 
@@ -6256,7 +4926,7 @@ function App() {
       <main>
         <section className="jobs-container">
           <h2>Trabajos Disponibles (3)</h2>
-
+    
           <div className="jobs-grid">
             <JobCard
               job={{
@@ -6271,7 +4941,7 @@ function App() {
               isFeatured={true}
               isNew={true}
             />
-
+    
             <JobCard
               job={{
                 title: 'Backend Developer',
@@ -6285,7 +4955,7 @@ function App() {
               isFeatured={false}
               isNew={false}
             />
-
+    
             <JobCard
               job={{
                 title: 'Full Stack Developer',
@@ -6302,17 +4972,12 @@ function App() {
           </div>
         </section>
       </main>
-
+    
       <Footer />
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Props: Reglas Importantes
 Las props fluyen de arriba hacia abajo
@@ -6324,12 +4989,6 @@ function App() {
 
 // ❌ Incorrecto: Un hijo NO puede pasar props a su padre directamente
 // (Para esto se usan callbacks, que veremos más adelante)
-        
-          
-        
-        
-        
-      
 
 Siempre desestructura en los parámetros
 
@@ -6342,12 +5001,6 @@ function JobCard(props) {
 function JobCard({ title }) {
   return <h3>{title}</h3>
 }
-        
-          
-        
-        
-        
-      
 
 Composición de Componentes
 
@@ -6368,12 +5021,6 @@ function JobCard({ title, isRemote, isFeatured }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -6398,12 +5045,6 @@ function JobCard() {
   )
 }
 // Error: Adjacent JSX elements must be wrapped in an enclosing tag
-        
-          
-        
-        
-        
-      
 
 Solución tradicional: Envolver en un <div>:
 
@@ -6416,16 +5057,11 @@ function JobCard() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Problema: Este <div> extra contamina el HTML y puede romper estilos CSS:
 
 <!-- Resultado en el DOM -->
+
 <div class="jobs-grid">
   <div>
     <!-- ← div extra innecesario -->
@@ -6438,12 +5074,6 @@ Problema: Este <div> extra contamina el HTML y puede romper estilos CSS:
     <p>Descripción 2</p>
   </div>
 </div>
-        
-          
-        
-        
-        
-      
 
 La solución: React Fragment
 
@@ -6459,24 +5089,13 @@ function JobCard() {
     </Fragment>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Resultado en el DOM:
 
 <!-- Sin divs extras! -->
+
 <h3>Título</h3>
 <p>Descripción</p>
-        
-          
-        
-        
-        
-      
 
 Sintaxis corta: <></>
 
@@ -6490,12 +5109,6 @@ function JobCard() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Es lo mismo que <Fragment> pero más corto y limpio.
 ¿Cuándo usar Fragment?
@@ -6511,12 +5124,6 @@ function JobActions() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Caso 2: Renderizar listas sin wrapper
 
@@ -6531,12 +5138,6 @@ function JobTags({ tags }) {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Caso 3: Condicionales que retornan múltiples elementos
 
@@ -6553,14 +5154,9 @@ function JobCard({ job, showDetails }) {
         </>
       )}
     </article>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Fragment vs div
 
@@ -6609,12 +5205,6 @@ function JobCard() {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¡Resumiendo que es gerundio!
 
@@ -6629,8 +5219,11 @@ En esta clase has aprendido:
 En la próxima clase aprenderemos a renderizar listas con .map() y a importar datos desde un archivo JSON para automatizar la creación de múltiples JobCards.
 
     💡 Recuerda: Las props son el mecanismo fundamental de React para crear componentes reutilizables y componibles. Dominar las props es esencial para ser efectivo con React.
+
 ---
+
 <a id="modulos-javascript"></a>
+
 # Módulos JavaScript - Import y Export
 
 Hasta ahora hemos tenido todo nuestro código en un solo archivo App.jsx. En aplicaciones reales, separamos el código en múltiples archivos usando el sistema de módulos de JavaScript. En esta clase aprenderemos a exportar e importar componentes.
@@ -6672,12 +5265,6 @@ function App() {
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -6699,12 +5286,6 @@ src/
 │   ├── JobList.jsx
 │   └── SearchForm.jsx
 └── App.jsx
-        
-          
-        
-        
-        
-      
 
 Separando un componente a otro archivo
 
@@ -6730,12 +5311,6 @@ function Header() {
 }
 
 export default Header
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace export default?
 
@@ -6760,12 +5335,6 @@ function App() {
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace import?
 
@@ -6777,6 +5346,7 @@ export default App
 Export Default vs Export Named
 
 Hay dos formas de exportar en JavaScript:
+
 1. Export Default (por defecto)
 
 Un solo export principal por archivo:
@@ -6787,12 +5357,6 @@ function Header() {
 }
 
 export default Header
-        
-          
-        
-        
-        
-      
 
 Importar:
 
@@ -6800,12 +5364,6 @@ Importar:
 import Header from './components/Header'
 import MyHeader from './components/Header' // ✅ También funciona
 import Cabecera from './components/Header' // ✅ También funciona
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -6835,23 +5393,11 @@ export function HeaderLogo() {
 export function HeaderNav() {
   return <nav>...</nav>
 }
-        
-          
-        
-        
-        
-      
 
 Importar:
 
 // Debes usar el NOMBRE EXACTO con llaves {}
 import { Header, HeaderLogo, HeaderNav } from './components/Header'
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -6869,6 +5415,7 @@ Desventajas:
 Por qué preferimos Named Exports
 
 En React moderno, preferimos named exports por varias razones:
+
 1. Consistencia
 
 // ❌ Con default export (cada archivo puede usar diferente nombre)
@@ -6882,12 +5429,6 @@ import MyHeader from './components/Header'
 import TopBar from './components/Header'
 
 // 😱 Tres nombres diferentes para el mismo componente!
-        
-          
-        
-        
-        
-      
 
 // ✅ Con named export (siempre el mismo nombre)
 // App.jsx
@@ -6900,12 +5441,6 @@ import { Header } from './components/Header'
 import { Header } from './components/Header'
 
 // 🎉 Mismo nombre en todos lados!
-        
-          
-        
-        
-        
-      
 
 2. Refactoring seguro
 
@@ -6919,12 +5454,6 @@ import { Header } from './components/Header'
 // Con default export:
 import Header from './components/Header'
 //     ^ Tienes que recordar/adivinar el nombre
-        
-          
-        
-        
-        
-      
 
 4. Múltiples exports
 
@@ -6943,12 +5472,6 @@ export function formatPhone(phone) {
 
 // Importar solo lo que necesitas
 import { formatDate, formatCurrency } from './utils'
-        
-          
-        
-        
-        
-      
 
 Sintaxis de Named Export
 
@@ -6963,12 +5486,6 @@ export function Header() {
 export function HeaderLogo() {
   return <img src="logo.png" />
 }
-        
-          
-        
-        
-        
-      
 
 Forma 2: Export al final
 
@@ -6983,12 +5500,6 @@ function HeaderLogo() {
 
 // Al final del archivo
 export { Header, HeaderLogo }
-        
-          
-        
-        
-        
-      
 
 Ambas son equivalentes. La primera es más común en React.
 Renombrando imports
@@ -6999,12 +5510,6 @@ Problema: Colisión de nombres
 // ❌ Error: Ambos se llaman "Button"
 import { Button } from './components/Button'
 import { Button } from './ui/Button'
-        
-          
-        
-        
-        
-      
 
 Solución 1: Renombrar con as
 
@@ -7020,12 +5525,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Solución 2: Renombrar ambos
 
@@ -7041,12 +5540,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ejemplo real: Colisión con nombres comunes
 
@@ -7062,12 +5555,6 @@ function Dashboard() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Rutas de importación
 Rutas relativas
@@ -7083,12 +5570,6 @@ import { Header } from '../Header'
 
 // Dos niveles arriba
 import { Header } from '../../Header'
-        
-          
-        
-        
-        
-      
 
 Import de múltiples elementos
 
@@ -7104,14 +5585,9 @@ import App, { config, API_URL } from './App'
 import * as Utils from './utils'
 Utils.formatDate()
 Utils.formatCurrency()
-        
-          
-        
-        
-        
-      
 
 Errores comunes
+
 1. Olvidar el export
 
 // ❌ Error: No exportado
@@ -7123,12 +5599,6 @@ function Header() {
 export function Header() {
   return <header>...</header>
 }
-        
-          
-        
-        
-        
-      
 
 2. Mezclar default y named imports
 
@@ -7142,12 +5612,6 @@ import Header from './components/Header'
 
 // ✅ Correcto: Usar llaves para named
 import { Header } from './components/Header'
-        
-          
-        
-        
-        
-      
 
 3. Ruta incorrecta
 
@@ -7156,12 +5620,6 @@ import { Header } from 'components/Header'
 
 // ✅ Correcto: Rutas relativas empiezan con ./
 import { Header } from './components/Header'
-        
-          
-        
-        
-        
-      
 
 4. Olvidar la extensión en algunos bundlers
 
@@ -7170,12 +5628,6 @@ import { Header } from './components/Header' // ✅
 
 // Algunos bundlers antiguos:
 import { Header } from './components/Header.jsx' // Puede ser necesario
-        
-          
-        
-        
-        
-      
 
 ¡Resumiendo que es gerundio!
 
@@ -7194,7 +5646,9 @@ En la próxima clase aprenderemos sobre CSS Modules, una forma de escribir CSS c
     💡 Recuerda: Usa named exports (export function ComponentName) en lugar de default exports para mantener consistencia y aprovechar mejor el autocomplete. Organiza tu código en archivos pequeños y enfocados en una sola responsabilidad.
 
 ---
+
 <a id="paginacion-props"></a>
+
 # Paginación - Props y Comunicación Padre-Hijo
 
 En esta clase vamos a crear un componente Pagination que nos permitirá navegar entre diferentes páginas de contenido. Aprenderemos a pasar datos mediante props, definir valores por defecto, y lo más importante: cómo un componente hijo puede comunicarse con su padre usando funciones.
@@ -7240,7 +5694,7 @@ function Pagination({ currentPage, totalPages }) {
           {page}
         </a>
       ))}
-
+    
       <a href="#" style={styleLinkRight}>
         <svg
           width="16"
@@ -7257,26 +5711,15 @@ function Pagination({ currentPage, totalPages }) {
         </svg>
       </a>
     </nav>
+
   )
 }
 
 export default Pagination
-        
-          
-        
-        
-        
-      
 
 Generando el array de páginas
 
 const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace esto?
 
@@ -7289,12 +5732,6 @@ Ejemplo:
 // Si totalPages = 5
 Array.from({ length: 5 }, (_, i) => i + 1)
 // Resultado: [1, 2, 3, 4, 5]
-        
-          
-        
-        
-        
-      
 
 Renderizando listas con .map()
 
@@ -7305,19 +5742,13 @@ Renderizando listas con .map()
     </a>
   ))
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace .map()?
 
     Recorre cada elemento del array pages
     Por cada page, retorna un elemento <a>
     key={page} es obligatorio para que React identifique cada elemento
-
+    
     💡 Nota: Profundizaremos en renderizado de listas en clases futuras. Por ahora, entiende que .map() transforma un array de datos en un array de elementos JSX.
 
 Props por defecto
@@ -7331,12 +5762,6 @@ function Pagination({ currentPage, totalPages }) {
 
   // resto del código...
 }
-        
-          
-        
-        
-        
-      
 
 Problema: Es verboso y no es la forma idiomática de JavaScript moderno.
 ✅ Forma moderna (recomendada)
@@ -7345,12 +5770,6 @@ function Pagination({ currentPage = 1, totalPages = 5 }) {
   // Si no se pasan props, usa los valores por defecto
   // resto del código...
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -7371,12 +5790,6 @@ Ejemplo de uso:
 // Con ambas props: usa los valores pasados
 <Pagination currentPage={3} totalPages={10} />
 // currentPage = 3, totalPages = 10
-        
-          
-        
-        
-        
-      
 
 Usando el componente en App
 
@@ -7402,19 +5815,14 @@ function App() {
         <JobListings />
         <Pagination currentPage={currentPage} totalPages={totalPages} />
       </main>
-
+    
       <Footer />
     </>
+
   )
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 ¿Qué está pasando?
 
@@ -7433,12 +5841,6 @@ App (padre)
 Pagination (hijo)
   │
   └─ Renderiza botones según estos valores
-        
-          
-        
-        
-        
-      
 
 Estilos inline con objetos
 
@@ -7448,12 +5850,6 @@ const styleLinkLeft = {
   opacity: currentPage === 1 ? 0.5 : 1,
   cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
 }
-        
-          
-        
-        
-        
-      
 
 Características de estilos inline en React:
 
@@ -7462,22 +5858,10 @@ Características de estilos inline en React:
     Los valores pueden ser dinámicos (cambian según props o estado)
 
 <a href="#" style={styleLinkLeft}>
-        
-          
-        
-        
-        
-      
 
 Equivalente en HTML:
 
 <a href="#" style="opacity: 0.5; cursor: not-allowed;"></a>
-        
-          
-        
-        
-        
-      
 
 Prevenir comportamiento por defecto
 
@@ -7487,12 +5871,6 @@ const handlePrevious = (e) => {
   e.preventDefault() // ← Importante
   // ...
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué?
 
@@ -7512,12 +5890,6 @@ Es común usar estas convenciones:
 const handleNext = () => { ... }
 const handlePrevious = () => { ... }
 const handlePageClick = () => { ... }
-        
-          
-        
-        
-        
-      
 
 Patrón:
 
@@ -7541,7 +5913,9 @@ En la próxima clase aprenderemos sobre callbacks y cómo pasar funciones como p
     💡 Recuerda: Las props fluyen de padre a hijo. Los estilos inline se pasan como objetos JavaScript con propiedades en camelCase. Usa preventDefault() para evitar comportamientos por defecto del navegador.
 
 ----
+
 <a id="callbacks"></a>
+
 # Callbacks - Pasar Funciones como Props
 
 En la clase anterior creamos el componente Pagination que recibe props con datos. Ahora vamos a aprender a pasar funciones como props para que el componente hijo pueda comunicarse con el padre y notificarle cuando algo cambia.
@@ -7561,17 +5935,12 @@ function Pagination({ currentPage = 1, totalPages = 5 }) {
           {page}
         </a>
       ))}
-
+    
       <a href="#">→</a>
     </nav>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Problema: Cuando haces click en un botón, no pasa nada. ¿Cómo hacemos que el componente reaccione?
 Pasando funciones como props
@@ -7600,19 +5969,14 @@ function App() {
           onPageChange={handlePageChange}
         />
       </main>
-
+    
       <Footer />
     </>
+
   )
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 ¿Qué acabamos de hacer?
 
@@ -7693,7 +6057,7 @@ function Pagination({ currentPage = 1, totalPages = 5, onPageChange }) {
           {page}
         </a>
       ))}
-
+    
       <a href="#" style={styleLinkRight} onClick={handleNext}>
         <svg
           width="16"
@@ -7710,16 +6074,11 @@ function Pagination({ currentPage = 1, totalPages = 5, onPageChange }) {
         </svg>
       </a>
     </nav>
+
   )
 }
 
 export default Pagination
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace cada función?
 handlePrevious
@@ -7730,12 +6089,6 @@ const handlePrevious = (e) => {
     onPageChange(currentPage - 1) // Notifica al padre
   }
 }
-        
-          
-        
-        
-        
-      
 
     Verifica que no estemos en la primera página
     Llama a onPageChange (la función del padre) con la página anterior
@@ -7748,12 +6101,6 @@ const handleNext = (e) => {
     onPageChange(currentPage + 1) // Notifica al padre
   }
 }
-        
-          
-        
-        
-        
-      
 
     Verifica que no estemos en la última página
     Llama a onPageChange con la página siguiente
@@ -7764,12 +6111,6 @@ const handlePageClick = (e, page) => {
   e.preventDefault()
   onPageChange(page) // Notifica al padre con la página clickeada
 }
-        
-          
-        
-        
-        
-      
 
     Llama a onPageChange con el número de página específico
 
@@ -7779,12 +6120,6 @@ Un callback es una función que se pasa como argumento a otra función, y que se
 
 // onPageChange es un callback
 <Pagination onPageChange={handlePageChange} />
-        
-          
-        
-        
-        
-      
 
 En este caso:
 
@@ -7805,12 +6140,6 @@ Ahora que tenemos el callback configurado, veamos qué pasa cuando el usuario in
 4. onPageChange es handlePageChange del padre (App)
    ↓
 5. handlePageChange(3) ejecuta console.log('Página cambiada a:', 3)
-        
-          
-        
-        
-        
-      
 
 Por ahora solo imprime en consola, pero en la próxima clase veremos cómo usar estado para que realmente cambie la página visualmente.
 Convención de nombres
@@ -7827,12 +6156,6 @@ En el componente padre
 const handlePageChange = (page) => { ... }
 const handleClick = () => { ... }
 const handleSubmit = (data) => { ... }
-        
-          
-        
-        
-        
-      
 
 En el componente hijo
 
@@ -7843,12 +6166,6 @@ function Pagination({ onPageChange }) {
     onPageChange(currentPage + 1)
   }
 }
-        
-          
-        
-        
-        
-      
 
 Patrón:
 
@@ -7868,12 +6185,6 @@ function Pagination({ currentPage = 1, totalPages = 5, onPageChange }) {
 
   // resto del código...
 }
-        
-          
-        
-        
-        
-      
 
 O podemos usar un valor por defecto:
 
@@ -7881,12 +6192,6 @@ function Pagination({ currentPage = 1, totalPages = 5, onPageChange = () => {} }
   // Si no se pasa onPageChange, usa función vacía
   // ...
 }
-        
-          
-        
-        
-        
-      
 
 Ejemplo adicional: Button con callback
 
@@ -7920,12 +6225,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 El patrón es el mismo:
 
@@ -7953,12 +6252,6 @@ function App() {
 
   return <JobCard job={job} onApply={handleApply} />
 }
-        
-          
-        
-        
-        
-      
 
 Nota: Usamos una arrow function onClick={() => onApply(job.id)} para poder pasar argumentos.
 Diferencia: onClick vs onClick()
@@ -7976,12 +6269,6 @@ Es importante entender esta diferencia:
 
 // ✅ Correcto: Pasar referencia directa sin argumentos
 <button onClick={handleClick}>Click</button>
-        
-          
-        
-        
-        
-      
 
 Regla:
 
@@ -8007,7 +6294,9 @@ En la próxima clase completaremos el ciclo aprendiendo sobre estado en el compo
     💡 Recuerda: Las funciones como props (callbacks) permiten que los componentes hijos notifiquen a sus padres sobre eventos. El hijo no modifica datos directamente, solo informa al padre que algo ocurrió llamando a la función callback.
 
 ---
+
 <a id="lifting-state-up"></a>
+
 # Estado por Props - Lifting State Up
 
 En la clase anterior aprendimos a pasar funciones como props para que el hijo notifique al padre. Ahora vamos a completar el ciclo: crear estado en el padre y pasarlo como props al hijo, haciendo que todo funcione de forma reactiva.
@@ -8037,19 +6326,14 @@ function App() {
           onPageChange={handlePageChange}
         />
       </main>
-
+    
       <Footer />
     </>
+
   )
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 Problema: Aunque el callback se ejecuta, la página no cambia visualmente porque currentPage siempre es 3.
 Agregando estado con useState
@@ -8080,19 +6364,14 @@ function App() {
           onPageChange={handlePageChange}
         />
       </main>
-
+    
       <Footer />
     </>
+
   )
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 ¿Qué cambió?
 Antes (valor fijo)
@@ -8102,12 +6381,6 @@ const currentPage = 3 // Nunca cambia
 const handlePageChange = (page) => {
   console.log('Página cambiada a:', page) // Solo imprime
 }
-        
-          
-        
-        
-        
-      
 
 Después (con estado)
 
@@ -8116,12 +6389,6 @@ const [currentPage, setCurrentPage] = useState(1) // Estado reactivo
 const handlePageChange = (page) => {
   setCurrentPage(page) // Actualiza el estado
 }
-        
-          
-        
-        
-        
-      
 
 Ahora sí funciona:
 
@@ -8147,12 +6414,6 @@ function App() {
 
   // ...
 }
-        
-          
-        
-        
-        
-      
 
 // src/components/Pagination.jsx
 function Pagination({ currentPage = 1, totalPages = 5, onPageChange }) {
@@ -8181,12 +6442,6 @@ function Pagination({ currentPage = 1, totalPages = 5, onPageChange }) {
 
   // ... resto del componente
 }
-        
-          
-        
-        
-        
-      
 
 Al abrir la aplicación verás en la consola:
 
@@ -8194,12 +6449,6 @@ Al abrir la aplicación verás en la consola:
 🟢 Pagination renderizado { currentPage: 1 }
 🔵 App renderizado
 🟢 Pagination renderizado { currentPage: 1 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué aparece dos veces? 🤔
 React.StrictMode: Renderizados dobles
@@ -8215,12 +6464,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 )
-        
-          
-        
-        
-        
-      
 
 <React.StrictMode> es un componente especial que:
 
@@ -8251,12 +6494,6 @@ function BadComponent() {
   counter++ // ← ¡Efecto secundario!
   return <div>Counter: {counter}</div>
 }
-        
-          
-        
-        
-        
-      
 
 En StrictMode, este componente mostraría valores inconsistentes porque counter se incrementa dos veces.
 ¿Debo preocuparme?
@@ -8271,23 +6508,11 @@ Para verlo sin StrictMode:
 
 // main.jsx
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
-        
-          
-        
-        
-        
-      
 
 Ahora solo verás:
 
 🔵 App renderizado
 🟢 Pagination renderizado { currentPage: 1 }
-        
-          
-        
-        
-        
-      
 
     💡 Recomendación: Deja StrictMode activado en desarrollo. Te ayudará a escribir código más robusto.
 
@@ -8297,12 +6522,6 @@ Ahora, cuando hagas click en “Página 3”, verás en la consola:
 
 🔵 App renderizado
 🟢 Pagination renderizado { currentPage: 3 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué pasó?
 
@@ -8333,12 +6552,6 @@ Montaje inicial (Primera carga)
 7. Pagination retorna JSX con botones
    ↓
 8. Todo se renderiza en pantalla
-        
-          
-        
-        
-        
-      
 
 Cuando haces click (Actualización)
 
@@ -8361,16 +6574,10 @@ Cuando haces click (Actualización)
 9. React re-renderiza Pagination
    ↓
 10. console.log('🟢 Pagination renderizado', { currentPage: 3 })
-   ↓
+    ↓
 11. Pagination retorna JSX con botón "3" activo
-   ↓
+    ↓
 12. React actualiza el DOM (solo lo que cambió)
-        
-          
-        
-        
-        
-      
 
 Lifting State Up (Elevar el estado)
 
@@ -8387,12 +6594,6 @@ function JobListings() {
   const [currentPage, setCurrentPage] = useState(1) // Estado duplicado!
   // ...
 }
-        
-          
-        
-        
-        
-      
 
 Problema: Los dos componentes no están sincronizados.
 
@@ -8408,12 +6609,6 @@ function App() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -8437,12 +6632,6 @@ function Pagination({ totalPages, onPageChange }) {
 
   // ...
 }
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -8464,12 +6653,6 @@ function App() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Componentes controlados vs no controlados
 Componente controlado (recomendado)
@@ -8482,12 +6665,6 @@ function Pagination({ currentPage, onPageChange }) {
   // No hay estado local
   // ...
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -8505,12 +6682,6 @@ function Pagination() {
   // Maneja su propio estado
   // ...
 }
-        
-          
-        
-        
-        
-      
 
 Desventajas:
 
@@ -8529,22 +6700,10 @@ const handlePageChange = (page) => {
 }
 
 // <Pagination onPageChange={handlePageChange} />
-        
-          
-        
-        
-        
-      
 
 Versión simplificada
 
 <Pagination onPageChange={setCurrentPage} />
-        
-          
-        
-        
-        
-      
 
 ¿Por qué funciona?
 
@@ -8566,12 +6725,6 @@ function App() {
 
   // ...
 }
-        
-          
-        
-        
-        
-      
 
 function Pagination({ currentPage = 1, totalPages = 5, onPageChange }) {
   console.log('🟢 Pagination renderizado', {
@@ -8582,34 +6735,16 @@ function Pagination({ currentPage = 1, totalPages = 5, onPageChange }) {
 
   // ...
 }
-        
-          
-        
-        
-        
-      
 
 Ahora verás:
 
 🔵 App renderizado { currentPage: 1, timestamp: '10:30:45' }
 🟢 Pagination renderizado { currentPage: 1, totalPages: 5, timestamp: '10:30:45' }
-        
-          
-        
-        
-        
-      
 
 Cuando hagas click:
 
 🔵 App renderizado { currentPage: 3, timestamp: '10:30:47' }
 🟢 Pagination renderizado { currentPage: 3, totalPages: 5, timestamp: '10:30:47' }
-        
-          
-        
-        
-        
-      
 
 Optimización: Evitar renderizados innecesarios
 
@@ -8624,19 +6759,13 @@ const Pagination = memo(function Pagination({ currentPage, totalPages, onPageCha
 })
 
 export default Pagination
-        
-          
-        
-        
-        
-      
 
 memo:
 
     Memoriza el resultado del componente
     Solo re-renderiza si las props cambiaron
     Optimización de rendimiento
-
+    
     💡 Nota: No abuses de memo. Úsalo solo cuando tengas problemas de rendimiento reales.
 
 Patrón completo: Estado → Props → Callback
@@ -8662,12 +6791,6 @@ function Pagination({ currentPage, onPageChange }) {
   // 5. Hijo llama al callback para actualizar
   return <button onClick={() => onPageChange(2)}>Ir a página 2</button>
 }
-        
-          
-        
-        
-        
-      
 
 Flujo:
 
@@ -8678,12 +6801,6 @@ Hijo (Pagination)
 Estado actualizado (App)
    ↓ prop actualizada
 Hijo re-renderizado (Pagination)
-        
-          
-        
-        
-        
-      
 
 ¡Resumiendo que es gerundio!
 
@@ -8702,8 +6819,11 @@ En esta clase has aprendido:
 En la próxima clase profundizaremos en renderizado de listas con .map(), aprendiendo a transformar arrays de datos en componentes React de forma dinámica y eficiente.
 
     💡 Recuerda: El estado vive en el padre, se pasa a los hijos como props, y los hijos lo actualizan llamando a callbacks. Este es el flujo de datos unidireccional de React. Los renderizados dobles en desarrollo son normales por StrictMode y te ayudan a escribir mejor código.
+
 ---
+
 <a id="keys-listas"></a>
+
 # Keys y Renderizado de Listas
 
 Hasta ahora hemos trabajado con componentes individuales. En esta clase aprenderemos a renderizar listas de datos dinámicamente usando .map(), y entenderemos por qué React necesita que cada elemento tenga una key única.
@@ -8725,21 +6845,16 @@ function App() {
         <p>DataStack</p>
         <p>Barcelona, España</p>
       </article>
-
+    
       <article className="job-listing-card">
         <h3>Full Stack Developer</h3>
         <p>StartupX</p>
         <p>Valencia, España</p>
       </article>
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -8780,12 +6895,6 @@ Primero, creemos un archivo JSON con nuestros datos:
   }
   // ... más elementos
 ]
-        
-          
-        
-        
-        
-      
 
 Creando el componente JobCard
 
@@ -8811,12 +6920,6 @@ export function JobCard({ job }) {
     </article>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Puntos clave:
 
@@ -8840,12 +6943,6 @@ export function JobListings() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace .map()?
 
@@ -8865,24 +6962,12 @@ jobs.map((job) => <JobCard key={job.id} job={job} />)
 //   <JobCard key={2} job={{...}} />,
 //   <JobCard key={3} job={{...}} />
 // ]
-        
-          
-        
-        
-        
-      
 
 ¿Por qué necesitamos la key?
 
 La prop key es obligatoria cuando renderizas listas. Sin ella, verás este warning:
 
 ⚠️ Warning: Each child in a list should have a unique "key" prop.
-        
-          
-        
-        
-        
-      
 
 ¿Qué es la key?
 
@@ -8893,12 +6978,6 @@ La key es un identificador único que ayuda a React a identificar qué elementos
 }
 //                           ↑
 //                      Obligatoria y única
-        
-          
-        
-        
-        
-      
 
 ¿Por qué React necesita keys?
 
@@ -8922,12 +7001,6 @@ Sin keys: React no sabe qué cambió
 ]
 
 // React piensa: "¿Todos cambiaron? Re-renderizo todos" 🐌
-        
-          
-        
-        
-        
-      
 
 Con keys: React sabe exactamente qué cambió
 
@@ -8947,14 +7020,9 @@ Con keys: React sabe exactamente qué cambió
 ]
 
 // React piensa: "Solo key={4} es nuevo, solo renderizo ese" ⚡
-        
-          
-        
-        
-        
-      
 
 Reglas de las keys
+
 1. Deben ser únicas entre hermanos
 
 // ✅ Correcto: IDs únicos
@@ -8966,12 +7034,6 @@ Reglas de las keys
 {
   jobs.map((job) => <JobCard key="job" job={job} />)
 }
-        
-          
-        
-        
-        
-      
 
 2. Deben ser estables
 
@@ -8986,12 +7048,6 @@ La key no debería cambiar entre renderizados:
 {
   jobs.map((job) => <JobCard key={job.id} job={job} />)
 }
-        
-          
-        
-        
-        
-      
 
 3. Preferiblemente, usa IDs del dato
 
@@ -9004,12 +7060,6 @@ La key no debería cambiar entre renderizados:
 {
   jobs.map((job, index) => <JobCard key={index} job={job} />)
 }
-        
-          
-        
-        
-        
-      
 
 ¿Cuándo usar índices como keys?
 
@@ -9027,12 +7077,6 @@ const DAYS_OF_WEEK = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
 {
   DAYS_OF_WEEK.map((day, index) => <li key={index}>{day}</li>)
 }
-        
-          
-        
-        
-        
-      
 
 Ejemplo donde NO es seguro:
 
@@ -9047,12 +7091,6 @@ const [tasks, setTasks] = useState([...])
 {tasks.map((task) => (
   <Task key={task.id} task={task} />
 ))}
-        
-          
-        
-        
-        
-      
 
 Problema con índices: Ejemplo visual
 
@@ -9064,12 +7102,6 @@ Imagina una lista de tareas:
   { id: 'b', text: 'Tarea B', completed: true },
   { id: 'c', text: 'Tarea C', completed: false },
 ]
-        
-          
-        
-        
-        
-      
 
 Con índices como key:
 
@@ -9084,12 +7116,6 @@ Con índices como key:
 
 // React piensa: "key={0} cambió de 'Tarea A' a 'Tarea B'"
 // Puede causar bugs en el estado o animaciones
-        
-          
-        
-        
-        
-      
 
 Con IDs como key:
 
@@ -9104,12 +7130,6 @@ Con IDs como key:
 
 // React piensa: "key='a' se eliminó, las demás siguen igual"
 // Todo funciona correctamente
-        
-          
-        
-        
-        
-      
 
 Lista vacía: Renderizado condicional
 
@@ -9132,12 +7152,6 @@ export function JobListings({ jobs }) {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 O con operador ternario:
 
@@ -9156,12 +7170,6 @@ export function JobListings({ jobs }) {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Lo que hemos visto en esta clase
 
@@ -9180,7 +7188,9 @@ En la próxima clase vamos a terminar de hacer funcionar nuestra paginación.
     💡 Recuerda: Siempre usa keys únicas y estables al renderizar listas. Prefiere IDs del objeto sobre índices del array. La key ayuda a React a optimizar los renderizados identificando qué elementos cambiaron.
 
 ---
+
 <a id="terminando-paginacion"></a>
+
 # Terminando la paginación
 
 En las clases anteriores creamos el componente Pagination y aprendimos a pasar funciones como props y manejar el estado en el componente padre. Ahora vamos a conectar todo para que la paginación funcione completamente: calcularemos el número total de páginas y mostraremos solo los trabajos de la página actual.
@@ -9200,12 +7210,6 @@ export function JobListings() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Problema: Si los datos están dentro de JobListings, no podemos filtrarlos, paginarlos ni manipularlos desde App.jsx.
 
@@ -9228,12 +7232,6 @@ function App() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 // src/components/JobListings.jsx (ahora)
 export function JobListings({ jobs }) {
@@ -9246,12 +7244,6 @@ export function JobListings({ jobs }) {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué es mejor así?
 
@@ -9260,12 +7252,6 @@ Antes (datos en JobListings):
 JobListings (tiene los datos)
     ↓
   Renderiza JobCard
-        
-          
-        
-        
-        
-      
 
     ❌ No podemos filtrar los datos desde App
     ❌ No podemos paginar los datos desde App
@@ -9282,12 +7268,6 @@ App (tiene los datos)
 JobListings (solo renderiza)
  ↓
 JobCard
-        
-          
-        
-        
-        
-      
 
     ✅ Tenemos control total sobre los datos
     ✅ Podemos aplicar paginación
@@ -9341,23 +7321,11 @@ function App() {
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 Vamos a desglosar cada parte para entenderla mejor.
 Constante RESULTS_PER_PAGE
 
 const RESULTS_PER_PAGE = 5
-        
-          
-        
-        
-        
-      
 
 Definimos una constante con el número de resultados que queremos mostrar por página. Usar una constante nos permite:
 
@@ -9369,12 +7337,6 @@ Convención: Las constantes suelen escribirse en MAYÚSCULAS_CON_GUIONES_BAJOS.
 Calculando el total de páginas con Math.ceil()
 
 const totalPages = Math.ceil(jobsData.length / RESULTS_PER_PAGE)
-        
-          
-        
-        
-        
-      
 
 Necesitamos saber cuántas páginas totales tendremos. Para eso dividimos el total de trabajos entre los resultados por página.
 Entendiendo Math.ceil()
@@ -9385,24 +7347,12 @@ Math.ceil(4.1) // 5
 Math.ceil(4.5) // 5
 Math.ceil(4.9) // 5
 Math.ceil(5.0) // 5
-        
-          
-        
-        
-        
-      
 
 ¿Por qué usamos ceil()?
 
 Porque si tenemos 23 trabajos y mostramos 5 por página:
 
 23 / 5 = 4.6 páginas
-        
-          
-        
-        
-        
-      
 
 No podemos tener 4.6 páginas, necesitamos 5 páginas completas:
 
@@ -9420,16 +7370,11 @@ const totalPages = Math.floor(23 / 5) // 4
 
 // ❌ Incorrecto: No tiene sentido 4.6 páginas
 const totalPages = 23 / 5 // 4.6
-        
-          
-        
-        
-        
-      
 
 Comparando Math.floor(), Math.ceil() y Math.round()
 
 JavaScript tiene tres funciones para redondear números:
+
 1. Math.floor() - Redondea hacia abajo
 
 Siempre redondea al entero menor más cercano:
@@ -9439,24 +7384,12 @@ Math.floor(4.5) // 4
 Math.floor(4.9) // 4
 Math.floor(5.0) // 5
 Math.floor(-4.9) // -5 (hacia abajo en la recta numérica)
-        
-          
-        
-        
-        
-      
 
 Ejemplo de uso:
 
 // Calcular edad a partir de años decimales
 const edadExacta = 25.8
 const edad = Math.floor(edadExacta) // 25 años completos
-        
-          
-        
-        
-        
-      
 
 2. Math.ceil() - Redondea hacia arriba
 
@@ -9467,12 +7400,6 @@ Math.ceil(4.5) // 5
 Math.ceil(4.9) // 5
 Math.ceil(5.0) // 5
 Math.ceil(-4.1) // -4 (hacia arriba en la recta numérica)
-        
-          
-        
-        
-        
-      
 
 Ejemplo de uso:
 
@@ -9480,12 +7407,6 @@ Ejemplo de uso:
 const productos = 23
 const productosPorCaja = 10
 const cajasNecesarias = Math.ceil(productos / productosPorCaja) // 3 cajas
-        
-          
-        
-        
-        
-      
 
 3. Math.round() - Redondea al más cercano
 
@@ -9497,33 +7418,21 @@ Math.round(4.5) // 5 ← En el medio, redondea hacia arriba
 Math.round(4.9) // 5
 Math.round(5.0) // 5
 Math.round(-4.5) // -4
-        
-          
-        
-        
-        
-      
 
 Ejemplo de uso:
 
 // Redondear precio al euro más cercano
 const precioExacto = 19.67
 const precioRedondeado = Math.round(precioExacto) // 20€
-        
-          
-        
-        
-        
-      
 
 Tabla comparativa
-Número	floor()	round()	ceil()
-4.1	4	4	5
-4.4	4	4	5
-4.5	4	5	5
-4.6	4	5	5
-4.9	4	5	5
-5.0	5	5	5
+Número    floor()    round()    ceil()
+4.1    4    4    5
+4.4    4    4    5
+4.5    4    5    5
+4.6    4    5    5
+4.9    4    5    5
+5.0    5    5    5
 
 Ayuda visual:
 
@@ -9532,12 +7441,6 @@ Ayuda visual:
     4 ←-------- 4.3 -----------→ 5 --------→ 5
     4 ←-------- 4.5 ---------------→ 5 ----→ 5
     4 ←-------- 4.7 -------------------→ 5 → 5
-        
-          
-        
-        
-        
-      
 
 ¿Cuál usar para la paginación?
 
@@ -9547,12 +7450,6 @@ Para calcular páginas totales, siempre usa Math.ceil():
 Math.floor(23 / 5) // ❌ 4 - Perdemos los últimos 3 trabajos
 Math.round(23 / 5) // ❌ 5 - Funciona, pero no es semánticamente correcto
 Math.ceil(23 / 5) // ✅ 5 - Correcto: necesitamos 5 páginas
-        
-          
-        
-        
-        
-      
 
 Cortando los datos con Array.slice()
 
@@ -9562,24 +7459,12 @@ const pagedResults = jobsData.slice(
   (currentPage - 1) * RESULTS_PER_PAGE, // inicio
   currentPage * RESULTS_PER_PAGE // fin (no incluido)
 )
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace Array.slice()?
 
 slice() extrae una porción del array sin modificar el array original:
 
 array.slice(inicio, fin)
-        
-          
-        
-        
-        
-      
 
     inicio: Índice donde empezar (incluido)
     fin: Índice donde terminar (no incluido)
@@ -9600,12 +7485,6 @@ numeros.slice(-3) // [7, 8, 9]
 
 // Obtener todos menos el primero y el último
 numeros.slice(1, -1) // [1, 2, 3, 4, 5, 6, 7, 8]
-        
-          
-        
-        
-        
-      
 
 Importante: slice() no muta el array original:
 
@@ -9614,12 +7493,6 @@ const copia = original.slice(1, 3) // [2, 3]
 
 console.log(original) // [1, 2, 3, 4, 5] ← No cambió
 console.log(copia) // [2, 3]
-        
-          
-        
-        
-        
-      
 
 Calculando los índices para cada página
 
@@ -9628,12 +7501,6 @@ Veamos cómo calcular los índices de inicio y fin para cada página:
 Con 23 trabajos y 5 por página:
 
 const RESULTS_PER_PAGE = 5
-        
-          
-        
-        
-        
-      
 
 Página 1
 
@@ -9642,12 +7509,6 @@ inicio = (1 - 1) * 5 = 0
 fin = 1 * 5 = 5
 
 jobsData.slice(0, 5) // Índices 0, 1, 2, 3, 4 (5 elementos)
-        
-          
-        
-        
-        
-      
 
 Página 2
 
@@ -9656,12 +7517,6 @@ inicio = (2 - 1) * 5 = 5
 fin = 2 * 5 = 10
 
 jobsData.slice(5, 10) // Índices 5, 6, 7, 8, 9 (5 elementos)
-        
-          
-        
-        
-        
-      
 
 Página 3
 
@@ -9670,12 +7525,6 @@ inicio = (3 - 1) * 5 = 10
 fin = 3 * 5 = 15
 
 jobsData.slice(10, 15) // Índices 10, 11, 12, 13, 14 (5 elementos)
-        
-          
-        
-        
-        
-      
 
 Página 5 (última, incompleta)
 
@@ -9685,20 +7534,14 @@ fin = 5 * 5 = 25
 
 jobsData.slice(20, 25) // Índices 20, 21, 22 (3 elementos)
 // No hay problema si `fin` es mayor que el tamaño del array
-        
-          
-        
-        
-        
-      
 
 Tabla visual de la paginación
-Página	currentPage	inicio	fin	slice()	Trabajos mostrados
-1	1	0	5	slice(0, 5)	0-4 (5 trabajos)
-2	2	5	10	slice(5, 10)	5-9 (5 trabajos)
-3	3	10	15	slice(10, 15)	10-14 (5 trabajos)
-4	4	15	20	slice(15, 20)	15-19 (5 trabajos)
-5	5	20	25	slice(20, 25)	20-22 (3 trabajos)
+Página    currentPage    inicio    fin    slice()    Trabajos mostrados
+1    1    0    5    slice(0, 5)    0-4 (5 trabajos)
+2    2    5    10    slice(5, 10)    5-9 (5 trabajos)
+3    3    10    15    slice(10, 15)    10-14 (5 trabajos)
+4    4    15    20    slice(15, 20)    15-19 (5 trabajos)
+5    5    20    25    slice(20, 25)    20-22 (3 trabajos)
 Ejemplo con datos reales
 
 const jobsData = [
@@ -9733,37 +7576,20 @@ console.log(pagedResults)
 //   { id: 9, title: 'Job 9' },
 //   { id: 10, title: 'Job 10' }
 // ]
-        
-          
-        
-        
-        
-      
 
 El flujo completo de la paginación
 
 Vamos a ver cómo funciona todo junto:
+
 1. Estado inicial
 
 const [currentPage, setCurrentPage] = useState(1)
 // currentPage = 1
-        
-          
-        
-        
-        
-      
 
 2. Cálculo de páginas totales
 
 const totalPages = Math.ceil(jobsData.length / RESULTS_PER_PAGE)
 // totalPages = Math.ceil(23 / 5) = 5
-        
-          
-        
-        
-        
-      
 
 3. Obtención de trabajos de la página actual
 
@@ -9772,12 +7598,6 @@ const pagedResults = jobsData.slice(
   currentPage * RESULTS_PER_PAGE // 1*5 = 5
 )
 // pagedResults = [trabajo1, trabajo2, trabajo3, trabajo4, trabajo5]
-        
-          
-        
-        
-        
-      
 
 4. Renderizado
 
@@ -9790,12 +7610,6 @@ const pagedResults = jobsData.slice(
   onPageChange={handlePageChange}
 />
 // Muestra: [<] 1 2 3 4 5 [>]
-        
-          
-        
-        
-        
-      
 
 5. Usuario hace clic en página 3
 
@@ -9804,12 +7618,6 @@ const pagedResults = jobsData.slice(
 handlePageChange(3)
 // Que llama a:
 setCurrentPage(3)
-        
-          
-        
-        
-        
-      
 
 6. React re-renderiza
 
@@ -9828,12 +7636,6 @@ const pagedResults = jobsData.slice(
 // Muestra: [<] 1 2 *3* 4 5 [>]
 //                 ↑
 //            página activa
-        
-          
-        
-        
-        
-      
 
 Diagrama del flujo de datos
 
@@ -9875,12 +7677,6 @@ Diagrama del flujo de datos
     pagedResults = slice(10, 15)
               ↓
     JobListings muestra trabajos 11-15
-        
-          
-        
-        
-        
-      
 
 Ventajas de esta implementación
 ✅ Separación de responsabilidades
@@ -9893,12 +7689,6 @@ const pagedResults = jobsData.slice(...)
 
 // Pagination.jsx - Solo maneja la navegación
 <Pagination currentPage={...} onPageChange={...} />
-        
-          
-        
-        
-        
-      
 
 ✅ Reutilizable
 
@@ -9920,12 +7710,6 @@ El componente Pagination puede usarse con cualquier tipo de datos:
   totalPages={articleTotalPages}
   onPageChange={handleArticlePageChange}
 />
-        
-          
-        
-        
-        
-      
 
 ✅ Eficiente
 
@@ -9934,18 +7718,13 @@ El componente Pagination puede usarse con cualquier tipo de datos:
     No cargamos todos los trabajos de golpe
 
 Mejoras posibles
+
 1. Scroll al inicio al cambiar de página
 
 const handlePageChange = (page) => {
   setCurrentPage(page)
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
-        
-          
-        
-        
-        
-      
 
 2. Persistir página en la URL
 
@@ -9958,12 +7737,6 @@ const handlePageChange = (page) => {
 }
 
 // URL: /jobs?page=3
-        
-          
-        
-        
-        
-      
 
 3. Desactivar botones en los extremos
 
@@ -9974,12 +7747,6 @@ const handlePageChange = (page) => {
   disablePrevious={currentPage === 1}
   disableNext={currentPage === totalPages}
 />
-        
-          
-        
-        
-        
-      
 
 4. Mostrar rango de resultados
 
@@ -9988,12 +7755,6 @@ const handlePageChange = (page) => {
   {Math.min(currentPage * RESULTS_PER_PAGE, jobsData.length)} de {jobsData.length} trabajos
 </p>
 // Página 2: "Mostrando 6 - 10 de 23 trabajos"
-        
-          
-        
-        
-        
-      
 
 Errores comunes
 ❌ Olvidar restar 1 en el cálculo de inicio
@@ -10009,12 +7770,6 @@ const pagedResults = jobsData.slice(
   (currentPage - 1) * RESULTS_PER_PAGE, // Página 1 empieza en índice 0
   currentPage * RESULTS_PER_PAGE
 )
-        
-          
-        
-        
-        
-      
 
 ❌ Usar Math.floor() o Math.round() para páginas totales
 
@@ -10026,12 +7781,6 @@ const totalPages = Math.round(jobsData.length / RESULTS_PER_PAGE)
 
 // ✅ Correcto: Siempre redondea hacia arriba
 const totalPages = Math.ceil(jobsData.length / RESULTS_PER_PAGE)
-        
-          
-        
-        
-        
-      
 
 ❌ Mutar el array con splice()
 
@@ -10040,12 +7789,6 @@ const pagedResults = jobsData.splice(0, 5)
 
 // ✅ Correcto: slice() crea un nuevo array
 const pagedResults = jobsData.slice(0, 5)
-        
-          
-        
-        
-        
-      
 
 Diferencia entre slice() y splice():
 
@@ -10058,12 +7801,6 @@ console.log(original) // [1, 2, 3, 4, 5] ← No cambió
 // splice() - SÍ muta, modifica el original
 const eliminados = original.splice(1, 2) // [2, 3]
 console.log(original) // [1, 4, 5] ← Cambió!
-        
-          
-        
-        
-        
-      
 
 Lo que hemos visto en esta clase
 
@@ -10081,7 +7818,9 @@ En la próxima clase veremos más conceptos avanzados de React que te ayudarán 
     💡 Recuerda: Para paginación siempre usa Math.ceil() para el total de páginas y slice() para cortar los datos. La fórmula clave es: inicio = (página - 1) * tamaño, fin = página * tamaño.
 
 ----
+
 <a id="css-modules"></a>
+
 # CSS Modules
 
 Hasta ahora hemos usado CSS global, donde todas las clases están disponibles en toda la aplicación. En esta clase aprenderemos a usar CSS Modules, una técnica que nos permite escribir CSS con ámbito local para cada componente, evitando conflictos de nombres.
@@ -10094,24 +7833,12 @@ Imagina que tienes estos estilos globales:
   background-color: blue;
   color: white;
 }
-        
-          
-        
-        
-        
-      
 
 /* otro-archivo.css */
 .button {
   background-color: red; /* ⚠️ Sobreescribe el anterior */
   font-size: 20px;
 }
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -10126,17 +7853,12 @@ Los CSS Modules son archivos CSS normales pero con una convención especial: el 
 
 ❌ Pagination.css       → CSS global
 ✅ Pagination.module.css → CSS Module (ámbito local)
-        
-          
-        
-        
-        
-      
 
 Característica principal: Las clases CSS tienen ámbito local automáticamente. React (Vite/Webpack) las transforma para que sean únicas.
 Creando el CSS Module para Pagination
 
 Vamos a crear estilos para nuestro componente Pagination.
+
 1. Crear el archivo Pagination.module.css
 
 Creamos el archivo junto al componente:
@@ -10145,12 +7867,6 @@ src/
   components/
     Pagination.jsx
     Pagination.module.css  ← Nuevo archivo
-        
-          
-        
-        
-        
-      
 
 Convención de nombres:
 
@@ -10182,10 +7898,11 @@ Convención de nombres:
     &:focus {
       background-color: #fff;
     }
-
+    
     &:active {
       transform: scale(0.9);
     }
+
   }
 }
 
@@ -10194,12 +7911,6 @@ Convención de nombres:
   color: white;
   pointer-events: none;
 }
-        
-          
-        
-        
-        
-      
 
 Notas sobre la sintaxis:
 
@@ -10235,19 +7946,14 @@ export function Pagination({ currentPage = 1, totalPages = 5, onPageChange }) {
           {page}
         </a>
       ))}
-
+    
       <a href="#" style={styleLinkRight} onClick={handleNext}>
         <!-- Icono de flecha derecha -->
       </a>
     </nav>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Puntos clave:
 
@@ -10255,6 +7961,7 @@ Puntos clave:
 import styles from './Pagination.module.css'
 
 // 2. Usar las clases con styles.nombreClase
+
 <nav className={styles.pagination}>
   {/* ... */}
 </nav>
@@ -10263,12 +7970,6 @@ import styles from './Pagination.module.css'
 <a className={currentPage === page ? styles.isActive : ''}>
   {page}
 </a>
-        
-          
-        
-        
-        
-      
 
 ¿Cómo funcionan los CSS Modules?
 
@@ -10278,13 +7979,8 @@ Código que escribes
 import styles from './Pagination.module.css'
 ;<nav className={styles.pagination}>
   <a className={styles.isActive}>1</a>
+
 </nav>
-        
-          
-        
-        
-        
-      
 
 Lo que se importa
 
@@ -10292,24 +7988,12 @@ styles = {
   pagination: 'Pagination_pagination__a1b2c',
   isActive: 'Pagination_isActive__d3e4f',
 }
-        
-          
-        
-        
-        
-      
 
 HTML generado en el navegador
 
 <nav class="Pagination_pagination__a1b2c">
   <a class="Pagination_isActive__d3e4f">1</a>
 </nav>
-        
-          
-        
-        
-        
-      
 
 Resultado: Los nombres de clase son únicos y no colisionan con otros componentes.
 Formato del nombre generado
@@ -10317,24 +8001,12 @@ Formato del nombre generado
 El nombre generado sigue este patrón:
 
 [Componente]_[clase-original]__[hash-único]
-        
-          
-        
-        
-        
-      
 
 Ejemplos:
 
 .pagination  →  Pagination_pagination__a1b2c
 .isActive    →  Pagination_isActive__d3e4f
 .button      →  Button_button__x7y8z
-        
-          
-        
-        
-        
-      
 
 Comparación: CSS Global vs CSS Modules
 CSS Global
@@ -10347,12 +8019,6 @@ CSS Global
 .isActive {
   background-color: blue;
 }
-        
-          
-        
-        
-        
-      
 
 // Pagination.jsx
 import './Pagination.css'
@@ -10364,12 +8030,6 @@ function Pagination() {
     </nav>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -10387,12 +8047,6 @@ CSS Modules
 .isActive {
   background-color: blue;
 }
-        
-          
-        
-        
-        
-      
 
 // Pagination.jsx
 import styles from './Pagination.module.css'
@@ -10404,12 +8058,6 @@ function Pagination() {
     </nav>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -10419,6 +8067,7 @@ Ventajas:
     ✅ Error si usas una clase que no existe
 
 Ventajas de los CSS Modules
+
 1. ✅ Sin colisiones de nombres
 
 Puedes usar el mismo nombre de clase en diferentes componentes:
@@ -10427,23 +8076,11 @@ Puedes usar el mismo nombre de clase en diferentes componentes:
 .button {
   background-color: blue;
 }
-        
-          
-        
-        
-        
-      
 
 /* Card.module.css */
 .button {
   background-color: red; /* ✅ No colisiona con Button */
 }
-        
-          
-        
-        
-        
-      
 
 2. ✅ Encapsulación y mantenibilidad
 
@@ -10454,12 +8091,6 @@ src/
     Pagination/
       Pagination.jsx
       Pagination.module.css    ← Estilos aquí
-        
-          
-        
-        
-        
-      
 
     Fácil de encontrar los estilos de un componente
     Si borras el componente, borras sus estilos
@@ -10473,32 +8104,22 @@ import styles from './Pagination.module.css'
 
 // Escribes: styles.
 // Tu editor sugiere: pagination, isActive
+
 <nav className={styles.pagination}>
   {/* Tu editor sabe que existe */}
 </nav>
 
 // ❌ Error de TypeScript si usas una clase que no existe
+
 <nav className={styles.paginashon}>
   {/* TypeScript te avisa que 'paginashon' no existe */}
 </nav>
-        
-          
-        
-        
-        
-      
 
 4. ✅ Eliminación automática de CSS no usado
 
 Las herramientas de build pueden detectar qué clases se usan:
 
 // Si nunca usas styles.isActive, puede ser eliminado del bundle
-        
-          
-        
-        
-        
-      
 
 5. ✅ Convive con CSS global
 
@@ -10508,16 +8129,11 @@ import styles from './Pagination.module.css'
 import './global.css'
 
 /*
+
 <nav className={`${styles.pagination} container`}>
                         ↑ CSS Module     ↑ CSS global
 </nav>
 */
-        
-          
-        
-        
-        
-      
 
 Aplicando múltiples clases
 
@@ -10525,56 +8141,26 @@ Hay varias formas de aplicar múltiples clases CSS Module:
 Opción 1: Template literals
 
 <a className={`${styles.link} ${styles.active}`}>Link</a>
-        
-          
-        
-        
-        
-      
 
 Opción 2: Condicionales
 
 <a className={currentPage === page ? styles.isActive : ''}>{page}</a>
-        
-          
-        
-        
-        
-      
 
 Opción 3: Combinar módulo y global
 
 <nav className={`${styles.pagination} container`}>
   {/*      ↑ CSS Module        ↑ CSS global */}
 </nav>
-        
-          
-        
-        
-        
-      
 
 Opción 4: Array + join (más legible)
 
 <a className={[styles.link, isActive && styles.active].filter(Boolean).join(' ')}>Link</a>
-        
-          
-        
-        
-        
-      
 
 Opción 5: Librería classnames
 
 import classNames from 'classnames'
 
 // <a className={classNames(styles.link, { [styles.active]: isActive })}>Link</a>
-        
-          
-        
-        
-        
-      
 
 Cuándo usar CSS Modules vs CSS global
 Usa CSS Modules para:
@@ -10602,12 +8188,6 @@ Errores comunes
 /* ✅ Pagination.module.css - SÍ es CSS Module */
 .pagination {
 }
-        
-          
-        
-        
-        
-      
 
 ❌ Usar nombres con guiones
 
@@ -10615,12 +8195,6 @@ Errores comunes
 .is-active {
   /* ⚠️ Complicado de acceder */
 }
-        
-          
-        
-        
-        
-      
 
 // Tienes que usar corchetes
 <a className={styles['is-active']}>Link</a>
@@ -10628,12 +8202,6 @@ Errores comunes
 // ✅ Mejor: usa camelCase
 // .isActive { }
 <a className={styles.isActive}>Link</a>
-        
-          
-        
-        
-        
-      
 
 Convención: Usa camelCase para nombres de clases en CSS Modules.
 ❌ Tratar de usar clases globalmente
@@ -10641,24 +8209,14 @@ Convención: Usa camelCase para nombres de clases en CSS Modules.
 /* Pagination.module.css */
 .pagination {
 }
-        
-          
-        
-        
-        
-      
 
 // ❌ No funciona: la clase real es "Pagination_pagination__a1b2c"
+
 <nav className="pagination">
 
 // ✅ Usa el objeto styles
+
 <nav className={styles.pagination}>
-        
-          
-        
-        
-        
-      
 
 Escapando al ámbito global: :global()
 
@@ -10680,12 +8238,6 @@ A veces necesitas estilos globales dentro de un CSS Module:
 :global(a) {
   color: blue;
 }
-        
-          
-        
-        
-        
-      
 
 Uso común: Estilos para librerías externas que inyectan HTML:
 
@@ -10697,12 +8249,6 @@ Uso común: Estilos para librerías externas que inyectan HTML:
 :global(.external-library-class) {
   color: red;
 }
-        
-          
-        
-        
-        
-      
 
 Lo que hemos visto en esta clase
 
@@ -10720,7 +8266,9 @@ En la próxima clase seguiremos explorando más conceptos de React que te ayudar
     💡 Recuerda: Usa CSS Modules para estilos de componentes específicos y CSS global para estilos base y utilidades. Los CSS Modules te dan encapsulación y evitan colisiones de nombres automáticamente.
 
 ----
+
 <a id="hook-useid"></a>
+
 # Hook useId()
 
 En esta clase vamos a mejorar nuestro componente de formulario de búsqueda. Aprenderemos a manejar el evento submit y a usar el hook useId() para generar identificadores únicos que eviten colisiones en nuestros elementos HTML.
@@ -10755,14 +8303,9 @@ export function SearchForm() {
         </select>
       </div>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Añadiendo el manejador de submit
 
@@ -10800,14 +8343,9 @@ export function SearchForm() {
         </select>
       </div>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Puntos clave:
 
@@ -10830,12 +8368,6 @@ const handleSubmit = (e) => {
   // La página se recarga inmediatamente
   // El console.log puede no verse
 }
-        
-          
-        
-        
-        
-      
 
 Con preventDefault():
 
@@ -10844,12 +8376,6 @@ const handleSubmit = (e) => {
   console.log('Formulario enviado')
   // Ahora podemos manejar el formulario con JavaScript
 }
-        
-          
-        
-        
-        
-      
 
 Añadiendo un botón de submit
 
@@ -10886,17 +8412,12 @@ export function SearchForm() {
           <option value="lead">Lead</option>
         </select>
       </div>
-
+    
       <button type="submit">Buscar</button>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Tipos de botones:
 
@@ -10911,12 +8432,6 @@ Tipos de botones:
 
 <button>Buscar</button>
 // ⚠️ Por defecto es type="submit" dentro de un <form>
-        
-          
-        
-        
-        
-      
 
 Importante: Si no especificas type, un <button> dentro de un <form> es automáticamente type="submit".
 El problema con IDs manuales
@@ -10932,12 +8447,6 @@ Actualmente, nuestros IDs están hardcodeados:
 <select name="experience-level" id="filter-experience-level">
   {/* ... */}
 </select>
-        
-          
-        
-        
-        
-      
 
 ¿Qué problema hay con esto?
 Problema 1: Colisiones de IDs
@@ -10952,33 +8461,24 @@ function App() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 HTML generado:
 
 <!-- Primer SearchForm -->
+
 <label for="filter-location">Ubicación</label>
 <select id="filter-location">
   ...
 </select>
 
 <!-- Segundo SearchForm -->
+
 <label for="filter-location">Ubicación</label>
 <select id="filter-location">
   ...
 </select>
+
 <!-- ❌ ID duplicado! -->
-        
-          
-        
-        
-        
-      
 
 Consecuencias:
 
@@ -10998,12 +8498,6 @@ Si necesitas cambiar el ID, debes actualizarlo en varios lugares:
 <select id="filter-location">
   {/*      ↑ Y aquí */}
 </select>
-        
-          
-        
-        
-        
-      
 
 La solución: useId()
 
@@ -11044,17 +8538,12 @@ export function SearchForm() {
           <option value="lead">Lead</option>
         </select>
       </div>
-
+    
       <button type="submit">Buscar</button>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Cambios realizados:
 
@@ -11090,17 +8579,12 @@ export function SearchForm() {
           {/* Evitamos magic strings como "experience-level" */}
         </select>
       </div>
-
+    
       <button type="submit">Buscar</button>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas de usar useId() para name:
 
@@ -11119,6 +8603,7 @@ Para nuestro caso, como solo usaremos los datos en React para filtrar, podríamo
 Inspeccionando el HTML generado en el navegador:
 
 <!-- Primer SearchForm -->
+
 <label for=":r0:">Ubicación</label>
 <select id=":r0:" name="location">
   ...
@@ -11130,6 +8615,7 @@ Inspeccionando el HTML generado en el navegador:
 </select>
 
 <!-- Segundo SearchForm (si lo usamos dos veces) -->
+
 <label for=":r2:">Ubicación</label>
 <select id=":r2:" name="location">
   ...
@@ -11139,12 +8625,6 @@ Inspeccionando el HTML generado en el navegador:
 <select id=":r3:" name="experience-level">
   ...
 </select>
-        
-          
-        
-        
-        
-      
 
 Características del ID generado:
 
@@ -11168,14 +8648,9 @@ El formato :r0: es:
 const id1 = useId() // ":r0:"
 const id2 = useId() // ":r1:"
 const id3 = useId() // ":r2:"
-        
-          
-        
-        
-        
-      
 
 Características importantes:
+
 1. Único por componente y renderizado
 
 function MyComponent() {
@@ -11185,12 +8660,6 @@ function MyComponent() {
   // Siempre son diferentes entre sí
   console.log(id1 === id2) // false
 }
-        
-          
-        
-        
-        
-      
 
 2. Estable entre renderizados
 
@@ -11201,12 +8670,6 @@ function MyComponent() {
   // Aunque el componente se re-renderice, el ID no cambia
   return <div id={id}>Count: {count}</div>
 }
-        
-          
-        
-        
-        
-      
 
 3. Único entre instancias
 
@@ -11218,12 +8681,6 @@ function App() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Comparación: ID manual vs useId()
 ID Manual (❌ Problemático)
@@ -11242,12 +8699,6 @@ function SearchForm() {
 // Usarlo dos veces causa problemas
 <SearchForm /> {/* id="location" */}
 <SearchForm /> {/* id="location" ❌ Duplicado! */}
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -11276,12 +8727,6 @@ function SearchForm() {
 // Usarlo múltiples veces es seguro
 <SearchForm /> {/* id=":r0:" */}
 <SearchForm /> {/* id=":r1:" ✅ Único! */}
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -11292,6 +8737,7 @@ Ventajas:
     ✅ Accesible por defecto
 
 Casos de uso de useId()
+
 1. Labels y inputs
 
 function TextField({ label }) {
@@ -11304,12 +8750,6 @@ function TextField({ label }) {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 2. ARIA attributes
 
@@ -11325,12 +8765,6 @@ function Tooltip({ children, tip }) {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 3. Múltiples IDs relacionados
 
@@ -11345,24 +8779,12 @@ function FormField({ label }) {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Nota: Puedes concatenar strings al ID generado:
 
 const baseId = useId() // ":r0:"
 const inputId = `${baseId}-input` // ":r0:-input"
 const helpId = `${baseId}-help` // ":r0:-help"
-        
-          
-        
-        
-        
-      
 
 Reglas de useId()
 ✅ Puedes:
@@ -11385,12 +8807,6 @@ function MyComponent() {
 const id = useId()
 const inputId = `${id}-input`
 const errorId = `${id}-error`
-        
-          
-        
-        
-        
-      
 
 ❌ No puedes:
 
@@ -11417,12 +8833,6 @@ for (let i = 0; i < 3; i++) {
 const handleClick = () => {
   const id = useId() // ❌ Error!
 }
-        
-          
-        
-        
-        
-      
 
 Regla general: useId() debe llamarse en el nivel superior del componente (como todos los hooks).
 Diferencia entre useId() y otros hooks
@@ -11433,12 +8843,6 @@ const [id] = useState('my-id') // No es necesario
 
 // ✅ Usa useId()
 const id = useId() // Más simple y correcto
-        
-          
-        
-        
-        
-      
 
 useState() es para datos que cambian. useId() es para identificadores que nunca cambian.
 
@@ -11450,12 +8854,6 @@ const id = `input-${Math.random()}` // Cambia en cada render!
 
 // ✅ Usa useId()
 const id = useId() // Estable entre renders
-        
-          
-        
-        
-        
-      
 
 Math.random() genera valores diferentes en cada renderizado. useId() es estable.
 Lo que hemos visto en esta clase
@@ -11476,7 +8874,9 @@ En la próxima clase aprenderemos a gestionar los datos del formulario y cómo c
     💡 Recuerda: Siempre usa useId() para generar IDs en tus componentes React. Evita IDs hardcodeados para prevenir colisiones cuando el componente se usa múltiples veces. Los IDs son para accesibilidad y asociación de elementos, mientras que name es para enviar datos del formulario.
 
 ---
+
 <a id="formularios-filtros"></a>
+
 # Gestión de Formularios y Filtros
 
 En la clase anterior añadimos el handleSubmit y usamos useId() para generar identificadores únicos. Ahora vamos a implementar la lógica completa del formulario: capturar los valores, filtrar los trabajos y añadir búsqueda en tiempo real.
@@ -11497,15 +8897,16 @@ export function SearchForm() {
     event.preventDefault()
 
     const formData = new FormData(event.target)
-
+    
     const filters = {
       search: formData.get(idText),
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
       experienceLevel: formData.get(idExperienceLevel),
     }
-
+    
     console.log(filters)
+
   }
 
   return (
@@ -11514,12 +8915,6 @@ export function SearchForm() {
     </form>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Puntos clave:
 
@@ -11535,12 +8930,6 @@ Creación de FormData
 const formData = new FormData(event.target)
 //                              ↑
 //                     El elemento <form>
-        
-          
-        
-        
-        
-      
 
 event.target es el elemento del formulario que disparó el evento submit.
 Obtener valores con .get()
@@ -11549,12 +8938,6 @@ const formData = new FormData(event.target)
 
 // Obtener el valor de un campo por su atributo "name"
 const value = formData.get('nombre-del-campo')
-        
-          
-        
-        
-        
-      
 
 En nuestro caso:
 
@@ -11564,12 +8947,6 @@ const filters = {
   location: formData.get(idLocation), // Valor del select de ubicación
   experienceLevel: formData.get(idExperienceLevel), // Valor del select de experiencia
 }
-        
-          
-        
-        
-        
-      
 
 Como usamos useId() para los atributos name, pasamos esos IDs a .get().
 Ejemplo visual
@@ -11580,12 +8957,6 @@ HTML generado:
 <select name=":r1:" id=":r1:">
   <option value="react">React</option>
 </select>
-        
-          
-        
-        
-        
-      
 
 JavaScript:
 
@@ -11593,12 +8964,6 @@ const formData = new FormData(event.target)
 
 formData.get(':r0:') // Valor del input (lo que el usuario escribió)
 formData.get(':r1:') // "react" (opción seleccionada)
-        
-          
-        
-        
-        
-      
 
 Ventajas de FormData
 
@@ -11635,12 +9000,6 @@ function App() {
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 Estados añadidos:
 
@@ -11658,26 +9017,21 @@ export function SearchForm({ onSearch }) {
     event.preventDefault()
 
     const formData = new FormData(event.target)
-
+    
     const filters = {
       search: formData.get(idText),
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
       experienceLevel: formData.get(idExperienceLevel),
     }
-
+    
     // Llamar a la función del padre
     onSearch(filters)
+
   }
 
   // ... return
 }
-        
-          
-        
-        
-        
-      
 
 Flujo de datos:
 
@@ -11688,12 +9042,6 @@ handleSubmit captura valores con FormData
 onSearch(filters) llama a la función del padre
        ↓
 App recibe los filtros y actualiza el estado
-        
-          
-        
-        
-        
-      
 
 Filtrando los trabajos
 
@@ -11754,33 +9102,22 @@ function App() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Orden de operaciones:
 
 jobsData (todos los trabajos)
     ↓
+
 1. Filtrar por technology, location, experienceLevel
     ↓
-jobsFilteredByFilters
+   jobsFilteredByFilters
     ↓
     ↓
 2. Calcular páginas totales
     ↓
 3. Aplicar paginación
     ↓
-pagedResults (solo los trabajos de la página actual)
-        
-          
-        
-        
-        
-      
+   pagedResults (solo los trabajos de la página actual)
 
 Entendiendo el filtro por selects
 
@@ -11791,12 +9128,6 @@ const jobsFilteredByFilters = jobsData.filter((job) => {
     (filters.experienceLevel === '' || job.data.nivel === filters.experienceLevel)
   )
 })
-        
-          
-        
-        
-        
-      
 
 Lógica de cada condición:
 
@@ -11804,12 +9135,6 @@ filters.technology === '' || job.data.technology === filters.technology
 //          ↑                              ↑
 //    Si está vacío           O      Si coincide con el filtro
 //   (no filtrar)                    (sí filtrar)
-        
-          
-        
-        
-        
-      
 
 Ejemplos:
 
@@ -11823,12 +9148,6 @@ true && false && true = ❌ No pasa (location no coincide)
 
 // Job 3: { technology: 'node', modalidad: 'remoto', nivel: 'mid' }
 true && true && true = ✅ Pasa el filtro (location coincide)
-        
-          
-        
-        
-        
-      
 
 Filtro de texto en tiempo real
 
@@ -11857,17 +9176,12 @@ export function SearchForm({ onSearch, onChangeText }) {
       </div>
 
       {/* ... resto de los campos */}
-
+    
       <button type="submit">Buscar</button>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Paso 2: Manejar el cambio en App.jsx
 
@@ -11883,12 +9197,6 @@ function App() {
 
   // ... resto del código
 }
-        
-          
-        
-        
-        
-      
 
 Flujo del filtro en tiempo real:
 
@@ -11903,12 +9211,6 @@ App actualiza textToFilter con setTextToFilter
 jobsWithTextFilter se recalcula automáticamente
        ↓
 Los trabajos filtrados se muestran inmediatamente
-        
-          
-        
-        
-        
-      
 
 Entendiendo el filtro por texto
 
@@ -11920,12 +9222,6 @@ const jobsWithTextFilter =
     : jobsFilteredByFilters.filter((job) => {
         return job.titulo.toLowerCase().includes(textToFilter.toLowerCase())
       })
-        
-          
-        
-        
-        
-      
 
 Lógica:
 
@@ -11944,24 +9240,12 @@ Ejemplo:
 
 // Job 3: { titulo: "Desarrollador Senior React" }
 "desarrollador senior react".includes("desarrollador") = ✅ true
-        
-          
-        
-        
-        
-      
 
 Usamos .toLowerCase() para hacer la búsqueda insensible a mayúsculas:
 
 'Desarrollador'.toLowerCase() // "desarrollador"
 'DESARROLLADOR'.toLowerCase() // "desarrollador"
 'dEsArRoLlAdOr'.toLowerCase() // "desarrollador"
-        
-          
-        
-        
-        
-      
 
 Orden completo de estados y filtrado
 
@@ -12038,12 +9322,6 @@ function App() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Diagrama del flujo de datos
 
@@ -12084,12 +9362,6 @@ Diagrama del flujo de datos
     │  Renderiza los  │
     │  5 trabajos     │
     └─────────────────┘
-        
-          
-        
-        
-        
-      
 
 Diferencia entre submit y onChange
 Submit (botón “Buscar”)
@@ -12099,12 +9371,6 @@ Submit (botón “Buscar”)
   <select name={idLocation}>{/* ... */}</select>
   <button type="submit">Buscar</button>
 </form>
-        
-          
-        
-        
-        
-      
 
     Se ejecuta al hacer clic en “Buscar”
     Se ejecuta al presionar Enter en cualquier input
@@ -12114,18 +9380,13 @@ Submit (botón “Buscar”)
 onChange (tiempo real)
 
 <input type="text" onChange={handleChangeText} />
-        
-          
-        
-        
-        
-      
 
     Se ejecuta cada vez que cambia el valor
     Actualiza en tiempo real mientras escribes
     Útil para búsquedas de texto donde quieres ver resultados inmediatamente
 
 Ventajas de esta arquitectura
+
 1. ✅ Estado centralizado
 
 App (tiene todos los estados)
@@ -12133,12 +9394,6 @@ App (tiene todos los estados)
  ├─→ SearchForm (recibe onSearch y onChangeText)
  ├─→ JobListings (recibe trabajos ya filtrados)
  └─→ Pagination (recibe totalPages calculadas)
-        
-          
-        
-        
-        
-      
 
     El estado está en un solo lugar
     Fácil de debuggear
@@ -12154,22 +9409,10 @@ App (tiene todos los estados)
 
 // Pagination solo se preocupa de la navegación
 <Pagination currentPage={currentPage} totalPages={totalPages} />
-        
-          
-        
-        
-        
-      
 
 3. ✅ Filtrado en cascada
 
 Datos → Filtro 1 → Filtro 2 → Paginación → Render
-        
-          
-        
-        
-        
-      
 
     Cada paso procesa el resultado del anterior
     Fácil de añadir más filtros
@@ -12202,7 +9445,9 @@ En la próxima clase exploraremos más conceptos avanzados de React como custom 
     💡 Recuerda: El orden importa: primero filtras los datos, luego calculas las páginas totales, y finalmente aplicas la paginación. El estado debe estar en el componente padre que necesita manipular los datos, no en los componentes hijos que solo los muestran.
 
 ---
+
 <a id="ejercicios-formularios"></a>
+
 # Ejercicios: Formularios y Eventos
 
 En esta clase vamos a practicar todo lo que hemos aprendido sobre gestión de formularios, filtros y eventos en React. Estos ejercicios te ayudarán a consolidar los conceptos de la clase anterior y a mejorar tu aplicación DevJobs.
@@ -12220,6 +9465,7 @@ En la clase anterior implementamos filtros básicos, pero aún nos faltan alguno
 Filtros a implementar
 
 Si tu formulario tiene estos campos pero no están funcionando todavía, es hora de implementarlos:
+
 1. Filtro por tecnología
 
 // src/App.jsx
@@ -12230,12 +9476,6 @@ const jobsFilteredByFilters = jobsData.filter((job) => {
     (filters.experienceLevel === '' || job.data.nivel === filters.experienceLevel)
   )
 })
-        
-          
-        
-        
-        
-      
 
 Si aún no lo tienes implementado:
 
@@ -12257,16 +9497,11 @@ return (
       <label htmlFor={idSalary}>Salario mínimo</label>
       <input type="number" name={idSalary} id={idSalary} placeholder="30000" min="0" step="1000" />
     </div>
-
+    
     <button type="submit">Buscar</button>
-  </form>
+
+</form>
 )
-        
-          
-        
-        
-        
-      
 
 En App.jsx, añade el filtro de salario:
 
@@ -12282,12 +9517,6 @@ const jobsFilteredByFilters = jobsData.filter((job) => {
     jobSalary >= minSalary
   )
 })
-        
-          
-        
-        
-        
-      
 
 3. Filtro por tipo de contrato
 
@@ -12304,12 +9533,6 @@ const idContractType = useId()
     <option value="internship">Prácticas</option>
   </select>
 </div>
-        
-          
-        
-        
-        
-      
 
 Añade el filtro en App.jsx:
 
@@ -12319,12 +9542,6 @@ const jobsFilteredByFilters = jobsData.filter((job) => {
     filters.contractType === '' || job.data.contractType === filters.contractType
   )
 })
-        
-          
-        
-        
-        
-      
 
 Checklist del Ejercicio 1
 
@@ -12343,12 +9560,6 @@ Los eventos onFocus y onBlur mejoran la experiencia de usuario dando feedback vi
   onFocus={() => console.log('El input está activo')}
   onBlur={() => console.log('El input perdió el foco')}
 />
-        
-          
-        
-        
-        
-      
 
     onFocus - Se ejecuta cuando el usuario hace clic en el input (o usa Tab para llegar a él)
     onBlur - Se ejecuta cuando el usuario sale del input (hace clic fuera o presiona Tab)
@@ -12373,15 +9584,16 @@ export function SearchForm({ onSearch, onChangeText }) {
     event.preventDefault()
 
     const formData = new FormData(event.target)
-
+    
     const filters = {
       search: formData.get(idText),
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
       experienceLevel: formData.get(idExperienceLevel),
     }
-
+    
     onSearch(filters)
+
   }
 
   const handleChangeText = (event) => {
@@ -12427,19 +9639,14 @@ export function SearchForm({ onSearch, onChangeText }) {
           <option value="python">Python</option>
         </select>
       </div>
-
+    
       {/* ... resto de los campos con onFocus y onBlur ... */}
-
+    
       <button type="submit">Buscar</button>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Cómo funciona?
 
@@ -12464,12 +9671,6 @@ setFocusedField(null)
 El componente se re-renderiza
        ↓
 El input vuelve a su estado normal
-        
-          
-        
-        
-        
-      
 
 Mejorando con CSS en lugar de inline styles
 
@@ -12486,12 +9687,6 @@ En lugar de usar style inline, puedes usar clases CSS:
   onBlur={() => setFocusedField(null)}
   className={focusedField === 'search' ? 'input-focused' : ''}
 />
-        
-          
-        
-        
-        
-      
 
 Y en tu CSS:
 
@@ -12513,12 +9708,6 @@ Y en tu CSS:
   font-size: 0.875rem;
   color: #6b7280;
 }
-        
-          
-        
-        
-        
-      
 
 Checklist del Ejercicio 2
 
@@ -12548,8 +9737,9 @@ export function SearchForm({ onSearch }) {
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
     }
-
+    
     onSearch(filters)
+
   }
 
   return (
@@ -12560,22 +9750,17 @@ export function SearchForm({ onSearch }) {
         <option value="">Todas</option>
         <option value="react">React</option>
       </select>
-
+    
       <select name={idLocation} id={idLocation} onChange={handleChange}>
         <option value="">Todas</option>
         <option value="remoto">Remoto</option>
       </select>
-
+    
       {/* No necesitas botón de submit */}
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -12601,14 +9786,15 @@ export function SearchForm({ onSearch }) {
     event.preventDefault()
 
     const formData = new FormData(event.target)
-
+    
     const filters = {
       search: formData.get(idText),
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
     }
-
+    
     onSearch(filters)
+
   }
 
   return (
@@ -12619,22 +9805,17 @@ export function SearchForm({ onSearch }) {
         <option value="">Todas</option>
         <option value="react">React</option>
       </select>
-
+    
       <select name={idLocation} id={idLocation}>
         <option value="">Todas</option>
         <option value="remoto">Remoto</option>
       </select>
-
+    
       <button type="submit">Buscar</button>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -12662,15 +9843,16 @@ export function SearchForm({ onSearch, onChangeText }) {
     event.preventDefault()
 
     const formData = new FormData(event.target)
-
+    
     const filters = {
       search: formData.get(idText),
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
       experienceLevel: formData.get(idExperienceLevel),
     }
-
+    
     onSearch(filters)
+
   }
 
   // Búsqueda de texto en tiempo real
@@ -12701,7 +9883,7 @@ export function SearchForm({ onSearch, onChangeText }) {
           <option value="node">Node.js</option>
         </select>
       </div>
-
+    
       <div className="form-group">
         <label htmlFor={idLocation}>Ubicación</label>
         <select name={idLocation} id={idLocation}>
@@ -12710,7 +9892,7 @@ export function SearchForm({ onSearch, onChangeText }) {
           <option value="cdmx">Ciudad de México</option>
         </select>
       </div>
-
+    
       <div className="form-group">
         <label htmlFor={idExperienceLevel}>Nivel de experiencia</label>
         <select name={idExperienceLevel} id={idExperienceLevel}>
@@ -12720,17 +9902,12 @@ export function SearchForm({ onSearch, onChangeText }) {
           <option value="senior">Senior</option>
         </select>
       </div>
-
+    
       <button type="submit">Aplicar filtros</button>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué es mejor el enfoque híbrido?
 
@@ -12789,12 +9966,6 @@ function App() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Extra: Resetear la página al cambiar filtros
 
@@ -12814,12 +9985,6 @@ const handleChangeText = (text) => {
   setTextToFilter(text)
   setCurrentPage(1) // ← Volver a la primera página
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué?
 
@@ -12861,14 +10026,9 @@ export function SearchForm({ onSearch, onChangeText, onReset }) {
         </button>
       </div>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 En App.jsx:
 
@@ -12883,12 +10043,6 @@ const handleReset = () => {
 }
 
 return <SearchForm onSearch={handleSearch} onChangeText={handleChangeText} onReset={handleReset} />
-        
-          
-        
-        
-        
-      
 
 Desafío extra 2: Contador de resultados
 
@@ -12924,7 +10078,7 @@ function App() {
             {textToFilter && ` para "${textToFilter}"`}
           </p>
         </div>
-
+    
         <JobListings jobs={pagedResults} />
         <Pagination
           currentPage={currentPage}
@@ -12934,14 +10088,9 @@ function App() {
       </main>
       <Footer />
     </>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Lo que has practicado en estos ejercicios
 
@@ -12954,13 +10103,13 @@ Lo que has practicado en estos ejercicios
     🎨 UX mejorada - Hints, feedback visual y mejor usabilidad
 
 Comparación de enfoques
-Característica	Todo onChange	Todo onSubmit	Híbrido ⭐
-Resultados instantáneos	✅	❌	✅ (solo texto)
-Rendimiento	❌	✅	✅
-Control del usuario	❌	✅	✅
-Filtros múltiples	❌	✅	✅
-Mejor para búsqueda	✅	❌	✅
-Mejor para filtros	❌	✅	✅
+Característica    Todo onChange    Todo onSubmit    Híbrido ⭐
+Resultados instantáneos    ✅    ❌    ✅ (solo texto)
+Rendimiento    ❌    ✅    ✅
+Control del usuario    ❌    ✅    ✅
+Filtros múltiples    ❌    ✅    ✅
+Mejor para búsqueda    ✅    ❌    ✅
+Mejor para filtros    ❌    ✅    ✅
 
 Recomendación: Usa el enfoque híbrido para la mejor experiencia de usuario.
 Recap de conceptos clave
@@ -12968,32 +10117,14 @@ FormData
 
 const formData = new FormData(event.target)
 const value = formData.get('field-name')
-        
-          
-        
-        
-        
-      
 
 onFocus y onBlur
 
 <input onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} />
-        
-          
-        
-        
-        
-      
 
 onChange para tiempo real
 
 <input onChange={(e) => handleChange(e.target.value)} />
-        
-          
-        
-        
-        
-      
 
 onSubmit para formularios
 
@@ -13001,12 +10132,6 @@ onSubmit para formularios
   e.preventDefault()
   handleSubmit()
 }}>
-        
-          
-        
-        
-        
-      
 
 Reset de formulario
 
@@ -13015,12 +10140,6 @@ document.querySelector('form').reset()
 
 // Con ref
 formRef.current.reset()
-        
-          
-        
-        
-        
-      
 
 Siguientes pasos
 
@@ -13029,7 +10148,7 @@ Ahora que dominas la gestión de formularios en React, en las próximas clases a
     🎣 Custom Hooks - Crear hooks reutilizables para lógica de formularios
     📝 Validación de formularios - Validar datos antes de enviarlos
     🚀 Optimización de rendimiento - useMemo y useCallback para formularios
-
+    
     💡 Recuerda: La experiencia de usuario es clave. Un formulario con búsqueda en tiempo real para texto y submit para filtros múltiples ofrece la mejor combinación de rapidez y control.
 
 ---
@@ -13039,6 +10158,7 @@ Lo de arriba es hasta "Ejercicios: Formularios y Eventos".
 ---
 
 <a id="filtros-automaticos-y-routing-basico"></a>
+
 # 26. Filtros automáticos y Routing básico
 
 En esta clase vamos a mejorar significativamente la experiencia de usuario de nuestra aplicación eliminando el botón de búsqueda para que los filtros funcionen automáticamente. Además, aprenderemos a crear un sistema básico de páginas sin usar React Router.
@@ -13076,8 +10196,9 @@ export function SearchForm({ onSearch, onChangeText }) {
       search: formData.get(idText),
       location: formData.get(idLocation),
     }
-
+    
     onSearch(filters)
+
   }
 
   const handleChangeText = (event) => {
@@ -13102,14 +10223,9 @@ export function SearchForm({ onSearch, onChangeText }) {
         <option value="presencial">Presencial</option>
       </select>
     </form>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 event.target vs event.currentTarget
 
@@ -13124,12 +10240,6 @@ event.target es el elemento que lanzó el evento. En nuestro caso:
 const handleChange = (event) => {
   console.log(event.target) // <input> o <select>, dependiendo de cuál cambió
 }
-        
-          
-        
-        
-        
-      
 
 event.currentTarget
 
@@ -13138,12 +10248,6 @@ event.currentTarget es el elemento que tiene el listener del evento. En nuestro 
 const handleChange = (event) => {
   console.log(event.currentTarget) // Siempre <form>
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué necesitamos currentTarget?
 
@@ -13154,12 +10258,6 @@ const formData = new FormData(event.target)
 
 // ✅ CORRECTO - Obtenemos todos los datos del formulario
 const formData = new FormData(event.currentTarget)
-        
-          
-        
-        
-        
-      
 
 Ejemplo visual del problema
 
@@ -13169,12 +10267,6 @@ Ejemplo visual del problema
     <option value="remoto">Remoto</option>
   </select>
 </form>
-        
-          
-        
-        
-        
-      
 
 Si cambias el select:
 
@@ -13187,12 +10279,6 @@ console.log(formData.get('location')) // null ❌ (los selects no funcionan así
 const formData = new FormData(event.currentTarget) // FormData del <form>
 console.log(formData.get('search')) // "..." ✅
 console.log(formData.get('location')) // "remoto" ✅
-        
-          
-        
-        
-        
-      
 
 Filtros funcionando en tiempo real
 
@@ -13232,12 +10318,6 @@ function App() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Esto no escala bien cuando queremos agregar más páginas.
 Reorganización del App y separación de layout
@@ -13256,22 +10336,10 @@ src/
     ├── Home.jsx
     ├── Search.jsx
     └── NotFound.jsx
-        
-          
-        
-        
-        
-      
 
 Crear la carpeta de páginas
 
 mkdir src/pages
-        
-          
-        
-        
-        
-      
 
 Mover la lógica de búsqueda a Search.jsx
 
@@ -13291,12 +10359,6 @@ export function Search() {
 
   // ... resto del código
 }
-        
-          
-        
-        
-        
-      
 
 Nuevo App.jsx simplificado
 
@@ -13322,12 +10384,6 @@ function App() {
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 Routing manual usando window.location.pathname
 
@@ -13344,12 +10400,6 @@ console.log(window.location.pathname) // "/search"
 
 // Si estás en: http://localhost:5173/about
 console.log(window.location.pathname) // "/about"
-        
-          
-        
-        
-        
-      
 
 Implementación del router manual
 
@@ -13385,12 +10435,6 @@ function App() {
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 Versión alternativa más limpia
 
@@ -13416,12 +10460,6 @@ function App() {
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 Creando la página 404
 
@@ -13438,12 +10476,6 @@ export function NotFound() {
     </main>
   )
 }
-        
-          
-        
-        
-        
-      
 
     ¡Aquí tienes un ejercicio! Tienes que estilar la página 404 para que tenga el mismo estilo que el resto de la aplicación.
 
@@ -13478,7 +10510,7 @@ export function Home() {
           <p>Encuentra trabajos remotos desde cualquier lugar</p>
         </div>
       </section>
-
+    
       <section className="stats">
         <div className="stat">
           <h2>1,500+</h2>
@@ -13494,18 +10526,14 @@ export function Home() {
         </div>
       </section>
     </main>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Errores típicos al pasar HTML a JSX
 
 Cuando migras HTML plano a JSX, ten cuidado con estos errores comunes:
+
 1. Inputs sin cerrar
 
 // ❌ HTML (no funciona en JSX)
@@ -13513,28 +10541,18 @@ Cuando migras HTML plano a JSX, ten cuidado con estos errores comunes:
 
 // ✅ JSX (self-closing)
 <input type="text" name="search" />
-        
-          
-        
-        
-        
-      
 
 2. Atributos con nombres diferentes
 
 // ❌ HTML
 <label for="search">Búsqueda</label>
+
 <div class="container">
 
 // ✅ JSX
 <label htmlFor="search">Búsqueda</label>
+
 <div className="container">
-        
-          
-        
-        
-        
-      
 
 3. Atributos en camelCase
 
@@ -13543,26 +10561,15 @@ Cuando migras HTML plano a JSX, ten cuidado con estos errores comunes:
 
 // ✅ JSX
 <button onClick={handleClick}>
-        
-          
-        
-        
-        
-      
 
 4. Comentarios diferentes
 
 // ❌ HTML
+
 <!-- Este es un comentario -->
 
 // ✅ JSX
 {/* Este es un comentario */}
-        
-          
-        
-        
-        
-      
 
 5. Valores booleanos
 
@@ -13573,12 +10580,6 @@ Cuando migras HTML plano a JSX, ten cuidado con estos errores comunes:
 <input disabled={true} />
 // o simplemente
 <input disabled />
-        
-          
-        
-        
-        
-      
 
 Mejorando navegación dentro del Header
 
@@ -13607,14 +10608,9 @@ export function Header() {
         </nav>
       </div>
     </header>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Problema con el routing manual
 
@@ -13622,12 +10618,6 @@ Nuestro router funciona, pero tiene un problema importante: cuando haces clic en
 ¿Por qué se recarga?
 
 <a href="/search">Buscar trabajos</a>
-        
-          
-        
-        
-        
-      
 
 Los enlaces HTML normales (<a href="...">) hacen que el navegador recargue la página completa. Esto:
 
@@ -13648,12 +10638,6 @@ Preparando la base para sincronizar filtros con la URL
 Una característica avanzada que implementaremos más adelante es sincronizar los filtros con la URL:
 
 http://localhost:5173/search?technology=react&location=remoto
-        
-          
-        
-        
-        
-      
 
 Esto permite:
 
@@ -13672,25 +10656,26 @@ En las siguientes clases aprenderemos:
     🔗 URL Search Params - Sincronizar filtros con la URL
     ⚡ Navegación sin recarga - SPA real con Link y navigate
     📱 Rutas dinámicas - Páginas de detalle /jobs/:id
-
+    
     💡 Recuerda: Nuestro router manual es educativo, pero en producción siempre debes usar React Router o una librería similar.
 
 Comparación: Router manual vs React Router
-Característica	Router manual	React Router
-Recarga la página	❌ Sí	✅ No
-Mantiene el estado	❌ No	✅ Sí
-Parámetros de URL	❌ Manual	✅ Automático
-Rutas dinámicas	❌ Difícil	✅ Fácil
-Navegación programática	❌ Limitada	✅ Completa
-Historial del navegador	⚠️ Básico	✅ Completo
-Producción	❌ No recomendado	✅ Recomendado
+Característica    Router manual    React Router
+Recarga la página    ❌ Sí    ✅ No
+Mantiene el estado    ❌ No    ✅ Sí
+Parámetros de URL    ❌ Manual    ✅ Automático
+Rutas dinámicas    ❌ Difícil    ✅ Fácil
+Navegación programática    ❌ Limitada    ✅ Completa
+Historial del navegador    ⚠️ Básico    ✅ Completo
+Producción    ❌ No recomendado    ✅ Recomendado
 
 Conclusión: El router manual nos ayuda a entender cómo funciona el routing, pero React Router es la solución profesional.
 
 ---
-<a id="hook-useeffect-efectos-secundarios-en-react"></a>
-# Hook useEffect: Efectos secundarios en React
 
+<a id="hook-useeffect-efectos-secundarios-en-react"></a>
+
+# Hook useEffect: Efectos secundarios en React
 
 El hook useEffect es uno de los hooks más importantes de React. Te permite ejecutar efectos secundarios en tus componentes, es decir, operaciones que afectan algo fuera del componente como llamadas a APIs, manipulación del DOM, suscripciones a eventos, etc.
 
@@ -13718,12 +10703,6 @@ function MyComponent() {
 
   return <div>Mi componente</div>
 }
-        
-          
-        
-        
-        
-      
 
 ¿Cuándo se ejecuta useEffect?
 Sin segundo parámetro: En cada render
@@ -13744,12 +10723,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Cada vez que haces clic en el botón:
 
@@ -13757,12 +10730,6 @@ Cada vez que haces clic en el botón:
 2. El componente se re-renderiza
 3. useEffect se ejecuta
 4. Se imprime "El componente se renderizó"
-        
-          
-        
-        
-        
-      
 
 ⚠️ Cuidado: Esto puede causar problemas de rendimiento si el efecto es costoso.
 El array de dependencias
@@ -13772,12 +10739,6 @@ El segundo parámetro de useEffect es un array de dependencias que controla cuá
 useEffect(() => {
   // Código del efecto
 }, [dependencia1, dependencia2])
-        
-          
-        
-        
-        
-      
 
 Array vacío: Solo en el primer render
 
@@ -13797,12 +10758,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ahora, aunque hagas clic 100 veces en el botón, el efecto solo se ejecuta una vez al inicio.
 Con dependencias: Solo cuando cambian
@@ -13827,14 +10782,9 @@ function App() {
 
       <input value={name} onChange={(e) => setName(e.target.value)} />
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 En este ejemplo:
 
@@ -13866,14 +10816,9 @@ function JobListings() {
 
       <button onClick={() => setCurrentPage(currentPage + 1)}>Siguiente página</button>
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 El efecto se ejecuta cuando:
 
@@ -13896,12 +10841,6 @@ function App() {
 
   return <div>Contador: {count}</div>
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué pasa?
 
@@ -13911,12 +10850,6 @@ function App() {
 4. setCount(count + 1) → count cambia
 5. count cambió y es una dependencia → useEffect se ejecuta
 6. ... infinito
-        
-          
-        
-        
-        
-      
 
 ✅ Solución 1: Eliminar la dependencia
 
@@ -13926,12 +10859,6 @@ useEffect(() => {
   // Solo se ejecuta una vez
   setCount(1)
 }, [])
-        
-          
-        
-        
-        
-      
 
 ✅ Solución 2: Usar la función callback de setState
 
@@ -13941,12 +10868,6 @@ useEffect(() => {
   // Correcto: no depende de count
   setCount((prevCount) => prevCount + 1)
 }, [])
-        
-          
-        
-        
-        
-      
 
 ✅ Solución 3: No modifiques las dependencias
 
@@ -13957,12 +10878,6 @@ useEffect(() => {
   console.log('El contador es:', count)
   document.title = `Contador: ${count}`
 }, [count])
-        
-          
-        
-        
-        
-      
 
 Ejemplo práctico: Actualizar el título del documento
 
@@ -13988,6 +10903,7 @@ function App() {
     } else {
       document.title = `${jobCount} trabajos de "${textToFilter}" - Página ${currentPage}`
     }
+
   }, [jobsFiltered.length, currentPage, textToFilter])
 
   return (
@@ -14003,23 +10919,18 @@ function App() {
           <div key={job.id}>{job.title}</div>
         ))}
       </div>
-
+    
       <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
         Anterior
       </button>
-
+    
       <span>Página {currentPage}</span>
-
+    
       <button onClick={() => setCurrentPage(currentPage + 1)}>Siguiente</button>
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ahora, cuando:
 
@@ -14028,6 +10939,7 @@ Ahora, cuando:
     🧹 Borras el filtro → el título vuelve a mostrar solo la página
 
 Reglas importantes de useEffect
+
 1. Siempre se ejecuta al menos una vez
 
 El efecto siempre se ejecuta en el primer render, sin importar las dependencias:
@@ -14035,12 +10947,6 @@ El efecto siempre se ejecuta en el primer render, sin importar las dependencias:
 useEffect(() => {
   console.log('Se ejecuta en el primer render')
 }, [count])
-        
-          
-        
-        
-        
-      
 
 Aunque count no haya cambiado, el efecto se ejecuta al montar el componente.
 2. Las dependencias deben incluir todo lo que uses
@@ -14056,12 +10962,6 @@ useEffect(() => {
 useEffect(() => {
   console.log('Filtro:', textToFilter)
 }, [textToFilter])
-        
-          
-        
-        
-        
-      
 
 3. No uses objetos o arrays como dependencias directamente
 
@@ -14073,12 +10973,6 @@ const filters = { technology: 'react', location: 'remote' }
 useEffect(() => {
   console.log('Filtros:', filters)
 }, [filters])
-        
-          
-        
-        
-        
-      
 
 Solución: Usa las propiedades individuales como dependencias:
 
@@ -14086,12 +10980,6 @@ Solución: Usa las propiedades individuales como dependencias:
 useEffect(() => {
   console.log('Filtros:', filters.technology, filters.location)
 }, [filters.technology, filters.location])
-        
-          
-        
-        
-        
-      
 
 4. Evita modificar las dependencias dentro del efecto
 
@@ -14106,19 +10994,13 @@ useEffect(() => {
 useEffect(() => {
   console.log('Count:', count)
 }, [count])
-        
-          
-        
-        
-        
-      
 
 Resumen de la matriz de dependencias
-Dependencias	¿Cuándo se ejecuta el efecto?
-Sin segundo parámetro	En cada render
-[] (array vacío)	Solo una vez (al montar)
-[dep1]	Al montar + cada vez que dep1 cambie
-[dep1, dep2]	Al montar + cada vez que dep1 o dep2 cambien
+Dependencias    ¿Cuándo se ejecuta el efecto?
+Sin segundo parámetro    En cada render
+[] (array vacío)    Solo una vez (al montar)
+[dep1]    Al montar + cada vez que dep1 cambie
+[dep1, dep2]    Al montar + cada vez que dep1 o dep2 cambien
 Conclusión
 
 El hook useEffect es esencial para ejecutar efectos secundarios en React:
@@ -14132,9 +11014,8 @@ En las próximas clases veremos hooks más avanzados y aprenderemos a crear nues
 
     💡 Recuerda: El efecto siempre se ejecuta al menos una vez (en el primer render), y después solo según las dependencias que le indiques.
 
-
-
 ---
+
 <a id="cuando-usar-useeffect"></a>
 
 # 28. Cuándo usar useEffect
@@ -14167,12 +11048,6 @@ function ProductList({ products }) {
 
   return <div>{expensiveProducts.map((product) => /* ... */)}</div>
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué? Porque no estás haciendo nada fuera del componente. Solo estás transformando datos que ya tienes.
 ❌ No lo uses para calcular valores derivados
@@ -14197,12 +11072,6 @@ function ShoppingCart({ items }) {
 
   return <div>Total: ${total}</div>
 }
-        
-          
-        
-        
-        
-      
 
 ❌ No lo uses para inicializar estado
 
@@ -14225,16 +11094,11 @@ function TodoList() {
 
   return <ul>{todos.map((todo) => /* ... */)}</ul>
 }
-        
-          
-        
-        
-        
-      
 
 ✅ Cuándo SÍ debes usar useEffect
 
 Usa useEffect cuando necesites hacer algo que no puede ejecutarse durante el render porque afecta algo externo al componente.
+
 1. Fetching de datos
 
 Uno de los casos más comunes es hacer peticiones a APIs:
@@ -14263,6 +11127,7 @@ function UserProfile({ userId }) {
         setError(error.message)
         setLoading(false)
       })
+
   }, [userId])
 
   if (loading) return <div>Cargando...</div>
@@ -14276,19 +11141,13 @@ function UserProfile({ userId }) {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué necesitamos useEffect aquí?
 
     No podemos hacer fetch durante el render porque es asíncrono
     El fetch afecta algo externo (la red)
     Queremos ejecutarlo cuando cambia userId
-
+    
     Igualmente, existen bibliotecas que simplifican mucho este proceso, como TanStack Query, y no necesitarás usar entonces useEffect.
 
 2. Modificar el DOM directamente
@@ -14303,12 +11162,6 @@ function DocumentTitle({ title }) {
 
   return <div>La página ahora se llama: {title}</div>
 }
-        
-          
-        
-        
-        
-      
 
 Otros ejemplos de modificación del DOM:
 
@@ -14322,12 +11175,6 @@ function AutoFocusInput() {
 
   return <input ref={inputRef} />
 }
-        
-          
-        
-        
-        
-      
 
 3. Suscripciones a eventos
 
@@ -14349,11 +11196,12 @@ function WindowSize() {
 
     // Suscribirse al evento resize
     window.addEventListener('resize', handleResize)
-
+    
     // Función de limpieza: desuscribirse cuando el componente se desmonte
     return () => {
       window.removeEventListener('resize', handleResize)
     }
+
   }, [])
 
   return (
@@ -14363,12 +11211,6 @@ function WindowSize() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué está pasando aquí?
 
@@ -14394,16 +11236,11 @@ function LiveCounter() {
     }, 1000)
 
     // ❌ SIN LIMPIEZA: El interval seguirá ejecutándose aunque el componente se desmonte
+
   }, [])
 
   return <div>Contador: {count}</div>
 }
-        
-          
-        
-        
-        
-      
 
 Problema: Si el componente se desmonta, el interval seguirá ejecutándose en segundo plano, intentando actualizar un componente que ya no existe. Esto es un memory leak.
 ✅ Solución: Limpiar el interval
@@ -14420,16 +11257,11 @@ function LiveCounter() {
     return () => {
       clearInterval(interval)
     }
+
   }, [])
 
   return <div>Contador: {count}</div>
 }
-        
-          
-        
-        
-        
-      
 
 Cuándo se ejecuta la función de limpieza
 
@@ -14447,32 +11279,21 @@ function Timer({ delay }) {
     const interval = setInterval(() => {
       setCount((prev) => prev + 1)
     }, delay)
-
+    
     return () => {
       console.log(`Limpiando timer con delay: ${delay}ms`)
       clearInterval(interval)
     }
+
   }, [delay])
 
   return <div>Contador: {count}</div>
 }
-        
-          
-        
-        
-        
-      
 
 Si cambias el delay de 1000ms a 500ms:
 
 1. Se ejecuta la función de limpieza (clearInterval del anterior)
 2. Se ejecuta el nuevo efecto (nuevo setInterval con 500ms)
-        
-          
-        
-        
-        
-      
 
 Múltiples efectos en un componente
 
@@ -14497,6 +11318,7 @@ function UserDashboard({ userId }) {
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
+
   }, [])
 
   // Efecto 3: Actualizar el título del documento
@@ -14513,12 +11335,6 @@ function UserDashboard({ userId }) {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué separarlos?
 
@@ -14551,9 +11367,10 @@ function SearchWithResize() {
         .then((res) => res.json())
         .then(setResults)
     }, 300) // Debounce de 300ms
-
+    
     // Limpiar el timeout si el usuario sigue escribiendo
     return () => clearTimeout(timeoutId)
+
   }, [query])
 
   // Efecto 2: Detectar el tamaño de la ventana
@@ -14564,6 +11381,7 @@ function SearchWithResize() {
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
+
   }, [])
 
   // Efecto 3: Calcular si es móvil basado en el ancho
@@ -14583,23 +11401,19 @@ function SearchWithResize() {
       <p>
         Ancho: {windowWidth}px - {isMobile ? 'Móvil' : 'Escritorio'}
       </p>
-
+    
       <ul>
         {results.map((result) => (
           <li key={result.id}>{result.title}</li>
         ))}
       </ul>
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Casos de uso comunes de limpieza
+
 1. Event listeners
 
 useEffect(() => {
@@ -14608,12 +11422,6 @@ useEffect(() => {
 
   return () => document.removeEventListener('click', handleClick)
 }, [])
-        
-          
-        
-        
-        
-      
 
 2. Intervals y Timeouts
 
@@ -14624,12 +11432,6 @@ useEffect(() => {
 
   return () => clearInterval(interval)
 }, [])
-        
-          
-        
-        
-        
-      
 
 3. Suscripciones a WebSockets
 
@@ -14642,12 +11444,6 @@ useEffect(() => {
 
   return () => ws.close()
 }, [])
-        
-          
-        
-        
-        
-      
 
 4. Librerías externas
 
@@ -14656,16 +11452,11 @@ useEffect(() => {
 
   return () => chart.destroy()
 }, [])
-        
-          
-        
-        
-        
-      
 
 Nuevas alternativas a useEffect para fetching
 
 En el video mencioné que existen nuevas formas de hacer fetching sin useEffect. Estas son algunas:
+
 1. React Server Components
 
 En frameworks modernos como Next.js 13+, puedes hacer fetching directamente en el componente:
@@ -14676,12 +11467,6 @@ async function UserProfile({ userId }) {
 
   return <div>{user.name}</div>
 }
-        
-          
-        
-        
-        
-      
 
 2. use Hook (React 19)
 
@@ -14694,15 +11479,9 @@ function UserProfile({ userPromise }) {
 
   return <div>{user.name}</div>
 }
-        
-          
-        
-        
-        
-      
 
 3. Librerías especializadas
-
+   
     React Query / TanStack Query: Gestión avanzada de estado asíncrono
     SWR: Librería de fetching de Vercel
     RTK Query: Solución de Redux Toolkit
@@ -14716,15 +11495,15 @@ Estas librerías manejan automáticamente:
     Refetching
 
 Resumen de cuándo usar useEffect
-Caso de uso	¿Usar useEffect?	¿Por qué?
-Transformar datos	❌ No	Hazlo directamente en el cuerpo del componente
-Calcular valores derivados	❌ No	No es un efecto secundario
-Inicializar estado	❌ No	Usa el valor inicial de useState
-Fetching de datos	✅ Sí	Es una operación asíncrona externa
-Modificar el DOM (document.title)	✅ Sí	Afecta algo externo al componente
-Suscribirse a eventos	✅ Sí	Necesitas limpiar la suscripción
-Timers (setInterval, setTimeout)	✅ Sí	Necesitas limpiar el timer
-WebSockets o conexiones persistentes	✅ Sí	Necesitas cerrar la conexión al desmontar
+Caso de uso    ¿Usar useEffect?    ¿Por qué?
+Transformar datos    ❌ No    Hazlo directamente en el cuerpo del componente
+Calcular valores derivados    ❌ No    No es un efecto secundario
+Inicializar estado    ❌ No    Usa el valor inicial de useState
+Fetching de datos    ✅ Sí    Es una operación asíncrona externa
+Modificar el DOM (document.title)    ✅ Sí    Afecta algo externo al componente
+Suscribirse a eventos    ✅ Sí    Necesitas limpiar la suscripción
+Timers (setInterval, setTimeout)    ✅ Sí    Necesitas limpiar el timer
+WebSockets o conexiones persistentes    ✅ Sí    Necesitas cerrar la conexión al desmontar
 Reglas importantes
 
     Un efecto, una responsabilidad: Si un efecto hace múltiples cosas sin relación, divídelo
@@ -14744,7 +11523,9 @@ useEffect es una herramienta poderosa, pero no debes usarla para todo. Úsala cu
 Recuerda: si puedes hacerlo sin useEffect, no uses useEffect.
 
 ---
+
 <a id="creando-un-single-page-spa"></a>
+
 # 29. Creando una Single Page Application (SPA) desde cero con React
 
 Una Single Page Application (SPA) es una aplicación web que no recarga la página al navegar entre diferentes rutas. En lugar de solicitar nuevas páginas al servidor, la SPA carga todo el código necesario al inicio y luego renderiza contenido dinámicamente según la URL.
@@ -14760,12 +11541,6 @@ En una web tradicional, cada vez que haces clic en un enlace:
 3. El navegador descarga de nuevo CSS, JavaScript, imágenes, fuentes...
 4. Se pierde el estado de la aplicación
 5. Hay un "parpadeo" mientras carga la nueva página
-        
-          
-        
-        
-        
-      
 
 Navegación SPA
 
@@ -14776,12 +11551,6 @@ En una SPA, cuando haces clic:
 3. React re-renderiza el contenido correspondiente
 4. NO se vuelven a descargar recursos
 5. Navegación instantánea y fluida
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -14803,12 +11572,6 @@ function Header() {
     </header>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Cada clic recarga toda la página → descarga de nuevo HTML, CSS, JS, imágenes…
 Solución: Crear un componente Link personalizado
@@ -14822,10 +11585,11 @@ function Link({ href, children, ...props }) {
 
     // 2. Cambiar la URL sin recargar la página
     window.history.pushState({}, '', href)
-
+    
     // 3. Emitir un evento para notificar el cambio
     const navigationEvent = new PopStateEvent('popstate')
     window.dispatchEvent(navigationEvent)
+
   }
 
   return (
@@ -14834,25 +11598,14 @@ function Link({ href, children, ...props }) {
     </a>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Qué hace cada parte?
+
 1. preventDefault()
 
 Evita que el navegador haga el comportamiento por defecto, que es navegar al enlace.
 
 event.preventDefault()
-        
-          
-        
-        
-        
-      
 
 Sin esto, el navegador seguiría el enlace de forma tradicional.
 2. pushState()
@@ -14860,12 +11613,6 @@ Sin esto, el navegador seguiría el enlace de forma tradicional.
 Cambia la URL del navegador sin recargar la página:
 
 window.history.pushState({}, '', href)
-        
-          
-        
-        
-        
-      
 
     Primer parámetro: objeto de estado (lo dejamos vacío)
     Segundo parámetro: título (obsoleto, lo dejamos vacío)
@@ -14878,12 +11625,6 @@ Para que React se entere del cambio de URL, emitimos manualmente un evento popst
 
 const navigationEvent = new PopStateEvent('popstate')
 window.dispatchEvent(navigationEvent)
-        
-          
-        
-        
-        
-      
 
 Este evento se dispara automáticamente cuando el usuario usa los botones de atrás/adelante del navegador, pero como nosotros estamos cambiando la URL manualmente con pushState, debemos emitirlo nosotros.
 Reemplazar los enlaces tradicionales
@@ -14899,12 +11640,6 @@ function Header() {
     </header>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¡Genial! Ahora al hacer clic:
 
@@ -14940,12 +11675,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ahora tenemos la ruta en el estado, pero todavía no se actualiza cuando navegamos.
 Escuchar cambios de URL con useEffect
@@ -14965,11 +11694,12 @@ function App() {
 
     // Escuchar el evento popstate
     window.addEventListener('popstate', handleLocationChange)
-
+    
     // Limpiar el event listener al desmontar
     return () => {
       window.removeEventListener('popstate', handleLocationChange)
     }
+
   }, [])
 
   return (
@@ -14981,12 +11711,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Importante: Usamos la misma referencia de función (handleLocationChange) para añadir y eliminar el listener. Si usáramos funciones anónimas diferentes, no se limpiaría correctamente.
 ¿Por qué el array vacío []?
@@ -14994,12 +11718,6 @@ Importante: Usamos la misma referencia de función (handleLocationChange) para a
 useEffect(() => {
   // ...
 }, [])
-        
-          
-        
-        
-        
-      
 
 Queremos que el listener se añada solo una vez cuando el componente se monta, no en cada render. Por eso usamos un array vacío como dependencia.
 Renderizar contenido según la ruta
@@ -15015,10 +11733,11 @@ function App() {
     }
 
     window.addEventListener('popstate', handleLocationChange)
-
+    
     return () => {
       window.removeEventListener('popstate', handleLocationChange)
     }
+
   }, [])
 
   return (
@@ -15031,12 +11750,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¡Ya tenemos una SPA funcional!
 El flujo completo
@@ -15049,12 +11762,6 @@ Cuando el usuario hace clic en un <Link>:
 4. useEffect detecta el evento → handleLocationChange()
 5. Actualiza el estado → setCurrentPath(window.location.pathname)
 6. React re-renderiza → muestra el componente correspondiente
-        
-          
-        
-        
-        
-      
 
 ¡Ya es una SPA! Comprobación con DevTools
 
@@ -15068,26 +11775,16 @@ Al hacer clic en un enlace <a> normal:
 ✅ bundle.js         200 OK  234 KB
 ✅ logo.png          200 OK  45 KB
 ✅ font.woff2        200 OK  78 KB
+
 ---------------------------------
+
     Total: 357 KB descargados
-        
-          
-        
-        
-        
-      
 
 Navegación SPA (con nuestro Link)
 
 Al hacer clic en nuestro <Link>:
 
 (vacío, no se descarga nada)
-        
-          
-        
-        
-        
-      
 
 ¡Navegación instantánea! No se recargan recursos porque la página nunca se recarga.
 Comparación con red lenta
@@ -15146,7 +11843,9 @@ Recuerda: React Router hace todo esto (y más) por ti, pero ahora entiendes cóm
     💡 Tip: Abre las DevTools → Network y compara la navegación tradicional vs SPA. Verás que con SPA no se descarga nada al navegar.
 
 ---
+
 <a id="custom-hooks-reutilizar-logica"></a>
+
 # 30. Custom Hooks: Reutilizar lógica en React
 
 Los custom hooks son una de las características más poderosas de React. Te permiten extraer lógica de componentes y reutilizarla en múltiples lugares de tu aplicación, mejorando la organización, mantenibilidad y composición del código.
@@ -15173,8 +11872,6 @@ function useWindowWidth() {
 
   return width
 }
-        
-      
 
 ¿Por qué crear custom hooks?
 
@@ -15206,12 +11903,6 @@ function Sidebar() {
 
   return windowWidth < 768 ? null : <aside>Sidebar</aside>
 }
-        
-          
-        
-        
-        
-      
 
 ❌ Problemas:
 
@@ -15245,12 +11936,6 @@ function Sidebar() {
   const windowWidth = useWindowWidth()
   return windowWidth < 768 ? null : <aside>Sidebar</aside>
 }
-        
-          
-        
-        
-        
-      
 
 ✅ Ventajas:
 
@@ -15274,10 +11959,11 @@ function App() {
     }
 
     window.addEventListener('popstate', handleLocationChange)
-
+    
     return () => {
       window.removeEventListener('popstate', handleLocationChange)
     }
+
   }, [])
 
   const navigateTo = (path) => {
@@ -15299,14 +11985,9 @@ function App() {
         {currentPath === '/contact' && <Contact />}
       </main>
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -15333,11 +12014,12 @@ export function useRouter() {
 
     // Escuchar cambios en el historial (botón atrás/adelante)
     window.addEventListener('popstate', handleLocationChange)
-
+    
     // Cleanup: remover el listener al desmontar
     return () => {
       window.removeEventListener('popstate', handleLocationChange)
     }
+
   }, [])
 
   // Función para navegar programáticamente
@@ -15352,12 +12034,6 @@ export function useRouter() {
     navigateTo,
   }
 }
-        
-          
-        
-        
-        
-      
 
 Paso 2: Usar el hook en el componente
 
@@ -15382,14 +12058,9 @@ function App() {
         {currentPath === '/contact' && <Contact />}
       </main>
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 ✅ ¡Mucho mejor! El componente ahora solo se preocupa de la UI.
 Paso 3: Reutilizar el hook en otros componentes
@@ -15423,12 +12094,6 @@ function Breadcrumbs() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Anatomía de un custom hook
 
@@ -15459,14 +12124,9 @@ export function useMyCustomHook(parameters) {
     helperFunction,
   }
 }
-        
-          
-        
-        
-        
-      
 
 Más ejemplos de custom hooks
+
 1. useLocalStorage
 
 Un hook para sincronizar estado con localStorage:
@@ -15496,12 +12156,6 @@ export function useLocalStorage(key, initialValue) {
 
   return [value, setValue]
 }
-        
-          
-        
-        
-        
-      
 
 Uso:
 
@@ -15515,12 +12169,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 2. useFetch
 
@@ -15550,16 +12198,11 @@ export function useFetch(url) {
         setError(error.message)
         setLoading(false)
       })
+
   }, [url])
 
   return { data, loading, error }
 }
-        
-          
-        
-        
-        
-      
 
 Uso:
 
@@ -15576,12 +12219,6 @@ function UserProfile({ userId }) {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 3. useToggle
 
@@ -15603,12 +12240,6 @@ export function useToggle(initialValue = false) {
     setFalse,
   }
 }
-        
-          
-        
-        
-        
-      
 
 Uso:
 
@@ -15626,14 +12257,9 @@ function Modal() {
         </div>
       )}
     </div>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Composición de hooks
 
@@ -15669,12 +12295,6 @@ function useDarkMode() {
 
   return { isDark, toggle }
 }
-        
-          
-        
-        
-        
-      
 
 Uso:
 
@@ -15688,12 +12308,6 @@ function App() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Mejorando el useRouter con más funcionalidades
 
@@ -15712,6 +12326,7 @@ export function useRouter() {
 
     window.addEventListener('popstate', handleLocationChange)
     return () => window.removeEventListener('popstate', handleLocationChange)
+
   }, [])
 
   const navigateTo = (path) => {
@@ -15745,12 +12360,6 @@ export function useRouter() {
     queryParams: getQueryParams(),
   }
 }
-        
-          
-        
-        
-        
-      
 
 Uso mejorado:
 
@@ -15779,14 +12388,9 @@ function SearchPage() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Reglas de los custom hooks
+
 1. El nombre DEBE empezar con “use”
 
 // ✅ Bien
@@ -15798,12 +12402,6 @@ function useApi() {}
 function counter() {}
 function getAuth() {}
 function apiHook() {}
-        
-          
-        
-        
-        
-      
 
 ¿Por qué? React necesita identificar los hooks para aplicar sus reglas internas.
 2. Solo llamar hooks en el nivel superior
@@ -15831,12 +12429,6 @@ function MyComponent() {
     }
   }, [condition])
 }
-        
-          
-        
-        
-        
-      
 
 3. Solo llamar hooks desde componentes o custom hooks
 
@@ -15854,12 +12446,6 @@ function useCustomHook() {
 function helperFunction() {
   const value = useMyHook() // ¡Error!
 }
-        
-          
-        
-        
-        
-      
 
 Cuándo crear un custom hook
 
@@ -15888,21 +12474,15 @@ src/
 │   ├── About.jsx
 │   └── Contact.jsx
 └── App.jsx
-        
-          
-        
-        
-        
-      
 
 Ventajas de los custom hooks
-Ventaja	Descripción
-🔄 Reutilización	Usa la misma lógica en múltiples componentes
-🧹 Separación	Separa lógica de UI para mejor organización
-🔧 Mantenibilidad	Cambios en un solo lugar
-🧪 Testing	Testea la lógica de forma aislada
-🎯 Composición	Combina múltiples hooks para crear funcionalidad compleja
-📖 Legibilidad	Código más limpio y fácil de entender
+Ventaja    Descripción
+🔄 Reutilización    Usa la misma lógica en múltiples componentes
+🧹 Separación    Separa lógica de UI para mejor organización
+🔧 Mantenibilidad    Cambios en un solo lugar
+🧪 Testing    Testea la lógica de forma aislada
+🎯 Composición    Combina múltiples hooks para crear funcionalidad compleja
+📖 Legibilidad    Código más limpio y fácil de entender
 Conclusión
 
 Los custom hooks son una herramienta fundamental en React moderno:
@@ -15916,7 +12496,9 @@ Los custom hooks son una herramienta fundamental en React moderno:
 Empieza identificando patrones repetidos en tu código y extráelos a custom hooks. Con el tiempo, construirás una librería de hooks reutilizables que acelerarán tu desarrollo.
 
 ---
+
 <a id="31"></a>
+
 # Integrando navegación con formulario de búsqueda
 
 En esta clase aprenderás a conectar un formulario de búsqueda con el router de tu aplicación SPA. Verás cómo manejar el evento de submit, extraer valores con FormData, construir URLs dinámicas con query params y reutilizar tu función de navegación personalizada.
@@ -15935,12 +12517,6 @@ function Home() {
     </form>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Limpiando el SVG del botón
 
@@ -15958,12 +12534,6 @@ En HTML los atributos usan kebab-case, pero en JSX debemos usar camelCase:
 <svg>
   <path strokeWidth="2" lineCap="round" />
 </svg>
-        
-          
-        
-        
-        
-      
 
 Habilitando el botón de búsqueda
 
@@ -15978,12 +12548,6 @@ Para poder probar el formulario, necesitamos habilitar el botón eliminando el a
 <button type="submit">
   <svg>...</svg>
 </button>
-        
-          
-        
-        
-        
-      
 
 Cambios realizados:
 
@@ -16003,6 +12567,7 @@ function Home() {
     event.preventDefault()
 
     // Aquí implementaremos la lógica
+
   }
 
   return (
@@ -16014,12 +12579,6 @@ function Home() {
     </form>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué event.preventDefault()?
 
@@ -16039,12 +12598,6 @@ const handleSearch = (event) => {
   event.preventDefault() // ← Evita el reload
   // Ahora podemos controlar la navegación nosotros
 }
-        
-          
-        
-        
-        
-      
 
 Extrayendo el valor del input con FormData
 
@@ -16058,12 +12611,6 @@ Primero, el input necesita un atributo name para poder identificarlo:
   name="search" // ← Importante
   placeholder="Buscar cursos..."
 />
-        
-          
-        
-        
-        
-      
 
 Usar FormData para extraer el valor
 
@@ -16078,12 +12625,6 @@ const handleSearch = (event) => {
 
   console.log('Buscando:', searchTerm)
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué FormData en lugar de useState?
 
@@ -16106,12 +12647,6 @@ function Home() {
     </form>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Opción 2: FormData (menos código)
 
@@ -16130,12 +12665,6 @@ function Home() {
     </form>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ✅ FormData es más simple cuando:
 
@@ -16169,12 +12698,6 @@ const handleSearch = (event) => {
 
   console.log('Navegar a:', targetUrl)
 }
-        
-          
-        
-        
-        
-      
 
 Ejemplos de URLs generadas:
 
@@ -16187,12 +12710,6 @@ Problema con espacios y caracteres especiales
 Si el usuario escribe “React de Dev”, la URL quedaría:
 
 /search?text=React de Dev  ← ¡URL inválida!
-        
-          
-        
-        
-        
-      
 
 Necesitamos codificar la URL:
 
@@ -16212,12 +12729,6 @@ const handleSearch = (event) => {
 
   console.log('Navegar a:', targetUrl)
 }
-        
-          
-        
-        
-        
-      
 
 Ahora sí funciona correctamente:
 
@@ -16228,14 +12739,17 @@ Ahora sí funciona correctamente:
 ¿Qué hace encodeURIComponent?
 
 Convierte caracteres especiales a su representación segura para URLs:
-Carácter	Codificado	Razón
-espacio	%20	Los espacios no son válidos en URL
-+	%2B	Tiene significado especial
-?	%3F	Delimita query params
-&	%26	Separa query params
-=	%3D	Asigna valores en query params
-#	%23	Indica fragmento de URL
-Reutilizando navigateTo del custom hook useRouter
+Carácter    Codificado    Razón
+espacio    %20    Los espacios no son válidos en URL
+
++ %2B    Tiene significado especial
+  ?    %3F    Delimita query params
+  &    %26    Separa query params
+  =    %3D    Asigna valores en query params
+  
+  # %23    Indica fragmento de URL
+  
+  Reutilizando navigateTo del custom hook useRouter
 
 En lugar de usar directamente window.history.pushState, vamos a reutilizar el custom hook useRouter que creamos en la clase anterior.
 ¿Por qué no usar window.history.pushState directamente?
@@ -16249,12 +12763,6 @@ const handleSearch = (event) => {
   // ❌ Problema: Solo actualiza la URL, no renderiza la vista
   window.history.pushState({}, '', targetUrl)
 }
-        
-          
-        
-        
-        
-      
 
 Problemas:
 
@@ -16280,6 +12788,7 @@ export function useRouter() {
 
     window.addEventListener('popstate', handleLocationChange)
     return () => window.removeEventListener('popstate', handleLocationChange)
+
   }, [])
 
   const navigateTo = (path) => {
@@ -16292,12 +12801,6 @@ export function useRouter() {
     navigateTo,
   }
 }
-        
-          
-        
-        
-        
-      
 
 Este hook nos proporciona la función navigateTo que:
 
@@ -16321,16 +12824,17 @@ function Home() {
 
     const formData = new FormData(event.target)
     const searchTerm = formData.get('search')
-
+    
     let targetUrl = '/search'
-
+    
     if (searchTerm) {
       const encodedTerm = encodeURIComponent(searchTerm)
       targetUrl += `?text=${encodedTerm}`
     }
-
+    
     // ✅ Usar navigateTo del hook
     navigateTo(targetUrl)
+
   }
 
   return (
@@ -16342,12 +12846,6 @@ function Home() {
     </form>
   )
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas de usar el hook:
 
@@ -16405,17 +12903,18 @@ function Home() {
     // Extraer el valor del input usando FormData
     const formData = new FormData(event.target)
     const searchTerm = formData.get('search')
-
+    
     // Construir la URL de destino
     let targetUrl = '/search'
-
+    
     if (searchTerm) {
       const encodedTerm = encodeURIComponent(searchTerm)
       targetUrl += `?text=${encodedTerm}`
     }
-
+    
     // Navegar usando navigateTo del hook
     navigateTo(targetUrl)
+
   }
 
   return (
@@ -16424,22 +12923,17 @@ function Home() {
 
       <form onSubmit={handleSearch}>
         <input type="text" name="search" placeholder="Buscar cursos..." className="search-input" />
-
+    
         <button type="submit" className="search-button">
           <svg ... />
         </button>
       </form>
     </div>
+
   )
 }
 
 export default Home
-        
-          
-        
-        
-        
-      
 
 Próximos pasos
 
@@ -16451,14 +12945,14 @@ En las siguientes clases veremos:
     Mantener estado en la URL: Para que los usuarios puedan compartir búsquedas específicas
 
 Conceptos clave aprendidos
-Concepto	Descripción
-event.preventDefault()	Evita el comportamiento por defecto del formulario
-FormData	API para extraer valores de formularios fácilmente
-encodeURIComponent	Codifica texto para que sea seguro en URLs
-Query params	Parámetros en la URL: ?text=valor&filtro=otro
-navigateTo	Reutilizar lógica del router en lugar de duplicar
-Atributo name	Identifica inputs para poder extraer sus valores
-JSX attributes	Usar camelCase en lugar de kebab-case para SVG/HTML
+Concepto    Descripción
+event.preventDefault()    Evita el comportamiento por defecto del formulario
+FormData    API para extraer valores de formularios fácilmente
+encodeURIComponent    Codifica texto para que sea seguro en URLs
+Query params    Parámetros en la URL: ?text=valor&filtro=otro
+navigateTo    Reutilizar lógica del router en lugar de duplicar
+Atributo name    Identifica inputs para poder extraer sus valores
+JSX attributes    Usar camelCase en lugar de kebab-case para SVG/HTML
 Conclusión
 
 En esta clase has aprendido a:
@@ -16474,11 +12968,11 @@ En esta clase has aprendido a:
 
 Ahora tu formulario de búsqueda está completamente funcional y se integra correctamente con el sistema de routing de tu aplicación. En las próximas clases implementaremos la lógica para leer estos parámetros y mostrar los resultados filtrados.
 
-
 ---
+
 <a id="32"></a>
 
-# Creando un componente <Route> declarativo
+# 32. Creando un componente <Route> declarativo
 
 En esta clase aprenderás a transformar un router con lógica imperativa (basado en if y switch) en un sistema declarativo usando un componente <Route>. Este cambio mejorará drásticamente la legibilidad, escalabilidad y mantenibilidad de tu aplicación.
 El problema: Lógica imperativa en el componente principal
@@ -16511,12 +13005,6 @@ function App() {
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 Alternativa con switch (tampoco es ideal)
 
@@ -16538,12 +13026,6 @@ function App() {
       return <NotFound />
   }
 }
-        
-          
-        
-        
-        
-      
 
 ¿Por qué no es ideal?
 
@@ -16576,24 +13058,12 @@ export function Route({ path, component: Component }) {
   // Si coincide, renderizar el componente
   return <Component />
 }
-        
-          
-        
-        
-        
-      
 
 Desglosando el código
 
 1. Reutilizamos el custom hook useRouter()
 
 const { currentPath } = useRouter()
-        
-          
-        
-        
-        
-      
 
 Aquí es donde se ve claramente el poder del custom hook que creamos en la clase anterior:
 
@@ -16606,12 +13076,6 @@ Aquí es donde se ve claramente el poder del custom hook que creamos en la clase
 if (currentPath !== path) {
   return null
 }
-        
-          
-        
-        
-        
-      
 
 Este es el patrón de renderizado condicional en React:
 
@@ -16623,12 +13087,6 @@ Este es el patrón de renderizado condicional en React:
 export function Route({ path, component: Component }) {
   return <Component />
 }
-        
-          
-        
-        
-        
-      
 
 Usamos destructuring con renaming:
 
@@ -16654,12 +13112,6 @@ function App() {
 
   return <NotFound />
 }
-        
-          
-        
-        
-        
-      
 
 Después (declarativo)
 
@@ -16682,12 +13134,6 @@ function App() {
 }
 
 export default App
-        
-          
-        
-        
-        
-      
 
 ¿Qué cambió?
 
@@ -16701,23 +13147,17 @@ Vamos a entender qué pasa cuando renderizamos estas rutas:
   <Route path="/search" component={Search} />
   <Route path="/about" component={About} />
 </>
-        
-          
-        
-        
-        
-      
 
 Si estamos en /
 
     Primera ruta (path="/")
         currentPath === "/" → ✅ Coincide
         Renderiza <Home />
-
+    
     Segunda ruta (path="/search")
         currentPath !== "/search" → ❌ No coincide
         Retorna null (no renderiza nada)
-
+    
     Tercera ruta (path="/about")
         currentPath !== "/about" → ❌ No coincide
         Retorna null (no renderiza nada)
@@ -16728,11 +13168,11 @@ Si estamos en /search
     Primera ruta (path="/")
         currentPath !== "/" → ❌ No coincide
         Retorna null
-
+    
     Segunda ruta (path="/search")
         currentPath === "/search" → ✅ Coincide
         Renderiza <Search />
-
+    
     Tercera ruta (path="/about")
         currentPath !== "/about" → ❌ No coincide
         Retorna null
@@ -16751,12 +13191,6 @@ function ConditionalComponent({ shouldShow, children }) {
   // Si debe mostrarse, renderiza el contenido
   return <div>{children}</div>
 }
-        
-          
-        
-        
-        
-      
 
 Ventajas:
 
@@ -16782,12 +13216,6 @@ function App() {
     return <NotFound />
   }
 }
-        
-          
-        
-        
-        
-      
 
 ❌ Desventajas:
 
@@ -16809,12 +13237,6 @@ function App() {
     </>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ✅ Ventajas:
 
@@ -16838,17 +13260,12 @@ function App() {
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
       </main>
-
+    
       <Footer />
     </>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 Lo que pasa:
 
@@ -16867,23 +13284,23 @@ Con este patrón declarativo, hemos sentado las bases para un router profesional
     React Router: Migrar a la librería oficial
 
 Conceptos clave aprendidos
-Concepto	Descripción
-Programación declarativa	Expresar qué queremos, no cómo lograrlo
-Programación imperativa	Describir paso a paso cómo hacer algo
-Renderizado condicional	Componentes que deciden si renderizar o no
-Retornar null	Patrón para indicar “no renderizar nada”
-Composición de componentes	Crear componentes que usan otros componentes
-Props con renaming	component: Component para usar mayúsculas
-Reutilización de hooks	useRouter() usado en múltiples lugares
+Concepto    Descripción
+Programación declarativa    Expresar qué queremos, no cómo lograrlo
+Programación imperativa    Describir paso a paso cómo hacer algo
+Renderizado condicional    Componentes que deciden si renderizar o no
+Retornar null    Patrón para indicar “no renderizar nada”
+Composición de componentes    Crear componentes que usan otros componentes
+Props con renaming    component: Component para usar mayúsculas
+Reutilización de hooks    useRouter() usado en múltiples lugares
 Ventajas del patrón <Route>
-Ventaja	Descripción
-🎯 Declarativo	Expresa claramente la intención
-📖 Legible	Fácil de entender de un vistazo
-🔧 Mantenible	Cambios localizados en cada ruta
-📈 Escalable	Añadir rutas no complica el código
-🧩 Modular	Cada ruta es independiente
-✅ Testeable	Fácil testear cada ruta por separado
-🔄 Reutilizable	El componente <Route> es reusable
+Ventaja    Descripción
+🎯 Declarativo    Expresa claramente la intención
+📖 Legible    Fácil de entender de un vistazo
+🔧 Mantenible    Cambios localizados en cada ruta
+📈 Escalable    Añadir rutas no complica el código
+🧩 Modular    Cada ruta es independiente
+✅ Testeable    Fácil testear cada ruta por separado
+🔄 Reutilizable    El componente <Route> es reusable
 Conclusión
 
 En esta clase has aprendido a:
@@ -16900,9 +13317,10 @@ Este patrón declarativo es la base de cómo funcionan los routers profesionales
 
     💡 Recuerda: En producción siempre debes usar React Router o una librería similar, pero entender cómo funciona internamente te hace un mejor desarrollador.
 
-
 ---
+
 <a id="33"></a>
+
 # Creando custom hook para formulario
 
 Introducción del problema
@@ -16938,12 +13356,6 @@ Nuestro hook necesita recibir:
 function useSearchForm({ onSearch, onTextFilter, IDTechnology, IDLocation, IDExperienceLevel }) {
   // Lógica del hook aquí
 }
-        
-          
-        
-        
-        
-      
 
 Añadiendo estado interno
 
@@ -16957,12 +13369,6 @@ function useSearchForm({ onSearch, onTextFilter, IDTechnology, IDLocation, IDExp
   // - se actualiza en handleChange
   // - será devuelto al componente para mostrarlo en el input
 }
-        
-          
-        
-        
-        
-      
 
 Implementando los handlers
 
@@ -16975,15 +13381,16 @@ function useSearchForm({ onSearch, onTextFilter, IDTechnology, IDLocation, IDExp
     event.preventDefault()
 
     const formData = new FormData(event.target)
-
+    
     const filters = {
       text: formData.get('search'),
       technology: formData.get('technology'),
       location: formData.get('location'),
       experience: formData.get('experience'),
     }
-
+    
     onSearch(filters)
+
   }
 
   const handleChange = (event) => {
@@ -16999,12 +13406,6 @@ function useSearchForm({ onSearch, onTextFilter, IDTechnology, IDLocation, IDExp
     handleChange,
   }
 }
-        
-          
-        
-        
-        
-      
 
 Usando el hook en el componente
 
@@ -17026,12 +13427,6 @@ function SearchComponent() {
     </form>
   )
 }
-        
-          
-        
-        
-        
-      
 
 El componente ya no implementa la lógica, solo consume las funciones y valores del hook.
 Ventajas de esta refactorización
@@ -17044,6 +13439,7 @@ Ventajas de esta refactorización
 
 ✅ Mejor organización: separación clara de responsabilidades
 Reglas importantes sobre custom hooks
+
 1. Llamar solo en el nivel superior
 
 Los custom hooks deben llamarse solo en el nivel superior del componente o de otro custom hook.
@@ -17078,12 +13474,6 @@ function Component() {
     console.log(searchText)
   }
 }
-        
-          
-        
-        
-        
-      
 
 2. Deben empezar con el prefijo “use”
 
@@ -17099,12 +13489,6 @@ function useAuthentication() {}
 // ❌ MAL
 function searchFormHook() {} // No empieza con "use"
 function getSearchForm() {} // No es un hook
-        
-          
-        
-        
-        
-      
 
 3. Solo se pueden usar en componentes o custom hooks
 
@@ -17132,12 +13516,6 @@ function useCalculateTotal() {
   const { data } = useData()
   return data.total
 }
-        
-          
-        
-        
-        
-      
 
 Verificando que todo funciona
 
@@ -17159,8 +13537,8 @@ Esta técnica mantiene tu código:
 
 Usar custom hooks correctamente es señal de código React profesional y bien arquitecturado.
 
-
 ---
+
 <a id="34"></a>
 
 # 9 Ejercicios prácticos: Router y Formularios
@@ -17205,6 +13583,7 @@ Puedes crear una página de Contacto, o cualquier otra que se te ocurra:
     /team → Página del equipo
 
 Paso a paso
+
 1. Crear el componente de la página
 
 // pages/Contact.jsx
@@ -17216,12 +13595,6 @@ export function Contact() {
     </div>
   )
 }
-        
-          
-        
-        
-        
-      
 
 2. Añadir la ruta en App
 
@@ -17243,17 +13616,12 @@ function App() {
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} /> {/* 👈 Nueva ruta */}
       </main>
-
+    
       <Footer />
     </>
+
   )
 }
-        
-          
-        
-        
-        
-      
 
 3. Añadir enlace en la navegación
 
@@ -17272,12 +13640,6 @@ export function Header() {
     </header>
   )
 }
-        
-          
-        
-        
-        
-      
 
 ✅ Verificación
 
@@ -17350,12 +13712,6 @@ En muchas aplicaciones, el enlace de la página actual se resalta visualmente:
 Inicio  |  Búsqueda  |  Acerca de  |  Contacto
                          ^^^^^^^
                        (estilo activo)
-        
-          
-        
-        
-        
-      
 
 Esto ayuda al usuario a saber en qué página está.
 ✅ Verificación
@@ -17399,12 +13755,6 @@ export function Link({
 
   // ... resto del código ...
 }
-        
-          
-        
-        
-        
-      
 
 Uso:
 
@@ -17421,29 +13771,23 @@ Uso:
 ;<Link href="/search" exact={false}>
   Búsqueda
 </Link>
-        
-          
-        
-        
-        
-      
 
 🎓 Conceptos practicados
 
 Al completar estos ejercicios habrás practicado:
-Concepto	Dónde lo usaste
-Routing	Crear y configurar nuevas rutas
-Componentes	Crear páginas y componentes reutilizables
-Estado con useState	Manejar datos del formulario y errores
-Custom hooks	Extraer lógica del formulario
-Validaciones	Validar campos del formulario
-Efectos con useEffect	(Opcional) Limpiar mensajes después de un tiempo
-Manejo de eventos	Capturar submit, change, etc.
-Renderizado condicional	Mostrar/ocultar mensajes y errores
-Props	Pasar datos entre componentes
-Composición	Combinar componentes para crear UI
-Reutilización de hooks	Usar useRouter() en múltiples lugares
-Accesibilidad	Atributos aria-current, labels, etc.
+Concepto    Dónde lo usaste
+Routing    Crear y configurar nuevas rutas
+Componentes    Crear páginas y componentes reutilizables
+Estado con useState    Manejar datos del formulario y errores
+Custom hooks    Extraer lógica del formulario
+Validaciones    Validar campos del formulario
+Efectos con useEffect    (Opcional) Limpiar mensajes después de un tiempo
+Manejo de eventos    Capturar submit, change, etc.
+Renderizado condicional    Mostrar/ocultar mensajes y errores
+Props    Pasar datos entre componentes
+Composición    Combinar componentes para crear UI
+Reutilización de hooks    Usar useRouter() en múltiples lugares
+Accesibilidad    Atributos aria-current, labels, etc.
 🚀 Próximos pasos
 
 Una vez completes estos ejercicios, estarás preparado para:
@@ -17487,7 +13831,9 @@ Si terminaste todos los ejercicios y quieres más práctica:
     Formulario multi-paso: Divide el formulario en varios pasos
     Tema claro/oscuro: Añade un botón para cambiar el tema
     Animaciones de transición: Anima el cambio entre páginas
-
+    
     💡 Recuerda: La práctica es fundamental para dominar React. Estos ejercicios te preparan para trabajar en aplicaciones reales. ¡Tómate tu tiempo y experimenta!
 
 ¡Mucho ánimo con los ejercicios! 🎉
+
+---

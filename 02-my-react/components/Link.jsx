@@ -10,7 +10,7 @@ export function Link ({ href, children, ...restOfProps }) {
     
         navigateTo(href)
 
-        // ver Navigation API, lo tienen que añadir proxomamente como una manera nueva de navegar más eficiente.
+        // ver Navigation API, lo tienen que añadir proximamente como una manera nueva de navegar más eficiente.
     }    
 
     return (
