@@ -75,7 +75,7 @@ const useSearchForm = ({idTechnology, idLocation, idExperience, onTextFilter, on
 }
 
 
-export default function Search({onTextFilter, onSearch, filteredJobs}) {
+export default function Search({onTextFilter, onSearch, filteredJobs, totalJobs}) {
     // IDs que se usaran en el formulario
     const isSearchInputText = useId()
     const idTechnology = useId()
@@ -136,7 +136,7 @@ export default function Search({onTextFilter, onSearch, filteredJobs}) {
                 <div
                     style={{ borderRadius: '25px', padding: '0.5rem 1rem', backgroundColor: '#b44cce', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                 > 
-                    <p style={{ fontSize: '0.85rem' }}>{jobsData.length}</p>
+                    <p style={{ fontSize: '0.85rem' }}>{totalJobs}</p>
                     <p style={{ margin: 0, fontSize: '1.1rem' , paddingLeft: '0.5rem'}}>Total de trabajos</p>
                 </div>
             </div>

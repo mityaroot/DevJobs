@@ -476,7 +476,7 @@ article {
     border: 1px solid #334155;
     border-radius: 12px;
     padding: 24px;
-    max-width: 400px;
+    width: 100%;
     margin-bottom: 1rem;
     
     
@@ -499,6 +499,25 @@ article {
     color: #ffffff;
     font-size: 1.3rem;
     letter-spacing: -0.025em;
+}
+
+.section-title {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #3b82f6, #a855f7, #ec4899);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .job-card-left {
+        border-right: none !important;
+        padding-right: 0 !important;
+    }
 }
 
 .job-meta {

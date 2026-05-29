@@ -2,7 +2,7 @@ import { useState } from "react"
 
 export default function JobCard({job}) {
     const estilos = { marginTop: '1rem', border: '2px solid rgba(0, 51, 102, 0.6)', 
-        padding: '20px', display: 'flex', justifyContent: 'space-between'}
+        padding: '24px', display: 'flex', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap'}
 
 /*     const numbers = [1,2,3]
     const [firstNumber, , thirdNumber] = numbers */
@@ -15,19 +15,21 @@ export default function JobCard({job}) {
         data-nivel={job.data?.nivel}
         data-technology={job.data?.technology}
         >
-            <div>
+            <div className="job-card-left" style={{ borderRight: '1px solid rgba(255,255,255,0.15)', paddingRight: '1rem', flex: 1 }}>
                 <h2>{job.titulo}</h2>
                 <small>{job.empresa} - {job.ubicacion}</small>
                  <p>{job.descripcion}</p>
                 
             </div>
 
-            <div style = {{display: 'flex', flexDirection: 'column', gap: '0.5rem', marginLeft: 'auto' }}>
-                <span>{job.data?.modalidad}</span>
-                <span>{job.data?.nivel}</span>
+            <div style = {{display: 'flex', flexDirection: 'column', gap: '0.75rem', marginLeft: 'auto', maxWidth: '220px', wordBreak: 'break-word' }}>
+                <span style={{ borderBottom: '1px solid rgba(255,255,255,0.15)', paddingBottom: '0.3rem' }}>{job.data?.modalidad}</span>
+                <span style={{ borderBottom: '1px solid rgba(255,255,255,0.15)', paddingBottom: '0.3rem' }}>{job.data?.nivel}</span>
                 <span>{job.data?.technology}</span>
 
-                <ApplyButton />
+                <div style={{ marginTop: '0.5rem' }}>
+                    <ApplyButton />
+                </div>
             </div>
 
             

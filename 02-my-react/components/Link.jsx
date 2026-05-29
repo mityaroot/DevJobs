@@ -1,9 +1,15 @@
 import React from 'react'
 import {useRouter} from '../hooks/useRouter'
 
-export function Link ({ href, children, ...restOfProps }) {
+export function Link ({ href, children, className: userClassName = '', ...restOfProps }) {
 
-    const { navigateTo } = useRouter()
+    const { navigateTo, currentPath } = useRouter()
+
+    const isActive = currentPath === href 
+    console.log(isActive ? 'activo' : 'no activo')
+
+    const className = `${userClassName} link${isActive ? 'activo' : ''}`.trim()
+    
 
     const handleClick = (event) => {
         event.preventDefault()
@@ -14,7 +20,7 @@ export function Link ({ href, children, ...restOfProps }) {
     }    
 
     return (
-        <a className="link" href={href} {...restOfProps} onClick={handleClick}>
+        <a className={className} href={href} aria-current={isActive ? 'page' : undefined} {...restOfProps} onClick={handleClick}>
             {children}
         </a>
     )

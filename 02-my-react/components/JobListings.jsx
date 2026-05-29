@@ -8,7 +8,7 @@ export default function JobListing({ jobs }) {
             <div 
             className="job-listing" 
                 style={{ width: '100%', 
-                maxWidth: '650px', border: '4px solid #ffffff2d', 
+                maxWidth: '900px', border: '4px solid #ffffff2d', 
                 borderRadius: '4px', paddingBottom: '2rem',
                 backgroundColor: '#f9f9f94f',
 
@@ -16,7 +16,7 @@ export default function JobListing({ jobs }) {
                 alignItems: 'center', flexDirection: 'column' 
                 }}>
 
-                <h2 style={{ padding: '1rem 1rem 0 1rem', marginBottom: '1rem' }}>
+                <h2 className="section-title" style={{ padding: '1rem 1rem 0 1rem', marginBottom: '1rem' }}>
                     Resultados de búsqueda
                 </h2>
 

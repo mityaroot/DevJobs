@@ -78,7 +78,7 @@ const useSwitch = () => {
         nombre: '',
         email: '',
         tlf: '',
-        message: ''
+        mensaje: ''
     })
 
         
@@ -88,14 +88,14 @@ const useSwitch = () => {
                 nombre: 'David',
                 email: 'david@gmail.com',
                 tlf: '622444555',
-                message: 'Hola, este es un mensaje de prueba.'
+                mensaje: 'Hola, este es un mensaje de prueba.'
             })
         } else {
             setDatosForm({
                 nombre: '',
                 email: '',
                 tlf: '',
-                message: ''
+                mensaje: ''
             })
         }
     }, [auto])
@@ -125,7 +125,7 @@ export function ContactPage() {
             field === 'email' ? value : datosForm.email,
             field === 'tlf' ? value : datosForm.tlf
         )
-        return full[field] || null
+        return full[field] || null // Si full[field] es undefined, devuelve null, si no, devuelve el error. 
     }
 
     const handleChange = (field, value) => {
@@ -137,9 +137,9 @@ export function ContactPage() {
         <>
             <style>{`
                 #${idName}::placeholder { color: #ff8181a2 !important; }
-                #${idEmail}::placeholder,
-                #${idTlf}::placeholder,
-                #${idMensaje}::placeholder { color: #64748b; }
+                #${idEmail}::placeholder { color: #81ffa7a2 !important; }
+                #${idTlf}::placeholder { color: #f581ffa2 !important; }
+                #${idMensaje}::placeholder { color: #e9447b !important; }
                 input:focus, textarea:focus { border-color: #3b82f6 !important; box-shadow: 0 0 0 3px rgba(59,130,246,0.2) !important; }
                 button:hover { opacity: 0.9; }
                 button:active { transform: scale(0.98); }
@@ -153,12 +153,21 @@ export function ContactPage() {
             <p style={{ textAlign: 'center', color: '#cbd5e1', marginBottom: '1.5rem' }}>¿Tienes alguna pregunta? Contáctanos.</p>
 
             <div style={{ display: 'flex', justifyContent: 'center',
-                marginTop: '10px', backgroundColor: '#1e293b',
+                marginTop: '10px', backgroundColor: '#0a0e14',
                 padding: '24px', maxWidth: '600px', margin: '0 auto',
                 borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)' }}
             >
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
-                    <span style={{ color: '#94a3b8', fontSize: '0.75rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Autofill</span>
+                    <span style={{ color: '#94a3b8', fontSize: '0.75rem',
+                         fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em'}}
+                    >
+                        {"Autorellenado y borrado".split("").map((letra, i) => (
+                            <span key={i} style={{ color: `hsl(${Math.random() * 360}, 80%, 60%)` }}>
+                                {letra === " " ? "\u00A0" : letra}
+                            </span>
+                        ))}
+                    </span>
+                    
                     <Switch_1 checked={auto} onChange={() => setAuto(!auto)}/>
                 </div>
 
@@ -208,8 +217,8 @@ export function ContactPage() {
                         style={{ width: '100%', height: '90px', padding: '10px 12px', borderRadius: '8px',
                             border: '1px solid #334155', background: '#0f172a', color: '#f1f5f9',
                             fontSize: '0.9rem', outline: 'none', transition: 'border 0.2s', resize: 'vertical' }}
-                        value={datosForm.message}
-                        onChange={(e) => setDatosForm({ ...datosForm, message: e.target.value })}
+                        value={datosForm.mensaje}
+                        onChange={(e) => setDatosForm({ ...datosForm, mensaje: e.target.value })}
                     />
 
                     <button type="submit" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: 'none',
