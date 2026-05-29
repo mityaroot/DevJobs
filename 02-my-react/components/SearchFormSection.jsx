@@ -23,25 +23,15 @@ const useSearchForm = ({idTechnology, idLocation, idExperience, onTextFilter, on
         const formData = new FormData(e.currentTarget)
         onSearch({
             technology: formData.get(idTechnology) || '',
-            location: formData.get(idLocation) || '',
-            experience: formData.get(idExperience) || ''
+            modalidad: formData.get(idLocation) || '',
+            nivel: formData.get(idExperience) || ''
         })
 
-        // Imprimir los filtros
         console.log('>>> Filtros: ', {
             technology: formData.get(idTechnology) || '',
-            location: formData.get(idLocation) || '',
-            experience: formData.get(idExperience) || ''
+            modalidad: formData.get(idLocation) || '',
+            nivel: formData.get(idExperience) || ''
         })
-
-        // Imprimir los trabajos filtrados
-        console.log('>>> Trabajos filtrados: ', jobsData.filter(job => {
-            return (
-                (formData.get(idTechnology) === '' || job.data.technology.includes(formData.get(idTechnology))) &&
-                (formData.get(idLocation) === '' || job.data.modalidad.includes(formData.get(idLocation))) &&
-                (formData.get(idExperience) === '' || job.data.nivel.includes(formData.get(idExperience)))
-            )
-        }))
     }
 
     // Manejador de cambio en el input de texto

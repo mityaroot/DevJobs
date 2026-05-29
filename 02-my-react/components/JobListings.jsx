@@ -20,6 +20,14 @@ export default function JobListing({ jobs }) {
                     Resultados de búsqueda
                 </h2>
 
+                {
+                    jobs.length === 0 && (
+                        <p style={{ color: '#777', marginBottom: '1rem', textAlign: 'center', padding: '1rem', textWrap: 'balance' }}>
+                            No se encontraron ofertas de empleo para tu búsqueda.
+                        </p>
+                    )
+                }
+
                 {jobs.map(job => (
                     <JobCard
                         key={job.id}

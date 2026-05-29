@@ -4,12 +4,6 @@ export default function Pagination({currentPage = 1, totalPages = 10, onPageChan
 
     console.log('🟢 Pagination renderizado', { currentPage })
     
-    // Generar array de páginas a mostrar
-/*    const pages = [];
-     for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-    } */
-
     const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     const handlePrevClick = (e) => {

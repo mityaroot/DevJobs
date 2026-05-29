@@ -12,14 +12,15 @@ const useFilters = () => {
     // Estados
     const [filters, setFilters] = useState({
       technology: '',
-      location: '',
-      experience: ''
+      modalidad: '',
+      nivel: ''
     })
     const [textToFilter, setTextToFilter] = useState('') // Filtro en tiempo real, por defecto ''
     const [currentPage, setCurrentPage] = useState(1) // Pagina actual, por defecto 1
 
     const [jobs, setJobs] = useState([])
     const [total, setTotal] = useState(0)
+    const [initialTotal, setInitialTotal] = useState(0)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -28,13 +29,24 @@ const useFilters = () => {
             try {
                 setLoading(true)
 
-                await new Promise((resolve) => setTimeout(resolve, 4000))
+                const params = new URLSearchParams()
+                if (textToFilter) { params.append('text', textToFilter)}
+                if (filters.technology) { params.append('technology', filters.technology)}
+                if (filters.modalidad) { params.append('modalidad', filters.modalidad)}
+                if (filters.nivel) { params.append('nivel', filters.nivel)}
 
-                const res = await fetch('https://jscamp-api.vercel.app/api/jobs')
+                const queryParams = params.toString()
+                console.log('>>> URL de fetch:', `https://jscamp-api.vercel.app/api/jobs?${queryParams}`)
+
+                await new Promise((resolve) => setTimeout(resolve, 1000))
+                const res = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`)
                 const json = await res.json()
 
                 setJobs(json.data)
                 setTotal(json.total)
+                if (!filters.technology && !filters.modalidad && !filters.nivel && !textToFilter) {
+                    setInitialTotal(json.total)
+                }
             } catch (error) {
                 console.error('Error fetching jobs:', error)
             } finally {
@@ -44,7 +56,7 @@ const useFilters = () => {
 
         fetchJobs()
 
-    }, []) // ponemos array vacio para que se ejecute solo una vez, cuando se monta el componente
+    }, [filters, textToFilter, currentPage]) // cuando se ejecuta el efecto
 
 
     
@@ -74,8 +86,10 @@ const useFilters = () => {
     }
 
     return {
-        jobs,
+        jobs: pagedResults,
         total,
+        initialTotal,
+        allJobs: jobs,
         loading,
         filters,
         textToFilter,
@@ -91,6 +105,8 @@ export function SearchPage() {
     const { 
         jobs,
         total,
+        initialTotal,
+        allJobs,
         loading,
         filters, 
         textToFilter, 
@@ -121,12 +137,16 @@ export function SearchPage() {
 
                 <p>Explora miles de oportunidades en el sector tecnológico.</p>
 
-                <Search onSearch={handleSearch} onTextFilter={handleTextFilter} filteredJobs={total} totalJobs={total} />
+                <Search onSearch={handleSearch} onTextFilter={handleTextFilter} filteredJobs={total} totalJobs={initialTotal} />
 
             </section>
 
             {
-                loading ? <p>Estamos cargando tus resultados...</p> : <JobListing jobs={jobs} />
+                loading ? 
+                <p style={{textAlign: 'center'}}>
+                    Estamos cargando tus resultados...
+                </p> 
+                : <JobListing jobs={jobs} />
             }
             
             <Pagination
